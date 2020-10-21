@@ -1,0 +1,28 @@
+.heading-border{
+    max-width: 8%;
+    margin: 0 auto;
+    background-color: #36f;
+    height: 5px;
+    border-radius: 15px;
+}
+
+.images-ul{
+    display: flex;
+}
+
+.footer{
+    text-align: right;
+    margin-top: 30px;
+}
+
+.fieldset{
+    border-color: #36f;
+    border-width: 2px;
+    border-radius: 20px;
+    padding:25px;
+}
+
+.legend{
+    width: auto;
+    font-size: 18px;
+}
