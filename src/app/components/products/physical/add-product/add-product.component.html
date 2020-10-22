@@ -65,10 +65,16 @@
                                     <div class="form-group row">
                                         <label for="validationCustom02" class="col-xl-3 col-sm-4 mb-0">Product For
                                         </label>
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn btn-secondary">Internation Shipping</button>
-                                            <button type="button" class="btn btn-secondary">Local Shipping</button>
-                                          </div>
+                                        <div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="intShip">
+                                                <label class="form-check-label" for="inlineRadio1">Internation Shipping</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="localShip">
+                                                <label class="form-check-label" for="inlineRadio2">Local Shipping</label>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Category
@@ -100,28 +106,51 @@
                                         </select>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="buy_x" class="col-xl-3 col-sm-3 mb-0">Buy</label>
-                                            <input class="form-control col-xl-3 col-sm-3" id="buy_x"
+                                        <label for="discount" class="col-xl-3 col-sm-3 mb-0">Discount</label>
+                                        <label for="buy_x" class="col-xl-1 col-sm-1 mb-0">Buy</label>
+                                            <input class="form-control col-xl-2 col-sm-2" id="buy_x"
                                             type="text" placeholder="XXX">
-                                        <label for="get_x" class="col-xl-2 col-sm-2 mb-0">Get</label>
-                                            <input class="form-control col-xl-3 col-sm-3" id="get_x"
+                                        <label for="get_x" class="col-xl-1 col-sm-1 mb-0">Get</label>
+                                            <input class="form-control col-xl-2 col-sm-2" id="get_x"
                                             type="text" placeholder="XXX">
                                     </div>
                                     <div class="form-group row" >
-                                        <label for="size" class="col-xl-3 col-sm-4 mb-0">Size Options
+                                        <label for="size" class="col-xl-3 col-sm-4 mb-0">Size
                                         </label>
-                                        <input class="form-control col-xl-4 col-sm-5" id="size" type="text">
-                                        <input class="upload col-xl-4 col-sm-2" style="padding-top: 10px;" type="file" (change)="readUrlSizeImg($event)">
+                                        <div class="col-xl-4 col-sm-5" style="padding-left: 0;">
+                                            <ng-select2 
+                                                [formControl]="productForm.controls['sizes']"
+                                                [data]="sizeOptions"
+                                                [options]="options"
+                                                [width]="300"
+                                                >		
+                                            </ng-select2>
+                                        </div>
+                                        <div class="col-xl-3 col-sm-2">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="customSwitch1" 
+                                                [formControl]="productForm.controls['customSize']">
+                                                <label class="custom-control-label" for="customSwitch1">Custom Size</label>
+                                            </div>
+                                        </div>
+                                        <div  class="col-xl-3 col-sm-4 mb-0"></div>
+                                        <div class="col-xl-8 col-sm-7 form-inline" *ngIf="custom_size.value">
+                                            <input class="form-control col-xl-4 col-sm-5" id="size" type="text">
+                                            <input class="upload col-xl-4 col-sm-2" style="padding-top: 10px;" type="file" (change)="readUrlSizeImg($event)">
+                                        </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Labels
                                         </label>
-                                        <ng-select2 
-                                            [formControl]="productForm.controls['labels']"
-                                            [data]="labelOptions"
-                                            [options]="options"
-                                            [width]="500">		
-                                        </ng-select2>
+                                        <div class="col-xl-8 col-sm-7" style="padding-left: 0;">
+                                            <ng-select2 
+                                                [formControl]="productForm.controls['labels']"
+                                                [data]="labelOptions"
+                                                [options]="options"
+                                                [width]="300"
+                                                >		
+                                            </ng-select2>
+                                        </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-xl-3 col-sm-4 mb-0">Stock Available</label>
@@ -134,7 +163,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <!-- <div class="form-group row">
                                         <label class="col-xl-3 col-sm-4">Input Product Type</label>
                                         <div class="col-xl-8 col-sm-7 pl-0 description-sm">
                                             <ck-editor id="editor1" cols="30" rows="10"  language="en" [fullPage]="true"></ck-editor>
@@ -145,7 +174,7 @@
                                         <div class="col-xl-8 col-sm-7 pl-0 description-sm">
                                             <ck-editor id="editor2" cols="30" rows="10"  language="en" [fullPage]="true"></ck-editor>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="form-group row">
                                         <label class="col-xl-3 col-sm-4">Add Description </label>
                                         <div class="col-xl-8 col-sm-7 pl-0 description-sm">
@@ -159,7 +188,7 @@
                                 <div class="product-buttons col-sm-8 offset-xl-3 offset-sm-4">
                                     <button type="button" class="btn btn-primary mr-1">Add</button>
                                     <button type="button" class="btn btn-light">Discard</button>
-                                    <button type="button" class="btn btn-primary mr-1">Request Label</button>
+                                    <!-- <button type="button" class="btn btn-primary mr-1">Request Label</button> -->
 
                                 </div>
                             </div>

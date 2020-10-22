@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit,AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { Select2OptionData } from 'ng-select2';
 import { Options } from 'select2';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-add-product',
@@ -28,6 +29,7 @@ export class AddProductComponent implements OnInit {
   ]
 
   public labelOptions: Array<Select2OptionData>;
+  public sizeOptions: Array<Select2OptionData>;
   public options: Options;
  
 
@@ -260,7 +262,11 @@ export class AddProductComponent implements OnInit {
     return this.productForm.get('extended_category');
   }
 
-  constructor(private fb: FormBuilder) {
+  get custom_size(){
+    return this.productForm.get('customSize');
+  }
+
+  constructor(private fb: FormBuilder,private elementRef:ElementRef) {
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       price: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
@@ -270,9 +276,19 @@ export class AddProductComponent implements OnInit {
       sub_category: ['', Validators.required],
       extended_category: ['', Validators.required],
       labels: [''],
+      sizes: [''],
+      customSize:[false]
     })
 
 
+    this.sizeOptions = [
+      {id:'xs',text:"XS"},
+      {id:'s',text:"S"},
+      {id:'m',text:"M"},
+      {id:'l',text:"L"},
+      {id:'xl',text:"XL"},
+      {id:'xxl',text:"XXL"},
+    ]
     this.labelOptions = [
       {id:'#gifts',text:"Gifts"},
       {id:'#recommendedgifts',text:"Recommended Gifts"},
@@ -326,20 +342,33 @@ export class AddProductComponent implements OnInit {
       {id:'#originaldesign',text:"Original Design"}
         ]
       
+        let self = this
         this.options = {
           multiple: true,
           theme: 'classic',
           closeOnSelect: false,
-          width: '500'
+          width: '100%',
+          language: {
+            noResults: function() {
+              return `No label found <span id='no-results-btn'>Request Label</span>`;
+            },
+          },
+          escapeMarkup: function (markup) {
+            return markup;
+          }
         };
 
-      this.productForm.valueChanges.subscribe(res => {
-        console.log("res---",res)
-        setTimeout(()=> {
-          console.log("main_cate",this.main_category)
-        },1000)
-      })
+      // this.productForm.valueChanges.subscribe(res => {
+      //   console.log("res---",res)
+      // })
+    
   }
+
+
+  noResultsButtonClicked() {
+    console.log('You clicked the "No Result Found" button.');
+  }
+
 
   increment() {
     this.counter += 1;
@@ -387,6 +416,14 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  ngAfterViewInit() {
+    let elem = this.elementRef.nativeElement.querySelector('#no-results-btn')
+    console.log(elem)
+    if(elem) elem.addEventListener('click', this.noResultsButtonClicked.bind(this));
+    
+  }
+  
 
   public config: DropzoneConfigInterface = {
     clickable: true,
