@@ -121,7 +121,7 @@
                                             <ng-select2 
                                                 [formControl]="productForm.controls['sizes']"
                                                 [data]="sizeOptions"
-                                                [options]="options"
+                                                [options]="sizeConfig"
                                                 [width]="300"
                                                 >		
                                             </ng-select2>
@@ -134,8 +134,8 @@
                                             </div>
                                         </div>
                                         <div  class="col-xl-3 col-sm-4 mb-0"></div>
-                                        <div class="col-xl-8 col-sm-7 form-inline" *ngIf="custom_size.value">
-                                            <input class="form-control col-xl-4 col-sm-5" id="size" type="text">
+                                        <div class="col-xl-8 col-sm-7 form-inline" style="margin-top: 20px;" *ngIf="custom_size.value">
+                                            <input class="form-control col-xl-4 col-sm-5" id="size" type="text" placeholder="enter size">
                                             <input class="upload col-xl-4 col-sm-2" style="padding-top: 10px;" type="file" (change)="readUrlSizeImg($event)">
                                         </div>
                                     </div>
@@ -146,7 +146,7 @@
                                             <ng-select2 
                                                 [formControl]="productForm.controls['labels']"
                                                 [data]="labelOptions"
-                                                [options]="options"
+                                                [options]="labelConfig"
                                                 [width]="300"
                                                 >		
                                             </ng-select2>
@@ -168,13 +168,24 @@
                                         <div class="col-xl-8 col-sm-7 pl-0 description-sm">
                                             <ck-editor id="editor1" cols="30" rows="10"  language="en" [fullPage]="true"></ck-editor>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="form-group row">
-                                        <label class="col-xl-3 col-sm-4">Custom Design </label>
-                                        <div class="col-xl-8 col-sm-7 pl-0 description-sm">
-                                            <ck-editor id="editor2" cols="30" rows="10"  language="en" [fullPage]="true"></ck-editor>
+                                        <label class="col-xl-3 col-sm-4" >Custom Design </label>
+                                        <div class="custom-control custom-switch col-xl-8 col-sm-7">
+                                            <input type="checkbox" class="custom-control-input" id="cutomDesign" 
+                                            [formControl]="productForm.controls['customDesign']">
+                                            <label class="custom-control-label" for="cutomDesign">
+                                            </label>
                                         </div>
-                                    </div> -->
+                                        <!-- <div class="col-xl-8 col-sm-7 pl-0 description-sm">
+                                            <ck-editor id="editor2" cols="30" rows="10"  language="en" [fullPage]="true"></ck-editor>
+                                        </div> -->
+                                        <div  class="col-xl-3 col-sm-4 mb-0"></div>
+                                        <div class="col-xl-8 col-sm-7 form-inline" style="margin-top: 20px;" *ngIf="custom_design.value">
+                                            <input class="form-control col-xl-4 col-sm-5" id="size" type="text" placeholder="description">
+                                            <input class="upload col-xl-4 col-sm-2" style="padding-top: 10px;" type="file" (change)="readUrlSizeImg($event)">
+                                        </div>
+                                    </div> 
                                     <div class="form-group row">
                                         <label class="col-xl-3 col-sm-4">Add Description </label>
                                         <div class="col-xl-8 col-sm-7 pl-0 description-sm">
