@@ -1,4 +1,18 @@
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <div class="filter-box">
+                <span>Filters By</span>
+                <ng-select2 
+                    [(ngModel)]="filters"
+                    [data]="filterOptions"
+                    [options]="filterConfig"
+                    [width]="300"
+                    >		
+                </ng-select2>
+            </div>
+        </div>
+    </div>
     <div class="row products-admin ratio_asos">
         <div class="col-xl-3 col-sm-6" *ngFor="let product of product_list">
             <div class="card">
@@ -41,4 +55,18 @@
             </div>
         </div>
     </div>
+    <!-- Pagination -->
+    <nav class="pagination-nav" aria-label="Page navigation">
+        <ul class="pagination justify-content-end">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
 </div>
