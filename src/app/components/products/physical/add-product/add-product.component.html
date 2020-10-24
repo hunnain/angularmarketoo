@@ -182,8 +182,24 @@
                                         </div> -->
                                         <div  class="col-xl-3 col-sm-4 mb-0"></div>
                                         <div class="col-xl-8 col-sm-7 form-inline" style="margin-top: 20px;" *ngIf="custom_design.value">
-                                            <input class="form-control col-xl-4 col-sm-5" id="size" type="text" placeholder="description">
-                                            <input class="upload col-xl-4 col-sm-2" style="padding-top: 10px;" type="file" (change)="readUrlSizeImg($event)">
+                                            <!-- <label for="custom-image-type" class="col-xl-2 col-sm-3 mb-0">Photo Format</label> -->
+                                            <select class="form-control digits col-xl-6 col-sm-12"
+                                            id="custom-image-type">
+                                            <option disabled selected>Select Format</option>
+                                            <option>JPEG/JFIF</option>
+                                            <option>JPEG 2000</option>
+                                            <option>Exif</option>
+                                            <option>TIFF</option>
+                                            <option>GIF</option>
+                                            <option>BMP</option>
+                                            <option>PNG</option>
+                                            <option>PPM</option>
+                                            <option>PGM</option>
+                                            <option>PBM</option>
+                                            <option>PNM</option>
+                                            </select>
+                                            <input class="upload col-xl-6 col-sm-12" style="padding-top: 10px;" type="file" (change)="readUrlSizeImg($event)">
+                                            <input class="form-control col-xl-12 col-sm-12" id="size" type="text" placeholder="Enter description">
                                         </div>
                                     </div> 
                                     <div class="form-group row">
