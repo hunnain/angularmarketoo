@@ -7,9 +7,10 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { SalesRoutingModule } from './sales-routing.module';
 import { OrdersComponent } from './orders/orders.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 @NgModule({
-  declarations: [OrdersComponent, TransactionsComponent],
+  declarations: [OrdersComponent,OrderDetailComponent, TransactionsComponent],
   imports: [
     CommonModule,
     SalesRoutingModule,

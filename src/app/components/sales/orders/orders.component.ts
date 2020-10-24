@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { DatatableComponent } from "@swimlane/ngx-datatable";
 import { orderDB } from "../../../shared/tables/order-list";
 @Component({
@@ -11,7 +12,7 @@ export class OrdersComponent implements OnInit {
   public temp = [];
 
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
-  constructor() {
+  constructor(private router: Router) {
     this.order = orderDB.list_order;
   }
 
@@ -30,6 +31,12 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onSelectRow(row){
+    console.log("row clicked",`/sales/order-detail/${row}`)
+    let route = `/sales/order-detail/${row.replace(/#/g,"")}`
+    this.router.navigate([route])
   }
 
 }
