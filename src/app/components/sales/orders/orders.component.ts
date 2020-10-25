@@ -34,7 +34,6 @@ export class OrdersComponent implements OnInit {
   }
 
   onSelectRow(row){
-    console.log("row clicked",`/sales/order-detail/${row}`)
     let route = `/sales/order-detail/${row.replace(/#/g,"")}`
     this.router.navigate([route])
   }
