@@ -23,6 +23,19 @@
                             <ngx-datatable-column name="Code"></ngx-datatable-column>
                             <ngx-datatable-column name="Discount"></ngx-datatable-column>
                             <ngx-datatable-column name="Status"></ngx-datatable-column>
+                            <ngx-datatable-column name="Due Date" prop="due_date"></ngx-datatable-column>
+                            <ngx-datatable-column name="Action" sortable="false" prop="id">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    <div>
+                                        <span style="color:blue;cursor: pointer;">
+                                            <i class="fa fa-edit" (click)='onSelectRow(value)'></i>
+                                        </span>
+                                        <span style="color:blue;cursor: pointer;margin-left:10px">
+                                            <i class="fa fa-trash" (click)='onSelectRow(value)'></i>
+                                        </span>
+                                    </div>
+                                  </ng-template>
+                            </ngx-datatable-column>
                         </ngx-datatable>
                     </div>
                 </div>
