@@ -26,5 +26,9 @@ export class ListCouponComponent implements OnInit {
 
    }
 
+   onSelectRow(val){
+     console.log('row click',val)
+   }   
+
 
 }
