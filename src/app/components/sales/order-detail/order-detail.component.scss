@@ -32,3 +32,89 @@
 .action{
     text-align: right;
 }
+
+.box-file-input{
+    width: 50px;
+    height: 50px;
+    background-color: #f1f4fb;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.upload{
+    position: absolute;
+    width: 70px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+}
+
+.imgUpload{
+    width: 50px;
+}
+
+
+// Invoice Modal CSS
+// header
+.main-container{
+    .header{
+        text-align: right;
+        img{
+            width:200px;
+        }
+        p{
+            margin-bottom: 0px;
+            font-size:10px;
+        }
+        p.company-name{
+            font-weight: bold;
+            font-size: 15px;
+        }
+    }
+    .heading{
+        h3{
+            font-weight: bold;
+        }
+    }
+    .content-right{
+        text-align: right;
+        p{
+            font-weight: bold;
+            margin-bottom: 0px;
+        }
+    }
+    .content-left{
+        p{
+            margin-bottom:0px;
+        }
+        p:nth-child(1){
+            margin-bottom:5px;
+        }
+        p:last-child{
+          margin-bottom:10px;  
+        }
+    }
+    .table-section{
+        .table .thead-dark th{
+            background-color: #4B5335;
+            border-color: #4B5335;
+        }
+    }
+    .footer-right{
+        text-align: right;
+        p{
+            margin-bottom: 0px;
+            font-weight: bold;
+        }
+    }
+    .footer-desc{
+        margin-top: 20px;
+        font-size: 10px;
+        span:last-child{
+            margin-top:5px;
+        }
+    }
+}

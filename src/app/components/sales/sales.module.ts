@@ -10,6 +10,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [OrdersComponent,OrderDetailComponent, TransactionsComponent],
@@ -20,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     SalesRoutingModule,
     Ng2SmartTableModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    SharedModule
   ]
 })
 export class SalesModule { }

@@ -12,7 +12,11 @@ import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 export class OrderDetailComponent implements OnInit {
   public closeResult: string;
   public status: string;
+  public reason: string;
+  public reasonDesc: string;
+
   public total: number;
+  public img:string="assets/images/user.png";
   
   public dummyData =  {
     "order id": "#51240",
@@ -22,6 +26,7 @@ export class OrderDetailComponent implements OnInit {
     "payment_status": "Paid",
     "payment_method": "Stripe",
     "invoice_no": "123456",
+    "shipment_method": "SF Express",
     "user_info":{
       name:"John Doe",
       contact:'714-508-5350',
@@ -32,7 +37,7 @@ export class OrderDetailComponent implements OnInit {
     "billing_address": "17601 N Thomas Hill Rd, Sturgeon, MO, 65284",
     "order_status": "Delivered",
     "date": "Dec 10,18",
-    "total": "54671"
+    "total": 54671
 }
 
   constructor(private modalService: NgbModal) {
@@ -61,12 +66,12 @@ export class OrderDetailComponent implements OnInit {
 
 
   changeTotal(content){
-    this.total = Number(this.dummyData.total);
+    // this.total = Number(this.dummyData.total);
     this.open(content)
   }
 
   updateTotal(){
-    this.dummyData.total = this.total.toString();
+    this.dummyData.total = this.dummyData.total + this.total;
     this.modalService.dismissAll("save button clicked")
   }
 
@@ -77,6 +82,31 @@ export class OrderDetailComponent implements OnInit {
   updateStatus(){
     this.dummyData.order_status = this.status
     this.modalService.dismissAll("save button clicked")
+  }
+
+  changeShipmentMethod(content){
+    this.open(content)
+  }
+
+  //FileUpload
+  readUrlSizeImg(event: any) {
+    if (event.target.files.length === 0)
+      return;
+    //Image upload validation
+    var mimeType = event.target.files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+    // Image upload
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (_event) => {
+      this.img = reader.result.toString();
+    }
+  }
+
+  openInvoice(content){
+    this.open(content)
   }
 
 }
