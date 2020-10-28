@@ -36,6 +36,9 @@ export class ProductListComponent implements OnInit {
       {id:'is',text:"International Shipping"},
       {id:'ls',text:"Local Shipping"},
       {id:'nu',text:"Newest Uploads"},
+      {id:'l-to-h',text:"Price Low to High"},
+      {id:'h-to-l',text:"Price High to Low"},
+
     ]
 
   }
