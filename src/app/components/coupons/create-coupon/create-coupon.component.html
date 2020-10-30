@@ -4,12 +4,12 @@
         <div class="card-header">
             <h5>Discount Coupon Details</h5>
         </div>
-        <div class="card-body tab2-card">
-            <ngb-tabset class="tab-coupon">
-                <ngb-tab title="General">
-                    <ng-template ngbTabContent>
+        <div class="card-body">
+            <!-- <ngb-tabset class="tab-coupon"> -->
+                <!-- <ngb-tab title="General"> -->
+                    <fieldset class="fieldset">
+                        <legend class="legend">General</legend>
                         <form [formGroup]="generalForm" class="needs-validation" novalidate="">
-                            <h4>General</h4>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group row">
@@ -76,13 +76,11 @@
                                 </div>
                             </div>
                         </form>
-                    </ng-template>
-                </ngb-tab>
-                <ngb-tab>
-                    <ng-template ngbTabTitle>Restriction</ng-template>
-                    <ng-template ngbTabContent>
+                    </fieldset>
+
+                    <fieldset class="fieldset" style="margin-top: 20px;">
+                        <legend class="legend">Restriction</legend>
                         <form [formGroup]="restrictionForm" class="needs-validation" novalidate="">
-                            <h4>Restriction</h4>
                             <div class="form-group row">
                                 <label class="col-xl-3 col-md-4">Category</label>
                                 <select class="custom-select col-md-7" formControlName="category" required="">
@@ -123,7 +121,7 @@
                                 <input class="form-control col-md-7" formControlName="max" id="validationCustom5"
                                     type="number">
                             </div>
-                            <h4>Usage Limits</h4>
+                            <h5>Usage Limits</h5>
                             <div class="form-group row">
                                 <label for="validationCustom6" class="col-xl-3 col-md-4">Per Limit</label>
                                 <input class="form-control col-md-7" formControlName="limit" id="validationCustom6"
@@ -135,8 +133,7 @@
                                     type="number">
                             </div>
                         </form>
-                    </ng-template>
-                </ngb-tab>
+                    </fieldset>
                 <!-- <ngb-tab>
                     <ng-template ngbTabTitle>Usage</ng-template>
                     <ng-template ngbTabContent>
@@ -155,9 +152,8 @@
                         </form>
                     </ng-template>
                 </ngb-tab> -->
-            </ngb-tabset>
-            <div class="pull-right">
-                <button type="button" class="btn btn-primary">Create</button>
+            <div class="pull-right" style="margin-top: 20px;">
+                <button type="button" class="btn btn-primary">{{isEdit ? 'Update' :'Create'}}</button>
             </div>
         </div>
     </div>

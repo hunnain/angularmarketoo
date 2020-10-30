@@ -22,6 +22,14 @@ const routes: Routes = [
           title: "Create Coupon",
           breadcrumb: "Create Coupons"
         }
+      },
+      {
+        path: 'edit-coupon/:id',
+        component: CreateCouponComponent,
+        data: {
+          title: "Edit Coupon",
+          breadcrumb: "Edit Coupons"
+        }
       }
     ]
   }

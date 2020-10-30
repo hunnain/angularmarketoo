@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { listCouponsDB } from 'src/app/shared/tables/list-coupon';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { CommonErrorService } from 'src/app/shared/service/error/common-error.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-coupon',
@@ -13,7 +14,7 @@ export class ListCouponComponent implements OnInit {
   public digital_categories = [];
   public selected = [];
 
-  constructor() {
+  constructor(private router: Router) {
     this.digital_categories = listCouponsDB.list_coupons;
   }
 
@@ -26,7 +27,12 @@ export class ListCouponComponent implements OnInit {
 
    }
 
-   onSelectRow(val){
+   onEdit(val){
+     console.log('row click',val)
+     this.router.navigate(['/coupons/edit-coupon/',val])
+   }   
+
+   onDelete(val){
      console.log('row click',val)
    }   
 

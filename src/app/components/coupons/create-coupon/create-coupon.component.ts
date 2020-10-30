@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { NgbDateStruct, NgbDate, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -14,11 +15,18 @@ export class CreateCouponComponent implements OnInit {
   public model: NgbDateStruct;
   public date: { year: number, month: number };
   public modelFooter: NgbDateStruct;
+  public isEdit:boolean = false;
+  public selectedId:string = null;
 
-  constructor(private formBuilder: FormBuilder, private calendar: NgbCalendar) {
+  constructor(private formBuilder: FormBuilder, private calendar: NgbCalendar,private activeRoute: ActivatedRoute) {
     this.createGeneralForm();
     this.createRestrictionForm();
     this.createUsageForm();
+
+    if(this.activeRoute.params['value'].id){
+      this.selectedId = this.activeRoute.params['value'].id
+      this.isEdit = true
+    }
   }
 
   selectToday() {
@@ -43,7 +51,9 @@ export class CreateCouponComponent implements OnInit {
       products: [''],
       category: [''],
       min: [''],
-      max: ['']
+      max: [''],
+      limit: [''],
+      customer:['']
     })
   }
 
