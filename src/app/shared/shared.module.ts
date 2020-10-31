@@ -32,6 +32,6 @@ import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.
     NgSelect2Module
   ],
   providers: [NavService, WINDOW_PROVIDERS],
-  exports: [NgSelect2Module,FeatherIconsComponent, ToggleFullscreenDirective]
+  exports: [NgSelect2Module,FeatherIconsComponent, ToggleFullscreenDirective,RightSidebarComponent]
 })
 export class SharedModule { }

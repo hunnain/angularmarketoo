@@ -14,7 +14,7 @@
         <div class="chat-box">
             <div class="people-list friend-list">
                 <ul class="list">
-                    <li class="clearfix" *ngFor="let user of users">
+                    <li class="clearfix" *ngFor="let user of users" (click)="onUserClick(user)" style="cursor: pointer;">
                         <img class="rounded-circle user-image blur-up lazyloaded" [src]="user.img" alt="">
                         <div class="status-circle online"></div>
                         <div class="about">

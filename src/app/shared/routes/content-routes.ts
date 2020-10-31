@@ -82,5 +82,12 @@ export const content: Routes = [
     data: {
       breadcrumb: "Invoice"
     }
+  },
+  {
+    path: 'my-messages',
+    loadChildren: () => import('../../components/messages/messages.module').then(m => m.MessagesModule),
+    data: {
+      breadcrumb: "My Messages"
+    }
   }
 ];
