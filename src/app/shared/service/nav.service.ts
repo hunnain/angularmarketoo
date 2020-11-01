@@ -83,6 +83,9 @@ export class NavService {
 		{
 			path: '/my-messages', title: 'My Messages', icon: 'message-square', type: 'link', badgeType: 'primary', active: false
 		},
+		{
+			path: '/boosting', title: 'Bosting-Q&A', icon: 'trending-up', type: 'link', badgeType: 'primary', active: false
+		},
 		// {
 		// 	title: 'Pages', icon: 'clipboard', type: 'sub', active: false, children: [
 		// 		{ path: '/pages/list-page', title: 'List Page', type: 'link' },

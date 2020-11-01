@@ -1,0 +1,35 @@
+.chat-container{
+    height: 100%;
+    .card-header{
+        padding: 10px 30px;
+        border-bottom: 1px solid #c1c1c1;
+    }
+    .card-body{
+        padding-bottom:0px;
+        .inner-content{
+            padding: 20px;
+            background-color: whitesmoke;
+            .inner-header{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom: 1px solid #4B5335;
+                .font-primary{
+                    color:#4B5335 !important;
+                }
+            }
+            .form-input{
+                margin-top: 10px;
+            }
+            .inner-footer{
+                background-color: bisque;
+                padding: 5px 10px;
+            }
+        }
+    }
+    .action-footer{
+        text-align: right;
+        padding:0px 30px;
+        padding-bottom:10px;
+    }
+}

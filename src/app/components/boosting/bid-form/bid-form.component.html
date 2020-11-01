@@ -1,0 +1,53 @@
+<div style="margin: 20px 0px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card chat-container">
+                <div class="card-header">
+                    <h5>Bid</h5>
+                </div>
+                <div class="card-body content">
+                  <div class="inner-content">
+                    <div class="inner-header">
+                        <span>BID TYPE AND VALUE</span>
+                        <span>
+                            <app-feather-icons [icon]="'info'" class="font-primary"></app-feather-icons>
+                        </span>
+                    </div>
+                    <div class="form-input">
+                        <div class="form-group row">
+                            <label for="cpc" class="col-sm-6 col-form-label" style="text-align: center;">CPC (Cost Per Click)</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" [(ngModel)]="bid" name="bid" id="cpc" placeholder="Your bid" style="text-align: right;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inner-footer">
+                        <span>SUGGETED BID FOR THESE SETTINGS:</span>
+                    </div>
+                  </div> 
+                </div>
+                <div class="action-footer">
+                    <button class="btn btn-primary" [disabled]="!bid" data-toggle="modal" (click)="openPaymentModal(gateway)">Pay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<ng-template #gateway let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Stripe</h5>
+        <button type="button" class="close" aria-label="Close"
+            (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+            <div class="main-container" ngbAutofocus>
+                <app-stripe-gateway [_totalAmount]="bid"></app-stripe-gateway>
+            </div>
+    </div>
+</ng-template>

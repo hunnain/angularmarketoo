@@ -1,0 +1,37 @@
+.boosting-section{
+    color: red;
+    background-color: lightgray;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+    p{
+        color:inherit;
+    }
+}
+
+
+
+::ng-deep .questions-section .accordion{
+    .card{
+        margin: 0 !important;
+        .card-header{
+            padding: 0 !important;
+            button{
+                width: 100%;
+                color:#4B5335;
+                text-align: left;
+                .header-title{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+                .font-primary{
+                    color:#4B5335 !important;
+                }
+            }
+        :hover,:focus{
+            text-decoration: none !important;
+        }
+        }
+    }
+} 

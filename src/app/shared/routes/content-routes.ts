@@ -89,5 +89,12 @@ export const content: Routes = [
     data: {
       breadcrumb: "My Messages"
     }
+  },
+  {
+    path: 'boosting',
+    loadChildren: () => import('../../components/boosting/boosting.module').then(m => m.BoostingModule),
+    data: {
+      breadcrumb: "Boosting"
+    }
   }
 ];

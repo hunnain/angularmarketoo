@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgSelect2Module } from 'ng-select2';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FeatherIconsComponent } from './components/feather-icons/feather-icons.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -29,9 +30,10 @@ import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.
   imports: [
     CommonModule,
     RouterModule,
-    NgSelect2Module
+    NgSelect2Module,
+    NgbModule
   ],
   providers: [NavService, WINDOW_PROVIDERS],
-  exports: [NgSelect2Module,FeatherIconsComponent, ToggleFullscreenDirective,RightSidebarComponent]
+  exports: [NgSelect2Module,FeatherIconsComponent, NgbModule,ToggleFullscreenDirective,RightSidebarComponent]
 })
 export class SharedModule { }
