@@ -84,7 +84,10 @@ export class NavService {
 			path: '/my-messages', title: 'My Messages', icon: 'message-square', type: 'link', badgeType: 'primary', active: false
 		},
 		{
-			path: '/boosting', title: 'Bosting-Q&A', icon: 'trending-up', type: 'link', badgeType: 'primary', active: false
+			title: 'Boosting', icon: 'trending-up', type: 'sub', active: false, children: [
+				{ path: '/boosting', title: 'Boost My Product', type: 'link' },
+				{ path: '/boosting/my-ads-performance', title: 'My Ads Performance', type: 'link' },
+			]
 		},
 		// {
 		// 	title: 'Pages', icon: 'clipboard', type: 'sub', active: false, children: [

@@ -9,6 +9,11 @@
                     search results and campaign, allowing as many potential buyers as possible 
                     to come across it.</p>
             </div>
+        </div>
+        <div class="col-12">
+            <app-bid-form></app-bid-form>
+        </div>
+        <div class="col-12" style="margin-bottom:20px;">
             <div class="questions-section">
                 <ngb-accordion [closeOthers]="true" (panelChange)="changeTab($event)">
                     <ngb-panel [id]="quest.id" *ngFor="let quest of questions">
@@ -19,13 +24,12 @@
                             <app-feather-icons *ngIf="tabId === quest.id" [icon]="'chevron-up'" class="font-primary"></app-feather-icons>
                         </div>
                     </ng-template>  
-                      <ng-template ngbPanelContent>{{quest.answer}}</ng-template>
+                      <ng-template ngbPanelContent>
+                        <div [innerHTML]="quest.answer"></div>  
+                        </ng-template>
                     </ngb-panel>
                   </ngb-accordion>
             </div>
-        </div>
-        <div class="col-12">
-            <app-bid-form></app-bid-form>
         </div>
     </div>
 </div>

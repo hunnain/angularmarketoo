@@ -1,4 +1,4 @@
-<div style="margin: 20px 0px;">
+<!-- <div style="margin: 20px 0px;">
     <div class="row">
         <div class="col-sm-12">
             <div class="card chat-container">
@@ -28,6 +28,88 @@
                 </div>
                 <div class="action-footer">
                     <button class="btn btn-primary" [disabled]="!bid" data-toggle="modal" (click)="openPaymentModal(gateway)">Pay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div style="margin: 20px 0px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card chat-container">
+                <div class="card-header">
+                    <div class="row">
+                        <h5 class="col-12 col-md-6">Set Daily Budget</h5>
+                        <span class="col-12 col-md-6" style="text-align: right;">Current Balance: 1,169 <span style="font-weight: bold;color:red">HKD</span></span>
+                    </div>
+                </div>
+                <div class="card-body content">
+                  <div class="inner-content">
+                    <div class="form-input">
+                        <div class="form-group row" style="align-items: center;">
+                            <label for="cpc" class="col-sm-6 col-form-label" style="text-align: center;"><strong>Daily Budget</strong></label>
+                            <div class="col-sm-6">
+                                <ng5-slider [(value)]="value1" [options]="options2"></ng5-slider>
+                            </div>
+                        </div>
+                        <div class="form-group row" style="align-items: center;">
+                            <label for="cpc" class="col-sm-6 col-form-label" style="text-align: center;"><strong>Bid / Click Budget</strong></label>
+                            <div class="col-sm-6">
+                                <ng5-slider [(value)]="value2" [options]="options2"></ng5-slider>                            
+                            </div>
+                        </div>
+                        <div class="form-group row" style="margin-top: 10px;">
+                            <div class="col-sm-12">
+                                <ng5-slider [(value)]="value3" [options]="options3"></ng5-slider>                            
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="cpc" class="col-12 col-form-label">Select Product for boosting</label>
+                            <div class="col-12">
+                                <ng-select2 
+                                    (valueChanged)="addProduct($event)"
+                                    [data]="productOptions"
+                                    [options]="productConfig"
+                                    [placeholder]="'Select Product'"
+                                    [width]="300"
+                                    >		
+                                </ng-select2>
+                            </div>
+                            <div class="col-12 product-list-container" *ngIf="products.length > 0">
+                                <ul class="list-inline product-list" >
+                                    <li class="list-inline-item" *ngFor="let prod of products">
+                                        <div class="product-list-item">
+                                            <img style="display:block;width:60px" [src]="prod.additional.img" alt="product-image" />
+                                            <span>{{prod.text}}</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="cpc" class="col-12 col-form-label">Select Keywords</label>
+                            <div class="col-12">
+                                <span class="keywordChip" *ngFor="let key of keyWords">
+                                    <input type="checkbox" [id]="key.id" (change)="selectKeyWord($event,key.id)"/>
+                                    <label [for]="key.id">{{key.text}}</label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-12 col-md-6">Total Keywords</label>
+                            <div class="col-12 col-md-6">
+                                <strong>{{selectedKeyWords.length}}</strong>
+                            </div>
+                        </div>
+                    </div>
+                  </div> 
+                </div>
+                <div class="action-footer row">
+                    <div class="col-12 col-md-6">
+                        <span style="display: block;">7560 <strong style="color: red;">HKD</strong></span>
+                        <span>1260 total clicks for 7 days</span>
+                    </div>
+                    <button class="btn btn-primary col-12 col-md-6" [disabled]="false" data-toggle="modal" (click)="openPaymentModal(gateway)">Boost Now!</button>
                 </div>
             </div>
         </div>

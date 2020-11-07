@@ -1,0 +1,171 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card main-container main-heading">
+            <div class="card-header">
+                <div class="row">
+                    <h5 class="col-12 col-md-6">My Ads Performance</h5>
+                    <span class="col-12 col-md-6" style="text-align: right;">Last 30 days</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row product-container" style="margin-top:20px;">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="product-card">
+                <div class="row main-responsive">
+                    <h5 class="col-12 col-sm-10">
+                        <div class="col-12 product-list-container">
+                            <span class="list-inline-item" *ngFor="let prod of products">
+                                <div class="product-list-item" [ngClass]="{'selected':selectedProduct.id == prod.id}">
+                                    <input type="radio" name="prod" [id]="prod.id" (change)="selectProduct($event,prod)"/>
+                                    <label [for]="prod.id">
+                                        <img style="display:block;width:60px" [src]="prod.additional.img" alt="product-image" />
+                                        <span>{{prod.text}}</span>
+                                    </label>
+                                </div>
+                            </span>
+                        </div>
+                    </h5>
+                    <span class="col-12 col-sm-2" style="text-align: right; margin-bottom:20px;">
+                        <select class="form-control digits" [(ngModel)]="prodSortFilter">
+                            <option value="1">Daily</option>
+                            <option value="2">Weekly</option>
+                            <option value="2">Monthly</option>
+                        </select>
+                    </span>
+                </div>
+            </div>
+            <div class="card-body" *ngIf="selectedProduct">
+                <div class="selected-product">
+                    <div class="row" style="align-items: center;">
+                        <div class="col-12 col-sm-3">
+                            <div class="product-thumbnail">
+                                <img style="width:100%;" [src]="selectedProduct.additional.img" alt="selected product">
+                                <p>{{selectedProduct.text}}</p> 
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-9">
+                            <p>Max Click Rate Generated:<b>123</b></p>
+                            <p>Current Estimated Item Ad Rank:<b>4</b></p>
+                            <p>Current Status:
+                                <select class="form-control digits" data-toggle="modal" style="max-width:200px;display: inline;" 
+                                (ngModelChange)="openChangeStatusModal($event,statusWarning)" 
+                                [(ngModel)]="productStatus">
+                                    <option value="1">In Progress</option>
+                                    <option value="2">Canceled</option>
+                                    <option value="3">Support</option>
+                                    <option value="4">Finished</option>
+                                    <option value="5">Rejected</option>
+                                </select>
+                            </p>
+                        </div>
+                        <!-- <div class="col-12 col-md-5">
+                            <span>Current Status:4</span>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row" style="margin-bottom: 20px;">
+    <div class="col-sm-12 col-md-6">
+        <div class="card main-container" style="height: 100%;">
+            <div class="card-header">
+                <div class="row">
+                    <span class="col-12 col-sm-8" style="display: flex;align-items: center;justify-content: flex-start;">
+                        <h5>Top Performing Groups</h5>
+                        <app-feather-icons [icon]="'help-circle'" class="font-primary" style="color: #000 !important;margin-left:5px"></app-feather-icons>
+                    </span>
+                    <span class="col-12 col-sm-4" style="text-align: right;">
+                        <select class="form-control digits" [(ngModel)]="prodSortFilter">
+                            <option value="1">Daily</option>
+                            <option value="2">Weekly</option>
+                            <option value="2">Monthly</option>
+                        </select>    
+                    </span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="market-chart">
+                    <x-chartist class="board-chart ct-golden-section" [data]="chart3.data" [type]="chart3.type"
+                        [options]="chart3.options" [events]="chart3.events">
+                    </x-chartist>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <div class="card main-container" style="height: 100%;">
+            <div class="card-header">
+                <div class="row">
+                    <span class="col-12 col-sm-8" style="display: flex;align-items: center;justify-content: flex-start;">
+                        <h5 >Top Trending Groups</h5>
+                        <app-feather-icons [icon]="'help-circle'" class="font-primary" style="color: #000 !important;margin-left:5px"></app-feather-icons>
+                    </span>
+                    <span class="col-12 col-sm-4" style="text-align: right;">
+                        <select class="form-control digits" [(ngModel)]="prodSortFilter">
+                            <option value="1">Daily</option>
+                            <option value="2">Weekly</option>
+                            <option value="2">Monthly</option>
+                        </select>    
+                    </span>
+                </div>
+            </div>
+            <div class="card-body">
+                <ngb-tabset class="tab-coupon mb-0">
+                    <ngb-tab>
+                        <ng-template ngbTabTitle><i class="icon-stats-down mr-2"></i>Trending Down</ng-template>
+                        <ng-template ngbTabContent>
+                            <div class="market-chart">
+                                <x-chartist class="board-chart ct-golden-section" [data]="chart3.data" [type]="chart3.type"
+                                    [options]="chart3.options" [events]="chart3.events">
+                                </x-chartist>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab>
+                        <ng-template ngbTabTitle><i class="icon-stats-up mr-2"></i>Trending Up
+                            <ng-template ngbTabContent>
+                                <div class="market-chart">
+                                    <x-chartist class="board-chart ct-golden-section" [data]="chart3.data" [type]="chart3.type"
+                                        [options]="chart3.options" [events]="chart3.events">
+                                    </x-chartist>
+                                </div>
+                            </ng-template>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<ng-template #statusWarning let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+        <button type="button" class="close" aria-label="Close"
+            (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+            <div class="main-container" ngbAutofocus>
+                <p>Marking your listing as "Sold", "Out Of Stock", "Deleted" or changing its category will stop your Boosting
+                    immediately. Reserved listing's promotion will be paused for a maximum 24hours. Within 24h, re-list the listing will bring back the promotion automtically.
+                    Over 24h, then it will be stopped. Re-listing will not cost any surcharge within the duration you paid for.
+                </p>
+            </div>
+            <div class="action">
+                <button class="btn btn-primary" type="button" (click)="save()">Update</button>
+            </div>
+    </div>
+</ng-template>
