@@ -1,0 +1,291 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="row product-page-main card-body">    
+            <div class="col-xl-8">
+                <div class="product-page-details product-right mb-0">
+                    <div class="row">
+                    <h2 class="col-12 col-md-6">Order Details</h2>
+                    <div class="col-12 col-md-6" style="text-align: right;">
+                        <span ngbTooltip="Invoice" placement="bottom" style="color:#36f;cursor: pointer;" 
+                        data-toggle="modal" (click)="openInvoice(Invoice)"><i class="fa fa-file" ></i></span>
+                    </div>    
+                    </div>
+                    <hr>
+                    <div class="container-gap">
+                        <p class="mb-0">Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium
+                            doloremque
+                            laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto
+                            beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem,</p>
+
+                        <div style="margin-top: 30px;">
+                            <h4 class="product-title">Customer</h4>
+                            <hr>
+                            <div class="payment-section" style="margin-top: 20px;">
+                                <div class="font-size-13">
+                                    <strong>Name</strong>: {{dummyData?.user_info?.name}}
+                                </div>
+                                <div class="font-size-13">
+                                    <strong>Contact No</strong>: {{dummyData?.user_info?.contact}}
+                                </div>
+                            </div>
+                            <div style="margin-top: 20px;" class="font-size-13">
+                                <strong>Address</strong>: {{dummyData?.user_info?.address}}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="container-gap">
+                        <h4 class="product-title">Payment</h4>
+                        <hr>
+                        <div class="payment-section">
+                            <div class="font-size-13">
+                                <strong>Status</strong>: <span class='badge badge-secondary'>{{dummyData.payment_status}}</span>
+                            </div>
+                            <div class="font-size-13">
+                                <strong>Method</strong>: <span class='badge badge-secondary'>{{dummyData.payment_method}}</span>
+                            </div>
+                            <div class="font-size-13">
+                                <strong>Invoice No</strong>: {{dummyData.invoice_no}}
+                            </div>
+                            <div class="font-size-13">
+                                <strong>Shipment Method</strong>: {{dummyData.shipment_method}}
+                                <span class="change-btn" data-toggle="modal" (click)="changeShipmentMethod(Shipment)">Change</span>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px;" class="font-size-13">
+                            <strong>Billing Address</strong>: {{dummyData.billing_address}}
+                        </div>
+                        <div style="margin-top: 20px;" class="font-size-13">
+                            <strong>Shipping Address</strong>: {{dummyData.shipping_address}}
+                        </div>
+                    </div>
+                    <div class="container-gap">
+                        <h4 class="product-title">Products</h4>
+                        <hr>
+                        <div>
+                            <ul class="list-inline">
+                                <li class="list-inline-item" *ngFor="let prod of dummyData.products">
+                                    <img [src]='prod' class='img-30 mr-2'>
+                                </li>
+                             </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="order-summary">
+                    <div class="container-gap">
+                        <h4>Order Summary</h4>
+                        <hr>
+                        <div style="margin-top: 20px;" class="font-size-13">
+                            <strong>Date</strong>: {{dummyData.date}}
+                        </div>
+                        <div style="margin-top: 20px;" class="font-size-13">
+                            <strong>Order Status</strong>: 
+                            <span class='badge badge-success'>{{dummyData.order_status}}</span> 
+                            <span class="change-btn" data-toggle="modal" (click)="changeStatus(Status)">Change</span>
+                        </div>
+                        <div style="margin-top: 20px;" class="font-size-13">
+                            <strong>Total</strong>: <h5 class="d-inline">${{dummyData.total}}</h5> 
+                            <span class="change-btn" data-toggle="modal" (click)="changeTotal(Total)">Change</span>
+                        </div>
+                        <div class="row" style="margin-top:30px;justify-content: space-evenly;">
+                            <button class="btn btn-primary col-12 col-sm-3" type="button"
+                            ngbTooltip="print" placement="bottom">
+                                <app-feather-icons [icon]="'printer'" class="font-primary" style="color: #fff !important;"></app-feather-icons>
+                            </button>
+                            <button class="btn btn-secondary col-12 col-sm-3" type="button" 
+                            ngbTooltip="message" placement="bottom">
+                                <app-feather-icons [icon]="'message-square'" class="font-primary" style="color: #fff !important;"></app-feather-icons>
+                            </button>
+                            <button class="btn btn-warning col-12 col-sm-3"
+                             type="button" ngbTooltip="back" placement="bottom" [routerLink]="'/sales/orders'">
+                             <app-feather-icons [icon]="'corner-down-left'" class="font-primary" style="color: #fff !important;"></app-feather-icons>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #Total let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Price</h5>
+        <button type="button" class="close" aria-label="Close"
+            (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <div>
+                <label for="price">Price</label>
+                <input type="number" ngbAutofocus [(ngModel)]="total" 
+                class="form-control" id="price" aria-describedby="price" placeholder="Enter Price">
+            </div>
+            <div style="margin-top: 10px;">
+                <label for="reason">Select Reason</label>
+                <select class="form-control" id="reason" [(ngModel)]="reason" name="reason">
+                  <option value="wrapping">Wrapping</option>
+                  <option value="other">Other</option>
+                </select>
+            </div>
+            <div style="margin-top: 10px;" *ngIf="reason == 'other'">
+                <label for="desc">Reason</label>
+                <input type="text" [(ngModel)]="reasonDesc" name="reasonDesc"
+                class="form-control" id="desc" aria-describedby="desc" placeholder="Enter Reason">
+            </div>
+        </div>
+        <div class="action">
+            <button class="btn btn-primary" type="button" (click)="updateTotal()">Update</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #Status let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
+        <button type="button" class="close" aria-label="Close"
+            (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="status">Select Status</label>
+            <select class="form-control" id="status" ngbAutofocus [(ngModel)]="status" name="status">
+              <option value="confirmingOrder">Confirming Order</option>
+              <option value="orderConfirmed">Order Confirmed</option>
+              <option value="shipped">Shipped</option>
+              <option value="delivered">Delivered</option> 
+              <option value="processingRefund">Processing Refund</option> 
+              <option value="refunded">Refunded</option> 
+            </select>
+          </div>
+        <div class="action">
+            <button class="btn btn-primary" type="button" (click)="updateStatus()">Update</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #Shipment let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Shipment Method</h5>
+        <button type="button" class="close" aria-label="Close"
+            (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <div>
+                <div class="row form-inline">
+                    <label class="col-12 col-sm-3" for="other">Other Courier</label>
+                    <input class="form-control col-12 col-sm-4" ngbAutofocus  id="other" type="text">
+                    <div class="box-input-file col-12 col-sm-3">
+                        <input class="upload" type="file" (change)="readUrlSizeImg($event)">
+                        <img class="imgUpload" alt="" [src]="img"></div>
+                </div>
+            </div>
+            <div style="margin: 20px 0px;">
+                <label style="margin-right:10px;">Marketoo Account</label>
+                <ol>
+                    <li><a href="https://www.sf-express.com/hk/tc/" target="_blank">SF Express</a></li>
+                    <li><a href="https://www.hongkongpost.hk/en/home/index.html" target="_blank">HK Post</a></li>
+                    <li><a href="https://ec-ship.hongkongpost.hk/platform/index.jsf?lang=en_us" target="_blank">EC Shipment</a></li>
+                </ol>
+            </div>
+            <div style="margin: 10px 0px;">
+                <div class="row form-inline" >
+                    <label class="col-12 col-sm-4">Add Tracking Details</label>
+                    <input class="form-control col-12 col-sm-5" id="size" type="text">
+                </div>
+            </div>
+          </div>
+        <div class="action">
+            <button class="btn btn-primary" type="button" (click)="updateStatus()">Update</button>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #Invoice let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Invoice</h5>
+        <button type="button" class="close" aria-label="Close"
+            (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+            <div class="main-container">
+                <div class="header">
+                    <img src="assets/images/Marketoo.png" alt="marketoo_logo"/>
+                    <p class="company-name">MARKETOO LIMITED</p>
+                    <p>Email: admin@marketoo.hk</p>
+                    <p>Whatsapp: (852) 5936 3083</p>
+                    <p>Website: https://www.marketoo.hk</p>
+                </div>
+                <div class="heading">
+                    <h3>INVOICE</h3>
+                </div>
+                <div class="content">
+                    <div class="content-right">
+                        <p>Invoice No.: 123123123123</p>
+                        <p>Date: 28,Mar 2020</p>
+                    </div>
+                    <div class="content-left">
+                        <p>Dear Mr John Doe,</p>
+                        <p>This order is deliver to</p>
+                        <p>17601 N Thomas Hill Rd, Sturgeon, MO, 65284</p>
+                    </div>
+                </div>
+                <div class="table-section">
+                    <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">Item product one example </th>
+                            <td>2</td>
+                            <td>$20</td>
+                            <td>$40</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Item product two example</th>
+                            <td>3</td>
+                            <td>$10</td>
+                            <td>$30</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Item product three example</th>
+                            <td>1</td>
+                            <td>$30</td>
+                            <td>$30</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+                <div class="footer-right">
+                    <p>Total (HKD): $100</p>
+                    <p>Payments: Stripe</p>
+                </div>
+                <div class="footer-desc">
+                    <span>This email and any files ransmited with it are confidential and intended solely for individual or entity to whom they are addressed. 
+                        If you have received this email in error, destory it immediately.</span>
+                    <span class="d-block">Thank you for shopping with us at Marketoo.</span>
+                </div>
+            </div>
+    </div>
+        <!-- <div class="action">
+            <button class="btn btn-primary" type="button" (click)="updateStatus()">Update</button>
+        </div> -->
+</ng-template>

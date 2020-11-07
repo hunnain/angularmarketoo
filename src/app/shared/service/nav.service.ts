@@ -89,6 +89,9 @@ export class NavService {
 				{ path: '/boosting/my-ads-performance', title: 'My Ads Performance', type: 'link' },
 			]
 		},
+		{
+			path: '/return-exchange', title: 'Return & Exchange', icon: 'package', type: 'link', badgeType: 'primary', active: false
+		},
 		// {
 		// 	title: 'Pages', icon: 'clipboard', type: 'sub', active: false, children: [
 		// 		{ path: '/pages/list-page', title: 'List Page', type: 'link' },

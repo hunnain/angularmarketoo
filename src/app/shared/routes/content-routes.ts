@@ -96,5 +96,12 @@ export const content: Routes = [
     data: {
       breadcrumb: "Boosting"
     }
+  },
+  {
+    path: 'return-exchange',
+    loadChildren: () => import('../../components/return-exchange/return-exchange.module').then(m => m.ReturnExchangeModule),
+    data: {
+      breadcrumb: "Return & Exchange"
+    }
   }
 ];
