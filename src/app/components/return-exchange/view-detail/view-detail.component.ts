@@ -12,6 +12,7 @@ import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 export class ViewDetailComponent implements OnInit {
   public closeResult: string;
   public status: string;
+  public refund_reason: string;
   public reason: string;
   public reasonDesc: string;
 
@@ -20,29 +21,32 @@ export class ViewDetailComponent implements OnInit {
   
   public dummyData =  {
     "order id": "#51240",
-    "products": ['assets/images/electronics/product/25.jpg',
-    'assets/images/electronics/product/13.jpg',
-    'assets/images/electronics/product/16.jpg'],
-    "payment_status": "Paid",
-    "payment_method": "Stripe",
-    "invoice_no": "123456",
-    "shipment_method": "SF Express",
+    "products":[
+      {
+        name:'Product 1',qty:2,price:10,
+        img:'assets/images/digital-product/product-1.png'
+      },
+      {
+        name:'Product 2',qty:1,price:20,
+        img:'assets/images/digital-product/product-2.png'
+      },
+      {
+        name:'Product 3',qty:3,price:30,
+        img:'assets/images/digital-product/product-4.png'
+      }
+    ],
+    "type": "Exchange",
+    "requested_on": "Dec 10,18",
+    "remarks":'Mismatch items',
+    "total": 54671,
     "user_info":{
       name:"John Doe",
       contact:'714-508-5350',
       address: "17601 N Thomas Hill Rd, Sturgeon, MO, 65284",
-
     },
-    "shipping_address": "560 Graysville Rd, Guthrie, KY, 42234",
-    "billing_address": "17601 N Thomas Hill Rd, Sturgeon, MO, 65284",
-    "order_status": "Delivered",
-    "date": "Dec 10,18",
-    "total": 54671
 }
 
-  constructor(private modalService: NgbModal) {
-    this.status = this.dummyData.order_status;
-   }
+  constructor(private modalService: NgbModal) {}
 
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -80,7 +84,7 @@ export class ViewDetailComponent implements OnInit {
   }
 
   updateStatus(){
-    this.dummyData.order_status = this.status
+    // this.dummyData.order_status = this.status
     this.modalService.dismissAll("save button clicked")
   }
 
