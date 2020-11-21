@@ -6,8 +6,13 @@
                     <div class="row">
                     <h2 class="col-12 col-md-6">Order Details</h2>
                     <div class="col-12 col-md-6" style="text-align: right;">
-                        <span ngbTooltip="Invoice" placement="bottom" style="color:#36f;cursor: pointer;" 
-                        data-toggle="modal" (click)="openInvoice(Invoice)"><i class="fa fa-file" ></i></span>
+                        <span style="color:#36f;cursor: pointer;" 
+                        data-toggle="modal" (click)="openInvoice(Invoice)">
+                            <span class="d-flex flex-column align-items-center position-absolute" style="right: 20px;">
+                                <app-feather-icons [icon]="'file-text'" class="font-primary"></app-feather-icons>
+                                <span>Invoice</span>
+                            </span>
+                        </span>
                     </div>    
                     </div>
                     <hr>

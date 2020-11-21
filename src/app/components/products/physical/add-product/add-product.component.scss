@@ -1,5 +1,9 @@
-::ng-deep #editor1  textarea,
-::ng-deep #editor2  textarea,
-::ng-deep #editor3  textarea {
-    width: 100% !important;
+::ng-deep #editor1 textarea,
+::ng-deep #editor2 textarea,
+::ng-deep #editor3 textarea {
+  width: 100% !important;
+}
+
+::ng-deep #no-results-btn {
+  cursor: pointer;
 }

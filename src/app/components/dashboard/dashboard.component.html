@@ -85,12 +85,20 @@
         </div> -->
         <div class="col-xl-6 xl-100">
             <section class="report-dashboard">
-                <h2 class="report-dashboard-title">Monthly Report</h2>
+                <div class="row align-items-center">
+                    <h2 class="col-8 report-dashboard-title">Monthly Report</h2>
+                    <div class="col-4 text-right">
+                        <span class="d-flex align-items-center justify-content-end" style="cursor: pointer;">
+                            <app-feather-icons [icon]="'download'" class="font-primary"></app-feather-icons>
+                            <span>Export Report</span>
+                        </span>
+                    </div>
+                </div>
               
                 <div class="row">
                   <div class="flex-container">
                     <div class="report-dashboard-item">
-                      <div class="report-dashboard-label">Net Profit (After tax)</div>
+                      <div class="report-dashboard-label">Net Profit</div>
                       <div class="report-dashboard-number"><span class="dollar-unit">$</span>80</div>
                     </div>
                     <!-- /.report-dashboard-item -->
@@ -139,7 +147,7 @@
                       <div class="report-dashboard-number">58</div>
                     </div>
                     <div class="report-dashboard-item">
-                      <div class="report-dashboard-label">Transactional Management Fee</div>
+                      <div class="report-dashboard-label">Transaction Management Fee</div>
                       <div class="report-dashboard-number"><span class="dollar-unit">$</span>12</div>
                     </div>
                     <!-- /.report-dashboard-item -->
