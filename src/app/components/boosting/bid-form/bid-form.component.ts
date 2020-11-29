@@ -76,7 +76,7 @@ export class BidFormComponent implements OnInit {
       width: '100%',
       language: {
         noResults: function () {
-          return `No label found <span id='no-results-btn' class='badge badge-secondary'>Request Label</span>`;
+          return `No Keyword found <span id='no-results-btn' class='badge badge-secondary'>Request Label</span>`;
         },
       },
       escapeMarkup: function (markup) {
