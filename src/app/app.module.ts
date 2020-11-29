@@ -17,14 +17,15 @@ import { VendorsModule } from './components/vendors/vendors.module';
 import { UsersModule } from './components/users/users.module';
 import { LocalizationModule } from './components/localization/localization.module';
 import { InvoiceModule } from './components/invoice/invoice.module';
-import { SettingModule } from './components/setting/setting.module';;
+import { SettingModule } from './components/setting/setting.module';
 import { ReportsModule } from './components/reports/reports.module';
 import { AuthModule } from './components/auth/auth.module';
+import { ReferComponent } from './components/refer/refer.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditorComponent } from './components/editor/editor.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent, ReferComponent, EditorComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -43,9 +44,11 @@ import { AuthModule } from './components/auth/auth.module';
     PagesModule,
     MediaModule,
     MenusModule,
-    UsersModule
+    UsersModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

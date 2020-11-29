@@ -1,32 +1,31 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Select2OptionData } from 'ng-select2';
-import { Options,LabelType } from 'ng5-slider';
+import { Options, LabelType } from 'ng5-slider';
 import { LabelOptions } from '../../products/physical/add-product/data';
-
-declare var jQuery;
-
+import { Options as Opt } from 'select2';
 @Component({
   selector: 'app-bid-form',
   templateUrl: './bid-form.component.html',
-  styleUrls: ['./bid-form.component.scss']
+  styleUrls: ['./bid-form.component.scss'],
 })
 export class BidFormComponent implements OnInit {
   public productOptions: Array<Select2OptionData>;
   public productConfig;
   public products = [];
+  public keyWords: Array<Select2OptionData>;
 
-  public keyWords = LabelOptions;
-  public selectedKeyWords = [];
-  
+  // public keyWords = LabelOptions;
+  public selectedKeyWords = [''];
+
   public closeResult: string;
-  public bid:number;
-
+  public bid: number;
+  public labelConfig: Opt;
   // slide range input1
   value1: number = 40;
   options1: Options = {
     floor: 1,
-    ceil: 100
+    ceil: 100,
   };
   // slide range input2
   value2: number = 40;
@@ -40,9 +39,9 @@ export class BidFormComponent implements OnInit {
         case LabelType.High:
           return '<b>$</b>' + value;
         default:
-          return  `$ ${value} HKD`;
+          return `$ ${value} HKD`;
       }
-    }
+    },
   };
   // slide range input3
   value3: number = 7;
@@ -56,9 +55,9 @@ export class BidFormComponent implements OnInit {
         case LabelType.High:
           return '<b>Max days:</b>' + value;
         default:
-          return  value+ 'days';
+          return value + 'days';
       }
-    }
+    },
   };
   constructor(private modalService: NgbModal) {
     this.productConfig = {
@@ -69,38 +68,80 @@ export class BidFormComponent implements OnInit {
       // templateResult: this.templateResult,
       // templateSelection: this.templateSelection
     };
-
+    this.keyWords = LabelOptions;
+    this.labelConfig = {
+      multiple: true,
+      theme: 'classic',
+      closeOnSelect: false,
+      width: '100%',
+      language: {
+        noResults: function () {
+          return `No label found <span id='no-results-btn' class='badge badge-secondary'>Request Label</span>`;
+        },
+      },
+      escapeMarkup: function (markup) {
+        return markup;
+      },
+    };
     this.productOptions = [
-      {id:'1',text:"Product 1",additional:{
-        img:'assets/images/digital-product/logo.jpg'
-      }},
-      {id:'2',text:"Product 2",additional:{
-        img:'assets/images/digital-product/logo.jpg'
-      }},
-      {id:'3',text:"Product 3",additional:{
-        img:'assets/images/digital-product/logo.jpg'
-      }},
-      {id:'4',text:"Product 4",additional:{
-        img:'assets/images/digital-product/logo.jpg'
-      }},
-      {id:'5',text:"Product 5",additional:{
-        img:'assets/images/digital-product/logo.jpg'
-      }},
-      {id:'6',text:"Product 6",additional:{
-        img:'assets/images/digital-product/logo.jpg'
-      }},
-    ]
-   }
-
-  ngOnInit() {
+      {
+        id: '1',
+        text: 'Product 1',
+        additional: {
+          img: 'assets/images/digital-product/logo.jpg',
+        },
+      },
+      {
+        id: '2',
+        text: 'Product 2',
+        additional: {
+          img: 'assets/images/digital-product/logo.jpg',
+        },
+      },
+      {
+        id: '3',
+        text: 'Product 3',
+        additional: {
+          img: 'assets/images/digital-product/logo.jpg',
+        },
+      },
+      {
+        id: '4',
+        text: 'Product 4',
+        additional: {
+          img: 'assets/images/digital-product/logo.jpg',
+        },
+      },
+      {
+        id: '5',
+        text: 'Product 5',
+        additional: {
+          img: 'assets/images/digital-product/logo.jpg',
+        },
+      },
+      {
+        id: '6',
+        text: 'Product 6',
+        additional: {
+          img: 'assets/images/digital-product/logo.jpg',
+        },
+      },
+    ];
   }
 
+  ngOnInit() {}
+
   open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -112,32 +153,35 @@ export class BidFormComponent implements OnInit {
     }
   }
 
-  
-  openPaymentModal(content){
-    this.open(content)
+  openPaymentModal(content) {
+    this.open(content);
   }
 
-  selectKeyWord(event,key){
-    console.log("checked",key)
-    let value = event.target.checked
-    if(value){
-      if(!this.selectedKeyWords.length || !this.selectedKeyWords.includes(key)){
+  selectKeyWord(event, key) {
+    console.log('checked', key);
+    let value = event.target.checked;
+    if (value) {
+      if (
+        !this.selectedKeyWords.length ||
+        !this.selectedKeyWords.includes(key)
+      ) {
         this.selectedKeyWords.push(key);
       }
-    }else{
-      if(this.selectedKeyWords.includes(key)){
+    } else {
+      if (this.selectedKeyWords.includes(key)) {
         let index = this.selectedKeyWords.indexOf(key);
-        this.selectedKeyWords.splice(index,1);
+        this.selectedKeyWords.splice(index, 1);
       }
     }
-    console.log("checked",this.selectedKeyWords)
+    console.log('checked', this.selectedKeyWords);
   }
 
-  addProduct(event){
+  addProduct(event) {
     console.log(event);
-    let filteredProd = this.productOptions.filter(prod => event.includes(prod.id))
+    let filteredProd = this.productOptions.filter((prod) =>
+      event.includes(prod.id)
+    );
     this.products = filteredProd;
-
   }
 
   //  // function for result template
@@ -169,5 +213,4 @@ export class BidFormComponent implements OnInit {
 
   //   return jQuery('<span>' + state.text + '</span>');
   // }
-
 }

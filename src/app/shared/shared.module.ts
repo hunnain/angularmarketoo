@@ -9,7 +9,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
-import { ToggleFullscreenDirective } from "./directives/fullscreen.directive";
+import { ToggleFullscreenDirective } from './directives/fullscreen.directive';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { NavService } from './service/nav.service';
 import { WINDOW_PROVIDERS } from './service/windows.service';
@@ -25,15 +25,16 @@ import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.
     SidebarComponent,
     ContentLayoutComponent,
     BreadcrumbComponent,
-    RightSidebarComponent
+    RightSidebarComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    NgSelect2Module,
-    NgbModule
-  ],
+  imports: [CommonModule, RouterModule, NgSelect2Module, NgbModule],
   providers: [NavService, WINDOW_PROVIDERS],
-  exports: [NgSelect2Module,FeatherIconsComponent, NgbModule,ToggleFullscreenDirective,RightSidebarComponent]
+  exports: [
+    NgSelect2Module,
+    FeatherIconsComponent,
+    NgbModule,
+    ToggleFullscreenDirective,
+    RightSidebarComponent,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

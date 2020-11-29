@@ -1,20 +1,94 @@
 <!-- Container-fluid starts-->
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Invoice List</h5>
-                </div>
-                <div class="card-body">
-                    <div id="batchDelete" class="custom-datatable">
-                        <div class="table-responsive">
-                            <ng2-smart-table [settings]="settings" [source]="invoice"></ng2-smart-table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-xl-6" style="padding-right: 0%">
+      <img
+        src="assets/images/refral-image.jpg"
+        alt=""
+        class="img-fluid blur-up full-width"
+      />
     </div>
+    <div class="col-xl-6" style="padding-left: 0%">
+      <div class="" style="background: white">
+        <div class="card-body">
+          <form [formGroup]="userForm">
+            <ngb-tabset class="tab-coupon profile-tabs" justify="justified">
+              <ngb-tab class="asdfgg">
+                <ng-template ngbTabTitle>
+                  <app-feather-icons [icon]="'mail'"></app-feather-icons>
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <div
+                    class="tab-pane fade show active"
+                    id="top-profile"
+                    role="tabpanel"
+                    aria-labelledby="top-profile-tab"
+                  >
+                    <input
+                      class="form-control field-margin"
+                      [formControl]="userForm.controls['email']"
+                      placeholder="Your email"
+                      id="email"
+                      type="email"
+                      required=""
+                    />
+                    <!-- <div class="form-group "> -->
+                    <div
+                      style="color: tomato; text-align: right; font-size: 16px"
+                    >
+                      Address Book
+                    </div>
+                    <editor (sendData)="getEmails($event)"></editor>
+                    <!-- <textarea
+                      class="form-control field-margin"
+                      placeholder="Enter upto 10 Friends' emails"
+                      rows="4"
+                    ></textarea> -->
+                    <!-- </div> -->
+                    <!-- <div class="form-group field-margin"> -->
+                    <textarea
+                      class="form-control field-margin"
+                      placeholder="you are about to look uh-mazing. I'm in love with my Calorisonic, and I think you will be too."
+                      rows="6"
+                    ></textarea>
+                    <!-- </div> -->
+                    <div style="margin-top: 20px">
+                      <button type="button" class="btn btn-primary full-width">
+                        {{ "Send Email" }}
+                      </button>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template
+                  style="width: 100px; text-align: center"
+                  ngbTabTitle
+                >
+                  <!-- <app-feather-icons [icon]="'facebook'"></app-feather-icons> -->
+                  <i data-feather="facebook"></i>
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <div class="account-setting"></div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>
+                  <app-feather-icons [icon]="'twitter'"></app-feather-icons>
+                  <!-- <i data-feather="facebook"></i> -->
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <div class="account-setting"></div>
+                </ng-template>
+              </ngb-tab>
+            </ngb-tabset>
+          </form>
+        </div>
+      </div>
+      <div style="text-align: center; margin: 10px">
+        how it works | Powered by Marketoo
+      </div>
+    </div>
+  </div>
+  <!-- Container-fluid Ends-->
 </div>
-<!-- Container-fluid Ends-->
