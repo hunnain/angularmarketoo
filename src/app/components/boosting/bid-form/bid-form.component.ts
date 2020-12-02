@@ -76,7 +76,7 @@ export class BidFormComponent implements OnInit {
       width: '100%',
       language: {
         noResults: function () {
-          return `No Keyword found <span id='no-results-btn' class='badge badge-secondary'>Request Label</span>`;
+          return `No Keyword found <span id='no-results-btn' class='badge badge-secondary' (click)="openModal()">Request Label</span>`;
         },
       },
       escapeMarkup: function (markup) {
@@ -157,6 +157,10 @@ export class BidFormComponent implements OnInit {
     this.open(content);
   }
 
+  openModal() {
+    console.log('Date');
+  }
+
   selectKeyWord(event, key) {
     console.log('checked', key);
     let value = event.target.checked;
@@ -213,4 +217,5 @@ export class BidFormComponent implements OnInit {
 
   //   return jQuery('<span>' + state.text + '</span>');
   // }
+  
 }

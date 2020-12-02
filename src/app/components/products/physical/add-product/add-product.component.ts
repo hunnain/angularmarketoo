@@ -160,7 +160,7 @@ export class AddProductComponent implements OnInit {
   ngAfterViewInit() {
     let elem = this.elementRef.nativeElement.querySelector('#no-results-btn')
     console.log(elem)
-    if(elem) elem.addEventListener('click', this.noResultsButtonClicked.bind(this));
+    if(elem) elem.addEventListener('onclick', this.noResultsButtonClicked.bind(this));
     
   }
   

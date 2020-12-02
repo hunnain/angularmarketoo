@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { invoiceDB } from '../../shared/tables/invoice';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-refer',
   templateUrl: './refer.component.html',
@@ -9,8 +9,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class ReferComponent implements OnInit {
   public userForm: FormGroup;
+  public closeResult: string;
 
-  constructor(private fb: FormBuilder, private elementRef: ElementRef) {
+  constructor(
+    private fb: FormBuilder,
+    private elementRef: ElementRef,
+    private modalService: NgbModal
+  ) {
     this.userForm = this.fb.group({
       email: [
         '',
@@ -22,6 +27,31 @@ export class ReferComponent implements OnInit {
       description_1: [''],
       description_2: [''],
     });
+  }
+  open(content) {
+    this.modalService
+      .open(content, {
+        size: 'xl',
+        backdrop: 'static',
+        ariaLabelledBy: 'modal-basic-title',
+      })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
   public settings = {
@@ -58,4 +88,8 @@ export class ReferComponent implements OnInit {
   getEmails = (data) => {
     console.log(data);
   };
+
+  openDoc(content) {
+    this.open(content);
+  }
 }
