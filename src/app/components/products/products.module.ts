@@ -19,7 +19,6 @@ import { ProductDetailComponent } from './physical/product-detail/product-detail
 import { GalleryModule } from '@ks89/angular-modal-gallery';
 import 'hammerjs';
 import 'mousetrap';
-
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
@@ -30,10 +29,18 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   url: 'https://httpbin.org/post',
 };
 
-
-
 @NgModule({
-  declarations: [CategoryComponent, SubCategoryComponent, ProductListComponent, AddProductComponent, DigitalCategoryComponent, DigitalSubCategoryComponent, DigitalListComponent, DigitalAddComponent, ProductDetailComponent],
+  declarations: [
+    CategoryComponent,
+    SubCategoryComponent,
+    ProductListComponent,
+    AddProductComponent,
+    DigitalCategoryComponent,
+    DigitalSubCategoryComponent,
+    DigitalListComponent,
+    DigitalAddComponent,
+    ProductDetailComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -44,14 +51,14 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     NgbModule,
     DropzoneModule,
     GalleryModule.forRoot(),
-    SharedModule
+    SharedModule,
   ],
   providers: [
     {
       provide: DROPZONE_CONFIG,
-      useValue: DEFAULT_DROPZONE_CONFIG
+      useValue: DEFAULT_DROPZONE_CONFIG,
     },
-    NgbActiveModal
-  ]
+    NgbActiveModal,
+  ],
 })
-export class ProductsModule { }
+export class ProductsModule {}

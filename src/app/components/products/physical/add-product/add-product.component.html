@@ -335,6 +335,7 @@
                       <label class="custom-control-label" for="cutomDesign">
                       </label>
                     </div>
+
                     <!-- <div class="col-xl-8 col-sm-7 pl-0 description-sm">
                                             <ck-editor id="editor2" cols="30" rows="10"  language="en" [fullPage]="true"></ck-editor>
                                         </div> -->
@@ -377,6 +378,51 @@
                     </div>
                   </div>
                   <div class="form-group row">
+                    <label
+                      for="exampleFormControlSelect1"
+                      class="col-xl-3 col-sm-4 mb-0"
+                      >Select Color
+                    </label>
+                    <select
+                      class="form-control digits col-xl-8 col-sm-7"
+                      id="exampleFormControlSelect1"
+                      [formControl]="productForm.controls['colorOption']"
+                    >
+                      <option
+                        *ngFor="let color of colorOptions"
+                        [value]="color.id"
+                      >
+                        {{ color.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      for="validationCustom01"
+                      class="col-xl-3 col-sm-4 mb-0"
+                      >Custom Color
+                    </label>
+                    <input
+                      class="form-control col-xl-8 col-sm-7"
+                      id="validationCustom01"
+                      type="text"
+                      [formControl]="productForm.controls['custom_color']"
+                      required
+                    />
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-xl-3 col-sm-4">Custom Material </label>
+                    <div class="col-xl-8 col-sm-7 pl-0 description-sm">
+                      <ck-editor
+                        id="editor3"
+                        cols="30"
+                        rows="10"
+                        language="en"
+                        [fullPage]="true"
+                      ></ck-editor>
+                    </div>
+                  </div>
+                  <div class="form-group row">
                     <label class="col-xl-3 col-sm-4">Add Description </label>
                     <div class="col-xl-8 col-sm-7 pl-0 description-sm">
                       <ck-editor
@@ -387,6 +433,25 @@
                         [fullPage]="true"
                       ></ck-editor>
                     </div>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      for="exampleFormControlSelect1"
+                      class="col-xl-3 col-sm-4 mb-0"
+                      >Payment Options
+                    </label>
+                    <select
+                      class="form-control digits col-xl-8 col-sm-7"
+                      id="exampleFormControlSelect1"
+                      [formControl]="productForm.controls['paymentOption']"
+                    >
+                      <option
+                        *ngFor="let opt of paymentOptions"
+                        [value]="opt.id"
+                      >
+                        {{ opt.name }}
+                      </option>
+                    </select>
                   </div>
                 </div>
               </form>
