@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Select2OptionData } from 'ng-select2';
 import { Options, LabelType } from 'ng5-slider';
 import { LabelOptions } from '../../products/physical/add-product/data';
 import { Options as Opt } from 'select2';
+
+declare var $;
+
 @Component({
   selector: 'app-bid-form',
   templateUrl: './bid-form.component.html',
   styleUrls: ['./bid-form.component.scss'],
 })
 export class BidFormComponent implements OnInit {
+  @ViewChild('gateway') gateway : ElementRef;
+  
   public productOptions: Array<Select2OptionData>;
   public productConfig;
   public products = [];
@@ -59,7 +64,10 @@ export class BidFormComponent implements OnInit {
       }
     },
   };
+
+
   constructor(private modalService: NgbModal) {
+    let self = this;
     this.productConfig = {
       multiple: true,
       theme: 'classic',
@@ -75,8 +83,13 @@ export class BidFormComponent implements OnInit {
       closeOnSelect: false,
       width: '100%',
       language: {
-        noResults: function () {
-          return `No Keyword found <span id='no-results-btn' class='badge badge-secondary' (click)="openModal()">Request Label</span>`;
+        noResults:  () => {
+          $('body').ready(function() {
+            $('#no-results-btn').click(function(e) {  
+              self.openModal();
+            });
+          });
+          return `No Keyword found <span id='no-results-btn' class='badge badge-secondary'>Request Label</span>`;
         },
       },
       escapeMarkup: function (markup) {
@@ -129,7 +142,18 @@ export class BidFormComponent implements OnInit {
     ];
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // $( "#no-results-btn" ).click(function() {
+    //   console.log( "Handler for .click() called." );
+    // });
+    
+  }
+
+  openModal() {
+    console.log('Date');
+    this.open(this.gateway)
+  }
+
 
   open(content) {
     this.modalService
@@ -157,10 +181,7 @@ export class BidFormComponent implements OnInit {
     this.open(content);
   }
 
-  openModal() {
-    console.log('Date');
-  }
-
+  
   selectKeyWord(event, key) {
     console.log('checked', key);
     let value = event.target.checked;
