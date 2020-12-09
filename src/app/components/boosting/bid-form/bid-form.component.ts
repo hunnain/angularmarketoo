@@ -13,13 +13,15 @@ declare var $;
   styleUrls: ['./bid-form.component.scss'],
 })
 export class BidFormComponent implements OnInit {
-  @ViewChild('gateway') gateway : ElementRef;
-  
+  @ViewChild('gateway') gateway: ElementRef;
+  @ViewChild('keyWordModal') keyWordModal: ElementRef;
+
   public productOptions: Array<Select2OptionData>;
   public productConfig;
   public products = [];
   public keyWords: Array<Select2OptionData>;
-
+  public keyword = '';
+  public totalAddedLabels = [];
   // public keyWords = LabelOptions;
   public selectedKeyWords = [''];
 
@@ -65,7 +67,6 @@ export class BidFormComponent implements OnInit {
     },
   };
 
-
   constructor(private modalService: NgbModal) {
     let self = this;
     this.productConfig = {
@@ -76,6 +77,7 @@ export class BidFormComponent implements OnInit {
       // templateResult: this.templateResult,
       // templateSelection: this.templateSelection
     };
+    // this.keyWord;
     this.keyWords = LabelOptions;
     this.labelConfig = {
       multiple: true,
@@ -83,9 +85,9 @@ export class BidFormComponent implements OnInit {
       closeOnSelect: false,
       width: '100%',
       language: {
-        noResults:  () => {
-          $('body').ready(function() {
-            $('#no-results-btn').click(function(e) {  
+        noResults: () => {
+          $('body').ready(function () {
+            $('#no-results-btn').click(function (e) {
               self.openModal();
             });
           });
@@ -146,27 +148,30 @@ export class BidFormComponent implements OnInit {
     // $( "#no-results-btn" ).click(function() {
     //   console.log( "Handler for .click() called." );
     // });
-    
   }
 
   openModal() {
     console.log('Date');
-    this.open(this.gateway)
+    this.open(this.keyWordModal);
   }
-
 
   open(content) {
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
         (result) => {
+          console.log(result);
+
           this.closeResult = `Closed with: ${result}`;
         },
         (reason) => {
+          console.log(reason);
+
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         }
       );
   }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -181,7 +186,13 @@ export class BidFormComponent implements OnInit {
     this.open(content);
   }
 
-  
+  onAddKeyword() {
+    console.log('added', this.keyword);
+    if (this.keyword) this.totalAddedLabels.push(this.keyword);
+    this.keyword = '';
+    this.modalService.dismissAll('close');
+  }
+
   selectKeyWord(event, key) {
     console.log('checked', key);
     let value = event.target.checked;
@@ -238,5 +249,4 @@ export class BidFormComponent implements OnInit {
 
   //   return jQuery('<span>' + state.text + '</span>');
   // }
-  
 }

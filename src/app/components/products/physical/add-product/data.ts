@@ -8,12 +8,12 @@ export const MainCategories = [
   { id: 'le', name: 'Leisure Experience' },
 ];
 export const PaymentOptions = [
-  { id: 'credit_card', name: 'credit card' },
-  { id: 'debit_card', name: 'Debit Card' },
-  { id: 'payment', name: 'Payment' },
-  { id: 'alipay', name: 'Alipay' },
-  { id: 'wechat_pay', name: 'WeChat pay' },
-  { id: 'apply_pay', name: 'apply pay' },
+  { id: 'credit_card', text: 'credit card' },
+  { id: 'debit_card', text: 'Debit Card' },
+  { id: 'payment', text: 'Payment' },
+  { id: 'alipay', text: 'Alipay' },
+  { id: 'wechat_pay', text: 'WeChat pay' },
+  { id: 'apply_pay', text: 'apply pay' },
 ];
 
 export const ColorOptions = [

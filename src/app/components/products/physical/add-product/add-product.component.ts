@@ -1,11 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  AfterViewInit,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { Select2OptionData } from 'ng-select2';
@@ -21,11 +14,13 @@ import {
   SizeOptions,
 } from './data';
 import { CommonService } from 'src/app/shared/service/common.service';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 // var $;
 
 // $('.select2-no-results').click(function () {
 //   $('li.select2-no-results').trigger('click');
 // });
+declare var $;
 
 @Component({
   selector: 'app-add-product',
@@ -33,6 +28,10 @@ import { CommonService } from 'src/app/shared/service/common.service';
   styleUrls: ['./add-product.component.scss'],
 })
 export class AddProductComponent implements OnInit {
+  @ViewChild('keyWordModal') keyWordModal: ElementRef;
+  public label: string;
+  public totalAddedLabels = [''];
+
   public productForm: FormGroup;
   public counter: number = 1;
   public sizeImg: string = 'assets/images/user.png';
@@ -55,9 +54,11 @@ export class AddProductComponent implements OnInit {
   public labelConfig: Options;
   public sizeOptions: Array<Select2OptionData>;
   public sizeConfig: Options;
+  public paymentOptions: Array<Select2OptionData>;
+  public paymentConfig: Options;
+  public closeResult: string;
 
   public mainCategories = MainCategories;
-  public paymentOptions = PaymentOptions;
   public colorOptions = ColorOptions;
 
   public subCategories = SubCategories;
@@ -83,7 +84,13 @@ export class AddProductComponent implements OnInit {
     return this.productForm.get('customDesign');
   }
 
-  constructor(private fb: FormBuilder, private elementRef: ElementRef) {
+  constructor(
+    private fb: FormBuilder,
+    private elementRef: ElementRef,
+    private modalService: NgbModal
+  ) {
+    let self = this;
+
     this.productForm = this.fb.group({
       name: [
         '',
@@ -121,6 +128,7 @@ export class AddProductComponent implements OnInit {
 
     this.sizeOptions = SizeOptions;
     this.labelOptions = LabelOptions;
+    this.paymentOptions = PaymentOptions;
 
     this.labelConfig = {
       multiple: true,
@@ -128,13 +136,27 @@ export class AddProductComponent implements OnInit {
       closeOnSelect: false,
       width: '100%',
       language: {
-        noResults: function () {
-          return `<span id='no-results-btn' class='badge badge-secondary' onclick="myClick()" >Request Label</span>`;
+        noResults: () => {
+          $('body').ready(function () {
+            $('#no-results-btn').click(function (e) {
+              self.openModal();
+            });
+          });
+          return `No Keyword found <span id='no-results-btn' class='badge badge-secondary'>Request Label</span>`;
         },
       },
       escapeMarkup: function (markup) {
         return markup;
       },
+    };
+
+    this.paymentConfig = {
+      multiple: true,
+      theme: 'classic',
+      closeOnSelect: false,
+      width: '100%',
+      // templateResult: this.templateResult,
+      // templateSelection: this.templateSelection
     };
     this.sizeConfig = {
       multiple: true,
@@ -160,6 +182,40 @@ export class AddProductComponent implements OnInit {
     if (this.counter > 0) {
       this.counter -= 1;
     }
+  }
+
+  openModal() {
+    console.log('Date');
+    this.open(this.keyWordModal);
+  }
+
+  open(content) {
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  onAddLabel() {
+    console.log('added', this.label);
+    if (this.label) this.totalAddedLabels.push(this.label);
+    this.label = '';
+    this.modalService.dismissAll('close');
   }
 
   //FileUpload
@@ -198,13 +254,6 @@ export class AddProductComponent implements OnInit {
 
   getColor(color) {
     console.log(color);
-  }
-
-  ngAfterViewInit() {
-    let elem = this.elementRef.nativeElement.querySelector('#no-results-btn');
-    console.log(elem);
-    if (elem)
-      elem.addEventListener('onclick', this.noResultsButtonClicked.bind(this));
   }
 
   myClick() {
