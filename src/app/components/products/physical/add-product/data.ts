@@ -8,12 +8,12 @@ export const MainCategories = [
   { id: 'le', name: 'Leisure Experience' },
 ];
 export const PaymentOptions = [
-  { id: 'credit_card', text: 'credit card' },
+  { id: 'credit_card', text: 'Credit Card' },
   { id: 'debit_card', text: 'Debit Card' },
-  { id: 'payment', text: 'Payment' },
   { id: 'alipay', text: 'Alipay' },
-  { id: 'wechat_pay', text: 'WeChat pay' },
-  { id: 'apply_pay', text: 'apply pay' },
+  { id: 'wechat_pay', text: 'WeChat Pay' },
+  { id: 'apple_pay', text: 'Apple Pay' },
+  { id: 'andriod_pay', text: 'Android Pay' },
 ];
 
 export const ColorOptions = [

@@ -49,28 +49,28 @@
         <div class="card-body content">
           <div class="inner-content">
             <div class="form-input">
-              <div class="form-group row" style="align-items: center">
+              <div class="form-group row" >
                 <label
                   for="cpc"
-                  class="col-sm-6 col-form-label"
-                  style="text-align: center"
-                  ><strong>Daily Budget</strong></label
-                >
-                <div class="col-sm-6">
+                  class="col-sm-3 col-form-label"
+                 
+                  ><strong>Daily Budgets</strong>
+                
+                </label>
+                <div class="col-sm-6 budgetbarAlignment">
                   <ng5-slider
                     [(value)]="value1"
                     [options]="options2"
                   ></ng5-slider>
                 </div>
               </div>
-              <div class="form-group row" style="align-items: center">
+              <div class="form-group row" >
                 <label
                   for="cpc"
-                  class="col-sm-6 col-form-label"
-                  style="text-align: center"
+                  class="col-sm-3 col-form-label"
                   ><strong>Bid / Click Budget</strong></label
                 >
-                <div class="col-sm-6">
+                <div class="col-sm-6 budgetbarAlignment">
                   <ng5-slider
                     [(value)]="value2"
                     [options]="options2"
