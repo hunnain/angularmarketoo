@@ -7,7 +7,7 @@
           class="card-header"
           style="padding-bottom: 0px; text-align: center"
         >
-          <h5 class="heading">SignUp Info</h5>
+          <h5 class="heading">{{ "signup_info" | translate }}</h5>
           <span class="heading-border"></span>
         </div>
         <div class="card-body" style="padding-top: 0px">
@@ -21,7 +21,9 @@
                 <div class="add-product-form">
                   <div>
                     <fieldset class="fieldset" style="margin-bottom: 20px">
-                      <legend class="legend">Applicant Details:</legend>
+                      <legend class="legend">
+                        {{ "applicant_details" | translate }}
+                      </legend>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
                           <label for="chinese_full_name" class="mb-0"
@@ -191,7 +193,9 @@
                   </div>
                   <div>
                     <fieldset class="fieldset">
-                      <legend class="legend">Details of Brand:</legend>
+                      <legend class="legend">
+                        {{ "details_brand" | translate }}
+                      </legend>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
                           <label for="brand_name" class="mb-0"
