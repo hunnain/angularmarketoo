@@ -1,12 +1,16 @@
 <div class="page-wrapper">
-    <div class="authentication-box">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5 p-0 card-left">
-                    <div class="card bg-primary">
-                        <div class="svg-icon" style="position: relative;">
-                            <img class="logo-img" src="assets/images/Marketoo.png" alt="Marketoo logo" />
-                            <!-- <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+  <div class="authentication-box">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5 p-0 card-left">
+          <div class="card bg-primary">
+            <div class="svg-icon" style="position: relative">
+              <img
+                class="logo-img"
+                src="assets/images/Marketoo.png"
+                alt="Marketoo logo"
+              />
+              <!-- <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 468.52 468.52"
                                 style="enable-background:new 0 0 468.52 468.52;" xml:space="preserve">
                                 <g>
@@ -117,57 +121,95 @@
             c1.923,0,3.84-0.728,5.303-2.192l-83.142-83.142L393.695,417.909z" />
                                 </g>
                             </svg> -->
-                        </div>
-                        <div class="single-item">
-                            <owl-carousel-o [options]="owlcarouselOptions">
-                                <ng-container *ngFor="let data of owlcarousel">
-                                    <ng-template carouselSlide class="item">
-                                        <div>
-                                            <h3 style="color:#4B5335">{{data.title}}</h3>
-                                            <p style="color:#4B5335">{{data.desc}}</p>
-                                        </div>
-                                    </ng-template>
-                                </ng-container>
-                            </owl-carousel-o>
-                        </div>
+            </div>
+            <div class="single-item">
+              <owl-carousel-o [options]="owlcarouselOptions">
+                <ng-container *ngFor="let data of owlcarousel">
+                  <ng-template carouselSlide class="item">
+                    <div>
+                      <h3 style="color: #4b5335">{{ data.title }}</h3>
+                      <p style="color: #4b5335">{{ data.desc }}</p>
                     </div>
-                </div>
-                <div class="col-md-7 p-0 card-right">
-                    <div class="card tab2-card">
-                        <div class="card-body">
-                            <ngb-tabset class="tab-coupon mb-0">
-                                <ngb-tab>
-                                    <ng-template ngbTabTitle><i class="icon-user mr-2"></i>Login</ng-template>
-                                    <ng-template ngbTabContent>
-                                        <div class="tab-pane fade active show" id="account" role="tabpanel"
-                                            aria-labelledby="account-tab">
-                                            <form [formGroup]="loginForm" 
-                                                class="form-horizontal auth-form" novalidate="">
-                                                <div class="form-group">
-                                                    <input required="" name="login[username]" type="email"
-                                                        class="form-control" placeholder="Username"
-                                                        id="exampleInputEmail1">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input required="" name="login[password]" type="password"
-                                                        class="form-control" placeholder="Password">
-                                                </div>
-                                                <div class="form-terms">
-                                                    <div class="custom-control custom-checkbox mr-sm-2">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="customControlAutosizing">
-                                                        <label class="custom-control-label"
-                                                            for="customControlAutosizing">Remember me</label>
-                                                        <a href="javascript:void(0)"
-                                                            class="btn btn-default forgot-pass">lost your
-                                                            password</a>
-                                                    </div>
-                                                </div>
-                                                <div class="form-button">
-                                                    <button [routerLink]="'/dashboard/default'"  class="btn btn-primary" type="submit">Login</button>
-                                                </div>
-                                                <a style="display:block;padding-top: 10px;" [routerLink]="'/sign-up'">Create An Account</a>
-                                                <!-- <div class="form-footer">
+                  </ng-template>
+                </ng-container>
+              </owl-carousel-o>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7 p-0 card-right">
+          <div class="card tab2-card">
+            <div class="card-body">
+              <ngb-tabset class="tab-coupon mb-0">
+                <ngb-tab>
+                  <ng-template ngbTabTitle
+                    ><i class="icon-user mr-2"></i
+                    >{{ "login" | translate }}</ng-template
+                  >
+                  <ng-template ngbTabContent>
+                    <div
+                      class="tab-pane fade active show"
+                      id="account"
+                      role="tabpanel"
+                      aria-labelledby="account-tab"
+                    >
+                      <form
+                        [formGroup]="loginForm"
+                        class="form-horizontal auth-form"
+                        novalidate=""
+                      >
+                        <div class="form-group">
+                          <input
+                            required=""
+                            name="login[username]"
+                            type="email"
+                            class="form-control"
+                            placeholder="{{ 'username' | translate }}"
+                            id="exampleInputEmail1"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <input
+                            required=""
+                            name="login[password]"
+                            type="password"
+                            class="form-control"
+                            placeholder="{{ 'password' | translate }}"
+                          />
+                        </div>
+                        <div class="form-terms">
+                          <div class="custom-control custom-checkbox mr-sm-2">
+                            <input
+                              type="checkbox"
+                              class="custom-control-input"
+                              id="customControlAutosizing"
+                            />
+                            <label
+                              class="custom-control-label"
+                              for="customControlAutosizing"
+                              >{{ "remember_me" | translate }}</label
+                            >
+                            <a
+                              href="javascript:void(0)"
+                              class="btn btn-default forgot-pass"
+                              >{{ "lost_password" | translate }}</a
+                            >
+                          </div>
+                        </div>
+                        <div class="form-button">
+                          <button
+                            [routerLink]="'/dashboard/default'"
+                            class="btn btn-primary"
+                            type="submit"
+                          >
+                            {{ "LOGIN" | translate }}
+                          </button>
+                        </div>
+                        <a
+                          style="display: block; padding-top: 10px"
+                          [routerLink]="'/sign-up'"
+                          >{{ "create_an_account" | translate }}</a
+                        >
+                        <!-- <div class="form-footer">
                                                     <span>Or Login up with social platforms</span>
                                                     <ul class="social">
                                                         <li><a class="icon-facebook" href="javascript:void(0)"></a></li>
@@ -178,11 +220,11 @@
                                                         </li>
                                                     </ul>
                                                 </div> -->
-                                            </form>
-                                        </div>
-                                    </ng-template>
-                                </ngb-tab>
-                                <!-- <ngb-tab>
+                      </form>
+                    </div>
+                  </ng-template>
+                </ngb-tab>
+                <!-- <ngb-tab>
                                     <ng-template ngbTabTitle><i class="icon-unlock mr-2"></i> Register
                                         <ng-template ngbTabContent>
                                             <form [formGroup]="registerForm" 
@@ -227,15 +269,15 @@
                                         </ng-template>
                                     </ng-template>
                                 </ngb-tab> -->
-                            </ngb-tabset>
-                        </div>
-                    </div>
-                </div>
+              </ngb-tabset>
             </div>
-            <!-- <a [routerLink]="'/dashboard/default'" class="btn btn-primary back-btn">
+          </div>
+        </div>
+      </div>
+      <!-- <a [routerLink]="'/dashboard/default'" class="btn btn-primary back-btn">
                 <app-feather-icons [icon]="'arrow-left'"></app-feather-icons>
                 back
             </a> -->
-        </div>
     </div>
+  </div>
 </div>

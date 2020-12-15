@@ -4,10 +4,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   public loginForm: FormGroup;
   public registerForm: FormGroup;
 
@@ -18,37 +17,31 @@ export class LoginComponent implements OnInit {
 
   owlcarousel = [
     {
-      title: "Welcome to Marketoo",
-      desc: "Welcome content here",
-    }
-
-  ]
+      title: 'Welcome to Marketoo',
+      desc: 'Welcome content here',
+    },
+  ];
   owlcarouselOptions = {
     loop: true,
     items: 1,
-    dots: true
+    dots: true,
   };
 
   createLoginForm() {
     this.loginForm = this.formBuilder.group({
       userName: [''],
       password: [''],
-    })
+    });
   }
   createRegisterForm() {
     this.registerForm = this.formBuilder.group({
       userName: [''],
       password: [''],
       confirmPassword: [''],
-    })
+    });
   }
 
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  onSubmit() {
-    
-  }
-
+  onSubmit() {}
 }

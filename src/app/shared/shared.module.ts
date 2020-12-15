@@ -8,6 +8,7 @@ import { FeatherIconsComponent } from './components/feather-icons/feather-icons.
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ToggleFullscreenDirective } from './directives/fullscreen.directive';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
@@ -27,7 +28,13 @@ import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.
     BreadcrumbComponent,
     RightSidebarComponent,
   ],
-  imports: [CommonModule, RouterModule, NgSelect2Module, NgbModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    NgSelect2Module,
+    NgbModule,
+    TranslateModule,
+  ],
   providers: [NavService, WINDOW_PROVIDERS],
   exports: [
     NgSelect2Module,
@@ -35,6 +42,7 @@ import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.
     NgbModule,
     ToggleFullscreenDirective,
     RightSidebarComponent,
+    TranslateModule,
   ],
 })
 export class SharedModule {}
