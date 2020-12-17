@@ -1,223 +1,336 @@
 <div class="container-fluid">
-    <div class="card">
-        <div class="row product-page-main card-body">    
-            <div class="col-xl-8">
-                <div class="product-page-details product-right mb-0">
-                    <div class="row">
-                    <h2 class="col-12 col-md-12">Return/Exchange Details</h2>    
-                    </div>
-                    <hr>
-                    <div class="container-gap">
-                        <p class="mb-0">Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium
-                            doloremque
-                            laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto
-                            beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem,</p>
+  <div class="card">
+    <div class="row product-page-main card-body">
+      <div class="col-xl-8">
+        <div class="product-page-details product-right mb-0">
+          <div class="row">
+            <h2 class="col-12 col-md-12">
+              {{ "re_return_details" | translate }}
+            </h2>
+          </div>
+          <hr />
+          <div class="container-gap">
+            <p class="mb-0">{{ "re_desc" | translate }}</p>
 
-                        <div style="margin-top: 30px;">
-                            <div>
-                                <div style="display: grid;grid-template-columns: 4fr 1fr 1fr;">
-                                    <span><b>Product</b></span>
-                                    <span><b>Qty</b></span>
-                                    <span><b>Price</b></span>
-                                </div>
-                                <hr>
-                                <ul>
-                                    <li style="margin-bottom: 10px;" *ngFor="let prod of dummyData.products">
-                                        <div style="display: grid;grid-template-columns: 4fr 1fr 1fr;align-items: center;">
-                                            <div>
-                                                <figure style="margin: 0px;">
-                                                    <img [src]='prod.img' class='img-50'>
-                                                    <figcaption>{{prod.name}}</figcaption>
-                                                </figure>
-                                            </div>
-                                            <div>
-                                                <span>{{prod.qty}}</span>
-                                            </div>
-                                            <div>
-                                                <span>${{prod.price}}HKD</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                 </ul>
-                            </div>
-                        </div>
-                        <div style="margin-top: 30px;">
-                            <h4 class="product-title">Refund/Reject</h4>
-                            <hr>
-                            <div style="margin-top: 20px;">
-                                <div>
-                                    <label for="refund_reason">Refund Reason</label>
-                                    <select class="form-control" id="refund_reason" [(ngModel)]="refund_reason" name="refund_reason">
-                                        <option value="faulty">Mismatched items</option>
-                                        <option value="faulty">Faulty items</option>
-                                        <option value="faulty">The product does not match the product page description</option>
-                                      </select>
-                                </div>
-                                <div class="font-size-13">
-                                    <p>Only you and other staff can see this reason</p>
-                                </div>
-                                <div style="margin-top: 10px;">
-                                    <label for="reject_reason">Reject Reason</label>
-                                    <input type="text" class="form-control" id="reject_reason" >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div style="margin-top: 30px">
+              <div>
+                <div style="display: grid; grid-template-columns: 4fr 1fr 1fr">
+                  <span
+                    ><b>{{ "re_product" | translate }}</b></span
+                  >
+                  <span
+                    ><b>{{ "re_qty" | translate }}</b></span
+                  >
+                  <span
+                    ><b>{{ "re_price" | translate }}</b></span
+                  >
                 </div>
-            </div>
-            <div class="col-xl-4">
-                <div class="order-summary">
-                    <div class="container-gap">
-                        <div style="display: flex;align-items: center;">
-                            <app-feather-icons [icon]="'package'" class="font-primary" style="margin-right: 5px;color:#000 !important"></app-feather-icons>
-                            <h4>Courier</h4>
-                        </div>
-                        <div style="margin-top: 20px;">
-                            <div class="input-group mb-2">
-                                <input type="text" class="form-control">
-                              </div>
-                        </div>
-                        <div style="margin-top: 20px;">
-                            <div>
-                                <label for="tracking_no">Tracking Number</label>
-                                <input type="number" id="tracking_no" class="form-control">
-                              </div>
-                        </div>
-                        <hr>
-                        <div style="margin-top: 20px;" class="font-size-13">
-                            <strong>Requested on</strong>: {{dummyData.requested_on}}
-                        </div>
-                        <div style="margin-top: 20px;" class="font-size-13">
-                            <strong>Type</strong>: 
-                            <span class='badge badge-success'>{{dummyData.type}}</span> 
-                        </div>
-                        <div style="margin-top: 20px;" class="font-size-13">
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">$</div>
-                                </div>
-                                <input type="number" class="form-control" id="inlineFormInputGroup" [value]="dummyData.total">
-                              </div>
-                            <!-- <strong>Total</strong>: <h5 class="d-inline">${{dummyData.total}}</h5> 
-                            <span class="change-btn" data-toggle="modal" (click)="changeTotal(Total)">Change</span> -->
-                        </div>
-                        <div class="row" style="margin-top:30px;">
-                            <div class="col-12 col-sm-12" style="text-align: center;">
-                                <button class="btn btn-primary" type="button">
-                                    Refund ${{dummyData.total}}
-                                </button>
-                            </div>
-                            <div class="col-12 col-sm-12" style="margin-top: 10px;">
-                                <p style="margin-bottom: 5px;">Refunded items will no longer be fulfillable.</p>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Send a notification to the customer</label>
-                                  </div>
-                            </div>
-                        </div>
+                <hr />
+                <ul>
+                  <li
+                    style="margin-bottom: 10px"
+                    *ngFor="let prod of dummyData.products"
+                  >
+                    <div
+                      style="
+                        display: grid;
+                        grid-template-columns: 4fr 1fr 1fr;
+                        align-items: center;
+                      "
+                    >
+                      <div>
+                        <figure style="margin: 0px">
+                          <img [src]="prod.img" class="img-50" />
+                          <figcaption>{{ prod.name }}</figcaption>
+                        </figure>
+                      </div>
+                      <div>
+                        <span>{{ prod.qty }}</span>
+                      </div>
+                      <div>
+                        <span>${{ prod.price }}HKD</span>
+                      </div>
                     </div>
-                </div>
+                  </li>
+                </ul>
+              </div>
             </div>
+            <div style="margin-top: 30px">
+              <h4 class="product-title">{{ "re_refund_rej" | translate }}</h4>
+              <hr />
+              <div style="margin-top: 20px">
+                <div>
+                  <label for="refund_reason">{{
+                    "re_refunf_reason" | translate
+                  }}</label>
+                  <select
+                    class="form-control"
+                    id="refund_reason"
+                    [(ngModel)]="refund_reason"
+                    name="refund_reason"
+                  >
+                    <option value="faulty">Mismatched items</option>
+                    <option value="faulty">Faulty items</option>
+                    <option value="faulty">
+                      The product does not match the product page description
+                    </option>
+                  </select>
+                </div>
+                <div class="font-size-13">
+                  <p>{{ "re_refund_reason_detail" | translate }}</p>
+                </div>
+                <div style="margin-top: 10px">
+                  <label for="reject_reason">{{
+                    "re_rej_reason" | translate
+                  }}</label>
+                  <input type="text" class="form-control" id="reject_reason" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="col-xl-4">
+        <div class="order-summary">
+          <div class="container-gap">
+            <div style="display: flex; align-items: center">
+              <app-feather-icons
+                [icon]="'package'"
+                class="font-primary"
+                style="margin-right: 5px; color: #000 !important"
+              ></app-feather-icons>
+              <h4>Courier</h4>
+            </div>
+            <div style="margin-top: 20px">
+              <div class="input-group mb-2">
+                <input type="text" class="form-control" />
+              </div>
+            </div>
+            <div style="margin-top: 20px">
+              <div>
+                <label for="tracking_no">{{ "re_track_no" | translate }}</label>
+                <input type="number" id="tracking_no" class="form-control" />
+              </div>
+            </div>
+            <hr />
+            <div style="margin-top: 20px" class="font-size-13">
+              <strong>{{ "re_req_on" | translate }}</strong
+              >: {{ dummyData.requested_on }}
+            </div>
+            <div style="margin-top: 20px" class="font-size-13">
+              <strong>{{ "re_type" | translate }}</strong
+              >:
+              <span class="badge badge-success">{{ dummyData.type }}</span>
+            </div>
+            <div style="margin-top: 20px" class="font-size-13">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">$</div>
+                </div>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="inlineFormInputGroup"
+                  [value]="dummyData.total"
+                />
+              </div>
+              <!-- <strong>Total</strong>: <h5 class="d-inline">${{dummyData.total}}</h5> 
+                            <span class="change-btn" data-toggle="modal" (click)="changeTotal(Total)">Change</span> -->
+            </div>
+            <div class="row" style="margin-top: 30px">
+              <div class="col-12 col-sm-12" style="text-align: center">
+                <button class="btn btn-primary" type="button">
+                  {{ "re_refund" | translate }} ${{ dummyData.total }}
+                </button>
+              </div>
+              <div class="col-12 col-sm-12" style="margin-top: 10px">
+                <p style="margin-bottom: 5px">
+                  {{ "re_refund_item" | translate }}
+                </p>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="exampleCheck1"
+                  />
+                  <label class="form-check-label" for="exampleCheck1">{{
+                    "re_send_not" | translate
+                  }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <ng-template #Total let-modal>
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update Price</h5>
-        <button type="button" class="close" aria-label="Close"
-            (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Update Price</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <div>
+        <label for="price">Price</label>
+        <input
+          type="number"
+          ngbAutofocus
+          [(ngModel)]="total"
+          class="form-control"
+          id="price"
+          aria-describedby="price"
+          placeholder="Enter Price"
+        />
+      </div>
+      <div style="margin-top: 10px">
+        <label for="reason">Select Reason</label>
+        <select
+          class="form-control"
+          id="reason"
+          [(ngModel)]="reason"
+          name="reason"
+        >
+          <option value="wrapping">Wrapping</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div style="margin-top: 10px" *ngIf="reason == 'other'">
+        <label for="desc">Reason</label>
+        <input
+          type="text"
+          [(ngModel)]="reasonDesc"
+          name="reasonDesc"
+          class="form-control"
+          id="desc"
+          aria-describedby="desc"
+          placeholder="Enter Reason"
+        />
+      </div>
     </div>
-    <div class="modal-body">
-        <div class="form-group">
-            <div>
-                <label for="price">Price</label>
-                <input type="number" ngbAutofocus [(ngModel)]="total" 
-                class="form-control" id="price" aria-describedby="price" placeholder="Enter Price">
-            </div>
-            <div style="margin-top: 10px;">
-                <label for="reason">Select Reason</label>
-                <select class="form-control" id="reason" [(ngModel)]="reason" name="reason">
-                  <option value="wrapping">Wrapping</option>
-                  <option value="other">Other</option>
-                </select>
-            </div>
-            <div style="margin-top: 10px;" *ngIf="reason == 'other'">
-                <label for="desc">Reason</label>
-                <input type="text" [(ngModel)]="reasonDesc" name="reasonDesc"
-                class="form-control" id="desc" aria-describedby="desc" placeholder="Enter Reason">
-            </div>
-        </div>
-        <div class="action">
-            <button class="btn btn-primary" type="button" (click)="updateTotal()">Update</button>
-        </div>
+    <div class="action">
+      <button class="btn btn-primary" type="button" (click)="updateTotal()">
+        Update
+      </button>
     </div>
+  </div>
 </ng-template>
 
 <ng-template #Status let-modal>
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
-        <button type="button" class="close" aria-label="Close"
-            (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="status">Select Status</label>
+      <select
+        class="form-control"
+        id="status"
+        ngbAutofocus
+        [(ngModel)]="status"
+        name="status"
+      >
+        <option value="confirmingOrder">Confirming Order</option>
+        <option value="orderConfirmed">Order Confirmed</option>
+        <option value="shipped">Shipped</option>
+        <option value="delivered">Delivered</option>
+        <option value="processingRefund">Processing Refund</option>
+        <option value="refunded">Refunded</option>
+      </select>
     </div>
-    <div class="modal-body">
-        <div class="form-group">
-            <label for="status">Select Status</label>
-            <select class="form-control" id="status" ngbAutofocus [(ngModel)]="status" name="status">
-              <option value="confirmingOrder">Confirming Order</option>
-              <option value="orderConfirmed">Order Confirmed</option>
-              <option value="shipped">Shipped</option>
-              <option value="delivered">Delivered</option> 
-              <option value="processingRefund">Processing Refund</option> 
-              <option value="refunded">Refunded</option> 
-            </select>
-          </div>
-        <div class="action">
-            <button class="btn btn-primary" type="button" (click)="updateStatus()">Update</button>
-        </div>
+    <div class="action">
+      <button class="btn btn-primary" type="button" (click)="updateStatus()">
+        Update
+      </button>
     </div>
+  </div>
 </ng-template>
 
 <ng-template #Shipment let-modal>
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update Shipment Method</h5>
-        <button type="button" class="close" aria-label="Close"
-            (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <div class="form-group">
-            <div>
-                <div class="row form-inline">
-                    <label class="col-12 col-sm-3" for="other">Other Courier</label>
-                    <input class="form-control col-12 col-sm-4" ngbAutofocus  id="other" type="text">
-                    <div class="box-input-file col-12 col-sm-3">
-                        <input class="upload" type="file" (change)="readUrlSizeImg($event)">
-                        <img class="imgUpload" alt="" [src]="img"></div>
-                </div>
-            </div>
-            <div style="margin: 20px 0px;">
-                <label style="margin-right:10px;">Marketoo Account</label>
-                <ol>
-                    <li><a href="https://www.sf-express.com/hk/tc/" target="_blank">SF Express</a></li>
-                    <li><a href="https://www.hongkongpost.hk/en/home/index.html" target="_blank">HK Post</a></li>
-                    <li><a href="https://ec-ship.hongkongpost.hk/platform/index.jsf?lang=en_us" target="_blank">EC Shipment</a></li>
-                </ol>
-            </div>
-            <div style="margin: 10px 0px;">
-                <div class="row form-inline" >
-                    <label class="col-12 col-sm-4">Add Tracking Details</label>
-                    <input class="form-control col-12 col-sm-5" id="size" type="text">
-                </div>
-            </div>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Update Shipment Method</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <div>
+        <div class="row form-inline">
+          <label class="col-12 col-sm-3" for="other">Other Courier</label>
+          <input
+            class="form-control col-12 col-sm-4"
+            ngbAutofocus
+            id="other"
+            type="text"
+          />
+          <div class="box-input-file col-12 col-sm-3">
+            <input
+              class="upload"
+              type="file"
+              (change)="readUrlSizeImg($event)"
+            />
+            <img class="imgUpload" alt="" [src]="img" />
           </div>
-        <div class="action">
-            <button class="btn btn-primary" type="button" (click)="updateStatus()">Update</button>
         </div>
+      </div>
+      <div style="margin: 20px 0px">
+        <label style="margin-right: 10px">Marketoo Account</label>
+        <ol>
+          <li>
+            <a href="https://www.sf-express.com/hk/tc/" target="_blank"
+              >SF Express</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.hongkongpost.hk/en/home/index.html"
+              target="_blank"
+              >HK Post</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://ec-ship.hongkongpost.hk/platform/index.jsf?lang=en_us"
+              target="_blank"
+              >EC Shipment</a
+            >
+          </li>
+        </ol>
+      </div>
+      <div style="margin: 10px 0px">
+        <div class="row form-inline">
+          <label class="col-12 col-sm-4">Add Tracking Details</label>
+          <input class="form-control col-12 col-sm-5" id="size" type="text" />
+        </div>
+      </div>
     </div>
+    <div class="action">
+      <button class="btn btn-primary" type="button" (click)="updateStatus()">
+        Update
+      </button>
+    </div>
+  </div>
 </ng-template>

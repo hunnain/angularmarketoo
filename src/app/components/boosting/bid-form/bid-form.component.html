@@ -39,9 +39,11 @@
       <div class="card chat-container">
         <div class="card-header">
           <div class="row">
-            <h5 class="col-12 col-md-6">Set Daily Budget</h5>
+            <h5 class="col-12 col-md-6">
+              {{ "bid_set_daily_bud" | translate }}
+            </h5>
             <span class="col-12 col-md-6" style="text-align: right"
-              >Current Balance: 1,169
+              >{{ "bid_curr_balnc" | translate }}: 1,169
               <span style="font-weight: bold; color: red">HKD</span></span
             >
           </div>
@@ -49,13 +51,9 @@
         <div class="card-body content">
           <div class="inner-content">
             <div class="form-input">
-              <div class="form-group row" >
-                <label
-                  for="cpc"
-                  class="col-sm-3 col-form-label"
-                 
-                  ><strong>Daily Budgets</strong>
-                
+              <div class="form-group row">
+                <label for="cpc" class="col-sm-3 col-form-label"
+                  ><strong> {{ "bid_daily_bud" | translate }}</strong>
                 </label>
                 <div class="col-sm-6 budgetbarAlignment">
                   <ng5-slider
@@ -64,11 +62,9 @@
                   ></ng5-slider>
                 </div>
               </div>
-              <div class="form-group row" >
-                <label
-                  for="cpc"
-                  class="col-sm-3 col-form-label"
-                  ><strong>Bid / Click Budget</strong></label
+              <div class="form-group row">
+                <label for="cpc" class="col-sm-3 col-form-label"
+                  ><strong> {{ "bid_bid_click" | translate }}</strong></label
                 >
                 <div class="col-sm-6 budgetbarAlignment">
                   <ng5-slider
@@ -86,9 +82,9 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="cpc" class="col-12 col-form-label"
-                  >Select Product for boosting</label
-                >
+                <label for="cpc" class="col-12 col-form-label">{{
+                  "bid_select_prod" | translate
+                }}</label>
                 <div class="col-12">
                   <ng-select2
                     (valueChanged)="addProduct($event)"
@@ -118,9 +114,9 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="cpc" class="col-12 col-form-label"
-                  >Select Keywords</label
-                >
+                <label for="cpc" class="col-12 col-form-label">{{
+                  "bid_select_keywords" | translate
+                }}</label>
                 <div class="col-12">
                   <ng-select2
                     [(ngModel)]="selectedKeyWords"
@@ -134,8 +130,10 @@
               </div>
               <div class="form-group row">
                 <label class="col-12 col-md-6"
-                  >Selected Keywords: {{ selectedKeyWords.length }} New
-                  KeyWords: {{ totalAddedLabels.length }}</label
+                  >{{ "bid_selected_keywords" | translate }}:
+                  {{ selectedKeyWords.length }}
+                  {{ "bid_new_keywords" | translate }}:
+                  {{ totalAddedLabels.length }}</label
                 >
                 <!-- <div class="col-12 col-md-6">
                     <strong>{{  }}</strong>
@@ -156,7 +154,7 @@
               data-toggle="modal"
               (click)="openPaymentModal(gateway)"
             >
-              Boost Now!
+              {{ "bid_boost_now" | translate }}
             </button>
           </div>
         </div>
@@ -222,7 +220,7 @@
         [disabled]="!keyword"
         (click)="onAddKeyword()"
       >
-        Add
+        {{ "prod_add" | translate }}
       </button>
       <button
         class="btn btn-light"
@@ -230,7 +228,7 @@
         data-dismiss="modal"
         (click)="modal.dismiss('Cross click')"
       >
-        Close
+        {{ "prod_close" | translate }}
       </button>
     </div>
   </ng-template>

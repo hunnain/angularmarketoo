@@ -1,45 +1,73 @@
 <!-- Container-fluid starts-->
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5>All Coupons</h5>
-                </div>
-                <div class="card-body">
-                    <div class="custom-datatable">
-                        <button class="btn btn-primary mr-1 mb-3" style="float: right;">Delete</button>
-                        <div class="clearfix"></div>
-                        <ngx-datatable class="bootstrap" [rows]="digital_categories" [columnMode]="'force'"
-                            [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="5"
-                            [selected]="selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false"
-                            (select)='onSelect($event)'>
-                            <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false"
-                                [draggable]="false" [resizeable]="false" [headerCheckboxable]="true"
-                                [checkboxable]="true">
-                                <button type="button" class="btn btn-primery">Delete</button>
-                            </ngx-datatable-column>
-                            <ngx-datatable-column name="Title"></ngx-datatable-column>
-                            <ngx-datatable-column name="Code"></ngx-datatable-column>
-                            <ngx-datatable-column name="Discount"></ngx-datatable-column>
-                            <ngx-datatable-column name="Due Date" prop="due_date"></ngx-datatable-column>
-                            <ngx-datatable-column name="Action" sortable="false" prop="id">
-                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                                    <div>
-                                        <span style="color:blue;cursor: pointer;">
-                                            <i class="fa fa-edit" (click)='onEdit(value)'></i>
-                                        </span>
-                                        <span style="color:blue;cursor: pointer;margin-left:10px">
-                                            <i class="fa fa-trash" (click)='onDelete(value)'></i>
-                                        </span>
-                                    </div>
-                                  </ng-template>
-                            </ngx-datatable-column>
-                        </ngx-datatable>
-                    </div>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>{{ "all_coupons" | translate }}</h5>
         </div>
+        <div class="card-body">
+          <div class="custom-datatable">
+            <button class="btn btn-primary mr-1 mb-3" style="float: right">
+              {{ "delete" | translate }}
+            </button>
+            <div class="clearfix"></div>
+            <ngx-datatable
+              class="bootstrap"
+              [rows]="digital_categories"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [rowHeight]="'auto'"
+              [limit]="5"
+              [selected]="selected"
+              [selectionType]="'checkbox'"
+              [selectAllRowsOnPage]="false"
+              (select)="onSelect($event)"
+            >
+              <ngx-datatable-column
+                [width]="30"
+                [sortable]="false"
+                [canAutoResize]="false"
+                [draggable]="false"
+                [resizeable]="false"
+                [headerCheckboxable]="true"
+                [checkboxable]="true"
+              >
+                <button type="button" class="btn btn-primery">
+                  {{ "delete" | translate }}
+                </button>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Title"></ngx-datatable-column>
+              <ngx-datatable-column name="Code"></ngx-datatable-column>
+              <ngx-datatable-column name="Discount"></ngx-datatable-column>
+              <ngx-datatable-column
+                name="Due Date"
+                prop="due_date"
+              ></ngx-datatable-column>
+              <ngx-datatable-column name="Action" sortable="false" prop="id">
+                <ng-template
+                  let-row="row"
+                  let-value="value"
+                  ngx-datatable-cell-template
+                >
+                  <div>
+                    <span style="color: blue; cursor: pointer">
+                      <i class="fa fa-edit" (click)="onEdit(value)"></i>
+                    </span>
+                    <span
+                      style="color: blue; cursor: pointer; margin-left: 10px"
+                    >
+                      <i class="fa fa-trash" (click)="onDelete(value)"></i>
+                    </span>
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 <!-- Container-fluid Ends-->

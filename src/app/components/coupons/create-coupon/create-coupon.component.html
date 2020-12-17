@@ -1,140 +1,229 @@
 <!-- Container-fluid starts-->
 <div class="container-fluid">
-    <div class="card">
-        <div class="card-header">
-            <h5>Discount Coupon Details</h5>
-        </div>
-        <div class="card-body">
-            <!-- <ngb-tabset class="tab-coupon"> -->
-                <!-- <ngb-tab title="General"> -->
-                    <fieldset class="fieldset">
-                        <legend class="legend">General</legend>
-                        <form [formGroup]="generalForm" class="needs-validation" novalidate="">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="form-group row">
-                                        <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>
-                                            Coupon Title</label>
-                                        <input class="form-control col-md-7" formControlName="name"
-                                            id="validationCustom0" type="text" required="">
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="validationCustom1" class="col-xl-3 col-md-4"><span>*</span>
-                                            Coupon Code</label>
-                                        <input class="form-control col-md-7" formControlName="code"
-                                            id="validationCustom1" type="text" required="">
-                                        <div class="valid-feedback">Please Provide a Valid Coupon Code.</div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-xl-3 col-md-4">Start Date</label>
-                                        <div class="input-group col-md-7 input-grp-p">
-                                            <input class="datepicker-here form-control digits" ngbDatepicker
-                                                formControlName="start_date" #f="ngbDatepicker">
-                                            <div class="input-group-append">
-                                                <button class="btn calendar" (click)="f.toggle()" type="button"><i
-                                                        class="fa fa-calendar"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-xl-3 col-md-4">End Date</label>
-                                        <div class="input-group col-md-7 input-grp-p">
-                                            <input class="datepicker-here form-control digits" ngbDatepicker
-                                                formControlName="end_date" #c="ngbDatepicker">
-                                            <div class="input-group-append">
-                                                <button class="btn calendar" (click)="c.toggle()" type="button"><i
-                                                        class="fa fa-calendar"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-xl-3 col-md-4">Free Shipping</label>
-                                        <div class="checkbox checkbox-primary col-md-7">
-                                            <input id="checkbox-primary-1" type="checkbox"
-                                                formControlName="free_shipping" data-original-title="" title="">
-                                            <label for="checkbox-primary-1">Allow Free Shipping</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-xl-3 col-md-4">Quantity</label>
-                                        <input class="form-control col-md-7" formControlName="quantity" type="number"
-                                            required="">
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-xl-3 col-md-4">Discount Type</label>
-                                        <select class="custom-select col-md-7" required="">
-                                            <option value="">--Select--</option>
-                                            <option value="1">Percent</option>
-                                            <option value="2">Fixed</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-xl-3 col-md-4">Amount $ / Percentage %</label>
-                                        <input class="form-control col-md-7" formControlName="quantity" type="number"
-                                            required="">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </fieldset>
+  <div class="card">
+    <div class="card-header">
+      <h5>{{ "disount_coup" | translate }}</h5>
+    </div>
+    <div class="card-body">
+      <!-- <ngb-tabset class="tab-coupon"> -->
+      <!-- <ngb-tab title="General"> -->
+      <fieldset class="fieldset">
+        <legend class="legend">{{ "cop_general" | translate }}</legend>
+        <form [formGroup]="generalForm" class="needs-validation" novalidate="">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group row">
+                <label for="validationCustom0" class="col-xl-3 col-md-4"
+                  ><span>*</span>{{ "cop_title" | translate }}</label
+                >
+                <input
+                  class="form-control col-md-7"
+                  formControlName="name"
+                  id="validationCustom0"
+                  type="text"
+                  required=""
+                />
+              </div>
+              <div class="form-group row">
+                <label for="validationCustom1" class="col-xl-3 col-md-4"
+                  ><span>*</span> {{ "cop_code" | translate }}</label
+                >
+                <input
+                  class="form-control col-md-7"
+                  formControlName="code"
+                  id="validationCustom1"
+                  type="text"
+                  required=""
+                />
+                <div class="valid-feedback">
+                  Please Provide a Valid Coupon Code.
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-xl-3 col-md-4">{{
+                  "cop_start_date" | translate
+                }}</label>
+                <div class="input-group col-md-7 input-grp-p">
+                  <input
+                    class="datepicker-here form-control digits"
+                    ngbDatepicker
+                    formControlName="start_date"
+                    #f="ngbDatepicker"
+                  />
+                  <div class="input-group-append">
+                    <button
+                      class="btn calendar"
+                      (click)="f.toggle()"
+                      type="button"
+                    >
+                      <i class="fa fa-calendar"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-xl-3 col-md-4">{{
+                  "cop_end_date" | translate
+                }}</label>
+                <div class="input-group col-md-7 input-grp-p">
+                  <input
+                    class="datepicker-here form-control digits"
+                    ngbDatepicker
+                    formControlName="end_date"
+                    #c="ngbDatepicker"
+                  />
+                  <div class="input-group-append">
+                    <button
+                      class="btn calendar"
+                      (click)="c.toggle()"
+                      type="button"
+                    >
+                      <i class="fa fa-calendar"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-xl-3 col-md-4">{{ "cop_free_shipping" | translate }}</label>
+                <div class="checkbox checkbox-primary col-md-7">
+                  <input
+                    id="checkbox-primary-1"
+                    type="checkbox"
+                    formControlName="free_shipping"
+                    data-original-title=""
+                    title=""
+                  />
+                  <label for="checkbox-primary-1">{{ "cop_allow_free_shipping" | translate }}</label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-xl-3 col-md-4">{{ "cop_quantity" | translate }}</label>
+                <input
+                  class="form-control col-md-7"
+                  formControlName="quantity"
+                  type="number"
+                  required=""
+                />
+              </div>
+              <div class="form-group row">
+                <label class="col-xl-3 col-md-4">{{ "cop_disc_type" | translate }}</label>
+                <select class="custom-select col-md-7" required="">
+                  <option value="">--Select--</option>
+                  <option value="1">Percent</option>
+                  <option value="2">Fixed</option>
+                </select>
+              </div>
+              <div class="form-group row">
+                <label class="col-xl-3 col-md-4">{{ "cop_amount_percent" | translate }}</label>
+                <input
+                  class="form-control col-md-7"
+                  formControlName="quantity"
+                  type="number"
+                  required=""
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </fieldset>
 
-                    <fieldset class="fieldset" style="margin-top: 20px;">
-                        <legend class="legend">Restriction</legend>
-                        <form [formGroup]="restrictionForm" class="needs-validation" novalidate="">
-                            <div class="form-group row">
-                                <label class="col-xl-3 col-md-4">Category</label>
-                                <select class="custom-select col-md-7" formControlName="category" required="">
-                                    <option value="">--Select--</option>
-                                    <option value="1">Electronics</option>
-                                    <option value="2">Clothes</option>
-                                    <option value="2">Shoes</option>
-                                    <option value="2">Digital</option>
-                                </select>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-xl-3 col-md-4">Sub Category</label>
-                                <select class="custom-select col-md-7" formControlName="category" required="">
-                                    <option value="">--Select--</option>
-                                    <option value="1">Electronics</option>
-                                    <option value="2">Clothes</option>
-                                    <option value="2">Shoes</option>
-                                    <option value="2">Digital</option>
-                                </select>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-xl-3 col-md-4">Extended Sub Category</label>
-                                <select class="custom-select col-md-7" formControlName="category" required="">
-                                    <option value="">--Select--</option>
-                                    <option value="1">Electronics</option>
-                                    <option value="2">Clothes</option>
-                                    <option value="2">Shoes</option>
-                                    <option value="2">Digital</option>
-                                </select>
-                            </div>
-                            <div class="form-group row">
-                                <label for="validationCustom4" class="col-xl-3 col-md-4">Minimum Spend</label>
-                                <input class="form-control col-md-7" formControlName="min" id="validationCustom4"
-                                    type="number">
-                            </div>
-                            <div class="form-group row">
-                                <label for="validationCustom5" class="col-xl-3 col-md-4">Maximum Spend</label>
-                                <input class="form-control col-md-7" formControlName="max" id="validationCustom5"
-                                    type="number">
-                            </div>
-                            <h5>Usage Limits</h5>
-                            <div class="form-group row">
-                                <label for="validationCustom6" class="col-xl-3 col-md-4">Per Limit</label>
-                                <input class="form-control col-md-7" formControlName="limit" id="validationCustom6"
-                                    type="number">
-                            </div>
-                            <div class="form-group row">
-                                <label for="validationCustom7" class="col-xl-3 col-md-4">Per Customer</label>
-                                <input class="form-control col-md-7" formControlName="customer" id="validationCustom7"
-                                    type="number">
-                            </div>
-                        </form>
-                    </fieldset>
-                <!-- <ngb-tab>
+      <fieldset class="fieldset" style="margin-top: 20px">
+        <legend class="legend">{{ "cop_restriction" | translate }}</legend>
+        <form
+          [formGroup]="restrictionForm"
+          class="needs-validation"
+          novalidate=""
+        >
+          <div class="form-group row">
+            <label class="col-xl-3 col-md-4">{{ "cop_cate" | translate }}</label>
+            <select
+              class="custom-select col-md-7"
+              formControlName="category"
+              required=""
+            >
+              <option value="">--Select--</option>
+              <option value="1">Electronics</option>
+              <option value="2">Clothes</option>
+              <option value="2">Shoes</option>
+              <option value="2">Digital</option>
+            </select>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-md-4">{{ "cop_sub_cate" | translate }}</label>
+            <select
+              class="custom-select col-md-7"
+              formControlName="category"
+              required=""
+            >
+              <option value="">--Select--</option>
+              <option value="1">Electronics</option>
+              <option value="2">Clothes</option>
+              <option value="2">Shoes</option>
+              <option value="2">Digital</option>
+            </select>
+          </div>
+          <div class="form-group row">
+            <label class="col-xl-3 col-md-4">{{ "cop_ex_sub_cate" | translate }}</label>
+            <select
+              class="custom-select col-md-7"
+              formControlName="category"
+              required=""
+            >
+              <option value="">--Select--</option>
+              <option value="1">Electronics</option>
+              <option value="2">Clothes</option>
+              <option value="2">Shoes</option>
+              <option value="2">Digital</option>
+            </select>
+          </div>
+          <div class="form-group row">
+            <label for="validationCustom4" class="col-xl-3 col-md-4"
+              >{{ "cop_min_spend" | translate }}</label
+            >
+            <input
+              class="form-control col-md-7"
+              formControlName="min"
+              id="validationCustom4"
+              type="number"
+            />
+          </div>
+          <div class="form-group row">
+            <label for="validationCustom5" class="col-xl-3 col-md-4"
+              >{{ "cop_max_spend" | translate }}</label
+            >
+            <input
+              class="form-control col-md-7"
+              formControlName="max"
+              id="validationCustom5"
+              type="number"
+            />
+          </div>
+          <h5>{{ "cop_usage_limit" | translate }}</h5>
+          <div class="form-group row">
+            <label for="validationCustom6" class="col-xl-3 col-md-4"
+              >{{ "cop_per_limit" | translate }}</label
+            >
+            <input
+              class="form-control col-md-7"
+              formControlName="limit"
+              id="validationCustom6"
+              type="number"
+            />
+          </div>
+          <div class="form-group row">
+            <label for="validationCustom7" class="col-xl-3 col-md-4"
+              >{{ "cop_per_customer" | translate }}</label
+            >
+            <input
+              class="form-control col-md-7"
+              formControlName="customer"
+              id="validationCustom7"
+              type="number"
+            />
+          </div>
+        </form>
+      </fieldset>
+      <!-- <ngb-tab>
                     <ng-template ngbTabTitle>Usage</ng-template>
                     <ng-template ngbTabContent>
                         <form [formGroup]="usageForm" class="needs-validation" novalidate="">
@@ -152,10 +241,12 @@
                         </form>
                     </ng-template>
                 </ngb-tab> -->
-            <div class="pull-right" style="margin-top: 20px;">
-                <button type="button" class="btn btn-primary">{{isEdit ? 'Update' :'Create'}}</button>
-            </div>
-        </div>
+      <div class="pull-right" style="margin-top: 20px">
+        <button type="button" class="btn btn-primary">
+          {{ isEdit ? "Update" : "Create" }}
+        </button>
+      </div>
     </div>
+  </div>
 </div>
 <!-- Container-fluid Ends-->

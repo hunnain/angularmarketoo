@@ -8,6 +8,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { CouponsRoutingModule } from './coupons-routing.module';
 import { ListCouponComponent } from './list-coupon/list-coupon.component';
 import { CreateCouponComponent } from './create-coupon/create-coupon.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [ListCouponComponent, CreateCouponComponent],
@@ -16,7 +17,8 @@ import { CreateCouponComponent } from './create-coupon/create-coupon.component';
     CouponsRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    NgxDatatableModule
-  ]
+    NgxDatatableModule,
+    SharedModule,
+  ],
 })
-export class CouponsModule { }
+export class CouponsModule {}

@@ -4,7 +4,7 @@
     <div class="col-sm-12">
       <div class="card">
         <div class="card-header">
-          <h5>Add Product</h5>
+          <h5>{{ "add_product" | translate }}</h5>
         </div>
         <div class="card-body">
           <div class="row product-adding">
@@ -49,7 +49,7 @@
                     <label
                       for="validationCustom01"
                       class="col-xl-3 col-sm-4 mb-0"
-                      >Product Name
+                      >{{ "prod_name" | translate }}
                     </label>
                     <input
                       class="form-control col-xl-8 col-sm-7"
@@ -65,14 +65,15 @@
                       "
                       class="text text-danger"
                     >
-                      Title Name is required.
+                      {{ "prod_name_req" | translate }}
                     </div>
                   </div>
                   <div class="form-group row">
                     <label
                       for="validationCustom02"
                       class="col-xl-3 col-sm-4 mb-0"
-                      >Actual Price
+                    >
+                      {{ "prod_actual_price" | translate }}
                     </label>
                     <input
                       class="form-control col-xl-8 col-sm-7"
@@ -88,14 +89,14 @@
                       "
                       class="text text-danger"
                     >
-                      Product Price is required.
+                      {{ "prod_actual_price_req" | translate }}
                     </div>
                   </div>
                   <div class="form-group row">
                     <label
                       for="validationCustom02"
                       class="col-xl-3 col-sm-4 mb-0"
-                      >Markdown Price
+                      >{{ "prod_mark_price" | translate }}
                     </label>
                     <input
                       class="form-control col-xl-8 col-sm-7"
@@ -111,14 +112,14 @@
                       "
                       class="text text-danger"
                     >
-                      Product Price is required.
+                      {{ "prod_mark_price_req" | translate }}
                     </div>
                   </div>
                   <div class="form-group row">
                     <label
                       for="validationCustom02"
                       class="col-xl-3 col-sm-4 mb-0"
-                      >Product For
+                      >{{ "prod_product_for" | translate }}
                     </label>
                     <div>
                       <div class="form-check form-check-inline">
@@ -129,9 +130,9 @@
                           id="inlineRadio1"
                           value="intShip"
                         />
-                        <label class="form-check-label" for="inlineRadio1"
-                          >Internation Shipping</label
-                        >
+                        <label class="form-check-label" for="inlineRadio1">{{
+                          "prod_inter_shipping" | translate
+                        }}</label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input
@@ -141,9 +142,9 @@
                           id="inlineRadio2"
                           value="localShip"
                         />
-                        <label class="form-check-label" for="inlineRadio2"
-                          >Local Shipping</label
-                        >
+                        <label class="form-check-label" for="inlineRadio2">{{
+                          "prod_local_shipping" | translate
+                        }}</label>
                       </div>
                     </div>
                   </div>
@@ -151,7 +152,7 @@
                     <label
                       for="exampleFormControlSelect1"
                       class="col-xl-3 col-sm-4 mb-0"
-                      >Category
+                      >{{ "prod_category" | translate }}
                     </label>
                     <select
                       class="form-control digits col-xl-8 col-sm-7"
@@ -170,7 +171,7 @@
                     <label
                       for="exampleFormControlSelect1"
                       class="col-xl-3 col-sm-4 mb-0"
-                      >Sub Category
+                      >{{ "prod_sub_category" | translate }}
                     </label>
                     <select
                       class="form-control digits col-xl-8 col-sm-7"
@@ -189,7 +190,7 @@
                   </div>
                   <div class="form-group row" *ngIf="sub_category.value">
                     <label for="ext-cate" class="col-xl-3 col-sm-4 mb-0"
-                      >Extended Sub Category
+                      >{{ "prod_ex_sub_category" | translate }}
                     </label>
                     <select
                       class="form-control digits col-xl-8 col-sm-7"
@@ -209,21 +210,21 @@
                     </select>
                   </div>
                   <div class="form-group row">
-                    <label for="discount" class="col-xl-3 col-sm-3 mb-0"
-                      >Discount</label
-                    >
-                    <label for="buy_x" class="col-xl-1 col-sm-1 mb-0"
-                      >Buy</label
-                    >
+                    <label for="discount" class="col-xl-3 col-sm-3 mb-0">{{
+                      "prod_discount" | translate
+                    }}</label>
+                    <label for="buy_x" class="col-xl-1 col-sm-1 mb-0">{{
+                      "prod_buy" | translate
+                    }}</label>
                     <input
                       class="form-control col-xl-2 col-sm-2"
                       id="buy_x"
                       type="text"
                       placeholder="XXX"
                     />
-                    <label for="get_x" class="col-xl-1 col-sm-1 mb-0"
-                      >Get</label
-                    >
+                    <label for="get_x" class="col-xl-1 col-sm-1 mb-0">{{
+                      "prod_get" | translate
+                    }}</label>
                     <input
                       class="form-control col-xl-2 col-sm-2"
                       id="get_x"
@@ -233,7 +234,7 @@
                   </div>
                   <div class="form-group row">
                     <label for="size" class="col-xl-3 col-sm-4 mb-0"
-                      >Size
+                      >{{ "prod_size" | translate }}
                     </label>
                     <div class="col-xl-4 col-sm-5" style="padding-left: 0">
                       <ng-select2
@@ -252,8 +253,10 @@
                           id="customSwitch1"
                           [formControl]="productForm.controls['customSize']"
                         />
-                        <label class="custom-control-label" for="customSwitch1"
-                          >Custom Size</label
+                        <label
+                          class="custom-control-label"
+                          for="customSwitch1"
+                          >{{ "prod_custom_size" | translate }}</label
                         >
                       </div>
                     </div>
@@ -281,7 +284,7 @@
                     <label
                       for="exampleFormControlSelect1"
                       class="col-xl-3 col-sm-4 mb-0"
-                      >Labels
+                      >{{ "prod_labels" | translate }}
                     </label>
                     <div class="col-xl-8 col-sm-7" style="padding-left: 0">
                       <ng-select2
@@ -294,9 +297,9 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-xl-3 col-sm-4 mb-0"
-                      >Stock Available</label
-                    >
+                    <label class="col-xl-3 col-sm-4 mb-0">{{
+                      "prod_stock_avail" | translate
+                    }}</label>
                     <div class="qty-box1">
                       <div class="input-group">
                         <i
@@ -324,7 +327,9 @@
                                         </div>
                                     </div>-->
                   <div class="form-group row">
-                    <label class="col-xl-3 col-sm-4">Custom Design </label>
+                    <label class="col-xl-3 col-sm-4"
+                      >{{ "prod_custom_design" | translate }}
+                    </label>
                     <div class="custom-control custom-switch col-xl-8 col-sm-7">
                       <input
                         type="checkbox"
@@ -381,7 +386,7 @@
                     <label
                       for="exampleFormControlSelect1"
                       class="col-xl-3 col-sm-4 mb-0"
-                      >Select Color
+                      >{{ "prod_select_color" | translate }}
                     </label>
                     <select
                       class="form-control digits col-xl-8 col-sm-7"
@@ -400,7 +405,7 @@
                     <label
                       for="validationCustom01"
                       class="col-xl-3 col-sm-4 mb-0"
-                      >Custom Color
+                      >{{ "prod_custom_color" | translate }}
                     </label>
                     <input
                       class="form-control col-xl-8 col-sm-7"
@@ -411,7 +416,9 @@
                     />
                   </div>
                   <div class="form-group row">
-                    <label class="col-xl-3 col-sm-4">Custom Material </label>
+                    <label class="col-xl-3 col-sm-4"
+                      >{{ "prod_custom_material" | translate }}
+                    </label>
                     <div class="col-xl-8 col-sm-7 pl-0 description-sm">
                       <ck-editor
                         id="editor3"
@@ -423,7 +430,9 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-xl-3 col-sm-4">Add Description </label>
+                    <label class="col-xl-3 col-sm-4"
+                      >{{ "prod_add_desc" | translate }}
+                    </label>
                     <div class="col-xl-8 col-sm-7 pl-0 description-sm">
                       <ck-editor
                         id="editor3"
@@ -438,7 +447,7 @@
                     <label
                       for="exampleFormControlSelect1"
                       class="col-xl-3 col-sm-4 mb-0"
-                      >Payment Options
+                      >{{ "prod_pay_option" | translate }}
                     </label>
                     <div class="col-xl-8 col-sm-7" style="padding-left: 0">
                       <ng-select2
@@ -467,9 +476,11 @@
               <div class="form-group row mb-0">
                 <div class="product-buttons col-sm-8 offset-xl-3 offset-sm-4">
                   <button type="button" class="btn btn-primary mr-1">
-                    Add
+                    {{ "prod_add" | translate }}
                   </button>
-                  <button type="button" class="btn btn-light">Discard</button>
+                  <button type="button" class="btn btn-light">
+                    {{ "prod_discard" | translate }}
+                  </button>
                   <!-- <button type="button" class="btn btn-primary mr-1">Request Label</button> -->
                 </div>
               </div>
