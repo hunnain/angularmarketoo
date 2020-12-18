@@ -162,6 +162,7 @@
                             required=""
                             name="login[username]"
                             type="email"
+                            formControlName="userName"
                             class="form-control"
                             placeholder="{{ 'username' | translate }}"
                             id="exampleInputEmail1"
@@ -172,6 +173,7 @@
                             required=""
                             name="login[password]"
                             type="password"
+                            formControlName="password"
                             class="form-control"
                             placeholder="{{ 'password' | translate }}"
                           />
@@ -197,13 +199,15 @@
                         </div>
                         <div class="form-button">
                           <button
-                            [routerLink]="'/dashboard/default'"
+                            (click)="onSubmit()"
                             class="btn btn-primary"
                             type="submit"
                           >
                             {{ "LOGIN" | translate }}
                           </button>
                         </div>
+                        <!-- [routerLink]="'/dashboard/default'" -->
+
                         <a
                           style="display: block; padding-top: 10px"
                           [routerLink]="'/sign-up'"
