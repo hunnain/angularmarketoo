@@ -17,7 +17,7 @@ export class AppComponent {
     translate: TranslateService
   ) {
     if (isPlatformBrowser(this.platformId)) {
-      translate.setDefaultLang('en');
+      translate.setDefaultLang('zh-Hant');
       translate.addLangs(['en', 'zh-Hant']);
     }
   }

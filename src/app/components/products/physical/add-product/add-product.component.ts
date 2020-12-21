@@ -106,6 +106,10 @@ export class AddProductComponent implements OnInit {
           Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$'),
         ],
       ],
+      markdownPrice: ['', [Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+      discountBuy: ['', [Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+      discountGet: ['', [Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+
       code: [
         '',
         [
@@ -124,6 +128,10 @@ export class AddProductComponent implements OnInit {
       sizes: [''],
       customSize: [false],
       customDesign: [false],
+      isInternationalShipping: [true],
+      customDesignFormat: [''],
+      description: [''],
+      // localShip: [true],
     });
 
     this.sizeOptions = SizeOptions;
@@ -277,4 +285,11 @@ export class AddProductComponent implements OnInit {
   public onUploadError(args: any): void {}
 
   public onUploadSuccess(args: any): void {}
+
+  public onSubmit() {
+    console.log(
+      { ...this.productForm.value, quantity: this.counter, images: this.url },
+      'asd'
+    );
+  }
 }
