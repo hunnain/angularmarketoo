@@ -6,6 +6,8 @@ import 'rxjs/add/operator/catch';
 import { CommonErrorService } from './error/common-error.service';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { HttpHeaders } from "@angular/common/http";
+import { throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,18 +19,21 @@ const httpOptions = {
 })
 export class CommonService {
   private readonly _http: HttpClient;
+  private base_url = environment.API_Base_URL
 
   constructor(public error: CommonErrorService,
     // public auth: MsalService,
     private http: HttpClient) { }
 
   httpErrorHandler(error: any) {
+    console.log("error handler--", error);
     if (error.status === 403 || error.status === 500 || error.status === 400) {
       this.error.setError(error);
     } else if (error.status === 401) {
       //   this._auth.signout();
     }
-    return Observable.throw(new Error(error));
+    // return Observable.throw(new Error(error));
+    return throwError(new Error(error));
   }
 
   post(url: string, body: Object): Observable<Response> {
@@ -38,7 +43,7 @@ export class CommonService {
       'Authorization': 'Bearer ' // + this.userData.getToken()
     });
     return this.http
-      .post(url, JSON.stringify(body), { headers: headers })
+      .post(this.base_url+url, JSON.stringify(body), { headers: headers })
       .map((response: Response) => {
         return response;
       }).catch((error: any) => this.httpErrorHandler(error));
@@ -53,7 +58,7 @@ export class CommonService {
     });
 
     return this.http
-      .put(url, JSON.stringify(body), { headers: headers })
+      .put(this.base_url+url, JSON.stringify(body), { headers: headers })
       .map((response: Response) => {
         return response;
       }).catch((error: any) => this.httpErrorHandler(error));
@@ -66,7 +71,7 @@ export class CommonService {
       // 'Authorization': 'Bearer '  + this.auth.acquireTokenRedirect.toString
     });
     return this.http
-      .get(url, { headers: headers })
+      .get(this.base_url+url, { headers: headers })
       .map((response: any) => {
         return response;
       })
@@ -79,7 +84,7 @@ export class CommonService {
       'Authorization': 'Bearer ' // + this.userData.getToken()
     });
     return this.http
-      .delete(url, { headers: headers }).map((response: Response) => {
+      .delete(this.base_url + url, { headers: headers }).map((response: Response) => {
         return response;
       }).catch((error: any) => this.httpErrorHandler(error));
   }

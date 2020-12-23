@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthServiceService } from 'src/app/shared/service/auth-service/auth-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,12 +11,17 @@ import { AuthServiceService } from 'src/app/shared/service/auth-service/auth-ser
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  public isTranslate: boolean = false;
+  
   public loginForm: FormGroup;
   public registerForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthServiceService
+    private authService: AuthServiceService,
+    private translate: TranslateService,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object,
   ) {
     this.createLoginForm();
     this.createRegisterForm();
@@ -21,8 +29,8 @@ export class LoginComponent implements OnInit {
 
   owlcarousel = [
     {
-      title: 'Welcome to Marketoo',
-      desc: 'Welcome content here',
+      title: 'title',
+      desc: 'title',
     },
   ];
   owlcarouselOptions = {
@@ -33,7 +41,7 @@ export class LoginComponent implements OnInit {
 
   createLoginForm() {
     this.loginForm = this.formBuilder.group({
-      userName: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
@@ -49,14 +57,24 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     console.log(this.loginForm.value);
+    this.router.navigate(['/dashboard/default'])
 
-    this.authService.login(this.loginForm.value).subscribe(
-      (res) => {
-        console.log(res, 'response');
-      },
-      (error) => {
-        console.log(error, 'error');
-      }
-    );
+    // this.authService.login(this.loginForm.value).subscribe(
+    //   (res) => {
+    //     console.log(res, 'response');
+    //   },
+    //   (error) => {
+    //     console.log(error, 'error');
+    //   }
+    // );
+  }
+
+  changeLanguage() {
+    this.isTranslate = !this.isTranslate;
+    console.log(this.isTranslate, isPlatformBrowser(this.platformId));
+
+    if (isPlatformBrowser(this.platformId)) {
+      this.translate.use(this.isTranslate ? 'zh-Hant' : 'en');
+    }
   }
 }

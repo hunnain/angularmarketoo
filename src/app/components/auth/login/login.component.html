@@ -127,8 +127,8 @@
                 <ng-container *ngFor="let data of owlcarousel">
                   <ng-template carouselSlide class="item">
                     <div>
-                      <h3 style="color: #4b5335">{{ data.title }}</h3>
-                      <p style="color: #4b5335">{{ data.desc }}</p>
+                      <h3 style="color: #4b5335">{{ data.title | translate }}</h3>
+                      <p style="color: #4b5335">{{ data.desc  | translate }}</p>
                     </div>
                   </ng-template>
                 </ng-container>
@@ -143,7 +143,7 @@
                 <ngb-tab>
                   <ng-template ngbTabTitle
                     ><i class="icon-user mr-2"></i
-                    >{{ "login" | translate }}</ng-template
+                    >{{ "LOGIN" | translate }}</ng-template
                   >
                   <ng-template ngbTabContent>
                     <div
@@ -159,18 +159,18 @@
                       >
                         <div class="form-group">
                           <input
-                            required=""
-                            name="login[username]"
+                            required="true"
+                            name="login[email]"
                             type="email"
-                            formControlName="userName"
+                            formControlName="email"
                             class="form-control"
-                            placeholder="{{ 'username' | translate }}"
+                            placeholder="{{ 'email' | translate }}"
                             id="exampleInputEmail1"
                           />
                         </div>
                         <div class="form-group">
                           <input
-                            required=""
+                            required="true"
                             name="login[password]"
                             type="password"
                             formControlName="password"
@@ -225,6 +225,8 @@
                                                     </ul>
                                                 </div> -->
                       </form>
+                      <img (click)="changeLanguage()" width="30" src="assets/images/icon.png" alt="change-lang-icon"
+                      style="position: absolute;bottom: 20px;right: 20px;cursor:pointer;"/>
                     </div>
                   </ng-template>
                 </ngb-tab>

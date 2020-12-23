@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API_Base_URL: "https://marketoo-api-service.azurewebsites.net/api/"
+  // API_Base_URL: "https://marketoo-api-service.azurewebsites.net/api/"
+  API_Base_URL: "http://localhost:5000/api/"
 };
 
 /*
