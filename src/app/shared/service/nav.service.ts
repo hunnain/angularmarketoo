@@ -37,32 +37,32 @@ export class NavService {
   MENUITEMS: Menu[] = [
     {
       path: '/dashboard/default',
-      title: 'Home',
+      title: 'sidebar_Home',
       icon: 'home',
       type: 'link',
       badgeType: 'primary',
       active: false,
     },
     {
-      title: 'My Account',
+      title: 'sidebar_My_Account',
       icon: 'user',
       type: 'sub',
-      children: [{ path: '/settings/profile', title: 'Profile', type: 'link' }],
+      children: [{ path: '/settings/profile', title: 'sidebar_Profile', type: 'link' }],
     },
     {
-      title: 'Product Management',
+      title: 'sidebar_Product_Management',
       icon: 'box',
       type: 'sub',
       active: false,
       children: [
         {
           path: '/products/physical/product-list',
-          title: 'Product List',
+          title: 'sidebar_Product_List',
           type: 'link',
         },
         {
           path: '/products/physical/add-product',
-          title: 'Add Product',
+          title: 'sidebar_Add_Product',
           type: 'link',
         },
         // 	title: 'Physical', type: 'sub', children: [
@@ -84,54 +84,54 @@ export class NavService {
       ],
     },
     {
-      title: 'Order Management',
+      title: 'sidebar_Order_Management',
       icon: 'dollar-sign',
       type: 'sub',
       active: false,
       children: [
-        { path: '/sales/orders', title: 'Orders', type: 'link' },
+        { path: '/sales/orders', title: 'sidebar_Orders', type: 'link' },
         // { path: '/sales/transactions', title: 'Transactions', type: 'link' },
       ],
     },
     {
-      title: 'Coupons',
+      title: 'sidebar_Coupons',
       icon: 'tag',
       type: 'sub',
       active: false,
       children: [
-        { path: '/coupons/list-coupons', title: 'List Coupons', type: 'link' },
+        { path: '/coupons/list-coupons', title: 'sidebar_List_Coupons', type: 'link' },
         {
           path: '/coupons/create-coupons',
-          title: 'Create Coupons',
+          title: 'sidebar_Create_Coupons',
           type: 'link',
         },
       ],
     },
     {
       path: '/my-messages',
-      title: 'My Messages',
+      title: 'sidebar_My_Messages',
       icon: 'message-square',
       type: 'link',
       badgeType: 'primary',
       active: false,
     },
     {
-      title: 'Boosting',
+      title: 'sidebar_Boosting',
       icon: 'trending-up',
       type: 'sub',
       active: false,
       children: [
-        { path: '/boosting', title: 'Boost My Product', type: 'link' },
+        { path: '/boosting', title: 'sidebar_Boost_My_Product', type: 'link' },
         {
           path: '/boosting/my-ads-performance',
-          title: 'My Ads Performance',
+          title: 'sidebar_My_Ads_Performance',
           type: 'link',
         },
       ],
     },
     {
       path: '/return-exchange',
-      title: 'Return & Exchange',
+      title: 'sidebar_Return_Exchange',
       icon: 'package',
       type: 'link',
       badgeType: 'primary',
@@ -139,7 +139,7 @@ export class NavService {
     },
     {
       path: '/refer-seller',
-      title: 'Refer a Seller',
+      title: 'sidebar_Refer_a_Seller',
       icon: 'package',
       type: 'link',
       badgeType: 'primary',

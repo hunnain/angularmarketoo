@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import * as chartData from '../../shared/data/chart';
 import { doughnutData, pieData } from '../../shared/data/chart';
 
@@ -10,7 +11,7 @@ import { doughnutData, pieData } from '../../shared/data/chart';
 export class DashboardComponent implements OnInit {
   public doughnutData = doughnutData;
   public pieData = pieData;
-  constructor() {
+  constructor(private translate: TranslateService) {
     Object.assign(this, { doughnutData, pieData })
   }
 

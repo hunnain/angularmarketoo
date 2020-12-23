@@ -14,12 +14,12 @@
               </div>
             </div>
             <div class="media-body col-8">
-              <span class="m-0">Earnings</span>
+              <span class="m-0">{{'dash_earnings' | translate}}</span>
               <h3 class="mb-0">
                 $
                 <span class="counter" [CountTo]="0" [from]="0" [duration]="2"
                   >0</span
-                ><small> This Month</small>
+                ><small> {{'dash_this_month' | translate}}</small>
               </h3>
             </div>
           </div>
@@ -39,11 +39,11 @@
               </div>
             </div>
             <div class="media-body col-8">
-              <span class="m-0">Total Active Products</span>
+              <span class="m-0">{{'dash_total_active_products' | translate}}</span>
               <h3 class="mb-0">
                 <span class="counter" [CountTo]="0" [from]="0" [duration]="2"
                   >0</span
-                ><small> This Month</small>
+                ><small> {{'dash_this_month' | translate}}</small>
               </h3>
             </div>
           </div>
@@ -63,11 +63,11 @@
               </div>
             </div>
             <div class="media-body col-8">
-              <span class="m-0">Messages</span>
+              <span class="m-0">{{'dash_messages' | translate}}</span>
               <h3 class="mb-0">
                 <span class="counter" [CountTo]="0" [from]="0" [duration]="2"
                   >0</span
-                ><small> This Month</small>
+                ><small> {{'dash_this_month' | translate}}</small>
               </h3>
             </div>
           </div>
@@ -87,11 +87,11 @@
               </div>
             </div>
             <div class="media-body col-8">
-              <span class="m-0">New Followers</span>
+              <span class="m-0">{{'dash_new_followers' | translate}}</span>
               <h3 class="mb-0">
                 <span class="counter" [CountTo]="0" [from]="0" [duration]="2"
                   >0</span
-                ><small> This Month</small>
+                ><small> {{'dash_this_month' | translate}}</small>
               </h3>
             </div>
           </div>
@@ -115,7 +115,7 @@
     <div class="col-xl-6 xl-100">
       <section class="report-dashboard">
         <div class="row align-items-center">
-          <h2 class="col-8 report-dashboard-title">Monthly Report</h2>
+          <h2 class="col-8 report-dashboard-title">{{'dash_monthly_report' | translate}}</h2>
           <div class="col-4 text-right">
             <span
               class="d-flex align-items-center justify-content-end"
@@ -125,7 +125,7 @@
                 [icon]="'download'"
                 class="font-primary"
               ></app-feather-icons>
-              <span>Export Report</span>
+              <span>{{'dash_export_report' | translate}}</span>
             </span>
           </div>
         </div>
@@ -292,7 +292,7 @@
           </table>
         </div>
         <!-- /.row -->
-        <h2 class="report-dashboard-title">Shipping Cost</h2>
+        <h2 class="report-dashboard-title">{{'dash_shipping_cost' | translate}}</h2>
         <div class="row">
           <div class="flex-container">
             <div class="report-dashboard-item">
@@ -534,7 +534,7 @@
     <div class="col-xl-6 xl-100">
       <div class="card">
         <div class="card-header">
-          <h5>Latest Orders</h5>
+          <h5>{{'dash_latest_orders' | translate}}</h5>
         </div>
         <div class="card-body">
           <div class="user-status table-responsive latest-order-table">
@@ -580,7 +580,7 @@
                 </tr>
               </tbody>
             </table>
-            <span class="btn btn-primary">View All Orders</span>
+            <span class="btn btn-primary">{{'dash_view_all_orders' | translate}}</span>
           </div>
         </div>
       </div>

@@ -14,7 +14,7 @@
       <!-- Sub -->
       <a href="javascript:void(0)" class="sidebar-header" *ngIf="menuItem.type === 'sub'"
         (click)="toggletNavActive(menuItem)">
-        <app-feather-icons [icon]="menuItem.icon"></app-feather-icons><span>{{menuItem.title}}<span
+        <app-feather-icons [icon]="menuItem.icon"></app-feather-icons><span>{{menuItem.title | translate}}<span
             class="badge badge-{{menuItem.badgeType}} ml-3"
             *ngIf="menuItem.badgeType">{{menuItem.badgeValue}}</span></span>
         <i class="fa fa-angle-right pull-right" *ngIf="menuItem.children"></i>
@@ -22,14 +22,14 @@
       <!-- Link -->
       <a [routerLink]="!menuItem.type ? null : [menuItem.path]" routerLinkActive="active" class="sidebar-header"
         *ngIf="menuItem.type === 'link'">
-        <app-feather-icons [icon]="menuItem.icon"></app-feather-icons><span>{{menuItem.title}}<span
+        <app-feather-icons [icon]="menuItem.icon"></app-feather-icons><span>{{menuItem.title | translate}}<span
             class="badge badge-{{menuItem.badgeType}} ml-3"
             *ngIf="menuItem.badgeType">{{menuItem.badgeValue}}</span></span>
         <i class="fa fa-angle-right pull-right" *ngIf="menuItem.children"></i>
       </a>
       <!-- External Link -->
       <a href="{{ !menuItem.type ? null : menuItem.path }}" class="sidebar-header" *ngIf="menuItem.type === 'extLink'">
-        <app-feather-icons [icon]="menuItem.icon"></app-feather-icons><span>{{menuItem.title}}<span
+        <app-feather-icons [icon]="menuItem.icon"></app-feather-icons><span>{{menuItem.title | translate}}<span
             class="badge badge-{{menuItem.badgeType}} ml-3"
             *ngIf="menuItem.badgeType">{{menuItem.badgeValue}}</span></span>
         <i class="fa fa-angle-right pull-right" *ngIf="menuItem.children"></i>
@@ -37,7 +37,7 @@
       <!-- External Tab Link -->
       <a href="{{ !menuItem.type ? null : menuItem.path }}" target="_blank" class="sidebar-header"
         *ngIf="menuItem.type === 'extTabLink'">
-        <app-feather-icons [icon]="menuItem.icon"></app-feather-icons><span>{{menuItem.title}}<span
+        <app-feather-icons [icon]="menuItem.icon"></app-feather-icons><span>{{menuItem.title | translate}}<span
             class="badge badge-{{menuItem.badgeType}} ml-3"
             *ngIf="menuItem.badgeType">{{menuItem.badgeValue}}</span></span>
         <i class="fa fa-angle-right pull-right" *ngIf="menuItem.children"></i>
@@ -48,7 +48,7 @@
         <li *ngFor="let childrenItem of menuItem.children" [ngClass]="{active: childrenItem.active}">
           <!-- Sub -->
           <a href="javascript:void(0)" *ngIf="childrenItem.type === 'sub'" (click)="toggletNavActive(childrenItem)">
-            <i class="fa fa-circle"></i><span> {{childrenItem.title}} <span
+            <i class="fa fa-circle"></i><span> {{childrenItem.title | translate}} <span
                 class="badge badge-{{childrenItem.badgeType}} pull-right"
                 *ngIf="childrenItem.badgeType">{{childrenItem.badgeValue}}</span> </span>
             <i class="fa fa-angle-down pull-right" *ngIf="childrenItem.children"></i>
@@ -56,7 +56,7 @@
           <!-- Link -->
           <a [routerLink]="!childrenItem.type ? null : [childrenItem.path]" *ngIf="childrenItem.type === 'link'"
             routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-            <i class="fa fa-circle"></i><span>{{childrenItem.title}} <span
+            <i class="fa fa-circle"></i><span>{{childrenItem.title | translate}} <span
                 class="badge badge-{{childrenItem.badgeType}} pull-right"
                 *ngIf="childrenItem.badgeType">{{childrenItem.badgeValue}}</span></span>
             <i class="fa fa-angle-down pull-right" *ngIf="childrenItem.children"></i>
@@ -64,7 +64,7 @@
           <!-- External Link -->
           <a href="{{ !childrenItem.type ? null : childrenItem.path }}" *ngIf="childrenItem.type === 'extLink'"
             routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-            <i class="fa fa-circle"></i><span>{{childrenItem.title}} <span
+            <i class="fa fa-circle"></i><span>{{childrenItem.title | translate}} <span
                 class="badge badge-{{childrenItem.badgeType}} pull-right"
                 *ngIf="childrenItem.badgeType">{{childrenItem.badgeValue}}</span></span>
             <i class="fa fa-angle-down pull-right" *ngIf="childrenItem.children"></i>
@@ -72,7 +72,7 @@
           <!-- External Tab Link -->
           <a href="{{ !childrenItem.type ? null : childrenItem.path }}" target="_blank"
             *ngIf="childrenItem.type === 'extTabLink'">
-            <i class="fa fa-circle"></i><span>{{childrenItem.title}} <span
+            <i class="fa fa-circle"></i><span>{{childrenItem.title | translate}} <span
                 class="badge badge-{{childrenItem.badgeType}} pull-right"
                 *ngIf="childrenItem.badgeType">{{childrenItem.badgeValue}}</span></span>
             <i class="fa fa-angle-down pull-right" *ngIf="childrenItem.children"></i>
@@ -84,7 +84,7 @@
               <a [routerLink]="!childrenSubItem.type ? null : [childrenSubItem.path]"
                 *ngIf="childrenSubItem.type === 'link'" routerLinkActive="active"
                 [routerLinkActiveOptions]="{exact: true}">
-                <i class="fa fa-circle"></i><span> {{childrenSubItem.title}} <span
+                <i class="fa fa-circle"></i><span> {{childrenSubItem.title | translate}} <span
                     class="badge badge-{{childrenSubItem.badgeType}} pull-right"
                     *ngIf="childrenSubItem.badgeType">{{childrenSubItem.badgeValue}}</span> </span>
               </a>
@@ -92,14 +92,14 @@
               <a href="{{ !childrenSubItem.type ? null : childrenSubItem.path }}"
                 *ngIf="childrenSubItem.type === 'extLink'" routerLinkActive="active"
                 [routerLinkActiveOptions]="{exact: true}">
-                <i class="fa fa-circle"></i><span>{{childrenSubItem.title}} <span
+                <i class="fa fa-circle"></i><span>{{childrenSubItem.title | translate}} <span
                     class="badge badge-{{childrenSubItem.badgeType}} pull-right"
                     *ngIf="childrenSubItem.badgeType">{{childrenSubItem.badgeValue}}</span></span>
               </a>
               <!-- External Tab Link -->
               <a href="{{ !childrenSubItem.type ? null : childrenSubItem.path }}" target="_blank"
                 *ngIf="childrenSubItem.type === 'extTabLink'">
-                <i class="fa fa-circle"></i><span>{{childrenSubItem.title}} <span
+                <i class="fa fa-circle"></i><span>{{childrenSubItem.title | translate}} <span
                     class="badge badge-{{childrenSubItem.badgeType}} pull-right"
                     *ngIf="childrenSubItem.badgeType">{{childrenSubItem.badgeValue}}</span></span>
               </a>

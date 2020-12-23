@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 @Component({
   selector: 'app-sign-up',
@@ -7,6 +9,8 @@ import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
+  public isTranslate: boolean = false;
+
   public sellerForm: FormGroup;
   public counter: number = 1;
   public url = [{
@@ -27,7 +31,9 @@ export class SignUpComponent implements OnInit {
   ]
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+    private translate: TranslateService,
+    @Inject(PLATFORM_ID) private platformId: Object,) {
     this.sellerForm = this.fb.group({
       chinese_full_name: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       english_full_name: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
@@ -98,5 +104,14 @@ export class SignUpComponent implements OnInit {
   public onUploadError(args: any): void { }
 
   public onUploadSuccess(args: any): void { }
+
+  changeLanguage() {
+    this.isTranslate = !this.isTranslate;
+    console.log(this.isTranslate, isPlatformBrowser(this.platformId));
+
+    if (isPlatformBrowser(this.platformId)) {
+      this.translate.use(this.isTranslate ? 'zh-Hant' : 'en');
+    }
+  }
 
 }
