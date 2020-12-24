@@ -44,7 +44,6 @@ export class HeaderComponent implements OnInit {
 
   changeLanguage() {
     this.isTranslate = !this.isTranslate;
-    console.log(this.isTranslate, isPlatformBrowser(this.platformId));
 
     if (isPlatformBrowser(this.platformId)) {
       this.translate.use(this.isTranslate ? 'zh-Hant' : 'en');

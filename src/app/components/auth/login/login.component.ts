@@ -12,16 +12,16 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   public isTranslate: boolean = false;
-  
+
   public loginForm: FormGroup;
   public registerForm: FormGroup;
-
+  public loading: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthServiceService,
     private translate: TranslateService,
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.createLoginForm();
     this.createRegisterForm();
@@ -56,8 +56,21 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
+    this.loading = true;
     console.log(this.loginForm.value);
-    this.router.navigate(['/dashboard/default'])
+    this.authService.login(this.loginForm.value).subscribe(
+      (res) => {
+        this.loading = false;
+        console.log(res, 'success');
+        localStorage.setItem('userInfo', JSON.stringify(res));
+        this.router.navigate(['/dashboard/default']);
+      },
+      (error) => {
+        this.loading = false;
+        console.log(error);
+      }
+    );
+    // this.router.navigate(['/dashboard/default'])
 
     // this.authService.login(this.loginForm.value).subscribe(
     //   (res) => {

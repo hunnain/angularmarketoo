@@ -482,6 +482,7 @@
                 <div class="product-buttons col-sm-8 offset-xl-3 offset-sm-4">
                   <button
                     type="button"
+                    [disabled]="loading"
                     class="btn btn-primary mr-1"
                     (click)="onSubmit()"
                   >

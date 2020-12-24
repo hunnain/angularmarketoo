@@ -150,7 +150,7 @@
   "cop_valid_code": "Please Provide a Valid Coupon Code.",
   "cop_start_date": "Start Date",
   "cop_end_date": "End Date",
-  "cop_free shipping": "Free Shipping",
+  "cop_free_shipping": "Free Shipping",
   "cop_allow_free_shipping": "Allow Free Shipping",
   "cop_quantity": "Quantity",
   "cop_disc_type": "Discount Type",
@@ -160,11 +160,12 @@
   "cop_cate": "Category",
   "cop_sub_cate": "Sub Category",
   "cop_ex_sub_cate": "Extended Sub Category",
+  "cop_groups": "Groups",
   "cop_min_spend": "Minimum Spend",
   "cop_max_spend": "Maximum Spend",
   "cop_usage_limit": "Usage Limits",
   "cop_per_limit": "Per Limit",
-  "cop_per_customer=": "Per Customer",
+  "cop_per_customer": "Per Customer",
   "cop_create": "CREATE",
 
   "bid_boosting": "Boosting",
@@ -178,7 +179,7 @@
   "bid_selected_keywords": "Selected Keywords",
   "bid_new_keywords": "New Keywords",
   "bid_boost_now": "BOOST NOW!",
-  
+
   "ref_email": "Your Email",
   "ref_other_email": "Email Here...",
   "ref_desc": "you are about to look uh-mazing. I'm in love with my Calorisonic, and I think you will be too.",

@@ -15,6 +15,7 @@ import {
 } from './data';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProductService } from 'src/app/shared/service/product-service/product.service';
 // var $;
 
 // $('.select2-no-results').click(function () {
@@ -31,7 +32,7 @@ export class AddProductComponent implements OnInit {
   @ViewChild('keyWordModal') keyWordModal: ElementRef;
   public label: string;
   public totalAddedLabels = [''];
-
+  public loading: boolean = false;
   public productForm: FormGroup;
   public counter: number = 1;
   public sizeImg: string = 'assets/images/user.png';
@@ -87,7 +88,8 @@ export class AddProductComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private elementRef: ElementRef,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private productService: ProductService
   ) {
     let self = this;
 
@@ -287,9 +289,23 @@ export class AddProductComponent implements OnInit {
   public onUploadSuccess(args: any): void {}
 
   public onSubmit() {
-    console.log(
-      { ...this.productForm.value, quantity: this.counter, images: this.url },
-      'asd'
+    let temp = this.productForm.value;
+    let data = {
+      ...temp,
+      subCategory: temp.sub_category,
+      quantity: this.counter,
+
+      // images: this.url,
+    };
+    console.log(data);
+    this.loading = true;
+    this.productService.addProduct(data).subscribe(
+      (res) => {
+        console.log(res, 'success');
+      },
+      (error) => {
+        this.loading = false;
+      }
     );
   }
 }

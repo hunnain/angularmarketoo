@@ -127,8 +127,10 @@
                 <ng-container *ngFor="let data of owlcarousel">
                   <ng-template carouselSlide class="item">
                     <div>
-                      <h3 style="color: #4b5335">{{ data.title | translate }}</h3>
-                      <p style="color: #4b5335">{{ data.desc  | translate }}</p>
+                      <h3 style="color: #4b5335">
+                        {{ data.title | translate }}
+                      </h3>
+                      <p style="color: #4b5335">{{ data.desc | translate }}</p>
                     </div>
                   </ng-template>
                 </ng-container>
@@ -199,6 +201,7 @@
                         </div>
                         <div class="form-button">
                           <button
+                            [disabled]="loading"
                             (click)="onSubmit()"
                             class="btn btn-primary"
                             type="submit"
@@ -225,8 +228,18 @@
                                                     </ul>
                                                 </div> -->
                       </form>
-                      <img (click)="changeLanguage()" width="30" src="assets/images/icon.png" alt="change-lang-icon"
-                      style="position: absolute;bottom: 20px;right: 20px;cursor:pointer;"/>
+                      <img
+                        (click)="changeLanguage()"
+                        width="30"
+                        src="assets/images/icon.png"
+                        alt="change-lang-icon"
+                        style="
+                          position: absolute;
+                          bottom: 20px;
+                          right: 20px;
+                          cursor: pointer;
+                        "
+                      />
                     </div>
                   </ng-template>
                 </ngb-tab>
