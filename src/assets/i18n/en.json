@@ -43,6 +43,7 @@
   "yes": "Yes",
   "no": "No",
   "your_referee": "Your referee’s URL (If any)",
+  "refereeUrl_invalid":"Enter valid url",
   "sign_up": "SIGNUP",
   "cancel": "CANCEL",
 

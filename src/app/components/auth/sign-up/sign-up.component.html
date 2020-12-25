@@ -26,7 +26,7 @@
                       </legend>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="chineseFname" class="mb-0"
+                          <label for="chineseFname" class="required mb-0"
                             >{{ "ch_full_name" | translate }}
                           </label>
                           <input
@@ -50,7 +50,7 @@
                           </div>
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="englishFname" class="mb-0"
+                          <label for="englishFname" class="required mb-0"
                             >{{ "en_full_name" | translate }}
                           </label>
                           <input
@@ -106,7 +106,7 @@
                           </div>
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="validationCustom04" class="mb-0"
+                          <label for="validationCustom04" class="required mb-0"
                             >{{ "gender" | translate }}
                           </label>
                           <select
@@ -122,7 +122,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="country" class="mb-0"
+                          <label for="country" class="required mb-0"
                             >{{ "select_country" | translate }}
                           </label>
                           <select 
@@ -141,7 +141,7 @@
                           </select>
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="validationCustom06" class="mb-0"
+                          <label for="validationCustom06" class="required mb-0"
                             >{{ "contact_no" | translate }}
                           </label>
                           <input
@@ -164,7 +164,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="email" class="mb-0"
+                          <label for="email" class="required mb-0"
                             >{{ "email" | translate }}
                           </label>
                           <input
@@ -194,7 +194,7 @@
                           </div>
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="email" class="mb-0"
+                          <label for="password" class="required mb-0"
                             >{{ "password" | translate }}
                           </label>
                           <input
@@ -217,7 +217,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="your_identity" class="mb-0"
+                          <label for="your_identity" class="required mb-0"
                             >{{ "your_identity" | translate }}
                           </label>
                           <select
@@ -293,7 +293,7 @@
                                 type="radio"
                                 name="inlineRadioOptions"
                                 id="inlineRadio1"
-                                value="yes"
+                                value="true"
                                 [formControl]="sellerForm.controls['interestedToJoinWm']"
                               />
                               <label
@@ -308,7 +308,7 @@
                                 type="radio"
                                 name="inlineRadioOptions"
                                 id="inlineRadio2"
-                                value="no"
+                                value="false"
                                 [formControl]="sellerForm.controls['interestedToJoinWm']"
                               />
                               <label
@@ -329,6 +329,15 @@
                             type="text"
                             [formControl]="sellerForm.controls['refereeUrl']"
                           />
+                          <!-- <div
+                            *ngIf="
+                            sellerForm.controls.refereeUrl.touched &&
+                            sellerForm.controls.refereeUrl.errors?.pattern
+                            "
+                            class="text text-danger"
+                          >
+                            {{ "refereeUrl_invalid" | translate }}
+                          </div> -->
                         </div>
                       </div>
                     </fieldset>
@@ -345,7 +354,7 @@
                       </legend>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="brand_name" class="mb-0"
+                          <label for="brand_name" class="required mb-0" 
                             >{{ "brand_name" | translate }}
                           </label>
                           <input
@@ -362,11 +371,11 @@
                             "
                             class="text text-danger"
                           >
-                            >{{ "brand_name_req" | translate }}
+                            {{ "brand_name_req" | translate }}
                           </div>
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="url" class="mb-0">
+                          <label for="url" class="required mb-0">
                             {{ "design_hall" | translate }}
                           </label>
                           <input
@@ -385,11 +394,20 @@
                           >
                             {{ "design_hall_req" | translate }}
                           </div>
+                          <div
+                            *ngIf="
+                            brandForm.controls.designHallUrl.touched &&
+                            brandForm.controls.designHallUrl.errors?.pattern
+                            "
+                            class="text text-danger"
+                          >
+                            {{ "design_hall_req" | translate }}
+                          </div>
                         </div>
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="product_category" class="mb-0"
+                          <label for="product_category" class="required mb-0"
                             >{{ "product_cat" | translate }}
                           </label>
                           <select
@@ -404,7 +422,7 @@
                           </select>
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="product_images" class="mb-0"
+                          <label for="product_images" class="required mb-0"
                             >{{ "provide_product" | translate }}
                           </label>
                           <div class="add-product">
@@ -421,8 +439,8 @@
                                   />
                                   <img
                                     class="imgUpload"
-                                    alt=""
-                                    [src]="item.img"
+                                    alt="prod-img"
+                                    [src]="productWishImages[i] ? productWishImages[i] :item.img"
                                   />
                                 </div>
                               </li>
@@ -432,7 +450,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="brand_website" class="mb-0"
+                          <label for="brand_website" class="required mb-0"
                             >{{ "brand_website" | translate }}
                           </label>
                           <input
@@ -443,7 +461,7 @@
                           />
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="facebook_url" class="mb-0"
+                          <label for="facebook_url" class="required mb-0"
                             >{{ "facebook" | translate }}
                           </label>
                           <input
@@ -456,7 +474,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="instagram_url" class="mb-0"
+                          <label for="instagram_url" class="required mb-0"
                             >{{ "instagram" | translate }}
                           </label>
                           <input
@@ -467,7 +485,7 @@
                           />
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="average_price_per_product" class="mb-0"
+                          <label for="average_price_per_product" class="required mb-0"
                             >{{ "avg_price" | translate }}
                           </label>
                           <select
@@ -485,7 +503,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="place_of_product" class="mb-0"
+                          <label for="place_of_product" class="required mb-0"
                             >{{ "place_product" | translate }}
                           </label>
                           <select
@@ -504,7 +522,7 @@
                           </select>
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="deliver_from" class="mb-0"
+                          <label for="deliver_from" class="required mb-0"
                             >{{ "deliver_from" | translate }}
                           </label>
                           <select 
@@ -535,7 +553,7 @@
                     type="button" 
                     class="btn btn-primary mr-1" 
                     (click)="createSeller()" 
-                    [disabled]="(sellerForm.invalid || brandForm.invalid) && !loading"
+                    [disabled]="sellerForm.invalid || brandForm.invalid || productWishImages.length === 0 ||  loading"
                   >
                     {{ "sign_up" | translate }}
                   </button>
