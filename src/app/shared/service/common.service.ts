@@ -29,7 +29,7 @@ export class CommonService {
   ) {}
 
   getTocket() {
-    console.log('tocket', this.userInfo.accessToken);
+    // console.log('tocket', this.userInfo.accessToken);
 
     if (this.userInfo) return this.userInfo.accessToken;
     else return '';
