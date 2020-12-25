@@ -214,78 +214,78 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Amount</th>
+                <th scope="col">{{'dash_amount' | translate}}</th>
                 <!-- <th scope="col">Other Deductions</th>
                 <th scope="col">Returns</th> -->
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row">Net Profit</th>
+                <th scope="row">{{'dash_net_profit' | translate}}</th>
                 <td>$80</td>
                 <!-- <td>Otto</td>
                 <td>@mdo</td> -->
               </tr>
               <tr>
-                <th scope="row">Discounted</th>
+                <th scope="row">{{'dash_discounted' | translate}}</th>
                 <td>$16</td>
                 <!-- <td>Thornton</td>
                 <td>@fat</td> -->
               </tr>
               <tr>
-                <th scope="row">Referral Deduction</th>
+                <th scope="row">{{'dash_referral_deduction' | translate}}</th>
                 <td>$6</td>
                 <!-- <td>the Bird</td>
                 <td>@twitter</td> -->
               </tr>
               <tr>
-                <th scope="row">Refund</th>
+                <th scope="row">{{'dash_refund' | translate}}</th>
                 <td>$58</td>
                 <!-- <td>the Bird</td>
                 <td>@twitter</td> -->
               </tr>
               <tr>
-                <th scope="row">Coupons</th>
+                <th scope="row">{{'dash_coupons' | translate}}</th>
                 <td>$164</td>
                 <!-- <td>the Bird</td>
                 <td>@twitter</td> -->
               </tr>
               <tr>
-                <th scope="row">Transaction Management Fee</th>
+                <th scope="row">{{'dash_transaction_management_fee' | translate}}</th>
                 <td>$1,234</td>
                 <!-- <td>the Bird</td>
                 <td>@twitter</td> -->
               </tr>
               <tr>
-                <th scope="row">Online Payment Fee</th>
+                <th scope="row">{{'dash_online_payment_fee' | translate}}</th>
                 <td>$820</td>
                 <!-- <td>the Bird</td>
                 <td>@twitter</td> -->
               </tr>
               <tr>
-                <th scope="row">Total Reimbursement</th>
+                <th scope="row">{{'dash_total_reimbursement' | translate}}</th>
                 <td>$240</td>
                 <!-- <td>the Bird</td>
                 <td>@twitter</td> -->
               </tr>
               <tr>
-                <th scope="row">Total Orders</th>
+                <th scope="row">{{'dash_total_orders' | translate}}</th>
                 <td>230</td>
               </tr>
               <tr>
-                <th scope="row">Delivered Orders</th>
+                <th scope="row">{{'dash_delivered_orders' | translate}}</th>
                 <td>158</td>
               </tr>
               <tr>
-                <th scope="row">Cancelled Orders</th>
+                <th scope="row">{{'dash_cancelled_orders' | translate}}</th>
                 <td>12</td>
               </tr>
               <tr>
-                <th scope="row">Returned Orders</th>
+                <th scope="row">{{'dash_returned_orders' | translate}}</th>
                 <td>5</td>
               </tr>
               <tr>
-                <th scope="row">Exchanged Orders</th>
+                <th scope="row">{{'dash_exchanged_orders' | translate}}</th>
                 <td>25</td>
               </tr>
             </tbody>
@@ -296,14 +296,14 @@
         <div class="row">
           <div class="flex-container">
             <div class="report-dashboard-item">
-              <div class="report-dashboard-label">Shipped via Own Account</div>
+              <div class="report-dashboard-label">{{'dash_shipped_via_own_account' | translate}}</div>
               <div class="report-dashboard-number">
                 <span class="dollar-unit">$</span>79
               </div>
             </div>
             <div class="report-dashboard-item">
               <div class="report-dashboard-label">
-                Shipped via Marketoo Account
+                {{'dash_shipped_via_marketoo_account' | translate}}
               </div>
               <div class="report-dashboard-number">
                 <span class="dollar-unit">$</span>129
@@ -315,10 +315,10 @@
       </section>
     </div>
 
-    <div class="col-xl-3 col-md-6 xl-50">
+    <div class="col-md-4 col-sm-6">
       <div class="card order-graph sales-carousel">
         <div class="card-header">
-          <h6>Total Sales</h6>
+          <h6 style="font-family: sans-serif; font-weight: 600;">{{'dash_total_revenue' | translate}}</h6>
           <div class="row">
             <div class="col-6">
               <div class="small-chartjs">
@@ -341,7 +341,8 @@
             <div class="col-6">
               <div class="value-graph">
                 <h3>
-                  42% <span><i class="fa fa-angle-up font-primary"></i></span>
+                  42% 
+                  <!-- <span><i class="fa fa-angle-up font-primary"></i></span> -->
                 </h3>
               </div>
             </div>
@@ -350,29 +351,30 @@
         <div class="card-body">
           <div class="media">
             <div class="media-body">
-              <span>Sales Last Month</span>
+              <span style="font-weight: 600;">{{'dash_compared_to_last_month' | translate}}</span>
               <h2 class="mb-0">0</h2>
               <p>
-                0.25% <span><i class="fa fa-angle-up"></i></span>
+                0.25% 
+                <!-- <span><i class="fa fa-angle-up"></i></span> -->
               </p>
-              <h5 class="f-w-600">Gross sales of August</h5>
+              <!-- <h5 class="f-w-600">Gross sales of August</h5>
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
-              </p>
+              </p> -->
             </div>
-            <div class="bg-primary b-r-8">
+            <!-- <div class="bg-primary b-r-8">
               <div class="small-box">
                 <i data-feather="briefcase"></i>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
-    <div class="col-xl-3 col-md-6 xl-50">
+    <div class="col-md-4 col-sm-6">
       <div class="card order-graph sales-carousel">
         <div class="card-header">
-          <h6>Total purchase</h6>
+          <h6 style="font-family: sans-serif;font-weight: 600;">{{'dash_average_basket_value' | translate}}</h6>
           <div class="row">
             <div class="col-6">
               <div class="small-chartjs">
@@ -395,7 +397,9 @@
             <div class="col-6">
               <div class="value-graph">
                 <h3>
-                  20% <span><i class="fa fa-angle-up font-secondary"></i></span>
+                  20% <span>
+                    <!-- <i class="fa fa-angle-up font-secondary"></i> -->
+                  </span>
                 </h3>
               </div>
             </div>
@@ -404,26 +408,28 @@
         <div class="card-body">
           <div class="media">
             <div class="media-body">
-              <span>Monthly purchase</span>
+              <span style="font-weight: 600;">{{'dash_compared_to_last_month' | translate}}</span>
               <h2 class="mb-0">0</h2>
               <p>
-                0.13% <span><i class="fa fa-angle-up"></i></span>
+                0.13% <span>
+                  <!-- <i class="fa fa-angle-up"></i> -->
+                </span>
               </p>
-              <h5 class="f-w-600">Avg Gross purchase</h5>
+              <!-- <h5 class="f-w-600">Avg Gross purchase</h5>
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
-              </p>
+              </p> -->
             </div>
-            <div class="bg-secondary b-r-8">
+            <!-- <div class="bg-secondary b-r-8">
               <div class="small-box">
                 <i data-feather="credit-card"></i>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
-    <div class="col-xl-3 col-md-6 xl-50">
+    <!-- <div class="col-xl-3 col-md-4 xl-50">
       <div class="card order-graph sales-carousel">
         <div class="card-header">
           <h6>Total cash transaction</h6>
@@ -476,11 +482,11 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-xl-3 col-md-6 xl-50">
+    </div> -->
+    <div class="col-md-4 col-sm-6">
       <div class="card order-graph sales-carousel">
         <div class="card-header">
-          <h6>New Followers</h6>
+          <h6 style="font-family: sans-serif;font-weight: 600;">{{'dash_new_followers' | translate}}</h6>
           <div class="row">
             <div class="col-6">
               <div class="small-chartjs">
@@ -503,7 +509,8 @@
             <div class="col-6">
               <div class="value-graph">
                 <h3>
-                  75% <span><i class="fa fa-angle-up font-danger"></i></span>
+                  75% 
+                  <!-- <span><i class="fa fa-angle-up font-danger"></i></span> -->
                 </h3>
               </div>
             </div>
@@ -512,21 +519,22 @@
         <div class="card-body">
           <div class="media">
             <div class="media-body">
-              <span>Followers</span>
+              <span style="font-weight: 600;">{{'dash_compared_to_last_month' | translate}}</span>
               <h2 class="mb-0">0</h2>
               <p>
-                0.25% <span><i class="fa fa-angle-up"></i></span>
+                0.25% 
+                <!-- <span><i class="fa fa-angle-up"></i></span> -->
               </p>
-              <h5 class="f-w-600">Followers of June</h5>
+              <!-- <h5 class="f-w-600">Followers of June</h5>
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
-              </p>
+              </p> -->
             </div>
-            <div class="bg-danger b-r-8">
+            <!-- <div class="bg-danger b-r-8">
               <div class="small-box">
                 <i data-feather="calendar"></i>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -541,10 +549,10 @@
             <table class="table table-bordernone">
               <thead>
                 <tr>
-                  <th scope="col">Order ID</th>
-                  <th scope="col">Order Total</th>
-                  <th scope="col">Product Name</th>
-                  <th scope="col">Status</th>
+                  <th scope="col">{{'dash_order_ID' | translate}}</th>
+                  <th scope="col">{{'dash_order_total' | translate}}</th>
+                  <th scope="col">{{'dash_product_name' | translate}}</th>
+                  <th scope="col">{{'dash_status' | translate}}</th>
                 </tr>
               </thead>
               <tbody>

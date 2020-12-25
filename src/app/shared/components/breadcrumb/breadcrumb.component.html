@@ -13,10 +13,10 @@
                     <li class="breadcrumb-item"><a [routerLink]="'/dashboard/default'">
                             <app-feather-icons [icon]="'home'"></app-feather-icons>
                         </a></li>
-                    <li class="breadcrumb-item" *ngIf="breadcrumbs?.parentBreadcrumb">{{breadcrumbs?.parentBreadcrumb}}
+                    <li class="breadcrumb-item" *ngIf="breadcrumbs?.parentBreadcrumb">{{breadcrumbs?.parentBreadcrumb | translate}}
                     </li>
                     <li class="breadcrumb-item active" *ngIf="breadcrumbs?.childBreadcrumb">
-                        {{breadcrumbs?.childBreadcrumb}}
+                        {{breadcrumbs?.childBreadcrumb | translate}}
                     </li>
                 </ol>
             </div>

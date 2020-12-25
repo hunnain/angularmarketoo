@@ -11,6 +11,6 @@ export class AuthServiceService {
     return this.commonService.post('seller/login', data);
   }
   signUp(data) {
-    return this.commonService.post('/seller/signUp', data);
+    return this.commonService.post('seller/signUp', data);
   }
 }

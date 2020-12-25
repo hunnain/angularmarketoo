@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, NavigationEnd, PRIMARY_OUTLET } from '@angular/
 
 import { filter } from 'rxjs/operators';
 import { map } from 'rxjs/internal/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -15,7 +16,7 @@ export class BreadcrumbComponent implements OnInit {
   public title: string
 
   constructor(private activatedRoute: ActivatedRoute,
-    private router: Router) {
+    private router: Router,private translate: TranslateService) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .pipe(map(() => this.activatedRoute))
