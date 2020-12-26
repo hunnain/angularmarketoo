@@ -179,7 +179,7 @@
               </a>
             </li>
             <li>
-              <a [routerLink]="'/auth/login'">
+              <a [routerLink]="'/auth/login'" (click)="onLogout()">
                 <app-feather-icons [icon]="'log-out'"></app-feather-icons>Logout
               </a>
             </li>

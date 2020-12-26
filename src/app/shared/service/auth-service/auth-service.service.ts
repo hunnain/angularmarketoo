@@ -19,6 +19,6 @@ export class AuthServiceService {
   }
 
   logout() {
-    return this.commonService.post('token/revoke',{});
+    return this.commonService.post('token/revoke', {});
   }
 }

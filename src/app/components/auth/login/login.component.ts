@@ -63,6 +63,8 @@ export class LoginComponent implements OnInit {
         this.loading = false;
         console.log(res, 'success');
         localStorage.setItem('userInfo', JSON.stringify(res));
+        localStorage.setItem('accessToken', res['accessToken']);
+        localStorage.setItem('refreshToken', res['refreshToken']);
         this.router.navigate(['/dashboard/default']);
       },
       (error) => {

@@ -50,5 +50,13 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  onLogout() {
+    console.log('logout');
+    localStorage.clear();
+    // localStorage.removeItem('userInfo');
+    // localStorage.removeItem('userInfo');
+    // localStorage.removeItem('userInfo');
+  }
+
   ngOnInit() {}
 }

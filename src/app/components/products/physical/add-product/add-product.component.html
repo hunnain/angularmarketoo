@@ -48,7 +48,7 @@
                   <div class="form-group row">
                     <label
                       for="validationCustom01"
-                      class="col-xl-3 col-sm-4 mb-0"
+                      class="col-xl-3 col-sm-4 mb-0 required"
                       >{{ "prod_name" | translate }}
                     </label>
                     <input
@@ -71,7 +71,7 @@
                   <div class="form-group row">
                     <label
                       for="validationCustom02"
-                      class="col-xl-3 col-sm-4 mb-0"
+                      class="col-xl-3 col-sm-4 mb-0 required"
                     >
                       {{ "prod_actual_price" | translate }}
                     </label>
@@ -95,7 +95,7 @@
                   <div class="form-group row">
                     <label
                       for="validationCustom02"
-                      class="col-xl-3 col-sm-4 mb-0"
+                      class="col-xl-3 col-sm-4 mb-0 required"
                       >{{ "prod_mark_price" | translate }}
                     </label>
                     <input
@@ -106,10 +106,10 @@
                     />
                     <div
                       *ngIf="
-                        productForm.controls.price.touched &&
-                        productForm.controls.price.errors?.required
+                        productForm.controls.markdownPrice.touched &&
+                        productForm.controls.markdownPrice.errors?.required
                       "
-                      class="text text-danger"
+                      class="text text-danger required"
                     >
                       {{ "prod_mark_price_req" | translate }}
                     </div>
@@ -444,6 +444,7 @@
                         cols="30"
                         rows="10"
                         language="en"
+                        [formControl]="productForm.controls['description']"
                         [fullPage]="true"
                       ></ck-editor>
                     </div>

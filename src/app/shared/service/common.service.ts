@@ -21,6 +21,8 @@ export class CommonService {
   private readonly _http: HttpClient;
   private base_url = environment.API_Base_URL;
   private userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  private accessToken = localStorage.getItem('accessToken');
+  private refreshToken = localStorage.getItem('refreshToken');
 
   constructor(
     public error: CommonErrorService,
@@ -28,10 +30,9 @@ export class CommonService {
     private http: HttpClient
   ) {}
 
-  getTocket() {
-    // console.log('tocket', this.userInfo.accessToken);
-
-    if (this.userInfo) return this.userInfo.accessToken;
+  public getToken(): string {
+    console.log('tocken', this.accessToken);
+    if (this.accessToken) return this.accessToken;
     else return '';
   }
 
@@ -50,7 +51,7 @@ export class CommonService {
     this.error.clearError();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + this.getTocket(),
+      // Authorization: 'Bearer ' + this.getTocket(),
     });
     return this.http
       .post(this.base_url + url, JSON.stringify(body), { headers: headers })
@@ -64,7 +65,7 @@ export class CommonService {
     this.error.clearError();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + this.getTocket(),
+      // Authorization: 'Bearer ' + this.getTocket(),
     });
 
     return this.http
@@ -92,7 +93,7 @@ export class CommonService {
     this.error.clearError();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + this.getTocket(),
+      // Authorization: 'Bearer ' + this.getTocket(),
     });
     return this.http
       .delete(this.base_url + url, { headers: headers })

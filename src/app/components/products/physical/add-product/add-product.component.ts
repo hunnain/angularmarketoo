@@ -35,6 +35,7 @@ export class AddProductComponent implements OnInit {
   public loading: boolean = false;
   public productForm: FormGroup;
   public counter: number = 1;
+  public productWishImages: Array<string> = [];
   public sizeImg: string = 'assets/images/user.png';
   public url = [
     {
@@ -58,7 +59,7 @@ export class AddProductComponent implements OnInit {
   public paymentOptions: Array<Select2OptionData>;
   public paymentConfig: Options;
   public closeResult: string;
-
+  public user = JSON.parse(localStorage.getItem('userInfo'));
   public mainCategories = MainCategories;
   public colorOptions = ColorOptions;
 
@@ -228,6 +229,7 @@ export class AddProductComponent implements OnInit {
     this.modalService.dismissAll('close');
   }
 
+  imgs = [];
   //FileUpload
   readUrl(event: any, i) {
     if (event.target.files.length === 0) return;
@@ -240,7 +242,16 @@ export class AddProductComponent implements OnInit {
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (_event) => {
-      this.url[i].img = reader.result.toString();
+      let img = reader.result.toString();
+      let base = reader.result.toString();
+      console.log(base);
+      
+      this.url[i].img = base;
+      this.productWishImages[i] = base;
+      let splited = img.split('base64,');
+      let byteImg = splited[1];
+      console.log(splited);
+      this.imgs[i] = byteImg;
     };
   }
 
@@ -256,7 +267,13 @@ export class AddProductComponent implements OnInit {
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (_event) => {
-      this.sizeImg = reader.result.toString();
+      // this.sizeImg = reader.result.toString();
+      let base = reader.result.toString();
+      // this.url[i].img = base;
+      // this.productWishImages[i] = base;
+      let splited = base.split('base64,');
+      let byteImg = splited[1];
+      this.sizeImg = byteImg;
     };
   }
 
@@ -294,13 +311,17 @@ export class AddProductComponent implements OnInit {
       ...temp,
       subCategory: temp.sub_category,
       quantity: this.counter,
-
-      // images: this.url,
+      images: this.imgs,
+      AvailableSizes: temp.sizes,
+      Description: temp.description,
+      CustomSizeImage: this.sizeImg,
+      SellerUuid: this.user.sellerUuid,
     };
     console.log(data);
     this.loading = true;
     this.productService.addProduct(data).subscribe(
       (res) => {
+        this.loading = false;
         console.log(res, 'success');
       },
       (error) => {
