@@ -55,11 +55,13 @@
                                 <select class="form-control digits" data-toggle="modal" style="max-width:200px;display: inline;" 
                                 (ngModelChange)="openChangeStatusModal($event,statusWarning)" 
                                 [(ngModel)]="productStatus">
-                                    <option value="1">In Progress</option>
-                                    <option value="2">Canceled</option>
-                                    <option value="3">Support</option>
-                                    <option value="4">Finished</option>
-                                    <option value="5">Rejected</option>
+                                    <option value="1">Confirming Order</option>
+                                    <option value="2">Order Confirmed</option>
+                                    <option value="3">Shipped</option>
+                                    <option value="4">Delivered</option>
+                                    <option value="5">Processing Refund</option>
+                                    <option value="6">Refunded</option>
+                                    <option value="5">Out Of Stock</option>
                                 </select>
                             </p>
                         </div>
