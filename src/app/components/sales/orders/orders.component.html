@@ -23,19 +23,32 @@
               [rowHeight]="'auto'"
               [limit]="5"
             >
-              <ngx-datatable-column prop="order id"></ngx-datatable-column>
-              <ngx-datatable-column name="Product"></ngx-datatable-column>
+              <ngx-datatable-column 
+              name='{{ "ordersmanagement_orderid" | translate }}'
+              prop="order id"></ngx-datatable-column>
+              <ngx-datatable-column 
+              name='{{ "ordersmanagement_product" | translate }}'
+              prop="product"></ngx-datatable-column>
               <ngx-datatable-column
+              name='{{ "ordersmanagement_paymentstatus" | translate }}'
                 prop="payment status"
               ></ngx-datatable-column>
               <ngx-datatable-column
+                name='{{ "ordersmanagement_paymentmethod" | translate }}'
                 prop="paymeny method"
               ></ngx-datatable-column>
-              <ngx-datatable-column prop="order status"></ngx-datatable-column>
-              <ngx-datatable-column name="Date"></ngx-datatable-column>
-              <ngx-datatable-column name="Total"></ngx-datatable-column>
+              <ngx-datatable-column 
+              name='{{ "ordersmanagement_orderstatus" | translate }}'
+              prop="order status"></ngx-datatable-column>
+              <ngx-datatable-column 
+              name='{{ "ordersmanagement_orderdate" | translate }}'
+              prop="date"></ngx-datatable-column>
+              <ngx-datatable-column 
+              name='{{ "ordersmanagement_total" | translate }}'
+              name="total"></ngx-datatable-column>
               <ngx-datatable-column
-                name="Action"
+              name='{{ "ordersmanagement_action" | translate }}'
+                prpp="action"
                 sortable="false"
                 prop="order id"
               >

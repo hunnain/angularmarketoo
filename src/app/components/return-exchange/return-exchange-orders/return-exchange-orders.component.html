@@ -11,12 +11,12 @@
                         <ngx-datatable class="bootstrap" [rows]="order" [columnMode]="'force'" [headerHeight]="50"
                             [footerHeight]="50" [rowHeight]="'auto'" [limit]="5">
                             <!-- <ngx-datatable-column prop="order id"></ngx-datatable-column> -->
-                            <ngx-datatable-column name="Products"></ngx-datatable-column>
-                            <ngx-datatable-column prop="type"></ngx-datatable-column>
-                            <ngx-datatable-column name="Requested on" prop="requested_on"></ngx-datatable-column>
-                            <ngx-datatable-column name="Amount" prop="total"></ngx-datatable-column>
-                            <ngx-datatable-column name="Remarks" prop="remarks"></ngx-datatable-column>
-                            <ngx-datatable-column name="Action" sortable="false" prop="order id">
+                            <ngx-datatable-column name='{{ "returnexchange_products" | translate }}' prop="products"></ngx-datatable-column>
+                            <ngx-datatable-column name='{{ "returnexchange_type" | translate }}' prop="type"></ngx-datatable-column>
+                            <ngx-datatable-column name='{{ "returnexchange_requestedon" | translate }}' prop="requested_on"></ngx-datatable-column>
+                            <ngx-datatable-column name='{{ "returnexchange_amount" | translate }}' prop="total"></ngx-datatable-column>
+                            <ngx-datatable-column name='{{ "returnexchange_remarks" | translate }}' prop="remarks"></ngx-datatable-column>
+                            <ngx-datatable-column name='{{ "returnexchange_action" | translate }}' sortable="false" prop="order id">
                                 <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                                     <span style="color:#f88379;cursor: pointer;">
                                         <i class="fa fa-eye" (click)='onSelectRow(value)'></i>

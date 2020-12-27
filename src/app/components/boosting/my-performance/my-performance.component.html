@@ -3,8 +3,8 @@
         <div class="card main-container main-heading">
             <div class="card-header">
                 <div class="row">
-                    <h5 class="col-12 col-md-6">My Ads Performance</h5>
-                    <span class="col-12 col-md-6" style="text-align: right;">Last 30 days</span>
+                    <h5 class="col-12 col-md-6">{{ "Boosting_performance" | translate }}</h5>
+                    <span class="col-12 col-md-6" style="text-align: right;">{{ "Boosting_last30days" | translate }}</span>
                 </div>
             </div>
         </div>
@@ -32,9 +32,9 @@
                     </h5>
                     <span class="col-12 col-sm-2" style="text-align: right; margin-bottom:20px;">
                         <select class="form-control digits" [(ngModel)]="prodSortFilter">
-                            <option value="1">Daily</option>
-                            <option value="2">Weekly</option>
-                            <option value="2">Monthly</option>
+                            <option value="1">{{ "Boosting_result_daily" | translate }}</option>
+                            <option value="2">{{ "Boosting_result_weekly" | translate }}</option>
+                            <option value="2">{{ "Boosting_result_monthly" | translate }}</option>
                         </select>
                     </span>
                 </div>
@@ -49,9 +49,9 @@
                             </div>
                         </div>
                         <div class="col-12 col-sm-9">
-                            <p>Max Click Rate Generated:<b>123</b></p>
-                            <p>Current Estimated Item Ad Rank:<b>4</b></p>
-                            <p>Current Status:
+                            <p>{{ "Boosting_result_maxclickrategenerated" | translate }}:<b>123</b></p>
+                            <p>{{ "Boosting_result_currentitemadrank" | translate }}<b>4</b></p>
+                            <p>{{ "Boosting_result_currentstatus" | translate }}
                                 <select class="form-control digits" data-toggle="modal" style="max-width:200px;display: inline;" 
                                 (ngModelChange)="openChangeStatusModal($event,statusWarning)" 
                                 [(ngModel)]="productStatus">
@@ -82,14 +82,14 @@
             <div class="card-header">
                 <div class="row">
                     <span class="col-12 col-sm-8" style="display: flex;align-items: center;justify-content: flex-start;">
-                        <h5>Top Performing Groups</h5>
+                        <h5>{{ "Boosting_result_topperforminggroup" | translate }}</h5>
                         <app-feather-icons [icon]="'help-circle'" class="font-primary" style="color: #000 !important;margin-left:5px"></app-feather-icons>
                     </span>
                     <span class="col-12 col-sm-4" style="text-align: right;">
                         <select class="form-control digits" [(ngModel)]="prodSortFilter">
-                            <option value="1">Daily</option>
-                            <option value="2">Weekly</option>
-                            <option value="2">Monthly</option>
+                            <option value="1">{{ "Boosting_result_daily" | translate }}</option>
+                            <option value="2">{{ "Boosting_result_weekly" | translate }}</option>
+                            <option value="2">{{ "Boosting_result_monthly" | translate }}</option>
                         </select>    
                     </span>
                 </div>
@@ -108,14 +108,14 @@
             <div class="card-header">
                 <div class="row">
                     <span class="col-12 col-sm-8" style="display: flex;align-items: center;justify-content: flex-start;">
-                        <h5 >Top Trending Groups</h5>
+                        <h5 >{{ "Boosting_result_toptrendinggroup" | translate }}</h5>
                         <app-feather-icons [icon]="'help-circle'" class="font-primary" style="color: #000 !important;margin-left:5px"></app-feather-icons>
                     </span>
                     <span class="col-12 col-sm-4" style="text-align: right;">
                         <select class="form-control digits" [(ngModel)]="prodSortFilter">
-                            <option value="1">Daily</option>
-                            <option value="2">Weekly</option>
-                            <option value="2">Monthly</option>
+                            <option value="1">{{ "Boosting_result_daily" | translate }}</option>
+                            <option value="2">{{ "Boosting_result_weekly" | translate }}</option>
+                            <option value="2">{{ "Boosting_result_monthly" | translate }}</option>
                         </select>    
                     </span>
                 </div>
@@ -123,7 +123,7 @@
             <div class="card-body">
                 <ngb-tabset class="tab-coupon mb-0">
                     <ngb-tab>
-                        <ng-template ngbTabTitle><i class="icon-stats-down mr-2"></i>Trending Down</ng-template>
+                        <ng-template ngbTabTitle><i class="icon-stats-down mr-2"></i>{{ "Boosting_result_trendingdown" | translate }}</ng-template>
                         <ng-template ngbTabContent>
                             <div class="market-chart">
                                 <x-chartist class="board-chart ct-golden-section" [data]="chart3.data" [type]="chart3.type"
@@ -133,7 +133,7 @@
                         </ng-template>
                     </ngb-tab>
                     <ngb-tab>
-                        <ng-template ngbTabTitle><i class="icon-stats-up mr-2"></i>Trending Up
+                        <ng-template ngbTabTitle><i class="icon-stats-up mr-2"></i>{{ "Boosting_result_trendingup" | translate }}
                             <ng-template ngbTabContent>
                                 <div class="market-chart">
                                     <x-chartist class="board-chart ct-golden-section" [data]="chart3.data" [type]="chart3.type"
