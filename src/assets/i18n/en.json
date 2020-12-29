@@ -245,6 +245,17 @@
   "prod_close": "Close",
   "prod_discard": "Discard",
 
+  "Red":"Red",
+  "Orange":"Orange",
+  "Yellow":"Yellow",
+  "Green":"Green",
+  "Blue":"Blue",
+  "Indigo":"Indigo",
+  "Violet":"Violet",
+  "Grey":"Grey",
+  "Black":"Black",
+  "White":"White",
+
   "manage_order": "Manage Order",
 
   "all_coupons": "All Coupons",

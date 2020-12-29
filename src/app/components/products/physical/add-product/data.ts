@@ -23,7 +23,7 @@ export const ColorOptions = [
   { id: 'green', name: 'Green' },
   { id: 'blue', name: 'Blue' },
   { id: 'indigo', name: 'Indigo' },
-  { id: 'voilet', name: 'violet' },
+  { id: 'voilet', name: 'Violet' },
   { id: 'grey', name: 'Grey' },
   { id: 'black', name: 'Black' },
   { id: 'white', name: 'White' },
