@@ -4,6 +4,7 @@ import { CommonService } from 'src/app/shared/service/common.service';
 import { CommonErrorService } from 'src/app/shared/service/error/common-error.service';
 import { Router } from '@angular/router';
 import { CouponService } from 'src/app/shared/service/coupon/coupon.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-list-coupon',
@@ -16,7 +17,7 @@ export class ListCouponComponent implements OnInit {
   public selected = [];
   public loading:boolean = false;
 
-  constructor(private router: Router, private couponService: CouponService) {
+  constructor(private router: Router, private couponService: CouponService, public translate: TranslateService) {
     this.digital_categories = listCouponsDB.list_coupons;
   }
 

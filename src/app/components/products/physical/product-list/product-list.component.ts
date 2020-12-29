@@ -4,6 +4,7 @@ import { productDB } from 'src/app/shared/tables/product-list';
 import { Select2OptionData } from 'ng-select2';
 import { Options } from 'select2';
 import { ProductService } from 'src/app/shared/service/product-service/product.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-list',
@@ -17,9 +18,15 @@ export class ProductListComponent implements OnInit {
   public product_list = [];
   public filters = '';
 
-  constructor(private productService: ProductService) {
+  public selectedLang:string = 'en';
+  constructor(private productService: ProductService,private translate: TranslateService) {
     this.product_list = productDB.product;
-
+    this.selectedLang = this.translate.currentLang;
+    this.translate.onLangChange.subscribe(res => {
+      this.selectedLang = res.lang
+      this.setFilters(res.lang)
+    });
+    
     this.filterConfig = {
       multiple: true,
       theme: 'classic',
@@ -27,17 +34,17 @@ export class ProductListComponent implements OnInit {
       width: '100%',
     };
 
-    this.filterOptions = [
-      { id: 'ac', text: 'All Categories' },
-      { id: 'sc', text: 'Sub Categories' },
-      { id: 'ec', text: 'Extended Categories' },
-      { id: 'mdp', text: 'Marked Down Products' },
-      { id: 'is', text: 'International Shipping' },
-      { id: 'ls', text: 'Local Shipping' },
-      { id: 'nu', text: 'Newest Uploads' },
-      { id: 'l-to-h', text: 'Price Low to High' },
-      { id: 'h-to-l', text: 'Price High to Low' },
-    ];
+      this.filterOptions = [
+        { id: 'ac', text:this.selectedLang === 'en'?  'All Categories':'所有類別' },
+        { id: 'sc', text:this.selectedLang === 'en'? 'Sub Categories': '次煩別' },
+        { id: 'ec', text:this.selectedLang === 'en'? 'Extended Categories':'次組別' },
+        { id: 'mdp', text:this.selectedLang === 'en'? 'Marked Down Products': '減價貨品' },
+        { id: 'is', text:this.selectedLang === 'en'? 'International Shipping': '國際郵寄' },
+        { id: 'ls', text:this.selectedLang === 'en'? 'Local Shipping': '本地郵寄' },
+        { id: 'nu', text:this.selectedLang === 'en'? 'Newest Uploads': '最新上架' },
+        { id: 'l-to-h', text:this.selectedLang === 'en'? 'Price Low to High' : '價格由低至高' },
+        { id: 'h-to-l', text:this.selectedLang === 'en'? 'Price High to Low': '價格由高至低' },
+      ];
   }
 
   pageNumber = 1;
@@ -45,6 +52,20 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     this.getProducts();
+  }
+
+  setFilters(lang){
+    this.filterOptions = [
+      { id: 'ac', text:lang === 'en'?  'All Categories':'所有類別' },
+      { id: 'sc', text:lang === 'en'? 'Sub Categories': '次煩別' },
+      { id: 'ec', text:lang === 'en'? 'Extended Categories':'次組別' },
+      { id: 'mdp', text:lang === 'en'? 'Marked Down Products': '減價貨品' },
+      { id: 'is', text:lang === 'en'? 'International Shipping': '國際郵寄' },
+      { id: 'ls', text:lang === 'en'? 'Local Shipping': '本地郵寄' },
+      { id: 'nu', text:lang === 'en'? 'Newest Uploads': '最新上架' },
+      { id: 'l-to-h', text:lang === 'en'? 'Price Low to High' : '價格由低至高' },
+      { id: 'h-to-l', text:lang === 'en'? 'Price High to Low': '價格由高至低' },
+    ];
   }
 
   getProducts() {
