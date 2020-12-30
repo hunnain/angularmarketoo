@@ -4,7 +4,7 @@
       <div class="col-xl-8">
         <div class="product-page-details product-right mb-0">
           <div class="row">
-            <h2 class="col-12 col-md-6">Order Details</h2>
+            <h2 class="col-12 col-md-6">{{ "ordermanagement_orderdetail" | translate }}</h2>
             <div class="col-12 col-md-6" style="text-align: right">
               <span
                 style="color: #36f; cursor: pointer"
@@ -19,78 +19,78 @@
                     [icon]="'file-text'"
                     class="font-primary"
                   ></app-feather-icons>
-                  <span>Invoice</span>
+                  <span>{{ "ordermanagement_orderinvoice" | translate }}</span>
                 </span>
               </span>
             </div>
           </div>
           <hr />
           <div class="container-gap">
-            <p class="mb-0">
+            <!-- <p class="mb-0">
               Sed ut perspiciatis, unde omnis iste natus error sit voluptatem
               accusantium doloremque laudantium, totam rem aperiam eaque ipsa,
               quae ab illo inventore veritatis et quasi architecto beatae vitae
               dicta sunt, explicabo. Nemo enim ipsam voluptatem,
-            </p>
+            </p> -->
 
             <div style="margin-top: 30px">
-              <h4 class="product-title">Customer</h4>
+              <h4 class="product-title">{{ "ordermanagement_ordercustomer" | translate }}</h4>
               <hr />
               <div class="payment-section" style="margin-top: 20px">
                 <div class="font-size-13">
-                  <strong>Name</strong>: {{ dummyData?.user_info?.name }}
+                  <strong>{{ "ordermanagement_ordercustomername" | translate }}</strong>: {{ dummyData?.user_info?.name }}
                 </div>
                 <div class="font-size-13">
-                  <strong>Contact No</strong>:
+                  <strong>{{ "ordermanagement_ordercustomercontactno" | translate }}</strong>:
                   {{ dummyData?.user_info?.contact }}
                 </div>
               </div>
               <div style="margin-top: 20px" class="font-size-13">
-                <strong>Address</strong>: {{ dummyData?.user_info?.address }}
+                <strong>{{ "ordermanagement_ordercustomeraddress" | translate }}</strong>: {{ dummyData?.user_info?.address }}
               </div>
             </div>
           </div>
 
           <div class="container-gap">
-            <h4 class="product-title">Payment</h4>
+            <h4 class="product-title">{{ "ordermanagement_ordercustomerpayment" | translate }}</h4>
             <hr />
             <div class="payment-section">
               <div class="font-size-13">
-                <strong>Status</strong>:
+                <strong>{{ "ordermanagement_ordercustomerstatus" | translate }}</strong>:
                 <span class="badge badge-secondary">{{
                   dummyData.payment_status
                 }}</span>
               </div>
               <div class="font-size-13">
-                <strong>Method</strong>:
+                <strong>{{ "ordermanagement_ordercustomermethod" | translate }}</strong>:
                 <span class="badge badge-secondary">{{
                   dummyData.payment_method
                 }}</span>
               </div>
               <div class="font-size-13">
-                <strong>Invoice No</strong>: {{ dummyData.invoice_no }}
+                <strong>{{ "ordermanagement_ordercustomerinvoiceno" | translate }}</strong>: {{ dummyData.invoice_no }}
               </div>
               <div class="font-size-13">
-                <strong>Shipment Method</strong>:
+                <strong>{{ "ordermanagement_ordercustomershippingmethod" | translate }}</strong>:
                 {{ dummyData.shipment_method }}
                 <span
                   class="change-btn"
                   data-toggle="modal"
                   (click)="changeShipmentMethod(Shipment)"
-                  >Change</span
+                  >{{ "ordermanagement_ordercustomershippingmethodchange" | translate }}</span
                 >
               </div>
             </div>
+            <!-- <div style="margin-top: 20px" class="font-size-13">
+              <strong>Billing Address {{ "ordermanagement_ordercustomershippingmethodchange" | translate }}</strong>: {{ dummyData.billing_address }}
+            </div> -->
             <div style="margin-top: 20px" class="font-size-13">
-              <strong>Billing Address</strong>: {{ dummyData.billing_address }}
-            </div>
-            <div style="margin-top: 20px" class="font-size-13">
-              <strong>Shipping Address</strong>:
+              <strong>{{ "ordermanagement_ordercustomershippingaddress" | translate }}</strong>:
               {{ dummyData.shipping_address }}
             </div>
           </div>
           <div class="container-gap">
-            <h4 class="product-title">Products</h4>
+            <h4 class="product-title">{{ "ordermanagement_ordercustomerproducts" | translate }}</h4>
             <hr />
             <div>
               <ul class="list-inline">
@@ -108,13 +108,13 @@
       <div class="col-xl-4">
         <div class="order-summary">
           <div class="container-gap">
-            <h4>Order Summary</h4>
+            <h4>{{ "ordermanagement_ordercustomersummary" | translate }}</h4>
             <hr />
             <div style="margin-top: 20px" class="font-size-13">
-              <strong>Date</strong>: {{ dummyData.date }}
+              <strong>{{ "ordermanagement_ordercustomersummarydate" | translate }}</strong>: {{ dummyData.date }}
             </div>
             <div style="margin-top: 20px" class="font-size-13">
-              <strong>Order Status</strong>:
+              <strong>{{ "ordermanagement_ordercustomersummaryorderstatus" | translate }}</strong>:
               <span class="badge badge-success">{{
                 dummyData.order_status
               }}</span>
@@ -122,17 +122,17 @@
                 class="change-btn"
                 data-toggle="modal"
                 (click)="changeStatus(Status)"
-                >Change</span
+                >{{ "ordermanagement_ordercustomersummaryorderstatuschange" | translate }}</span
               >
             </div>
             <div style="margin-top: 20px" class="font-size-13">
-              <strong>Total</strong>:
+              <strong>{{ "ordermanagement_ordercustomersummaryorderstotals" | translate }}</strong>:
               <h5 class="d-inline">${{ dummyData.total }}</h5>
               <span
                 class="change-btn"
                 data-toggle="modal"
                 (click)="changeTotal(Total)"
-                >Change</span
+                >{{ "ordermanagement_ordercustomersummaryorderstotalschange" | translate }}</span
               >
             </div>
             <div
