@@ -16,6 +16,7 @@ import { NavService } from './service/nav.service';
 import { WINDOW_PROVIDERS } from './service/windows.service';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.
     ContentLayoutComponent,
     BreadcrumbComponent,
     RightSidebarComponent,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +45,7 @@ import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.
     ToggleFullscreenDirective,
     RightSidebarComponent,
     TranslateModule,
+    LoaderComponent,
   ],
 })
 export class SharedModule {}
