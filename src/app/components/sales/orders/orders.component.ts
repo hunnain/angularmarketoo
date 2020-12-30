@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { DatatableComponent } from "@swimlane/ngx-datatable";
 import { orderDB } from "../../../shared/tables/order-list";
 @Component({
@@ -12,7 +13,7 @@ export class OrdersComponent implements OnInit {
   public temp = [];
 
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
-  constructor(private router: Router) {
+  constructor(private router: Router, public translate: TranslateService) {
     this.order = orderDB.list_order;
   }
 

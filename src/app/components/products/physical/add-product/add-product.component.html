@@ -162,7 +162,7 @@
                         *ngFor="let cate of mainCategories"
                         [value]="cate.id"
                       >
-                        {{ cate.name }}
+                        {{ cate.name | translate }}
                       </option>
                     </select>
                   </div>
@@ -183,13 +183,13 @@
                         "
                         [value]="subCate.id"
                       >
-                        {{ subCate.name }}
+                        {{ subCate.name | translate }}
                       </option>
                     </select>
                   </div>
                   <div class="form-group row" *ngIf="sub_category.value">
                     <label for="ext-cate" class="col-xl-3 col-sm-4 mb-0"
-                      >{{ "prod_ex_sub_category" | translate }}
+                      >{{ "cop_ex_sub_cate" | translate }}
                     </label>
                     <select
                       class="form-control digits col-xl-8 col-sm-7"
@@ -204,7 +204,7 @@
                         "
                         [value]="extndCate.id"
                       >
-                        {{ extndCate.name }}
+                        {{ extndCate.name | translate }}
                       </option>
                     </select>
                   </div>
@@ -402,7 +402,7 @@
                         *ngFor="let color of colorOptions"
                         [value]="color.id"
                       >
-                        {{ color.name }}
+                        {{ color.name | translate }}
                       </option>
                     </select>
                   </div>

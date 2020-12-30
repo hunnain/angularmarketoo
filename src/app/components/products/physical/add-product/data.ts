@@ -1,10 +1,10 @@
 export const MainCategories = [
   { id: 'acces', name: 'Accessories' },
-  { id: 'cloth', name: 'Clothing' },
+  { id: 'cloth', name: 'clothing' },
   { id: 'stat', name: 'Stationery' },
   { id: 'dn', name: 'Daily Necessities' },
-  { id: 'hr', name: 'Handbag/ Rucksack' },
-  { id: 'sc', name: 'Skin Care' },
+  { id: 'hr', name: 'handbag' },
+  { id: 'sc', name: 'skin-care' },
   { id: 'le', name: 'Leisure Experience' },
 ];
 export const PaymentOptions = [
@@ -23,7 +23,7 @@ export const ColorOptions = [
   { id: 'green', name: 'Green' },
   { id: 'blue', name: 'Blue' },
   { id: 'indigo', name: 'Indigo' },
-  { id: 'voilet', name: 'violet' },
+  { id: 'voilet', name: 'Violet' },
   { id: 'grey', name: 'Grey' },
   { id: 'black', name: 'Black' },
   { id: 'white', name: 'White' },
@@ -119,7 +119,7 @@ export const ExtendedCategories = {
   ],
   'cloth-cc': [],
   'stat-pp': [
-    { id: 'stat-pp-pc', name: '(Post Cards) 148mm x 110mm' },
+    { id: 'stat-pp-pc', name: 'Post Cards' },
     { id: 'stat-pp-s', name: 'Stickers' },
     { id: 'stat-pp-t', name: 'Tapes' },
     { id: 'stat-pp-pstg', name: 'Postage' },

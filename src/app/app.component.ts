@@ -19,6 +19,7 @@ export class AppComponent {
     if (isPlatformBrowser(this.platformId)) {
       translate.setDefaultLang('en');
       translate.addLangs(['en', 'zh-Hant']);
+      translate.use('en');
     }
   }
 }
