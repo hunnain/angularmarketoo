@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Questions } from './ads-questions';
+import { EnglishQuestions } from './ads-questionsenglish';
+import { ChineseQuestions } from './ads-questionschinese';
+import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-bidding',
@@ -8,9 +12,16 @@ import { Questions } from './ads-questions';
   styleUrls: ['./bidding.component.scss']
 })
 export class BiddingComponent implements OnInit {
-  public questions = Questions
+  public questions;
   public tabId;
-  constructor() {
+  public selectedLang: string = 'en'
+  constructor(private translate: TranslateService) {
+    this.selectedLang = this.translate.currentLang;
+    this.questions = this.selectedLang === 'en' ? EnglishQuestions : ChineseQuestions
+    this.translate.onLangChange.subscribe(res => {
+      this.selectedLang = res.lang;
+      this.questions = this.selectedLang === 'en' ? EnglishQuestions : ChineseQuestions
+    })
   }
 
   ngOnInit() { }

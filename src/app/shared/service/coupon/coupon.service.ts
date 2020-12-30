@@ -8,8 +8,8 @@ export class CouponService {
 
   constructor(private commonService: CommonService) {}
 
-  getCoupon(id,query) {
-    return this.commonService.get(`coupon/GetCouponBySeller/${id}?${query}`);
+  getCoupon(query) {
+    return this.commonService.get(`coupon/GetCouponBySeller?${query}`);
   }
 
   addCoupon(data) {

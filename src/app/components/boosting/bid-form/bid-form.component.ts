@@ -4,6 +4,7 @@ import { Select2OptionData } from 'ng-select2';
 import { Options, LabelType } from 'ng5-slider';
 import { LabelOptions } from '../../products/physical/add-product/data';
 import { Options as Opt } from 'select2';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var $;
 
@@ -67,8 +68,15 @@ export class BidFormComponent implements OnInit {
     },
   };
 
-  constructor(private modalService: NgbModal) {
+
+  public selectedLang:string = 'en';
+  constructor(private modalService: NgbModal,private translate: TranslateService) {
     let self = this;
+    this.selectedLang = this.translate.currentLang;
+    this.translate.onLangChange.subscribe(res => {
+      this.selectedLang = res.lang
+      this.keyWords = LabelOptions(this.selectedLang);
+    })
     this.productConfig = {
       multiple: true,
       theme: 'classic',
@@ -78,7 +86,7 @@ export class BidFormComponent implements OnInit {
       // templateSelection: this.templateSelection
     };
     // this.keyWord;
-    this.keyWords = LabelOptions;
+    this.keyWords = LabelOptions(this.selectedLang);
     this.labelConfig = {
       multiple: true,
       theme: 'classic',

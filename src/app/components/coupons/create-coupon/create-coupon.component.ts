@@ -63,7 +63,7 @@ export class CreateCouponComponent implements OnInit {
       CouponCode: ['',Validators.required],
       StartDate: [new Date(),Validators.required],
       EndDate: [new Date(),Validators.required],
-      AllowFreeShipping: [''],
+      AllowFreeShipping: [false],
       Quantity: [1,[Validators.required, Validators.pattern('^[1-9][0-9]*$')]],
       DiscountType: ['',Validators.required],
       PercentageDiscount: ['',[Validators.required,Validators.pattern('^[1-9][0-9]*$')]]
@@ -86,23 +86,41 @@ export class CreateCouponComponent implements OnInit {
 
   createCoupon(){
     console.log('general form', this.generalForm.value)
-    console.log('restrictionForm', this.restrictionForm.value)
+    // console.log('restrictionForm', this.restrictionForm.value)
     let data = {
       ...this.generalForm.value,
+      StartDate:this.formatDate(this.generalForm.value.StartDate),
+      EndDate:this.formatDate(this.generalForm.value.EndDate),
       ...this.restrictionForm.value
     }
-    // this.loading = true;
-    // this.couponService.addCoupon(data).subscribe(res => {
-    //   this.loading=false;
-    //   this.router.navigate(['/coupons/list-coupons'])
-    // },err => {
-    //   this.loading=false;
-    // })
+    this.loading = true;
+    console.log(data)
+    this.couponService.addCoupon(data).subscribe(res => {
+      this.loading=false;
+      this.router.navigate(['/coupons/list-coupons'])
+    },err => {
+      this.loading=false;
+    })
   }
 
   editCoupon(){
     console.log('edit general form', this.generalForm.value)
     console.log('edit restrictionForm', this.restrictionForm.value)
+  }
+
+
+  formatDate(date,inverse = false){
+    let newDate = inverse ? {} :new Date();
+    if(inverse){
+      let curr: Date = new Date(date);
+      newDate ={ year:curr.getFullYear(), month:curr.getMonth()+1, day:curr.getDate()};
+      return newDate;
+    }else{
+      let {year,month,day} = date;
+      newDate = new Date(year, month-1, day, 0, 0, 0, 0);
+      return newDate;
+    }
+
   }
 
 }

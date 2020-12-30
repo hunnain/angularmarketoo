@@ -31,15 +31,10 @@ export class ListCouponComponent implements OnInit {
    }
 
    fetchCoupons(){
-     let user = JSON.parse(localStorage.getItem('userInfo'));
-     console.log("user info---",user)
-     let sellerId="";
-     if(user){
-      sellerId = user['sellerUuid']
-     }
+     
      this.loading = true;
      let query = `PageSize=1&PageNumber=1`;
-     this.couponService.getCoupon(sellerId,query).subscribe(res => {
+     this.couponService.getCoupon(query).subscribe(res => {
         if(res){
           this.loading = false;
           console.log('coupon-res',res);

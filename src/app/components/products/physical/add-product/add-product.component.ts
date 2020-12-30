@@ -16,6 +16,7 @@ import {
 import { CommonService } from 'src/app/shared/service/common.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from 'src/app/shared/service/product-service/product.service';
+import { TranslateService } from '@ngx-translate/core';
 // var $;
 
 // $('.select2-no-results').click(function () {
@@ -86,13 +87,21 @@ export class AddProductComponent implements OnInit {
     return this.productForm.get('customDesign');
   }
 
+  public selectedLang:string = 'en';
   constructor(
     private fb: FormBuilder,
     private elementRef: ElementRef,
     private modalService: NgbModal,
-    private productService: ProductService
+    private productService: ProductService,
+    private translate: TranslateService
   ) {
     let self = this;
+    this.selectedLang = this.translate.currentLang;
+    this.translate.onLangChange.subscribe(res => {
+      this.selectedLang = res.lang
+      this.sizeOptions = SizeOptions(this.selectedLang);
+      this.labelOptions = LabelOptions(this.selectedLang);
+    })
 
     this.productForm = this.fb.group({
       name: [
@@ -137,8 +146,8 @@ export class AddProductComponent implements OnInit {
       // localShip: [true],
     });
 
-    this.sizeOptions = SizeOptions;
-    this.labelOptions = LabelOptions;
+    this.sizeOptions = SizeOptions(this.selectedLang);
+    this.labelOptions = LabelOptions(this.selectedLang);
     this.paymentOptions = PaymentOptions;
 
     this.labelConfig = {
