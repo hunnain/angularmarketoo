@@ -13,6 +13,10 @@
       </div>
     </div>
   </div>
+  
+  <div style="display: flex; align-items: center; justify-content: center">
+    <app-loader [loading]="loading"></app-loader>
+  </div>
   <div class="row products-admin ratio_asos">
     <div class="col-xl-3 col-sm-6" *ngFor="let product of product_list">
       <div class="card">
