@@ -169,6 +169,24 @@
                             placeholder="{{ 'email' | translate }}"
                             id="exampleInputEmail1"
                           />
+                          <div
+                            *ngIf="
+                              loginForm.controls.email.touched &&
+                              loginForm.controls.email.errors?.required
+                            "
+                            class="text text-danger"
+                          >
+                            {{ "email_req" | translate }}
+                          </div>
+                          <div
+                            *ngIf="
+                            loginForm.controls.email.touched &&
+                            loginForm.controls.email.errors?.pattern
+                            "
+                            class="text text-danger"
+                          >
+                            {{ "email_invalid" | translate }}
+                          </div>
                         </div>
                         <div class="form-group">
                           <input
@@ -179,6 +197,15 @@
                             class="form-control"
                             placeholder="{{ 'password' | translate }}"
                           />
+                          <div
+                            *ngIf="
+                              loginForm.controls.password.touched &&
+                              loginForm.controls.password.errors?.required
+                            "
+                            class="text text-danger"
+                          >
+                            {{ "password_req" | translate }}
+                          </div>
                         </div>
                         <div class="form-terms">
                           <div class="custom-control custom-checkbox mr-sm-2">
@@ -201,7 +228,7 @@
                         </div>
                         <div class="form-button">
                           <button
-                            [disabled]="loading"
+                            [disabled]="loginForm.invalid || loading"
                             (click)="onSubmit()"
                             class="btn btn-primary"
                             type="submit"

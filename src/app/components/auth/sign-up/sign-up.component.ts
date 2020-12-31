@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { AuthServiceService } from 'src/app/shared/service/auth-service/auth-service.service';
+import { CommonService } from 'src/app/shared/service/common.service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -40,9 +41,12 @@ export class SignUpComponent implements OnInit {
     private authService: AuthServiceService,
     private router: Router,
     private translate: TranslateService,
+    private cs: CommonService,
     @Inject(PLATFORM_ID) private platformId: Object,
-
     ) {
+      this.cs.isLoading.subscribe(loading => {
+        this.loading = loading;
+    })
     this.sellerForm = this.fb.group({
       chineseFname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       englishFname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
@@ -133,11 +137,9 @@ export class SignUpComponent implements OnInit {
   }
 
   createSeller(){
-    console.log('seller info',this.sellerForm.value)
-    console.log('brand info',this.brandForm.value)
-    console.log('images',this.url)
-    console.log('productWishImages',this.productWishImages)
-    console.log('byteImages',this.imgs)
+    // console.log('seller info',this.sellerForm.value)
+    // console.log('brand info',this.brandForm.value)
+    // console.log('byteImages',this.imgs)
 
     let data = {
       ...this.sellerForm.value,
@@ -146,14 +148,18 @@ export class SignUpComponent implements OnInit {
     this.loading = true;
     this.authService.signUp(data).subscribe(
       (res) => {
-        console.log(res, 'response');
-        this.loading = false;
-        this.router.navigate(['/login'])
-      },
-      (error) => {
-        console.log(error, 'error');
-        this.loading = false;
+        if(res){
+          // console.log(res, 'response');
+          this.cs.isLoading.next(false)
+          this.loading = false;
+          this.router.navigate(['/login'])
+        }
       }
+      // ,
+      // (error) => {
+      //   console.log(error, 'error');
+      //   this.loading = false;
+      // }
     );
   }
 

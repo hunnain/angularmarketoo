@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDateStruct, NgbDate, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { CommonService } from 'src/app/shared/service/common.service';
 import { CouponService } from 'src/app/shared/service/coupon/coupon.service';
 import { ExtendedCategories, MainCategories, SubCategories } from '../../products/physical/add-product/data';
 
@@ -39,7 +40,8 @@ export class CreateCouponComponent implements OnInit {
   }
   constructor(
     private formBuilder: FormBuilder,
-    private couponService: CouponService, 
+    private couponService: CouponService,
+    private cs: CommonService, 
     private calendar: NgbCalendar,
     private activeRoute: ActivatedRoute,
     private router: Router
@@ -50,7 +52,22 @@ export class CreateCouponComponent implements OnInit {
     if(this.activeRoute.params['value'].id){
       this.selectedId = this.activeRoute.params['value'].id
       this.isEdit = true
+      this.fetchCouponByCode(this.selectedId);
     }
+
+    this.cs.isLoading.subscribe(loading => {
+      this.loading = loading;
+  })
+  }
+
+  fetchCouponByCode(code){
+    this.couponService.getCouponByCode(code).subscribe(res => {
+      if(res){
+        console.log("fetch res---",res)
+        const { couponTitle,CouponCode,StartDate,EndDate,AllowFreeShipping,Quantity,DiscountType,PercentageDiscount } = res;
+        // this.generalForm
+      }
+    })
   }
 
   selectToday() {
@@ -96,11 +113,16 @@ export class CreateCouponComponent implements OnInit {
     this.loading = true;
     console.log(data)
     this.couponService.addCoupon(data).subscribe(res => {
-      this.loading=false;
-      this.router.navigate(['/coupons/list-coupons'])
-    },err => {
-      this.loading=false;
-    })
+      if(res){
+        this.cs.isLoading.next(false)
+        this.loading=false;
+        this.router.navigate(['/coupons/list-coupons'])
+      }
+    }
+    // ,err => {
+    //   this.loading=false;
+    // }
+    )
   }
 
   editCoupon(){

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { listCouponsDB } from 'src/app/shared/tables/list-coupon';
 import { CommonService } from 'src/app/shared/service/common.service';
-import { CommonErrorService } from 'src/app/shared/service/error/common-error.service';
 import { Router } from '@angular/router';
 import { CouponService } from 'src/app/shared/service/coupon/coupon.service';
 import { TranslateService } from '@ngx-translate/core';
+import { AllCoupons } from '../../../shared/interfaces/coupon/coupon'
+
 
 @Component({
   selector: 'app-list-coupon',
@@ -17,8 +18,15 @@ export class ListCouponComponent implements OnInit {
   public selected = [];
   public loading:boolean = false;
 
-  constructor(private router: Router, private couponService: CouponService, public translate: TranslateService) {
-    this.digital_categories = listCouponsDB.list_coupons;
+  constructor(
+    private router: Router, 
+    private couponService: CouponService, 
+    public translate: TranslateService,
+    private cs: CommonService) {
+    // this.digital_categories = listCouponsDB.list_coupons;
+    this.cs.isLoading.subscribe(loading => {
+      this.loading = loading;
+  })
   }
 
   onSelect({ selected }) {
@@ -36,12 +44,16 @@ export class ListCouponComponent implements OnInit {
      let query = `PageSize=1&PageNumber=1`;
      this.couponService.getCoupon(query).subscribe(res => {
         if(res){
+          this.cs.isLoading.next(false)
           this.loading = false;
+          this.digital_categories = res;
           console.log('coupon-res',res);
         }
-     },err => {
-      this.loading = false;
-     })
+     }
+    //  ,err => {
+    //   this.loading = false;
+    //  }
+    )
    }
 
    onEdit(val){

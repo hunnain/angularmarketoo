@@ -12,6 +12,10 @@ export class CouponService {
     return this.commonService.get(`coupon/GetCouponBySeller?${query}`);
   }
 
+  getCouponByCode(code) {
+    return this.commonService.get(`coupon/GetCouponByCode/${code}`);
+  }
+
   addCoupon(data) {
     return this.commonService.post('coupon', data);
   }

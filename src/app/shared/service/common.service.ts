@@ -6,7 +6,7 @@ import 'rxjs/add/operator/catch';
 import { CommonErrorService } from './error/common-error.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 const httpOptions = {
@@ -24,6 +24,9 @@ export class CommonService {
   private accessToken = localStorage.getItem('accessToken');
   private refreshToken = localStorage.getItem('refreshToken');
 
+  public isLoading: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+
   constructor(
     public error: CommonErrorService,
     // public auth: MsalService,
@@ -31,7 +34,8 @@ export class CommonService {
   ) {}
 
   public getToken(): string {
-    console.log('tocken', this.accessToken);
+    // console.log('tocken', this.accessToken);
+    this.accessToken = localStorage.getItem('accessToken');
     if (this.accessToken) return this.accessToken;
     else return '';
   }
@@ -39,7 +43,7 @@ export class CommonService {
   httpErrorHandler(error: any) {
     console.log('error handler--', error);
     if (error.status === 403 || error.status === 500 || error.status === 400) {
-      this.error.setError(error);
+      // this.error.setError(error);
     } else if (error.status === 401) {
       //   this._auth.signout();
     }
@@ -48,7 +52,8 @@ export class CommonService {
   }
 
   post(url: string, body: Object): Observable<Response> {
-    this.error.clearError();
+    this.isLoading.next(true)
+    // this.error.clearError();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       // Authorization: 'Bearer ' + this.getTocket(),
@@ -58,11 +63,12 @@ export class CommonService {
       .map((response: Response) => {
         return response;
       })
-      .catch((error: any) => this.httpErrorHandler(error));
+      // .catch((error: any) => this.httpErrorHandler(error));
   }
 
   put(url: string, body: Object): Observable<Response> {
-    this.error.clearError();
+    this.isLoading.next(true)
+    // this.error.clearError();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       // Authorization: 'Bearer ' + this.getTocket(),
@@ -73,11 +79,12 @@ export class CommonService {
       .map((response: Response) => {
         return response;
       })
-      .catch((error: any) => this.httpErrorHandler(error));
+      // .catch((error: any) => this.httpErrorHandler(error));
   }
 
   get(url: string): Observable<any> {
-    this.error.clearError();
+    this.isLoading.next(true)
+    // this.error.clearError();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       // 'Authorization': 'Bearer '  + this.auth.acquireTokenRedirect.toString
@@ -90,7 +97,8 @@ export class CommonService {
   }
 
   delete(url: string): Observable<Response> {
-    this.error.clearError();
+    this.isLoading.next(true)
+    // this.error.clearError();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       // Authorization: 'Bearer ' + this.getTocket(),
@@ -100,6 +108,6 @@ export class CommonService {
       .map((response: Response) => {
         return response;
       })
-      .catch((error: any) => this.httpErrorHandler(error));
+      // .catch((error: any) => this.httpErrorHandler(error));
   }
 }

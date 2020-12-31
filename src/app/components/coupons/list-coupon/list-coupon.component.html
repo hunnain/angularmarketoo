@@ -38,14 +38,18 @@
                   {{ "delete" | translate }}
                 </button>
               </ngx-datatable-column>
-              <ngx-datatable-column name='{{ "coupon_title" | translate }}' prop="title"></ngx-datatable-column>
-              <ngx-datatable-column name='{{ "coupon_code" | translate }}' prop="code"></ngx-datatable-column>
-              <ngx-datatable-column name='{{ "coupon_code_discount" | translate }}' prop="discount"></ngx-datatable-column>
+              <ngx-datatable-column name='{{ "coupon_title" | translate }}' prop="couponTitle"></ngx-datatable-column>
+              <ngx-datatable-column name='{{ "coupon_code" | translate }}' prop="couponCode"></ngx-datatable-column>
+              <ngx-datatable-column name='{{ "coupon_code_discount" | translate }}' prop="percentageDiscount"></ngx-datatable-column>
               <ngx-datatable-column
                 name='{{ "coupon_duedate" | translate }}'
-                prop="due_date"
+                prop="startDate"
               ></ngx-datatable-column>
-              <ngx-datatable-column name='{{ "coupon_code_action" | translate }}' sortable="false" prop="id">
+              <ngx-datatable-column
+                name='{{ "coupon_duedate" | translate }}'
+                prop="endDate"
+              ></ngx-datatable-column>
+              <ngx-datatable-column name='{{ "coupon_code_action" | translate }}' sortable="false" prop="couponCode">
                 <ng-template
                   let-row="row"
                   let-value="value"

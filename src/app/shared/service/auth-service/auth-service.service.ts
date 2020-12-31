@@ -18,6 +18,10 @@ export class AuthServiceService {
     return this.commonService.post('seller/signUp', data);
   }
 
+  refreshToken(data){
+    return this.commonService.post('token/refresh',data);
+  }
+
   logout() {
     return this.commonService.post('token/revoke', {});
   }
