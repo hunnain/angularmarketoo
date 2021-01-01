@@ -7,7 +7,10 @@
           <h5>{{ "all_coupons" | translate }}</h5>
         </div>
         <div class="card-body">
-          <div class="custom-datatable">
+          <div style="display: flex; align-items: center; justify-content: center">
+            <app-loader [loading]="loading"></app-loader>
+          </div>
+          <div class="custom-datatable" *ngIf="!loading">
             <button class="btn btn-primary mr-1 mb-3" style="float: right">
               {{ "delete" | translate }}
             </button>

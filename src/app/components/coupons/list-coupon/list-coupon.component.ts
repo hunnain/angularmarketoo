@@ -16,17 +16,17 @@ export class ListCouponComponent implements OnInit {
 
   public digital_categories = [];
   public selected = [];
-  public loading:boolean = false;
+  public loading: boolean = false;
 
   constructor(
-    private router: Router, 
-    private couponService: CouponService, 
+    private router: Router,
+    private couponService: CouponService,
     public translate: TranslateService,
     private cs: CommonService) {
     // this.digital_categories = listCouponsDB.list_coupons;
     this.cs.isLoading.subscribe(loading => {
       this.loading = loading;
-  })
+    })
   }
 
   onSelect({ selected }) {
@@ -35,35 +35,36 @@ export class ListCouponComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.fetchCoupons();
-   }
+    this.fetchCoupons();
+  }
 
-   fetchCoupons(){
-     
-     this.loading = true;
-     let query = `PageSize=1&PageNumber=1`;
-     this.couponService.getCoupon(query).subscribe(res => {
-        if(res){
-          this.cs.isLoading.next(false)
-          this.loading = false;
-          this.digital_categories = res;
-          console.log('coupon-res',res);
-        }
-     }
-    //  ,err => {
-    //   this.loading = false;
-    //  }
+  fetchCoupons() {
+
+    this.loading = true;
+    let query = `PageSize=10&PageNumber=1`;
+    this.couponService.getCoupon(query).subscribe(res => {
+      if (res) {
+        this.cs.isLoading.next(false)
+        console.log(res);
+        this.loading = false;
+        this.digital_categories = res.body;
+        console.log('coupon-res', res);
+      }
+    }
+      //  ,err => {
+      //   this.loading = false;
+      //  }
     )
-   }
+  }
 
-   onEdit(val){
-     console.log('row click',val)
-     this.router.navigate(['/coupons/edit-coupon/',val])
-   }   
+  onEdit(val) {
+    console.log('row click', val)
+    this.router.navigate(['/coupons/edit-coupon/', val])
+  }
 
-   onDelete(val){
-     console.log('row click',val)
-   }   
+  onDelete(val) {
+    console.log('row click', val)
+  }
 
 
 }

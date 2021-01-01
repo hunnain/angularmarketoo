@@ -39,15 +39,15 @@
                 >
                 <input
                   class="form-control col-md-7"
-                  formControlName="CouponCode"
+                  formControlName="couponCode"
                   id="validationCustom1"
                   type="text"
                   required
                 />
                 <div
                 *ngIf="
-                generalForm.controls.CouponCode.touched &&
-                generalForm.controls.CouponCode.errors?.required
+                generalForm.controls.couponCode.touched &&
+                generalForm.controls.couponCode.errors?.required
                 "
                 class="text text-danger offset-md-3 col-md-7"
               >
@@ -64,8 +64,8 @@
                     ngbDatepicker
                     placeholder="dd-mm-yyyy"
                     [minDate]="currentDate"
-                    [maxDate]="generalForm.controls.EndDate.value"
-                    formControlName="StartDate"
+                    [maxDate]="generalForm.controls.endDate.value"
+                    formControlName="startDate"
                     #f="ngbDatepicker"
                     readonly
                   />
@@ -89,8 +89,8 @@
                     class="datepicker-here form-control digits"
                     ngbDatepicker
                     placeholder="dd-mm-yyyy"
-                    [minDate]="generalForm.controls.StartDate.value"
-                    formControlName="EndDate"
+                    [minDate]="generalForm.controls.startDate.value"
+                    formControlName="endDate"
                     #c="ngbDatepicker"
                     readonly
                   />
@@ -111,7 +111,7 @@
                   <input
                     id="checkbox-primary-1"
                     type="checkbox"
-                    formControlName="AllowFreeShipping"
+                    formControlName="allowFreeShipping"
                     data-original-title=""
                     title=""
                   />
@@ -122,14 +122,14 @@
                 <label class="col-xl-3 col-md-4 required">{{ "cop_quantity" | translate }}</label>
                 <input
                   class="form-control col-md-7"
-                  formControlName="Quantity"
+                  formControlName="quantity"
                   type="number"
                   required=""
                 />
                 <div
                 *ngIf="
-                generalForm.controls.Quantity.touched &&
-                generalForm.controls.Quantity.errors?.required
+                generalForm.controls.quantity.touched &&
+                generalForm.controls.quantity.errors?.required
                 "
                 class="text text-danger offset-md-3 col-md-7"
               >
@@ -137,8 +137,8 @@
               </div>
                 <div
                 *ngIf="
-                generalForm.controls.Quantity.touched &&
-                generalForm.controls.Quantity.errors?.pattern
+                generalForm.controls.quantity.touched &&
+                generalForm.controls.quantity.errors?.pattern
                 "
                 class="text text-danger offset-md-3 col-md-7"
               >
@@ -147,7 +147,7 @@
               </div>
               <div class="form-group row">
                 <label class="col-xl-3 col-md-4 required">{{ "cop_disc_type" | translate }}</label>
-                <select class="custom-select col-md-7" required="" formControlName="DiscountType">
+                <select class="custom-select col-md-7" required="" formControlName="discountType">
                   <option value="">--Select--</option>
                   <option value="1">Percent</option>
                   <option value="2">Fixed</option>
@@ -157,14 +157,14 @@
                 <label class="col-xl-3 col-md-4 required">{{ "cop_amount_percent" | translate }}</label>
                 <input
                   class="form-control col-md-7"
-                  formControlName="PercentageDiscount"
+                  formControlName="percentageDiscount"
                   type="number"
                   required=""
                 />
                 <div
                 *ngIf="
-                generalForm.controls.PercentageDiscount.touched &&
-                generalForm.controls.PercentageDiscount.errors?.required
+                generalForm.controls.percentageDiscount.touched &&
+                generalForm.controls.percentageDiscount.errors?.required
                 "
                 class="text text-danger offset-md-3 col-md-7"
               >
@@ -172,8 +172,8 @@
               </div>
                 <div
                 *ngIf="
-                generalForm.controls.PercentageDiscount.touched &&
-                generalForm.controls.PercentageDiscount.errors?.pattern
+                generalForm.controls.percentageDiscount.touched &&
+                generalForm.controls.percentageDiscount.errors?.pattern
                 "
                 class="text text-danger offset-md-3 col-md-7"
               >
@@ -196,7 +196,7 @@
             <label class="col-xl-3 col-md-4 required">{{ "cop_cate" | translate }}</label>
             <select
             class="custom-select col-md-7"
-              formControlName="Category"
+              formControlName="category"
           >
             <option
               *ngFor="let cate of mainCategories"
@@ -210,7 +210,7 @@
             <label class="col-xl-3 col-md-4 required">{{ "cop_sub_cate" | translate }}</label>
             <select
             class="custom-select col-md-7"
-            formControlName="SubCategory"
+            formControlName="subCategory"
           >
             <option
               *ngFor="
@@ -226,7 +226,7 @@
             <label class="col-xl-3 col-md-4">{{ "cop_ex_sub_cate" | translate }}</label>
             <select
             class="custom-select col-md-7"
-            formControlName="ExtendedSubCategory"
+            formControlName="extendedSubCategory"
           >
             <option
               *ngFor="
@@ -246,7 +246,7 @@
             >
             <input
               class="form-control col-md-7"
-              formControlName="MinSpend"
+              formControlName="minSpend"
               id="validationCustom4"
               type="number"
             />
@@ -257,7 +257,7 @@
             >
             <input
               class="form-control col-md-7"
-              formControlName="MaxSpend"
+              formControlName="maxSpend"
               id="validationCustom5"
               type="number"
             />
@@ -269,7 +269,7 @@
             >
             <input
               class="form-control col-md-7"
-              formControlName="PerLimit"
+              formControlName="perLimit"
               id="validationCustom6"
               type="number"
             />
@@ -280,7 +280,7 @@
             >
             <input
               class="form-control col-md-7"
-              formControlName="PerCustomer"
+              formControlName="perCustomer"
               id="validationCustom7"
               type="number"
             />
@@ -296,6 +296,8 @@
           {{ isEdit ? "Update" : "Create" }}
         </button>
       </div>
+      {{generalForm.invalid }}
+      {{restrictionForm.invalid }}
     </div>
   </div>
 </div>
