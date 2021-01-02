@@ -4,7 +4,8 @@
     <div class="col-sm-12">
       <div class="card">
         <div class="card-header">
-          <h5>{{ "add_product" | translate }}</h5>
+          <h5 *ngIf="!isEdit">{{ "add_product" | translate }}</h5>
+          <h5 *ngIf="isEdit">{{ "edit_product" | translate }}</h5>
         </div>
         <div class="card-body">
           <div class="row product-adding">
@@ -150,7 +151,7 @@
                   <div class="form-group row">
                     <label
                       for="exampleFormControlSelect1"
-                      class="col-xl-3 col-sm-4 mb-0"
+                      class="col-xl-3 col-sm-4 mb-0 required"
                       >{{ "prod_category" | translate }}
                     </label>
                     <select
@@ -169,7 +170,7 @@
                   <div class="form-group row" *ngIf="main_category.value">
                     <label
                       for="exampleFormControlSelect1"
-                      class="col-xl-3 col-sm-4 mb-0"
+                      class="col-xl-3 col-sm-4 mb-0 required"
                       >{{ "prod_sub_category" | translate }}
                     </label>
                     <select
@@ -212,9 +213,14 @@
                     <label for="discount" class="col-xl-3 col-sm-3 mb-0">{{
                       "prod_discount" | translate
                     }}</label>
-                    <label for="buy_x" class="col-xl-1 col-sm-1 mb-0">{{
-                      "prod_buy" | translate
-                    }}</label>
+                    <label
+                      for="buy_x"
+                      class="col-xl-1 col-sm-1 mb-0"
+                      [ngClass]="{
+                        required: !disc_buy.value && disc_get.value
+                      }"
+                      >{{ "prod_buy" | translate }}</label
+                    >
                     <input
                       class="form-control col-xl-2 col-sm-2"
                       id="buy_x"
@@ -222,9 +228,14 @@
                       [formControl]="productForm.controls['discountBuy']"
                       placeholder="XXX"
                     />
-                    <label for="get_x" class="col-xl-1 col-sm-1 mb-0">{{
-                      "prod_get" | translate
-                    }}</label>
+                    <label
+                      for="get_x"
+                      class="col-xl-1 col-sm-1 mb-0"
+                      [ngClass]="{
+                        required: disc_buy.value && !disc_get.value
+                      }"
+                      >{{ "prod_get" | translate }}</label
+                    >
                     <input
                       class="form-control col-xl-2 col-sm-2"
                       id="get_x"
@@ -234,7 +245,7 @@
                     />
                   </div>
                   <div class="form-group row">
-                    <label for="size" class="col-xl-3 col-sm-4 mb-0"
+                    <label for="size" class="col-xl-3 col-sm-4 mb-0 required"
                       >{{ "prod_size" | translate }}
                     </label>
                     <div class="col-xl-4 col-sm-5" style="padding-left: 0">
@@ -271,20 +282,21 @@
                         class="form-control col-xl-4 col-sm-5"
                         id="size"
                         type="text"
-                        placeholder='{{ "prod_custom_entersize" | translate }}'
+                        [formControl]="productForm.controls['customizeSize']"
+                        placeholder="{{ 'prod_custom_entersize' | translate }}"
                       />
                       <input
                         class="upload col-xl-4 col-sm-2"
                         style="padding-top: 10px"
                         type="file"
-                        (change)="readUrlSizeImg($event)"
+                        (change)="readUrlSizeImg($event, 'customSizeImage')"
                       />
                     </div>
                   </div>
                   <div class="form-group row">
                     <label
                       for="exampleFormControlSelect1"
-                      class="col-xl-3 col-sm-4 mb-0"
+                      class="col-xl-3 col-sm-4 mb-0 required"
                       >{{ "prod_labels" | translate }}
                     </label>
                     <div class="col-xl-8 col-sm-7" style="padding-left: 0">
@@ -376,14 +388,16 @@
                         class="upload col-xl-6 col-sm-12"
                         style="padding-top: 10px"
                         type="file"
-                        (change)="readUrlSizeImg($event)"
+                        (change)="readUrlSizeImg($event, 'customDesignImage')"
                       />
                       <input
                         class="form-control col-xl-12 col-sm-12"
                         id="size"
                         type="text"
-                        [formControl]="productForm.controls['description']"
-                        placeholder='{{ "prod_custom_entersize" | translate }}'
+                        [formControl]="
+                          productForm.controls['customDescription']
+                        "
+                        placeholder="{{ 'prod_custom_entersize' | translate }}"
                       />
                     </div>
                   </div>
@@ -435,24 +449,31 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-xl-3 col-sm-4"
-                      >{{ "prod_add_desc" | translate }}
+                    <label class="col-xl-3 col-sm-4 required"
+                      >{{ "prod_desc" | translate }}
                     </label>
-                    <div class="col-xl-8 col-sm-7 pl-0 description-sm">
-                      <ck-editor
+                    <div class="col-xl-8 col-sm-7 pl-0">
+                      <input
+                        class="form-control col-xl-8 col-sm-7"
+                        id="validationCustom01"
+                        type="text"
+                        [formControl]="productForm.controls['description']"
+                        required
+                      />
+                      <!-- <ck-editor
                         id="editor3"
                         cols="30"
                         rows="10"
                         language="en"
                         [formControl]="productForm.controls['description']"
                         [fullPage]="true"
-                      ></ck-editor>
+                      ></ck-editor> -->
                     </div>
                   </div>
                   <div class="form-group row">
                     <label
                       for="exampleFormControlSelect1"
-                      class="col-xl-3 col-sm-4 mb-0"
+                      class="col-xl-3 col-sm-4 mb-0 required"
                       >{{ "prod_pay_option" | translate }}
                     </label>
                     <div class="col-xl-8 col-sm-7" style="padding-left: 0">
@@ -487,7 +508,7 @@
                     class="btn btn-primary mr-1"
                     (click)="onSubmit()"
                   >
-                    {{ "prod_add" | translate }}
+                    {{ (isEdit ? "prod_update" : "prod_add") | translate }}
                   </button>
                   <button type="button" class="btn btn-light">
                     {{ "prod_discard" | translate }}

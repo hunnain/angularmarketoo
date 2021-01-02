@@ -13,7 +13,7 @@
       </div>
     </div>
   </div>
-  
+
   <div style="display: flex; align-items: center; justify-content: center">
     <app-loader [loading]="loading"></app-loader>
   </div>
@@ -43,6 +43,7 @@
                       type="button"
                       data-original-title=""
                       title=""
+                      (click)="onEdit(product)"
                     >
                       <i class="icon-pencil-alt"></i>
                     </button>
@@ -86,16 +87,34 @@
     </div>
   </div>
   <!-- Pagination -->
-  <nav class="pagination-nav" aria-label="Page navigation">
+  <nav class="pagination-nav" aria-label="Page navigation" *ngIf="!loading">
     <ul class="pagination justify-content-end">
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1">{{ "prev" | translate }}</a>
+      <li
+        class="page-item"
+        [ngClass]="{
+          disabled: !pagination.hasPrevious
+        }"
+        (click)="prevPage()"
+      >
+        <a class="page-link" tabindex="-1">{{ "prev" | translate }}</a>
       </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
       <li class="page-item">
-        <a class="page-link" href="#">{{ "next" | translate }}</a>
+        <a class="page-link" (click)="pageNumberClick('1')">1</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" (click)="pageNumberClick('2')">2</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" (click)="pageNumberClick('3')">3</a>
+      </li>
+      <li
+        class="page-item"
+        [ngClass]="{
+          disabled: !pagination.hasNext
+        }"
+        (click)="nextPage()"
+      >
+        <a class="page-link">{{ "next" | translate }}</a>
       </li>
     </ul>
   </nav>

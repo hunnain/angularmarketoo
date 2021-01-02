@@ -4,7 +4,6 @@ import { CommonService } from '../common.service';
 @Injectable({
   providedIn: 'root',
 })
-
 export class ProductService {
   constructor(private commonService: CommonService) {}
 
@@ -12,12 +11,16 @@ export class ProductService {
     return this.commonService.get(`product?${query}`);
   }
 
+  getProductById(uuid) {
+    return this.commonService.get(`product/${uuid}`);
+  }
+
   addProduct(data) {
     return this.commonService.post('product', data);
   }
 
   updateProduct(id, data) {
-    return this.commonService.put(`product${id}`, data);
+    return this.commonService.put(`product/${id}`, data);
   }
 
   deleteProduct(id) {

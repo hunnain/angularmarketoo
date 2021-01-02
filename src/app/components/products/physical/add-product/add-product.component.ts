@@ -17,6 +17,7 @@ import { CommonService } from 'src/app/shared/service/common.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from 'src/app/shared/service/product-service/product.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute, Router } from '@angular/router';
 // var $;
 
 // $('.select2-no-results').click(function () {
@@ -71,6 +72,13 @@ export class AddProductComponent implements OnInit {
     return this.productForm.get('category');
   }
 
+  get disc_buy() {
+    return this.productForm.get('discountBuy');
+  }
+  get disc_get() {
+    return this.productForm.get('discountGet');
+  }
+
   get sub_category() {
     return this.productForm.get('sub_category');
   }
@@ -87,21 +95,29 @@ export class AddProductComponent implements OnInit {
     return this.productForm.get('customDesign');
   }
 
-  public selectedLang:string = 'en';
+  public selectedLang: string = 'en';
+  product_id: string = '';
+  isEdit: boolean = false;
   constructor(
     private fb: FormBuilder,
     private elementRef: ElementRef,
     private modalService: NgbModal,
     private productService: ProductService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private activeRoute: ActivatedRoute,
+    private router: Router,
+    private cs: CommonService
   ) {
     let self = this;
     this.selectedLang = this.translate.currentLang;
-    this.translate.onLangChange.subscribe(res => {
-      this.selectedLang = res.lang
+    this.cs.isLoading.subscribe((loading) => {
+      this.loading = loading;
+    });
+    this.translate.onLangChange.subscribe((res) => {
+      this.selectedLang = res.lang;
       this.sizeOptions = SizeOptions(this.selectedLang);
       this.labelOptions = LabelOptions(this.selectedLang);
-    })
+    });
 
     this.productForm = this.fb.group({
       name: [
@@ -139,10 +155,13 @@ export class AddProductComponent implements OnInit {
       labels: [''],
       sizes: [''],
       customSize: [false],
+      customizeSize: [''],
       customDesign: [false],
       isInternationalShipping: [true],
       customDesignFormat: [''],
       description: [''],
+      customDescription: [''],
+
       // localShip: [true],
     });
 
@@ -185,6 +204,19 @@ export class AddProductComponent implements OnInit {
       width: '100%',
     };
 
+    this.activeRoute.params.subscribe((params) => {
+      console.log(params);
+      if (params.id) {
+        this.product_id = params.id;
+        this.isEdit = true;
+        this.loading = true;
+        productService.getProductById(params.id).subscribe((res) => {
+          this.cs.isLoading.next(false);
+          this.loading = false;
+          console.log(res);
+        });
+      }
+    });
     // this.productForm.valueChanges.subscribe(res => {
     //   console.log("res---",res)
     // })
@@ -254,7 +286,7 @@ export class AddProductComponent implements OnInit {
       let img = reader.result.toString();
       let base = reader.result.toString();
       console.log(base);
-      
+
       this.url[i].img = base;
       this.productWishImages[i] = base;
       let splited = img.split('base64,');
@@ -265,7 +297,9 @@ export class AddProductComponent implements OnInit {
   }
 
   //FileUpload
-  readUrlSizeImg(event: any) {
+  customSizeImage = [];
+  customDesignImage = [];
+  readUrlSizeImg(event: any, key: '') {
     if (event.target.files.length === 0) return;
     //Image upload validation
     var mimeType = event.target.files[0].type;
@@ -280,17 +314,15 @@ export class AddProductComponent implements OnInit {
       let base = reader.result.toString();
       // this.url[i].img = base;
       // this.productWishImages[i] = base;
+      console.log(base);
+
       let splited = base.split('base64,');
       let byteImg = splited[1];
-      this.sizeImg = byteImg;
+      this[key] = byteImg;
     };
   }
 
   ngOnInit() {}
-
-  getColor(color) {
-    console.log(color);
-  }
 
   myClick() {
     // changes.prop contains the old and the new value...
@@ -321,21 +353,50 @@ export class AddProductComponent implements OnInit {
       subCategory: temp.sub_category,
       quantity: this.counter,
       images: this.imgs,
-      AvailableSizes: temp.sizes,
-      Description: temp.description,
-      CustomSizeImage: this.sizeImg,
-      SellerUuid: this.user.sellerUuid,
+      availableSizes: temp.sizes,
+      description: temp.description,
+      sellerUuid: this.user.sellerUuid,
+      paymentOptions: temp.paymentOption,
     };
+    delete data['paymentOption'];
+    console.log(temp);
+
+    if (temp.customDesign) {
+      data['customDesignUu'] = {
+        image: this.customDesignImage,
+        description: temp.customDesignFormat,
+        customDesignFormat: temp.customDesignFormat,
+      };
+    } else {
+      delete data['customDesignFormat'];
+      delete data['customDescription'];
+      delete data['customDesign'];
+    }
+
+    if (temp.customSize) {
+      data['customSizeImage'] = this.customSizeImage;
+      data['customSize'] = temp.customizeSize;
+    } else {
+      delete data['customizeSize'];
+      delete data['customSize'];
+    }
+
     console.log(data);
     this.loading = true;
-    this.productService.addProduct(data).subscribe(
-      (res) => {
+    if (this.product_id) {
+      this.productService
+        .updateProduct(this.product_id, data)
+        .subscribe((res) => {
+          this.cs.isLoading.next(false);
+          this.loading = false;
+          this.router.navigate(['/products/physical/product-list']);
+        });
+    } else {
+      this.productService.addProduct(data).subscribe((res) => {
+        this.cs.isLoading.next(false);
         this.loading = false;
-        console.log(res, 'success');
-      },
-      (error) => {
-        this.loading = false;
-      }
-    );
+        this.router.navigate(['/products/physical/product-list']);
+      });
+    }
   }
 }

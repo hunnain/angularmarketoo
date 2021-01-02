@@ -90,10 +90,19 @@ export class CommonService {
       // 'Authorization': 'Bearer '  + this.auth.acquireTokenRedirect.toString
     });
     return this.http
-      .get(this.base_url + url, { headers: headers })
-      .map((response: any) => {
-        return response;
-      });
+      .get<any>(this.base_url + url, {
+        // headers: new HttpHeaders().set('X-Pagination', ''),
+        observe: 'response',
+      })
+    //   .map((response: any) => {
+    //     console.log(response.headers.get('X-Pagination'));
+    //     return response;
+    //   });
+    // return this.http
+    //   .get(this.base_url + url, { headers: headers })
+    //   .map((response: any) => {
+    //     return response;
+    //   });
   }
 
   delete(url: string): Observable<Response> {
