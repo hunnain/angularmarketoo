@@ -31,12 +31,18 @@ export class CommonService {
     public error: CommonErrorService,
     // public auth: MsalService,
     private http: HttpClient
-  ) {}
+  ) { }
 
-  public getToken(): string {
+  public getAccessToken(): string {
     // console.log('tocken', this.accessToken);
     this.accessToken = localStorage.getItem('accessToken');
     if (this.accessToken) return this.accessToken;
+    else return '';
+  }
+
+  public getRefreshToken(): string {
+    this.refreshToken = localStorage.getItem('refreshToken');
+    if (this.accessToken) return this.refreshToken;
     else return '';
   }
 
@@ -63,7 +69,7 @@ export class CommonService {
       .map((response: Response) => {
         return response;
       })
-      // .catch((error: any) => this.httpErrorHandler(error));
+    // .catch((error: any) => this.httpErrorHandler(error));
   }
 
   put(url: string, body: Object): Observable<Response> {
@@ -79,7 +85,7 @@ export class CommonService {
       .map((response: Response) => {
         return response;
       })
-      // .catch((error: any) => this.httpErrorHandler(error));
+    // .catch((error: any) => this.httpErrorHandler(error));
   }
 
   get(url: string): Observable<any> {
@@ -87,22 +93,21 @@ export class CommonService {
     // this.error.clearError();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
+      // "X-Pagination": "application/json",
+      // "abc": "application/json"
       // 'Authorization': 'Bearer '  + this.auth.acquireTokenRedirect.toString
     });
-    return this.http
-      .get<any>(this.base_url + url, {
-        // headers: new HttpHeaders().set('X-Pagination', ''),
-        observe: 'response',
-      })
-    //   .map((response: any) => {
-    //     console.log(response.headers.get('X-Pagination'));
-    //     return response;
-    //   });
     // return this.http
     //   .get(this.base_url + url, { headers: headers })
     //   .map((response: any) => {
     //     return response;
     //   });
+    return this.http
+      .get<any>(this.base_url + url, {
+        // headers: new HttpHeaders().set('X-Pagination', ''),
+        observe: 'response',
+        headers: headers
+      })
   }
 
   delete(url: string): Observable<Response> {
@@ -117,6 +122,6 @@ export class CommonService {
       .map((response: Response) => {
         return response;
       })
-      // .catch((error: any) => this.httpErrorHandler(error));
+    // .catch((error: any) => this.httpErrorHandler(error));
   }
 }

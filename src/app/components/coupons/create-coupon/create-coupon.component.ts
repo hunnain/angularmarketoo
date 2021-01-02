@@ -19,6 +19,7 @@ export class CreateCouponComponent implements OnInit {
   public modelFooter: NgbDateStruct;
   public isEdit: boolean = false;
   public loading: boolean = false;
+  public fetching: boolean = false;
   public selectedId: string = null;
   public curr: Date = new Date();
   public currentDate = { year: this.curr.getFullYear(), month: this.curr.getMonth() + 1, day: this.curr.getDate() };
@@ -57,15 +58,18 @@ export class CreateCouponComponent implements OnInit {
 
     this.cs.isLoading.subscribe(loading => {
       this.loading = loading;
+      this.fetching = loading;
     })
   }
 
   fetchCouponByCode(code) {
+    this.fetching = true;
     this.couponService.getCouponByCode(code).subscribe(res => {
       if (res) {
         console.log("fetch res---", res)
         this.cs.isLoading.next(false)
-        const { couponTitle, couponCode, startDate, endDate, allowFreeShipping, quantity, discountType, percentageDiscount, couponId, seller, sellerId, ...rest } = res;
+        this.fetching = false;
+        const { couponTitle, couponCode, startDate, endDate, allowFreeShipping, quantity, discountType, percentageDiscount, couponId, seller, sellerId, ...rest } = res.body;
         let general = {
           couponTitle, couponCode,
           allowFreeShipping, quantity, discountType, percentageDiscount,
@@ -88,8 +92,8 @@ export class CreateCouponComponent implements OnInit {
     this.generalForm = this.formBuilder.group({
       couponTitle: ['', Validators.required],
       couponCode: ['', Validators.required],
-      startDate: ['', Validators.required],
-      endDate: ['', Validators.required],
+      startDate: [{}, Validators.required],
+      endDate: [{}, Validators.required],
       allowFreeShipping: [false],
       quantity: [1, [Validators.required, Validators.pattern('^[1-9][0-9]*$')]],
       discountType: ['', Validators.required],
@@ -129,15 +133,28 @@ export class CreateCouponComponent implements OnInit {
         this.router.navigate(['/coupons/list-coupons'])
       }
     }
-      // ,err => {
-      //   this.loading=false;
-      // }
     )
   }
 
   editCoupon() {
-    console.log('edit general form', this.generalForm.value)
-    console.log('edit restrictionForm', this.restrictionForm.value)
+    // console.log('general form', this.generalForm.value)
+    // console.log('restrictionForm', this.restrictionForm.value)
+    let data = {
+      ...this.generalForm.value,
+      startDate: this.formatDate(this.generalForm.value.startDate),
+      endDate: this.formatDate(this.generalForm.value.endDate),
+      ...this.restrictionForm.value
+    }
+    this.loading = true;
+    console.log(data)
+    this.couponService.updateCoupon(this.selectedId, data).subscribe(res => {
+      if (res) {
+        this.cs.isLoading.next(false)
+        this.loading = false;
+        this.router.navigate(['/coupons/list-coupons'])
+      }
+    }
+    )
   }
 
 

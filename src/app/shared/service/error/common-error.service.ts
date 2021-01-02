@@ -29,25 +29,26 @@ export class CommonErrorService {
 
   // Global Error Service //
   getClientMessage(error: Error): string {
+    console.log("client error", error)
     if (!navigator.onLine) {
-        return 'No Internet Connection';
+      return 'No Internet Connection';
     }
     return error.message ? error.message : error.toString();
-}
-
-getServerMessage(error: HttpErrorResponse): string {
-  console.log("common error service",error);
-  let msg = this.parseServerError(error.error)
-  return msg ? msg : error.message;
-}
-
-parseServerError(error){
-  if(error && error.hasOwnProperty('errors')){
-    let { errors } = error;
-    let keys = Object.keys(errors);
-    return errors[keys[0]][0];
-  }else{
-    return error.Message;
   }
-}
+
+  getServerMessage(error: HttpErrorResponse): string {
+    console.log("common error service", error);
+    let msg = this.parseServerError(error.error)
+    return msg ? msg : error.message;
+  }
+
+  parseServerError(error) {
+    if (error && error.hasOwnProperty('errors')) {
+      let { errors } = error;
+      let keys = Object.keys(errors);
+      return errors[keys[0]][0];
+    } else {
+      return error.Message;
+    }
+  }
 }

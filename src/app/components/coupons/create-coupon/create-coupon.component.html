@@ -4,7 +4,12 @@
     <div class="card-header">
       <h5>{{ "discount_coup" | translate }}</h5>
     </div>
-    <div class="card-body">
+    <div class="card-body" *ngIf="isEdit">
+      <div style="display: flex; align-items: center; justify-content: center">
+        <app-loader [loading]="loading"></app-loader>
+      </div>
+    </div>
+    <div class="card-body" *ngIf="isEdit || !fetching">
       <!-- <ngb-tabset class="tab-coupon"> -->
       <!-- <ngb-tab title="General"> -->
       <fieldset class="fieldset">
@@ -63,7 +68,7 @@
                     class="datepicker-here form-control digits"
                     ngbDatepicker
                     placeholder="dd-mm-yyyy"
-                    [minDate]="currentDate"
+                    [minDate]="generalForm.controls.startDate.value ? generalForm.controls.startDate.value : currentDate"
                     [maxDate]="generalForm.controls.endDate.value"
                     formControlName="startDate"
                     #f="ngbDatepicker"
@@ -295,9 +300,15 @@
           (click)="isEdit? editCoupon() : createCoupon()">
           {{ isEdit ? "Update" : "Create" }}
         </button>
+        <button
+          *ngIf="isEdit" 
+          type="button" 
+          class="btn btn-danger ml-1" 
+          [routerLink]="'/coupons/list-coupons'"
+          >
+          Back
+        </button>
       </div>
-      {{generalForm.invalid }}
-      {{restrictionForm.invalid }}
     </div>
   </div>
 </div>

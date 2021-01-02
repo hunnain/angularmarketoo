@@ -5,10 +5,10 @@ import { CommonService } from '../common.service';
   providedIn: 'root',
 })
 export class AuthServiceService {
-  constructor(private commonService: CommonService) {}
+  constructor(private commonService: CommonService) { }
 
-  public getToken(): string {
-    return localStorage.getItem('token');
+  writeToLS(key, value) {
+    localStorage.setItem(key, value);
   }
 
   login(data) {
@@ -18,8 +18,8 @@ export class AuthServiceService {
     return this.commonService.post('seller/signUp', data);
   }
 
-  refreshToken(data){
-    return this.commonService.post('token/refresh',data);
+  refreshToken(data) {
+    return this.commonService.post('token/refresh', data);
   }
 
   logout() {

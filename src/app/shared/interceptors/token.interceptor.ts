@@ -11,16 +11,15 @@ import { CommonService } from '../service/common.service';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   constructor(
-    public auth: AuthServiceService,
     private commonService: CommonService
-  ) {}
+  ) { }
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     request = request.clone({
       setHeaders: {
-        Authorization: `Bearer ${this.commonService.getToken()}`,
+        Authorization: `Bearer ${this.commonService.getAccessToken()}`,
       },
     });
     return next.handle(request);
