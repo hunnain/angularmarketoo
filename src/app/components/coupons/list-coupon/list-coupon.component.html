@@ -22,11 +22,15 @@
               [headerHeight]="50"
               [footerHeight]="50"
               [rowHeight]="'auto'"
-              [limit]="5"
               [selected]="selected"
               [selectionType]="'checkbox'"
               [selectAllRowsOnPage]="false"
               (select)="onSelect($event)"
+              [externalPaging]="true"
+              [count]="pagination.TotalCount"
+              [offset]="pagination.CurrentPage"
+              [limit]="pagination.PageSize"
+              (page)="setPage($event)"
             >
               <ngx-datatable-column
                 [width]="30"

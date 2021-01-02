@@ -6,6 +6,15 @@ import { CouponService } from 'src/app/shared/service/coupon/coupon.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AllCoupons } from '../../../shared/interfaces/coupon/coupon';
 
+interface Paginate {
+  TotalCount: number;
+  PageSize: number;
+  CurrentPage: number;
+  HasNext: boolean;
+  HasPrevious: boolean;
+  TotalPages: number;
+}
+
 @Component({
   selector: 'app-list-coupon',
   templateUrl: './list-coupon.component.html',
@@ -15,6 +24,14 @@ export class ListCouponComponent implements OnInit {
   public digital_categories = [];
   public selected = [];
   public loading: boolean = false;
+  public pagination: Paginate = {
+    TotalCount: 0,
+    PageSize: 10,
+    CurrentPage: 0,
+    HasNext: false,
+    HasPrevious: false,
+    TotalPages: 0
+  };
 
   constructor(
     private router: Router,
@@ -39,14 +56,16 @@ export class ListCouponComponent implements OnInit {
 
   fetchCoupons() {
     this.loading = true;
-    let query = `PageSize=1&PageNumber=1`;
+    let query = `PageSize=10&PageNumber=1`;
     this.couponService.getCoupon(query).subscribe(
       (res) => {
         if (res) {
           this.cs.isLoading.next(false);
           this.loading = false;
           this.digital_categories = res.body;
-          console.log('coupon-res', res);
+          console.log('coupon-res', res.headers.get('x-pagination'));
+          this.pagination = JSON.parse(res.headers.get('X-Pagination'));
+          console.log("pagination", this.pagination)
         }
       }
       //  ,err => {
@@ -62,5 +81,9 @@ export class ListCouponComponent implements OnInit {
 
   onDelete(val) {
     console.log('row click', val);
+  }
+
+  setPage(page) {
+    console.log("page--", page)
   }
 }
