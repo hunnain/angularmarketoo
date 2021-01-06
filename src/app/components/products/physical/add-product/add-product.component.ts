@@ -63,7 +63,8 @@ export class AddProductComponent implements OnInit {
   public closeResult: string;
   public user = JSON.parse(localStorage.getItem('userInfo'));
   public mainCategories = MainCategories;
-  public colorOptions = ColorOptions;
+  public colorOptions: Array<Select2OptionData>;
+  public colorConfig: Options;
 
   public subCategories = SubCategories;
   public extendedCategories = ExtendedCategories;
@@ -75,6 +76,7 @@ export class AddProductComponent implements OnInit {
   get disc_buy() {
     return this.productForm.get('discountBuy');
   }
+
   get disc_get() {
     return this.productForm.get('discountGet');
   }
@@ -117,6 +119,7 @@ export class AddProductComponent implements OnInit {
       this.selectedLang = res.lang;
       this.sizeOptions = SizeOptions(this.selectedLang);
       this.labelOptions = LabelOptions(this.selectedLang);
+      this.colorOptions = ColorOptions(this.selectedLang);
     });
 
     this.productForm = this.fb.group({
@@ -148,7 +151,7 @@ export class AddProductComponent implements OnInit {
       custom_color: ['', Validators.required],
       size: ['', Validators.required],
       category: ['', Validators.required],
-      paymentOption: ['', Validators.required],
+      paymentOptions: ['', Validators.required],
       colorOption: ['', Validators.required],
       sub_category: ['', Validators.required],
       extended_category: ['', Validators.required],
@@ -161,6 +164,7 @@ export class AddProductComponent implements OnInit {
       customDesignFormat: [''],
       description: [''],
       customDescription: [''],
+      customMaterial: [''],
 
       // localShip: [true],
     });
@@ -168,6 +172,7 @@ export class AddProductComponent implements OnInit {
     this.sizeOptions = SizeOptions(this.selectedLang);
     this.labelOptions = LabelOptions(this.selectedLang);
     this.paymentOptions = PaymentOptions;
+    this.colorOptions = ColorOptions(this.selectedLang);
 
     this.labelConfig = {
       multiple: true,
@@ -197,6 +202,14 @@ export class AddProductComponent implements OnInit {
       // templateResult: this.templateResult,
       // templateSelection: this.templateSelection
     };
+    this.colorConfig = {
+      multiple: true,
+      theme: 'classic',
+      closeOnSelect: false,
+      width: '100%',
+      // templateResult: this.templateResult,
+      // templateSelection: this.templateSelection
+    };
     this.sizeConfig = {
       multiple: true,
       theme: 'classic',
@@ -211,6 +224,41 @@ export class AddProductComponent implements OnInit {
         this.isEdit = true;
         this.loading = true;
         productService.getProductById(params.id).subscribe((res) => {
+          // console.log(res.body);
+          // Object.keys(res.body).forEach((key) => {
+          const { body } = res;
+          this.productForm.patchValue({
+            ...res.body,
+            sizes: body.availableSizes,
+            sub_category: body.subCategory,
+            customizeSize: body.customSize,
+            customDesign: body.customDesignUu ? true : false,
+            customDesignFormat: body.customDesignUu
+              ? body.customDesignUu.customDesignFormat
+              : '',
+            customDescription: body.customDesignUu
+              ? body.customDesignUu.description
+              : '',
+            colorOption: body.availableColours,
+            custom_color: body.customColours[0] || '',
+            extended_category: body.extendedSubCategory,
+          });
+          this.counter = body.quantity;
+          this.customSizeImage = this.addBase64(body.customSizeImage);
+          this.customDesignImage = body.customDesignUu
+            ? this.addBase64(body.customDesignUu.image)
+            : '';
+          if (body.images && body.images.length)
+            body.images.forEach((img, i) => {
+              if (img) {
+                this.url[i].img = this.addBase64(img);
+                this.imgs[i] = img;
+              }
+            });
+
+          console.log(this.productForm.value);
+
+          // });
           this.cs.isLoading.next(false);
           this.loading = false;
           console.log(res);
@@ -296,10 +344,22 @@ export class AddProductComponent implements OnInit {
     };
   }
 
+  removeBase64(data) {
+    let base = data;
+    let splited = base.split('base64,');
+    let byteImg = splited[1];
+    return byteImg;
+  }
+
+  addBase64(data) {
+    let base = `data:image/jpeg;base64,${data}`;
+    return base;
+  }
+
   //FileUpload
-  customSizeImage = [];
-  customDesignImage = [];
-  readUrlSizeImg(event: any, key: '') {
+  customSizeImage = '';
+  customDesignImage = '';
+  readCustomSizeImg(event: any) {
     if (event.target.files.length === 0) return;
     //Image upload validation
     var mimeType = event.target.files[0].type;
@@ -310,15 +370,30 @@ export class AddProductComponent implements OnInit {
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (_event) => {
-      // this.sizeImg = reader.result.toString();
       let base = reader.result.toString();
-      // this.url[i].img = base;
-      // this.productWishImages[i] = base;
-      console.log(base);
+      // let splited = base.split('base64,');
+      // let byteImg = splited[1];
+      // this.customSizeImage = byteImg;
+      this.customSizeImage = base;
+    };
+  }
 
-      let splited = base.split('base64,');
-      let byteImg = splited[1];
-      this[key] = byteImg;
+  readCustomDesignImg(event: any) {
+    if (event.target.files.length === 0) return;
+    //Image upload validation
+    var mimeType = event.target.files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+    // Image upload
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (_event) => {
+      let base = reader.result.toString();
+      // let splited = base.split('base64,');
+      // let byteImg = splited[1];
+      // this.customDesignImage = byteImg;
+      this.customDesignImage = base;
     };
   }
 
@@ -339,6 +414,9 @@ export class AddProductComponent implements OnInit {
     autoQueue: false,
     addRemoveLinks: true,
   };
+  public onDiscard() {
+    this.router.navigate(['/products/physical/product-list']);
+  }
 
   public onUploadInit(args: any): void {}
 
@@ -356,15 +434,17 @@ export class AddProductComponent implements OnInit {
       availableSizes: temp.sizes,
       description: temp.description,
       sellerUuid: this.user.sellerUuid,
-      paymentOptions: temp.paymentOption,
+      paymentOptions: temp.paymentOptions,
+      availableColours: temp.colorOption,
+      customColours: [temp.custom_color],
+      extendedSubCategory: temp.extended_category,
     };
-    delete data['paymentOption'];
     console.log(temp);
 
     if (temp.customDesign) {
       data['customDesignUu'] = {
-        image: this.customDesignImage,
-        description: temp.customDesignFormat,
+        image: this.removeBase64(this.customDesignImage),
+        description: temp.customDescription,
         customDesignFormat: temp.customDesignFormat,
       };
     } else {
@@ -374,7 +454,7 @@ export class AddProductComponent implements OnInit {
     }
 
     if (temp.customSize) {
-      data['customSizeImage'] = this.customSizeImage;
+      data['customSizeImage'] = this.removeBase64(this.customSizeImage);
       data['customSize'] = temp.customizeSize;
     } else {
       delete data['customizeSize'];

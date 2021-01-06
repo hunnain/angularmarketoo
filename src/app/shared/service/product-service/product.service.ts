@@ -12,15 +12,15 @@ export class ProductService {
   }
 
   getProductById(uuid) {
-    return this.commonService.get(`product/${uuid}`);
+    return this.commonService.get(`product/getproductbyid/${uuid}`);
   }
 
   addProduct(data) {
     return this.commonService.post('product', data);
   }
 
-  updateProduct(id, data) {
-    return this.commonService.put(`product/${id}`, data);
+  updateProduct(uuid, data) {
+    return this.commonService.put(`product/${uuid}`, data);
   }
 
   deleteProduct(id) {

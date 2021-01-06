@@ -87,12 +87,19 @@
     </div>
   </div>
   <!-- Pagination -->
+  <!-- <mat-paginator
+    [length]="pagination.TotalCount"
+    [pageSize]="PageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="pageEvent($event)"
+  >
+  </mat-paginator> -->
   <nav class="pagination-nav" aria-label="Page navigation" *ngIf="!loading">
     <ul class="pagination justify-content-end">
       <li
         class="page-item"
         [ngClass]="{
-          disabled: !pagination.hasPrevious
+          disabled: !pagination.HasPrevious
         }"
         (click)="prevPage()"
       >
@@ -110,7 +117,7 @@
       <li
         class="page-item"
         [ngClass]="{
-          disabled: !pagination.hasNext
+          disabled: !pagination.HasNext
         }"
         (click)="nextPage()"
       >

@@ -5,7 +5,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { CKEditorModule } from 'ngx-ckeditor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+// import { MatPaginatorModule } from '@angular/material/paginator';
 import { ProductsRoutingModule } from './products-routing.module';
 import { CategoryComponent } from './physical/category/category.component';
 import { SubCategoryComponent } from './physical/sub-category/sub-category.component';
@@ -50,6 +50,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     Ng2SmartTableModule,
     NgbModule,
     DropzoneModule,
+    // MatPaginatorModule,
     GalleryModule.forRoot(),
     SharedModule,
   ],

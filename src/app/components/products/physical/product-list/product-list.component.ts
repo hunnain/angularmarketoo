@@ -28,6 +28,10 @@ export class ProductListComponent implements OnInit {
     TotalCount: 0,
     TotalPages: 1,
   };
+  // MatPaginator Inputs
+  // length = 100;
+  // pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 50];
   public selectedLang: string = 'en';
   constructor(
     private productService: ProductService,
@@ -93,11 +97,13 @@ export class ProductListComponent implements OnInit {
     ];
   }
 
-  pageNumber = 1;
-  pageSize = 10;
-
   ngOnInit() {
     this.getProducts();
+  }
+
+  pageEvent(data) {
+    console.log(data);
+    this.pagination.PageSize = data;
   }
 
   setFilters(lang) {
