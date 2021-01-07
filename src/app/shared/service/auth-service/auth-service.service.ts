@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CommonService } from '../common.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,14 @@ export class AuthServiceService {
   }
 
   refreshToken(data) {
-    return this.commonService.post('token/refresh', data);
+    return this.commonService.post('token/refresh', data)
+      .pipe(
+        map(res => {
+          console.log("auth service--", res)
+          this.writeToLS('accessToken', res['accessToken']);
+          this.writeToLS('refreshToken', res['refreshToken']);
+        })
+      );
   }
 
   logout() {

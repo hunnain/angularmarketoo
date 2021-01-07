@@ -16,12 +16,16 @@
             />
             <ngx-datatable
               class="bootstrap"
-              [rows]="order"
+              [rows]="orders"
               [columnMode]="'force'"
               [headerHeight]="50"
               [footerHeight]="50"
               [rowHeight]="'auto'"
-              [limit]="5"
+              [externalPaging]="true"
+              [count]="pagination.TotalCount"
+              [offset]="pagination.CurrentPage"
+              [limit]="pagination.PageSize"
+              (page)="setPage($event)"
             >
               <ngx-datatable-column 
               name='{{ "ordersmanagement_orderid" | translate }}'

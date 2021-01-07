@@ -5,15 +5,9 @@ import { Router } from '@angular/router';
 import { CouponService } from 'src/app/shared/service/coupon/coupon.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AllCoupons } from '../../../shared/interfaces/coupon/coupon';
+import { Paginate } from 'src/app/shared/interfaces/pagination';
 
-interface Paginate {
-  TotalCount: number;
-  PageSize: number;
-  CurrentPage: number;
-  HasNext: boolean;
-  HasPrevious: boolean;
-  TotalPages: number;
-}
+
 
 @Component({
   selector: 'app-list-coupon',

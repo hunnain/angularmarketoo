@@ -9,7 +9,7 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+// import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // import { MatPaginatorModule } from '@angular/material/paginator';
 
@@ -65,8 +65,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     UsersModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSnackBarModule,
-    // MatPaginatorModule,
+    // MatSnackBarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -82,8 +81,12 @@ export function HttpLoaderFactory(http: HttpClient) {
       multi: true,
     },
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

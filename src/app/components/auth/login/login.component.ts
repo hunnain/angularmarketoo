@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     this.createLoginForm();
 
     this.cs.isLoading.subscribe(loading => {
-        this.loading = loading;
+      this.loading = loading;
     })
   }
 
@@ -45,12 +45,12 @@ export class LoginComponent implements OnInit {
 
   createLoginForm() {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}')]],
+      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}')]],
       password: ['', Validators.required],
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   onSubmit() {
     this.loading = true;
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
       (res) => {
         this.cs.isLoading.next(false)
         this.loading = false;
-        console.log(res, 'success');
+        // console.log(res, 'success');
         localStorage.setItem('userInfo', JSON.stringify(res));
         localStorage.setItem('accessToken', res['accessToken']);
         localStorage.setItem('refreshToken', res['refreshToken']);

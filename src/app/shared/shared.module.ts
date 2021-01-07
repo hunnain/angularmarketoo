@@ -16,6 +16,8 @@ import { WINDOW_PROVIDERS } from './service/windows.service';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { MaterialModule } from '../material.module';
+
 @NgModule({
   declarations: [
     ToggleFullscreenDirective,
@@ -35,6 +37,7 @@ import { LoaderComponent } from './components/loader/loader.component';
     // MatPaginatorModule,
     NgbModule,
     TranslateModule,
+    MaterialModule
   ],
   providers: [NavService, WINDOW_PROVIDERS],
   exports: [
@@ -48,4 +51,4 @@ import { LoaderComponent } from './components/loader/loader.component';
     LoaderComponent,
   ],
 })
-export class SharedModule {}
+export class SharedModule { }
