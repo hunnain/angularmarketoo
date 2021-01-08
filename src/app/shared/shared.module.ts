@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgSelect2Module } from 'ng-select2';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { FeatherIconsComponent } from './components/feather-icons/feather-icons.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -34,10 +34,10 @@ import { MaterialModule } from '../material.module';
     CommonModule,
     RouterModule,
     NgSelect2Module,
-    // MatPaginatorModule,
+    MatPaginatorModule,
     NgbModule,
     TranslateModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [NavService, WINDOW_PROVIDERS],
   exports: [
@@ -47,8 +47,8 @@ import { MaterialModule } from '../material.module';
     ToggleFullscreenDirective,
     RightSidebarComponent,
     TranslateModule,
-    // MatPaginatorModule,
+    MatPaginatorModule,
     LoaderComponent,
   ],
 })
-export class SharedModule { }
+export class SharedModule {}

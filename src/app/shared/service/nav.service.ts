@@ -47,7 +47,9 @@ export class NavService {
       title: 'sidebar_My_Account',
       icon: 'user',
       type: 'sub',
-      children: [{ path: '/settings/profile', title: 'sidebar_Profile', type: 'link' }],
+      children: [
+        { path: '/settings/profile', title: 'sidebar_Profile', type: 'link' },
+      ],
     },
     {
       title: 'sidebar_Product_Management',
@@ -99,10 +101,19 @@ export class NavService {
       type: 'sub',
       active: false,
       children: [
-        { path: '/coupons/list-coupons', title: 'sidebar_List_Coupons', type: 'link' },
+        {
+          path: '/coupons/list-coupons',
+          title: 'sidebar_List_Coupons',
+          type: 'link',
+        },
         {
           path: '/coupons/create-coupons',
           title: 'sidebar_Create_Coupons',
+          type: 'link',
+        },
+        {
+          path: '/coupons/create-store-credit',
+          title: 'create_Store_Credit',
           type: 'link',
         },
       ],
