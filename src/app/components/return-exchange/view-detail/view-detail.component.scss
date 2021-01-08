@@ -1,120 +1,144 @@
-.container-gap{
-    margin-bottom:30px
+.container-gap {
+  margin-bottom: 30px;
 }
 
-.payment-section{
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
-    grid-gap: 10px;
+.payment-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 10px;
 }
 
-.font-size-13{
-    font-size: 13px;
+.font-size-13 {
+  font-size: 13px;
 }
 
-.order-summary{
-    border-top: 1px solid #0000001a;
-    border-left: 1px solid #0000001a;
-    border-top-left-radius: 10px;
-    margin-top: 50px;
-    padding: 10px;
+.order-summary {
+  border-top: 1px solid #0000001a;
+  border-left: 1px solid #0000001a;
+  border-top-left-radius: 10px;
+  margin-top: 50px;
+  padding: 10px;
 }
 
-.change-btn{
-    cursor: pointer;
-    color:blue;
-    margin-left: 10px;
-    &:hover{
-        text-decoration: underline;
-    }
+.change-btn {
+  cursor: pointer;
+  color: blue;
+  margin-left: 10px;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
-.action{
-    text-align: right;
+.action {
+  text-align: right;
 }
 
-.box-file-input{
-    width: 50px;
-    height: 50px;
-    background-color: #f1f4fb;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    vertical-align: middle;
+.box-file-input {
+  width: 50px;
+  height: 50px;
+  background-color: #f1f4fb;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
 }
 
-.upload{
-    position: absolute;
-    width: 70px;
-    left: 0;
-    right: 0;
-    opacity: 0;
+.upload {
+  position: absolute;
+  width: 70px;
+  left: 0;
+  right: 0;
+  opacity: 0;
 }
 
-.imgUpload{
-    width: 50px;
+.imgUpload {
+  width: 50px;
 }
 
+.modal-text-style-1 {
+  font-size: 15px;
+  font-family: "Times New Roman", serif;
+  color: black;
+}
+.modal-text-style-2 {
+  line-height: normal;
+  font-size: 15px;
+  font-family: "Calibri", sans-serif;
+}
+.modal-text-style-3 {
+  margin-top: 0in;
+  margin-right: 0in;
+  margin-bottom: 0.0001pt;
+  margin-left: 0in;
+  line-height: normal;
+  font-size: 15px;
+  font-family: "Calibri", s;
+}
+.modal-text-style-4 {
+  font-size: 16px;
+  font-family: "Helvetica", sans-serif;
+  color: black;
+}
 
 // Invoice Modal CSS
 // header
-.main-container{
-    .header{
-        text-align: right;
-        img{
-            width:200px;
-        }
-        p{
-            margin-bottom: 0px;
-            font-size:10px;
-        }
-        p.company-name{
-            font-weight: bold;
-            font-size: 15px;
-        }
+.main-container {
+  .header {
+    text-align: right;
+    img {
+      width: 200px;
     }
-    .heading{
-        h3{
-            font-weight: bold;
-        }
+    p {
+      margin-bottom: 0px;
+      font-size: 10px;
     }
-    .content-right{
-        text-align: right;
-        p{
-            font-weight: bold;
-            margin-bottom: 0px;
-        }
+    p.company-name {
+      font-weight: bold;
+      font-size: 15px;
     }
-    .content-left{
-        p{
-            margin-bottom:0px;
-        }
-        p:nth-child(1){
-            margin-bottom:5px;
-        }
-        p:last-child{
-          margin-bottom:10px;  
-        }
+  }
+  .heading {
+    h3 {
+      font-weight: bold;
     }
-    .table-section{
-        .table .thead-dark th{
-            background-color: #4B5335;
-            border-color: #4B5335;
-        }
+  }
+  .content-right {
+    text-align: right;
+    p {
+      font-weight: bold;
+      margin-bottom: 0px;
     }
-    .footer-right{
-        text-align: right;
-        p{
-            margin-bottom: 0px;
-            font-weight: bold;
-        }
+  }
+  .content-left {
+    p {
+      margin-bottom: 0px;
     }
-    .footer-desc{
-        margin-top: 20px;
-        font-size: 10px;
-        span:last-child{
-            margin-top:5px;
-        }
+    p:nth-child(1) {
+      margin-bottom: 5px;
     }
+    p:last-child {
+      margin-bottom: 10px;
+    }
+  }
+  .table-section {
+    .table .thead-dark th {
+      background-color: #4b5335;
+      border-color: #4b5335;
+    }
+  }
+  .footer-right {
+    text-align: right;
+    p {
+      margin-bottom: 0px;
+      font-weight: bold;
+    }
+  }
+  .footer-desc {
+    margin-top: 20px;
+    font-size: 10px;
+    span:last-child {
+      margin-top: 5px;
+    }
+  }
 }

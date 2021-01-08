@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Image } from '@ks89/angular-modal-gallery';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-view-detail',
   templateUrl: './view-detail.component.html',
   styleUrls: ['./view-detail.component.scss'],
-  providers: [NgbRatingConfig]
+  providers: [NgbRatingConfig],
 })
 export class ViewDetailComponent implements OnInit {
   public closeResult: string;
@@ -17,43 +18,62 @@ export class ViewDetailComponent implements OnInit {
   public reasonDesc: string;
 
   public total: number;
-  public img:string="assets/images/user.png";
-  
-  public dummyData =  {
-    "order id": "#51240",
-    "products":[
-      {
-        name:'Product 1',qty:2,price:10,
-        img:'assets/images/digital-product/product-1.png'
-      },
-      {
-        name:'Product 2',qty:1,price:20,
-        img:'assets/images/digital-product/product-2.png'
-      },
-      {
-        name:'Product 3',qty:3,price:30,
-        img:'assets/images/digital-product/product-4.png'
-      }
-    ],
-    "type": "Exchange",
-    "requested_on": "Dec 10,18",
-    "remarks":'Mismatch items',
-    "total": 54671,
-    "user_info":{
-      name:"John Doe",
-      contact:'714-508-5350',
-      address: "17601 N Thomas Hill Rd, Sturgeon, MO, 65284",
-    },
-}
+  public img: string = 'assets/images/user.png';
 
-  constructor(private modalService: NgbModal) {}
+  public dummyData = {
+    'order id': '#51240',
+    products: [
+      {
+        name: 'Product 1',
+        qty: 2,
+        price: 10,
+        img: 'assets/images/digital-product/product-1.png',
+      },
+      {
+        name: 'Product 2',
+        qty: 1,
+        price: 20,
+        img: 'assets/images/digital-product/product-2.png',
+      },
+      {
+        name: 'Product 3',
+        qty: 3,
+        price: 30,
+        img: 'assets/images/digital-product/product-4.png',
+      },
+    ],
+    type: 'Exchange',
+    requested_on: 'Dec 10,18',
+    remarks: 'Mismatch items',
+    total: 54671,
+    user_info: {
+      name: 'John Doe',
+      contact: '714-508-5350',
+      address: '17601 N Thomas Hill Rd, Sturgeon, MO, 65284',
+    },
+  };
+  public selectedLang: string = 'en';
+  constructor(
+    private modalService: NgbModal,
+    private translate: TranslateService
+  ) {
+    this.selectedLang = this.translate.currentLang;
+    this.translate.onLangChange.subscribe((res) => {
+      this.selectedLang = res.lang;
+    });
+  }
 
   open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -65,37 +85,34 @@ export class ViewDetailComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-
-  changeTotal(content){
+  changeTotal(content) {
     // this.total = Number(this.dummyData.total);
-    this.open(content)
+    this.open(content);
   }
 
-  updateTotal(){
+  updateTotal() {
     this.dummyData.total = this.dummyData.total + this.total;
-    this.modalService.dismissAll("save button clicked")
+    this.modalService.dismissAll('save button clicked');
   }
 
-  changeStatus(content){
-    this.open(content)
+  changeStatus(content) {
+    this.open(content);
   }
 
-  updateStatus(){
+  updateStatus() {
     // this.dummyData.order_status = this.status
-    this.modalService.dismissAll("save button clicked")
+    this.modalService.dismissAll('save button clicked');
   }
 
-  changeShipmentMethod(content){
-    this.open(content)
+  changeShipmentMethod(content) {
+    this.open(content);
   }
 
   //FileUpload
   readUrlSizeImg(event: any) {
-    if (event.target.files.length === 0)
-      return;
+    if (event.target.files.length === 0) return;
     //Image upload validation
     var mimeType = event.target.files[0].type;
     if (mimeType.match(/image\/*/) == null) {
@@ -106,11 +123,14 @@ export class ViewDetailComponent implements OnInit {
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (_event) => {
       this.img = reader.result.toString();
-    }
+    };
   }
 
-  openInvoice(content){
-    this.open(content)
+  openInvoice(content) {
+    this.open(content);
   }
 
+  showDetail(content) {
+    this.open(content);
+  }
 }

@@ -10,7 +10,12 @@
           </div>
           <hr />
           <div class="container-gap">
-            <p class="mb-0">{{ "re_desc" | translate }}</p>
+            <span
+              (click)="showDetail(Document)"
+              style="cursor: pointer; color: tomato"
+              >Read more about Returned and Exchange Policy
+            </span>
+            <!-- <p class="mb-0">{{ "re_desc" | translate }}</p> -->
 
             <div style="margin-top: 30px">
               <div>
@@ -333,4 +338,206 @@
       </button>
     </div>
   </div>
+</ng-template>
+
+<ng-template #Document let-modal class="modal-xl">
+  <div class="modal-header" style="background: #f88379">
+    <h5 class="modal-title" id="exampleModalLabel" style="color: white">
+      Return and Exchange
+    </h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="main-container" style="padding: 10px 30px">
+      <p class="modal-text-style-3">
+        <span class="modal-text-style-4" *ngIf="selectedLang === 'en'"
+          >In order to provide a pleasurable shopping experience, quality of
+          products are subjected to more stringent provisions.</span
+        >
+        <span class="modal-text-style-4" *ngIf="selectedLang !== 'en'"
+          >為了提供更愉快的購物體驗，Marketoo嚴格規管商品質素</span
+        >
+      </p>
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-1">&nbsp;</span>
+      </p>
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-4" *ngIf="selectedLang === 'en'"
+          >Products delivery, exchange, return are handled by individual
+          designers. Before sending a refund or exchange request, please contact
+          designers and provide valid reasons.</span
+        >
+        <span class="modal-text-style-4" *ngIf="selectedLang !== 'en'"
+          >商品出貨、換貨、退貨都是由個別設計師自行管理。申請退款時，請務必先與設計師
+          聯繫並告知原因。</span
+        >
+      </p>
+
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-1">&nbsp;</span>
+      </p>
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-4" *ngIf="selectedLang === 'en'"
+          >Under below circumstances, customers are entitled to apply for a
+          refund/ exchange Within 7 days after products are received.</span
+        ><span class="modal-text-style-4" *ngIf="selectedLang !== 'en'"
+          >任何商品有以下情況，消費者可在收到商品後7天內申請退貨/ 換貨:</span
+        >
+      </p>
+
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-1">&nbsp;</span>
+      </p>
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-4" *ngIf="selectedLang === 'en'"
+          >Mismatched items (including but not limited to mismatch regarding
+          products Specification, style, quantity)</span
+        ><span class="modal-text-style-4" *ngIf="selectedLang !== 'en'"
+          >與訂單不符的商品（包含但不限於商品規格、樣式、數量等不符）</span
+        >
+      </p>
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-1">&nbsp;</span>
+      </p>
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-4" *ngIf="selectedLang === 'en'"
+          >Faulty items (including but not limited to product defect and damages
+          caused By shipment)</span
+        >
+        <span class="modal-text-style-4" *ngIf="selectedLang !== 'en'"
+          >商品有缺陷瑕疵（包含但不限於品質瑕疵、運送過程毀損等）</span
+        >
+      </p>
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-1">&nbsp;</span>
+      </p>
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-4" *ngIf="selectedLang === 'en'"
+          >The product does not match the product page description (including
+          but not Limited to product usage and function)</span
+        ><span class="modal-text-style-4" *ngIf="selectedLang !== 'en'"
+          >商品與商品頁說明不符（包含但不限於商品用途、商品功能等）</span
+        >
+      </p>
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-1">&nbsp;</span>
+      </p>
+      <p class="modal-text-style-3">
+        <span class="modal-text-style-4" *ngIf="selectedLang === 'en'"
+          >Confirmation will be sent immediately when refund/ exchange
+          application is received and returned products fulfil refund
+          policy.</span
+        >
+        <span class="modal-text-style-4" *ngIf="selectedLang !== 'en'"
+          >收到退貨/
+          換貨申請並確認貨品狀態符合退貨政策的要求後，會立即發出確認郵件。</span
+        >
+      </p>
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-1">&nbsp;</span>
+      </p>
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-4" *ngIf="selectedLang === 'en'"
+          >Designers are responsible for return shipping cost of the products
+          and the returned Product cost will be fully refunded.</span
+        ><span class="modal-text-style-4" *ngIf="selectedLang !== 'en'"
+          >商品退回運費由設計師負擔，而退貨商品費用也將獲全額退款。</span
+        >
+      </p>
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-1">&nbsp;</span>
+      </p>
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-4" *ngIf="selectedLang === 'en'"
+          >If duties and taxes are imposed on cross-border traded goods, the
+          recipient shall Bare all taxes and fees.</span
+        ><span class="modal-text-style-4" *ngIf="selectedLang !== 'en'"
+          >跨境交易商品通關時，如遇收件地區海關收取稅金，相關稅金與費用應由收件方負
+          擔。.</span
+        >
+      </p>
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-1">&nbsp;</span>
+      </p>
+      <p class="modal-text-style-2">
+        <span
+          *ngIf="selectedLang === 'en'"
+          style="
+            font-size: 16px;
+            font-family: 'Trebuchet MS', sans-serif;
+            color: #ed220b;
+          "
+          >All returns will be refunded in the form of store credit or original
+          payment method.</span
+        >
+        <span
+          *ngIf="selectedLang !== 'en'"
+          style="
+            font-size: 16px;
+            font-family: 'Trebuchet MS', sans-serif;
+            color: #ed220b;
+          "
+          >所有退貨會以積分形式退款或退回原本付款方式.</span
+        >
+      </p>
+      <!--  -->
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-1">&nbsp;</span>
+      </p>
+      <p class="modal-text-style-3">
+        <span
+          *ngIf="selectedLang === 'en'"
+          style="
+            font-size: 16px;
+            font-family: 'Trebuchet MS', sans-serif;
+            color: #ed220b;
+          "
+          >If you choose to refund in the form of store credit, the credit will
+          be automatically added to your Marketoo account. After logging into
+          your Marketoo account with your email address and password, you can
+          view the details of the store credit on the "My Wallet" page in "My
+          Account". When you make a purchase, the system will automatically
+          deduct</span
+        >
+        <span
+          *ngIf="selectedLang !== 'en'"
+          style="
+            font-size: 16px;
+            font-family: 'Trebuchet MS', sans-serif;
+            color: #ed220b;
+          "
+          >如選擇以積分形式退 款,積分將會自動加入到您的
+          Marketoo帳戶。以電郵地址及密碼登入Marketoo 帳戶後,
+          您可於「我的帳戶」內的「我的錢包」頁面查看積分的詳情。當您購
+          物時系統會自動扣減錢包內的積分, 並用以付款。
+        </span>
+      </p>
+      <!--  -->
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-1">&nbsp;</span>
+      </p>
+      <p class="modal-text-style-2">
+        <span class="modal-text-style-4" *ngIf="selectedLang === 'en'"
+          >If the designer's country/region for consumer rights protection is
+          higher than this Marketoo's cancellation policy or, when the designer
+          and the consumer's country/Region is the same, the designer should
+          provide the higher protection for consumers in his country/region of
+          the rights and interests</span
+        >
+        <span class="modal-text-style-4" *ngIf="selectedLang !== 'en'"
+          >如設計師所屬國家對於消費者權益保障高於本Marketoo退款政策之規定者，當設計師與消費者所屬國家相同，設計師應就其所屬國家消費者，提供該較高之消費者權益保障。</span
+        >
+      </p>
+    </div>
+  </div>
+  <!-- <div class="action">
+          <button class="btn btn-primary" type="button" (click)="updateStatus()">Update</button>
+      </div> -->
 </ng-template>
