@@ -92,6 +92,7 @@
   "sidebar_Coupons": "Coupons",
   "sidebar_List_Coupons": "List Coupons",
   "sidebar_Create_Coupons": "Create Coupons",
+  "create_Store_Credit": "Create Store Credit",
   "coupon_duedate": "Due Date",
   "coupon_title": "Title",
   "coupon_code": "Code",
@@ -148,6 +149,7 @@
   "List Coupons": "List Coupons",
   "Create Coupons": "Create Coupon",
   "Edit Coupon": "Edit Coupon",
+  "Create Store Credit": "Create Store Credit",
   "Pages": "Pages",
   "List Page": "List Page",
   "Create Page": "Create Page",
@@ -362,8 +364,15 @@
   "cop_max_spend": "Maximum Spend",
   "cop_usage_limit": "Usage Limits",
   "cop_per_limit": "Per Limit",
+  "cop_can_be_used": "Can be used (Times)",
+  "cop_send_to": "Send to",
+  "cop_notify_recivers": "Notify Recivers",
   "cop_per_customer": "Per Customer",
   "cop_create": "CREATE",
+
+  "csc": "Create Store Credit",
+  "csc_send_amount": "Send Amount",
+  "csc_reason": "Reason",
 
   "bid_boosting": "Boosting",
   "bid_boosting_desc": "It is a pay as you go boosting seller tool designed to increase the visibility of your listing on Marketoo. Your listing will be pinned across categories in search results and campaign, allowing as many potential buyers as possible to come across it.",
@@ -532,5 +541,9 @@
   "Knitting": "Knitting",
   "Outdoor Activities": "Outdoor Activities",
   "Indoor Activities": "Indoor Activities",
-  "Casual Seminar": "Casual Seminar"
+  "Casual Seminar": "Casual Seminar",
+
+  "bid_min_days": "Min days",
+  "bid_max_days": "Max days",
+  "bid_days": "Days"
 }
