@@ -52,31 +52,22 @@ export class BidFormComponent implements OnInit {
     },
   };
   // slide range input3
+  public selectedLang: string = 'en';
   value3: number = 7;
-  options3: Options = {
-    floor: 3,
-    ceil: 30,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return '<b>Min days:</b>' + value;
-        case LabelType.High:
-          return '<b>Max days:</b>' + value;
-        default:
-          return value + 'days';
-      }
-    },
-  };
-
-
-  public selectedLang:string = 'en';
-  constructor(private modalService: NgbModal,private translate: TranslateService) {
+  options3 = this.generateOptions();
+  date;
+  constructor(
+    private modalService: NgbModal,
+    private translate: TranslateService
+  ) {
     let self = this;
     this.selectedLang = this.translate.currentLang;
-    this.translate.onLangChange.subscribe(res => {
-      this.selectedLang = res.lang
+    this.translate.onLangChange.subscribe((res) => {
+      this.selectedLang = res.lang;
+      this.options3 = this.generateOptions();
+      this.labelConfig = this.generateLabelConfig();
       this.keyWords = LabelOptions(this.selectedLang);
-    })
+    });
     this.productConfig = {
       multiple: true,
       theme: 'classic',
@@ -87,25 +78,7 @@ export class BidFormComponent implements OnInit {
     };
     // this.keyWord;
     this.keyWords = LabelOptions(this.selectedLang);
-    this.labelConfig = {
-      multiple: true,
-      theme: 'classic',
-      closeOnSelect: false,
-      width: '100%',
-      language: {
-        noResults: () => {
-          $('body').ready(function () {
-            $('#no-results-btn').click(function (e) {
-              self.openModal();
-            });
-          });
-          return `No Keyword found <span id='no-results-btn' class='badge badge-secondary'>Request Label</span>`;
-        },
-      },
-      escapeMarkup: function (markup) {
-        return markup;
-      },
-    };
+    this.labelConfig = this.generateLabelConfig();
     this.productOptions = [
       {
         id: '1',
@@ -150,6 +123,53 @@ export class BidFormComponent implements OnInit {
         },
       },
     ];
+  }
+  generateOptions(): Options {
+    console.log(this.selectedLang, 'asd');
+    return {
+      floor: 3,
+      ceil: 30,
+      translate: (value: number, label: LabelType): string => {
+        switch (label) {
+          case LabelType.Low:
+            return (
+              `<b>${this.selectedLang == 'en' ? 'Min Days' : '最少⽇數'}:</b>` +
+              value
+            );
+          case LabelType.High:
+            return '<b>Max days:</b>' + value;
+          default:
+            return value + `${this.selectedLang == 'en' ? 'Days' : '⽇'}`;
+        }
+      },
+    };
+  }
+  generateLabelConfig(): Opt {
+    console.log(this.selectedLang, 'label');
+    let self = this;
+    return {
+      multiple: true,
+      theme: 'classic',
+      closeOnSelect: false,
+      width: '100%',
+      language: {
+        noResults: () => {
+          $('body').ready(function () {
+            $('#no-results-btn').click(function (e) {
+              self.openModal();
+            });
+          });
+          return `${
+            this.selectedLang == 'en' ? 'No Keyword found' : '沒有相關鍵字'
+          } <span id='no-results-btn' class='badge badge-secondary'>${
+            this.selectedLang == 'en' ? 'Request Label' : '申請關鍵字'
+          }</span>`;
+        },
+      },
+      escapeMarkup: function (markup) {
+        return markup;
+      },
+    };
   }
 
   ngOnInit() {

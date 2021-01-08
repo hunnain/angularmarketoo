@@ -72,6 +72,27 @@
                     [options]="options2"
                   ></ng5-slider>
                 </div>
+                <div class="col-sm-3">
+                  <div class="input-group input-grp-p">
+                    <input
+                      class="datepicker-here form-control digits"
+                      ngbDatepicker
+                      placeholder="dd-mm-yyyy"
+                      [(ngModel)]="date"
+                      #f="ngbDatepicker"
+                      readonly
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn calendar"
+                        (click)="f.toggle()"
+                        type="button"
+                      >
+                        <i class="fa fa-calendar"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="form-group row" style="margin-top: 10px">
                 <div class="col-sm-12">
