@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthServiceService {
-  constructor(private commonService: CommonService) { }
+  constructor(private commonService: CommonService) {}
 
   writeToLS(key, value) {
     localStorage.setItem(key, value);
@@ -20,14 +20,14 @@ export class AuthServiceService {
   }
 
   refreshToken(data) {
-    return this.commonService.post('token/refresh', data)
-      .pipe(
-        map(res => {
-          console.log("auth service--", res)
-          this.writeToLS('accessToken', res['accessToken']);
-          this.writeToLS('refreshToken', res['refreshToken']);
-        })
-      );
+    return this.commonService.post('token/refresh', data).pipe(
+      map((res) => {
+        this.commonService.isLoading.next(false);
+        console.log('auth service--', res);
+        this.writeToLS('accessToken', res['accessToken']);
+        this.writeToLS('refreshToken', res['refreshToken']);
+      })
+    );
   }
 
   logout() {

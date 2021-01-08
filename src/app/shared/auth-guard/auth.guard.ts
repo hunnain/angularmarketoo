@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import {
+  CanActivate,
+  CanDeactivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
+  Router,
+} from '@angular/router';
 import { Observable } from 'rxjs';
 import { catchError, map, subscribeOn } from 'rxjs/operators';
 
@@ -11,29 +18,37 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
   constructor(
     private cs: CommonService,
     private auth: AuthServiceService,
     private router: Router,
-    private ns: NotificationService) { }
+    private ns: NotificationService
+  ) {}
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    console.log("auth guard")
+    state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    console.log('auth guard');
     let accessToken = this.cs.getAccessToken();
     let refreshToken = this.cs.getRefreshToken();
     if (refreshToken && accessToken) {
-      let data = { accessToken, refreshToken }
-      return this.auth.refreshToken(data)
+      let data = { accessToken, refreshToken };
+      return this.auth
+        .refreshToken(data)
         .mapTo(true)
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
-          this.router.navigate(['auth/login'])
+          this.cs.isLoading.next(false);
+          this.router.navigate(['auth/login']);
           return Observable.of(false);
-        })
+        });
       // .subscribe(res => {
       //   console.log("res---", res, next['_routerState'].url);
       //   if (res) {
@@ -56,7 +71,7 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
       // });
       // return true
     } else {
-      this.router.navigate(['auth/login'])
+      this.router.navigate(['auth/login']);
       return false;
     }
     // return true;
@@ -65,7 +80,12 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
     component: unknown,
     currentRoute: ActivatedRouteSnapshot,
     currentState: RouterStateSnapshot,
-    nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    nextState?: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
     return true;
   }
 
@@ -78,5 +98,4 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
       return error.Message;
     }
   }
-
 }
