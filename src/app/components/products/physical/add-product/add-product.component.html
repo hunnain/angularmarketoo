@@ -224,7 +224,7 @@
                     <input
                       class="form-control col-xl-2 col-sm-2"
                       id="buy_x"
-                      type="number"
+                      type="text"
                       [formControl]="productForm.controls['discountBuy']"
                       placeholder="XXX"
                     />
@@ -239,7 +239,7 @@
                     <input
                       class="form-control col-xl-2 col-sm-2"
                       id="get_x"
-                      type="number"
+                      type="text"
                       [formControl]="productForm.controls['discountGet']"
                       placeholder="XXX"
                     />
@@ -503,6 +503,7 @@
                       >
                       </ng-select2>
                     </div>
+
                     <!-- <select
                       class="form-control digits col-xl-8 col-sm-7"
                       id="exampleFormControlSelect1"
@@ -518,6 +519,7 @@
                   </div>
                 </div>
               </form>
+              
               <div class="form-group row mb-0">
                 <div class="product-buttons col-sm-8 offset-xl-3 offset-sm-4">
                   <button

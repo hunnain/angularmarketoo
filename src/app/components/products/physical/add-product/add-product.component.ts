@@ -96,7 +96,6 @@ export class AddProductComponent implements OnInit {
   get custom_design() {
     return this.productForm.get('customDesign');
   }
-
   public selectedLang: string = 'en';
   product_id: string = '';
   isEdit: boolean = false;
@@ -118,6 +117,7 @@ export class AddProductComponent implements OnInit {
     this.translate.onLangChange.subscribe((res) => {
       this.selectedLang = res.lang;
       this.sizeOptions = SizeOptions(this.selectedLang);
+      this.labelConfig = this.generateLabelConfig();
       this.labelOptions = LabelOptions(this.selectedLang);
       this.colorOptions = ColorOptions(this.selectedLang);
     });
@@ -174,25 +174,26 @@ export class AddProductComponent implements OnInit {
     this.paymentOptions = PaymentOptions;
     this.colorOptions = ColorOptions(this.selectedLang);
 
-    this.labelConfig = {
-      multiple: true,
-      theme: 'classic',
-      closeOnSelect: false,
-      width: '100%',
-      language: {
-        noResults: () => {
-          $('body').ready(function () {
-            $('#no-results-btn').click(function (e) {
-              self.openModal();
-            });
-          });
-          return `No Keyword found <span id='no-results-btn' class='badge badge-secondary'>Request Label</span>`;
-        },
-      },
-      escapeMarkup: function (markup) {
-        return markup;
-      },
-    };
+    this.labelConfig = this.generateLabelConfig();
+    // {
+    //   multiple: true,
+    //   theme: 'classic',
+    //   closeOnSelect: false,
+    //   width: '100%',
+    //   language: {
+    //     noResults: () => {
+    //       $('body').ready(function () {
+    //         $('#no-results-btn').click(function (e) {
+    //           self.openModal();
+    //         });
+    //       });
+    //       return `No Keyword found <span id='no-results-btn' class='badge badge-secondary'>Request Label</span>`;
+    //     },
+    //   },
+    //   escapeMarkup: function (markup) {
+    //     return markup;
+    //   },
+    // };
 
     this.paymentConfig = {
       multiple: true,
@@ -268,6 +269,34 @@ export class AddProductComponent implements OnInit {
     // this.productForm.valueChanges.subscribe(res => {
     //   console.log("res---",res)
     // })
+  }
+
+  generateLabelConfig(): Options {
+    console.log(this.selectedLang, 'label');
+    let self = this;
+    return {
+      multiple: true,
+      theme: 'classic',
+      closeOnSelect: false,
+      width: '100%',
+      language: {
+        noResults: () => {
+          $('body').ready(function () {
+            $('#no-results-btn').click(function (e) {
+              self.openModal();
+            });
+          });
+          return `${
+            this.selectedLang == 'en' ? 'No Keyword found' : '沒有相關鍵字'
+          } <span id='no-results-btn' class='badge badge-secondary'>${
+            this.selectedLang == 'en' ? 'Request Label' : '申請關鍵字'
+          }</span>`;
+        },
+      },
+      escapeMarkup: function (markup) {
+        return markup;
+      },
+    };
   }
 
   noResultsButtonClicked() {
