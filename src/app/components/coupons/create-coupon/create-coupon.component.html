@@ -18,7 +18,9 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="form-group row">
-                <label for="validationCustom0" class="col-xl-3 col-md-4 required"
+                <label
+                  for="validationCustom0"
+                  class="col-xl-3 col-md-4 required"
                   >{{ "cop_title" | translate }}</label
                 >
                 <input
@@ -29,18 +31,21 @@
                   required
                 />
                 <div
-                *ngIf="
-                generalForm.controls.couponTitle.touched &&
-                generalForm.controls.couponTitle.errors?.required
-                "
-                class="text text-danger offset-md-3 col-md-7"
-              >
-                {{ "couponTitle_req" | translate }}
-              </div>
+                  *ngIf="
+                    generalForm.controls.couponTitle.touched &&
+                    generalForm.controls.couponTitle.errors?.required
+                  "
+                  class="text text-danger offset-md-3 col-md-7"
+                >
+                  {{ "couponTitle_req" | translate }}
+                </div>
               </div>
               <div class="form-group row">
-                <label for="validationCustom1" class="col-xl-3 col-md-4 required"
-                  > {{ "cop_code" | translate }}</label
+                <label
+                  for="validationCustom1"
+                  class="col-xl-3 col-md-4 required"
+                >
+                  {{ "cop_code" | translate }}</label
                 >
                 <input
                   class="form-control col-md-7"
@@ -50,14 +55,14 @@
                   required
                 />
                 <div
-                *ngIf="
-                generalForm.controls.couponCode.touched &&
-                generalForm.controls.couponCode.errors?.required
-                "
-                class="text text-danger offset-md-3 col-md-7"
-              >
-                {{ "CouponCode_req" | translate }}
-              </div>
+                  *ngIf="
+                    generalForm.controls.couponCode.touched &&
+                    generalForm.controls.couponCode.errors?.required
+                  "
+                  class="text text-danger offset-md-3 col-md-7"
+                >
+                  {{ "CouponCode_req" | translate }}
+                </div>
               </div>
               <div class="form-group row">
                 <label class="col-xl-3 col-md-4 required">{{
@@ -68,7 +73,11 @@
                     class="datepicker-here form-control digits"
                     ngbDatepicker
                     placeholder="dd-mm-yyyy"
-                    [minDate]="generalForm.controls.startDate.value ? generalForm.controls.startDate.value : currentDate"
+                    [minDate]="
+                      generalForm.controls.startDate.value
+                        ? generalForm.controls.startDate.value
+                        : currentDate
+                    "
                     [maxDate]="generalForm.controls.endDate.value"
                     formControlName="startDate"
                     #f="ngbDatepicker"
@@ -111,7 +120,9 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-xl-3 col-md-4">{{ "cop_free_shipping" | translate }}</label>
+                <label class="col-xl-3 col-md-4">{{
+                  "cop_free_shipping" | translate
+                }}</label>
                 <div class="checkbox checkbox-primary col-md-7">
                   <input
                     id="checkbox-primary-1"
@@ -120,11 +131,15 @@
                     data-original-title=""
                     title=""
                   />
-                  <label for="checkbox-primary-1">{{ "cop_allow_free_shipping" | translate }}</label>
+                  <label for="checkbox-primary-1">{{
+                    "cop_allow_free_shipping" | translate
+                  }}</label>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-xl-3 col-md-4 required">{{ "cop_quantity" | translate }}</label>
+                <label class="col-xl-3 col-md-4 required">{{
+                  "cop_quantity" | translate
+                }}</label>
                 <input
                   class="form-control col-md-7"
                   formControlName="quantity"
@@ -132,34 +147,42 @@
                   required=""
                 />
                 <div
-                *ngIf="
-                generalForm.controls.quantity.touched &&
-                generalForm.controls.quantity.errors?.required
-                "
-                class="text text-danger offset-md-3 col-md-7"
-              >
-                {{ "qty_req" | translate }}
-              </div>
+                  *ngIf="
+                    generalForm.controls.quantity.touched &&
+                    generalForm.controls.quantity.errors?.required
+                  "
+                  class="text text-danger offset-md-3 col-md-7"
+                >
+                  {{ "qty_req" | translate }}
+                </div>
                 <div
-                *ngIf="
-                generalForm.controls.quantity.touched &&
-                generalForm.controls.quantity.errors?.pattern
-                "
-                class="text text-danger offset-md-3 col-md-7"
-              >
-                {{ "qty_invalid" | translate }}
-              </div>
+                  *ngIf="
+                    generalForm.controls.quantity.touched &&
+                    generalForm.controls.quantity.errors?.pattern
+                  "
+                  class="text text-danger offset-md-3 col-md-7"
+                >
+                  {{ "qty_invalid" | translate }}
+                </div>
               </div>
               <div class="form-group row">
-                <label class="col-xl-3 col-md-4 required">{{ "cop_disc_type" | translate }}</label>
-                <select class="custom-select col-md-7" required="" formControlName="discountType">
+                <label class="col-xl-3 col-md-4 required">{{
+                  "cop_disc_type" | translate
+                }}</label>
+                <select
+                  class="custom-select col-md-7"
+                  required=""
+                  formControlName="discountType"
+                >
                   <option value="">--Select--</option>
                   <option value="1">Percent</option>
                   <option value="2">Fixed</option>
                 </select>
               </div>
               <div class="form-group row">
-                <label class="col-xl-3 col-md-4 required">{{ "cop_amount_percent" | translate }}</label>
+                <label class="col-xl-3 col-md-4 required">{{
+                  "cop_amount_percent" | translate
+                }}</label>
                 <input
                   class="form-control col-md-7"
                   formControlName="percentageDiscount"
@@ -167,23 +190,23 @@
                   required=""
                 />
                 <div
-                *ngIf="
-                generalForm.controls.percentageDiscount.touched &&
-                generalForm.controls.percentageDiscount.errors?.required
-                "
-                class="text text-danger offset-md-3 col-md-7"
-              >
-                {{ "PercentageDiscount_req" | translate }}
-              </div>
+                  *ngIf="
+                    generalForm.controls.percentageDiscount.touched &&
+                    generalForm.controls.percentageDiscount.errors?.required
+                  "
+                  class="text text-danger offset-md-3 col-md-7"
+                >
+                  {{ "PercentageDiscount_req" | translate }}
+                </div>
                 <div
-                *ngIf="
-                generalForm.controls.percentageDiscount.touched &&
-                generalForm.controls.percentageDiscount.errors?.pattern
-                "
-                class="text text-danger offset-md-3 col-md-7"
-              >
-                {{ "PercentageDiscount_invalid" | translate }}
-              </div>
+                  *ngIf="
+                    generalForm.controls.percentageDiscount.touched &&
+                    generalForm.controls.percentageDiscount.errors?.pattern
+                  "
+                  class="text text-danger offset-md-3 col-md-7"
+                >
+                  {{ "PercentageDiscount_invalid" | translate }}
+                </div>
               </div>
             </div>
           </div>
@@ -198,57 +221,51 @@
           novalidate=""
         >
           <div class="form-group row">
-            <label class="col-xl-3 col-md-4 required">{{ "cop_cate" | translate }}</label>
-            <select
-            class="custom-select col-md-7"
-              formControlName="category"
-          >
-            <option
-              *ngFor="let cate of mainCategories"
-              [value]="cate.id"
-            >
-              {{ cate.name }}
-            </option>
-          </select>
+            <label class="col-xl-3 col-md-4 required">{{
+              "cop_cate" | translate
+            }}</label>
+            <select class="custom-select col-md-7" formControlName="category">
+              <option *ngFor="let cate of mainCategories" [value]="cate.id">
+                {{ cate.name }}
+              </option>
+            </select>
           </div>
           <div class="form-group row" *ngIf="main_category.value">
-            <label class="col-xl-3 col-md-4 required">{{ "cop_sub_cate" | translate }}</label>
+            <label class="col-xl-3 col-md-4 required">{{
+              "cop_sub_cate" | translate
+            }}</label>
             <select
-            class="custom-select col-md-7"
-            formControlName="subCategory"
-          >
-            <option
-              *ngFor="
-                let subCate of subCategories[main_category.value]
-              "
-              [value]="subCate.id"
+              class="custom-select col-md-7"
+              formControlName="subCategory"
             >
-              {{ subCate.name }}
-            </option>
-          </select>
+              <option
+                *ngFor="let subCate of subCategories[main_category.value]"
+                [value]="subCate.id"
+              >
+                {{ subCate.name }}
+              </option>
+            </select>
           </div>
           <div class="form-group row" *ngIf="sub_category.value">
-            <label class="col-xl-3 col-md-4">{{ "cop_ex_sub_cate" | translate }}</label>
+            <label class="col-xl-3 col-md-4">{{
+              "cop_ex_sub_cate" | translate
+            }}</label>
             <select
-            class="custom-select col-md-7"
-            formControlName="extendedSubCategory"
-          >
-            <option
-              *ngFor="
-                let extndCate of extendedCategories[
-                  sub_category.value
-                ]
-              "
-              [value]="extndCate.id"
+              class="custom-select col-md-7"
+              formControlName="extendedSubCategory"
             >
-              {{ extndCate.name }}
-            </option>
-          </select>
+              <option
+                *ngFor="let extndCate of extendedCategories[sub_category.value]"
+                [value]="extndCate.id"
+              >
+                {{ extndCate.name }}
+              </option>
+            </select>
           </div>
           <div class="form-group row">
-            <label for="validationCustom4" class="col-xl-3 col-md-4"
-              >{{ "cop_min_spend" | translate }}</label
-            >
+            <label for="validationCustom4" class="col-xl-3 col-md-4">{{
+              "cop_min_spend" | translate
+            }}</label>
             <input
               class="form-control col-md-7"
               formControlName="minSpend"
@@ -257,9 +274,9 @@
             />
           </div>
           <div class="form-group row">
-            <label for="validationCustom5" class="col-xl-3 col-md-4"
-              >{{ "cop_max_spend" | translate }}</label
-            >
+            <label for="validationCustom5" class="col-xl-3 col-md-4">{{
+              "cop_max_spend" | translate
+            }}</label>
             <input
               class="form-control col-md-7"
               formControlName="maxSpend"
@@ -269,43 +286,70 @@
           </div>
           <h5>{{ "cop_usage_limit" | translate }}</h5>
           <div class="form-group row">
-            <label for="validationCustom6" class="col-xl-3 col-md-4"
-              >{{ "cop_per_limit" | translate }}</label
-            >
+            <label for="validationCustom6" class="col-xl-3 col-md-4">{{
+              "cop_can_be_used" | translate
+            }}</label>
             <input
               class="form-control col-md-7"
-              formControlName="perLimit"
+              formControlName="canBeUsed"
               id="validationCustom6"
-              type="number"
+              type="text"
             />
           </div>
-          <div class="form-group row">
-            <label for="validationCustom7" class="col-xl-3 col-md-4"
-              >{{ "cop_per_customer" | translate }}</label
-            >
+          <!-- <div class="form-group row">
+            <label for="validationCustom7" class="col-xl-3 col-md-4">{{
+              "cop_send_to" | translate
+            }}</label>
             <input
               class="form-control col-md-7"
               formControlName="perCustomer"
               id="validationCustom7"
               type="number"
             />
+          </div> -->
+          <div class="form-group row">
+            <label class="col-xl-3 col-md-4">{{
+              "cop_send_to" | translate
+            }}</label>
+            <select class="custom-select col-md-5" formControlName="sendTo">
+              <option *ngFor="let opt of sendOptions" [value]="opt.id">
+                {{ opt.name }}
+              </option>
+            </select>
+
+            <div
+              class="checkbox checkbox-primary col-md-2"
+              style="text-align: end"
+            >
+              <input
+                id="checkbox-primary-2"
+                type="checkbox"
+                formControlName="notifyRecivers"
+                data-original-title=""
+                title=""
+              />
+              <label for="checkbox-primary-2">{{
+                "cop_notify_recivers" | translate
+              }}</label>
+            </div>
           </div>
         </form>
       </fieldset>
       <div class="pull-right" style="margin-top: 20px">
-        <button 
-          type="button" 
-          class="btn btn-primary" 
+        <button
+          type="button"
+          class="btn btn-primary"
           [disabled]="generalForm.invalid || restrictionForm.invalid || loading"
-          (click)="isEdit? editCoupon() : createCoupon()">
-          {{ isEdit ? "Update" : "Create" }}
+          (click)="isEdit ? editCoupon() : createCoupon()"
+        >
+          {{ (isEdit ? "cop_update" : "cop_create") | translate }}
         </button>
         <button
-          *ngIf="isEdit" 
-          type="button" 
-          class="btn btn-danger ml-1" 
+          *ngIf="isEdit"
+          type="button"
+          class="btn btn-danger ml-1"
           [routerLink]="'/coupons/list-coupons'"
-          >
+        >
           Back
         </button>
       </div>

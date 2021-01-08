@@ -7,6 +7,14 @@ export const MainCategories = [
   { id: 'sc', name: 'skin-care' },
   { id: 'le', name: 'Leisure Experience' },
 ];
+export const SendToOptions = (lang = 'en') => [
+  { id: 'all_fol', name: lang == 'en' ? 'All Followers' : '所有粉絲' },
+  {
+    id: 'wnpwm',
+    name: lang == 'en' ? 'Who made purchases with me' : '曾向我下單的客⼾',
+  },
+  { id: 'both', name: lang == 'en' ? 'Both' : '兩類群組' },
+];
 
 export const SubCategories = {
   acces: [
