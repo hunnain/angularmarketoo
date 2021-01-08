@@ -9,9 +9,10 @@ import { CouponsRoutingModule } from './coupons-routing.module';
 import { ListCouponComponent } from './list-coupon/list-coupon.component';
 import { CreateCouponComponent } from './create-coupon/create-coupon.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CreateStoreCreditComponent } from './create-store-credit/create-store-credit.component';
 
 @NgModule({
-  declarations: [ListCouponComponent, CreateCouponComponent],
+  declarations: [ListCouponComponent, CreateCouponComponent, CreateStoreCreditComponent],
   imports: [
     CommonModule,
     CouponsRoutingModule,

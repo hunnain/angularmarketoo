@@ -1,0 +1,78 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="card">
+    <!-- <div class="card-header">
+      <h5>{{ "discount_coup" | translate }}</h5>
+    </div> -->
+    <!-- <div class="card-body" *ngIf="isEdit">
+      <div style="display: flex; align-items: center; justify-content: center">
+        <app-loader [loading]="loading"></app-loader>
+      </div>
+    </div> -->
+    <div class="card-body">
+      <!-- <ngb-tabset class="tab-coupon"> -->
+      <!-- <ngb-tab title="General"> -->
+
+      <fieldset class="fieldset" style="margin-top: 20px">
+        <legend class="legend">{{ "csc" | translate }}</legend>
+        <form
+          [formGroup]="storeCreditForm"
+          class="needs-validation"
+          novalidate=""
+        >
+          <div class="form-group row">
+            <label for="validationCustom5" class="col-xl-3 col-md-4">{{
+              "csc_send_amount" | translate
+            }}</label>
+            <input
+              class="form-control col-md-7"
+              formControlName="sendAmount"
+              id="validationCustom5"
+              type="number"
+            />
+          </div>
+          <div class="form-group row">
+            <label for="validationCustom0" class="col-xl-3 col-md-4 required">{{
+              "csc_reason" | translate
+            }}</label>
+            <input
+              class="form-control col-md-7"
+              formControlName="reason"
+              id="validationCustom0"
+              type="text"
+            />
+            <!-- <div
+              *ngIf="
+                generalForm.controls.couponTitle.touched &&
+                generalForm.controls.couponTitle.errors?.required
+              "
+              class="text text-danger offset-md-3 col-md-7"
+            >
+              {{ "couponTitle_req" | translate }}
+            </div> -->
+          </div>
+        </form>
+      </fieldset>
+      <div class="pull-right" style="margin-top: 20px">
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="storeCreditForm.invalid || loading"
+          (click)="isEdit ? editCoupon() : createCoupon()"
+        >
+          {{ (isEdit ? "cop_update" : "cop_create") | translate }}
+        </button>
+        <button
+          *ngIf="isEdit"
+          type="button"
+          class="btn btn-danger ml-1"
+          [routerLink]="'/coupons/list-coupons'"
+        >
+          Back
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Container-fluid Ends-->
