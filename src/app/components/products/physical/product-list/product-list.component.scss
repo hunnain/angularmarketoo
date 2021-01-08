@@ -1,7 +1,22 @@
-.filter-box{
-    margin-bottom: 30px;
+.filter-box {
+  margin-bottom: 30px;
 }
 
-.pagination-nav{
-    margin-bottom: 20px;
+.pagination-nav {
+  margin-bottom: 20px;
+}
+.pagination .mat-form-field-underline {
+  background: #f88379;
+}
+.pagination .mat-select-arrow {
+  color: #f88379;
+}
+.pagination .mat-select-value-text {
+  color: #f88379;
+}
+.pagination .mat-button-wrapper {
+  color: #f88379;
+}
+.pagination .mat-paginator-page-size-label {
+  color: #f88379;
 }

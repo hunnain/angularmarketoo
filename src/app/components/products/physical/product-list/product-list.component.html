@@ -87,14 +87,18 @@
     </div>
   </div>
   <!-- Pagination -->
-  <!-- <mat-paginator
-    [length]="pagination.TotalCount"
-    [pageSize]="PageSize"
-    [pageSizeOptions]="pageSizeOptions"
-    (page)="pageEvent($event)"
-  >
-  </mat-paginator> -->
-  <nav class="pagination-nav" aria-label="Page navigation" *ngIf="!loading">
+  <div class="pagination" *ngIf="!loading" style="margin-bottom: 10px">
+    <mat-paginator
+      color="primary"
+      [pageIndex]="pagination.CurrentPage - 1"
+      [length]="pagination.TotalCount"
+      [pageSize]="pagination.PageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="pageEvent($event)"
+    >
+    </mat-paginator>
+  </div>
+  <!-- <nav class="pagination-nav" aria-label="Page navigation" *ngIf="!loading">
     <ul class="pagination justify-content-end">
       <li
         class="page-item"
@@ -124,5 +128,5 @@
         <a class="page-link">{{ "next" | translate }}</a>
       </li>
     </ul>
-  </nav>
+  </nav> -->
 </div>

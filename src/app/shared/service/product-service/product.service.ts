@@ -8,7 +8,7 @@ export class ProductService {
   constructor(private commonService: CommonService) {}
 
   getProduct(query) {
-    return this.commonService.get(`product?${query}`);
+    return this.commonService.get(`product/seller?${query}`);
   }
 
   getProductById(uuid) {

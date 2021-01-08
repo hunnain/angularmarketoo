@@ -103,7 +103,9 @@ export class ProductListComponent implements OnInit {
 
   pageEvent(data) {
     console.log(data);
-    this.pagination.PageSize = data;
+    this.pagination.PageSize = data.pageSize;
+    this.pagination.CurrentPage = data.pageIndex + 1;
+    this.getProducts();
   }
 
   setFilters(lang) {
@@ -134,6 +136,7 @@ export class ProductListComponent implements OnInit {
   getProducts() {
     const { PageSize, CurrentPage } = this.pagination;
     this.loading = true;
+    this.product_list = [];
     this.productService
       .getProduct(`pageSize=${PageSize}&pageNumber=${CurrentPage}`)
       .subscribe((res) => {
