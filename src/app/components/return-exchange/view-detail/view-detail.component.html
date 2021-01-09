@@ -74,11 +74,9 @@
                     [(ngModel)]="refund_reason"
                     name="refund_reason"
                   >
-                    <option value="faulty">Mismatched items</option>
-                    <option value="faulty">Faulty items</option>
-                    <option value="faulty">
-                      The product does not match the product page description
-                    </option>
+                    <option value="faulty">{{'Mismatched items' | translate}}</option>
+                    <option value="faulty">{{'Faulty items' | translate}}</option>
+                    <option value="faulty">{{'Wrong size' | translate}}</option>
                   </select>
                 </div>
                 <div class="font-size-13">

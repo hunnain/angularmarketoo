@@ -9,7 +9,7 @@
         <app-loader [loading]="loading"></app-loader>
       </div>
     </div>
-    <div class="card-body" *ngIf="isEdit || !fetching">
+    <div class="card-body" *ngIf="isEdit && !fetching || !isEdit">
       <!-- <ngb-tabset class="tab-coupon"> -->
       <!-- <ngb-tab title="General"> -->
       <fieldset class="fieldset">

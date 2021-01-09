@@ -8,6 +8,7 @@ import {
   Inject,
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthServiceService } from '../../service/auth-service/auth-service.service';
 import { NavService } from '../../service/nav.service';
 
 @Component({
@@ -25,9 +26,10 @@ export class HeaderComponent implements OnInit {
   public isTranslate: boolean = false;
   constructor(
     public navServices: NavService,
+    private authService: AuthServiceService,
     @Inject(PLATFORM_ID) private platformId: Object,
     private translate: TranslateService
-  ) {}
+  ) { }
 
   collapseSidebar() {
     this.open = !this.open;
@@ -52,11 +54,13 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     console.log('logout');
-    localStorage.clear();
+    this.authService.logout().subscribe(res => {
+      localStorage.clear();
+    })
     // localStorage.removeItem('userInfo');
     // localStorage.removeItem('userInfo');
     // localStorage.removeItem('userInfo');
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

@@ -26,7 +26,7 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
     private auth: AuthServiceService,
     private router: Router,
     private ns: NotificationService
-  ) {}
+  ) { }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -46,6 +46,7 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
         .catch((err) => {
           console.log(err);
           this.cs.isLoading.next(false);
+          localStorage.clear();
           this.router.navigate(['auth/login']);
           return Observable.of(false);
         });

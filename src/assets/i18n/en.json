@@ -543,6 +543,9 @@
   "Indoor Activities": "Indoor Activities",
   "Casual Seminar": "Casual Seminar",
 
+  "Mismatched items":"Mismatched items",
+  "Faulty items":"Faulty items",
+  "Wrong size":"Wrong size",
   "bid_min_days": "Min days",
   "bid_max_days": "Max days",
   "bid_days": "Days"
