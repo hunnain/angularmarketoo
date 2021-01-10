@@ -7,8 +7,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { AllCoupons } from '../../../shared/interfaces/coupon/coupon';
 import { Paginate } from 'src/app/shared/interfaces/pagination';
 
-
-
 @Component({
   selector: 'app-list-coupon',
   templateUrl: './list-coupon.component.html',
@@ -19,14 +17,14 @@ export class ListCouponComponent implements OnInit {
   public selected = [];
   public loading: boolean = false;
   public pagination: Paginate = {
-    TotalCount: 0,
-    PageSize: 10,
-    CurrentPage: 0,
+    CurrentPage: 1,
     HasNext: false,
     HasPrevious: false,
-    TotalPages: 0
+    PageSize: 10,
+    TotalCount: 0,
+    TotalPages: 1,
   };
-
+  pageSizeOptions: number[] = [5, 10, 25, 50];
   constructor(
     private router: Router,
     private couponService: CouponService,
@@ -36,7 +34,7 @@ export class ListCouponComponent implements OnInit {
     // this.digital_categories = listCouponsDB.list_coupons;
     this.cs.isLoading.subscribe((loading) => {
       this.loading = loading;
-    })
+    });
   }
 
   onSelect({ selected }) {
@@ -48,9 +46,17 @@ export class ListCouponComponent implements OnInit {
     this.fetchCoupons();
   }
 
+  pageEvent(data) {
+    console.log(data);
+    this.pagination.PageSize = data.pageSize;
+    this.pagination.CurrentPage = data.pageIndex + 1;
+    this.fetchCoupons();
+  }
+
   fetchCoupons() {
+    const { PageSize, CurrentPage } = this.pagination;
     this.loading = true;
-    let query = `PageSize=10&PageNumber=1`;
+    let query = `PageSize=${PageSize}&PageNumber=${CurrentPage}`;
     this.couponService.getCoupon(query).subscribe(
       (res) => {
         if (res) {
@@ -59,7 +65,7 @@ export class ListCouponComponent implements OnInit {
           this.digital_categories = res.body;
           console.log('coupon-res', res.headers.get('x-pagination'));
           this.pagination = JSON.parse(res.headers.get('X-Pagination'));
-          console.log("pagination", this.pagination)
+          console.log('pagination', this.pagination);
         }
       }
       //  ,err => {
@@ -78,6 +84,6 @@ export class ListCouponComponent implements OnInit {
   }
 
   setPage(page) {
-    console.log("page--", page)
+    console.log('page--', page);
   }
 }

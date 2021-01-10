@@ -29,11 +29,11 @@
               [selectAllRowsOnPage]="false"
               (select)="onSelect($event)"
             >
-              <!-- [externalPaging]="true"
+              <!-- [externalPaging]="true" 
               [count]="pagination.TotalCount"
               [offset]="pagination.CurrentPage"
               [limit]="pagination.PageSize"
-              (page)="setPage($event)" -->
+              (page)="setPage($event)"-->
               <ngx-datatable-column
                 [width]="30"
                 [sortable]="false"
@@ -89,6 +89,25 @@
                   </div>
                 </ng-template>
               </ngx-datatable-column>
+              <ngx-datatable-footer>
+                <ng-template ngx-datatable-footer-template>
+                  <div
+                    class="pagination"
+                    *ngIf="!loading"
+                    style="margin-bottom: 10px; width: -webkit-fill-available"
+                  >
+                    <mat-paginator
+                      style="width: -webkit-fill-available"
+                      [pageIndex]="pagination.CurrentPage - 1"
+                      [length]="pagination.TotalCount"
+                      [pageSize]="pagination.PageSize"
+                      [pageSizeOptions]="pageSizeOptions"
+                      (page)="pageEvent($event)"
+                    >
+                    </mat-paginator>
+                  </div>
+                </ng-template>
+              </ngx-datatable-footer>
             </ngx-datatable>
           </div>
         </div>
