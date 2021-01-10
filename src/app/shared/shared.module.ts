@@ -17,7 +17,8 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { MaterialModule } from '../material.module';
-
+import { EmailChipInputComponent } from './components/email-chip-input/email-chip-input.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     ToggleFullscreenDirective,
@@ -29,6 +30,7 @@ import { MaterialModule } from '../material.module';
     BreadcrumbComponent,
     RightSidebarComponent,
     LoaderComponent,
+    EmailChipInputComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +40,8 @@ import { MaterialModule } from '../material.module';
     NgbModule,
     TranslateModule,
     MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [NavService, WINDOW_PROVIDERS],
   exports: [
@@ -49,6 +53,7 @@ import { MaterialModule } from '../material.module';
     TranslateModule,
     MatPaginatorModule,
     LoaderComponent,
+    EmailChipInputComponent,
   ],
 })
 export class SharedModule {}
