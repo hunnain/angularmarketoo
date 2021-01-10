@@ -119,10 +119,10 @@
       <p>Shop Owner Referral Program</p>
       <p>&nbsp;</p>
       <ul>
-        <li>
+        <li *ngIf="selectedLang != 'en'">
           店主每成功邀請一位新店主註冊並且上架商品後，即可獲得HK$20，可用於減免成交管理費，並扣除於當月管理費中。
         </li>
-        <li>
+        <li *ngIf="selectedLang == 'en'">
           After the shop owner successfully invites a new shop owner to register
           and list the products on Marketoo, shop owner will get HK$20 in which
           shop owner can use to reduce transaction management fee and deduct it
@@ -131,22 +131,22 @@
       </ul>
       <p>&nbsp;</p>
       <ul>
-        <li>
+        <li *ngIf="selectedLang != 'en'">
           每月可減免成交管理費金額上限為 HK$500（相當於邀請25個新店主或以上）,
           減免額不可超過每月成交管理費。
         </li>
-        <li>
+        <li *ngIf="selectedLang == 'en'">
           The maximum amount of monthly transaction management fee exemption is
           HK$500 (equivalent to inviting 25 new shop owners or more), and the
           deduction cannot exceed the monthly transaction management fee.
         </li>
         <li></li>
-        <li>
+        <li *ngIf="selectedLang != 'en'">
           減免金額與當月收入同樣於當月月底結算，由Marketoo
           系統每月自動減免成交管理費，若可減免的金額比成交管理費多，扣除可減免金額後，差額不可累積或兌換其他優惠。
         </li>
         <li></li>
-        <li>
+        <li *ngIf="selectedLang == 'en'">
           The deduction amount will be settled at the end of the same month as
           the income of the current month. Marketoo system will automatically
           deduct the transaction management fee every month. If the deduction
@@ -155,13 +155,13 @@
           exchanged for other offers.
         </li>
         <li></li>
-        <li>
+        <li *ngIf="selectedLang != 'en'">
           例子1：本月收入HK$2000，成交管理費為 HK$100，店主可拿到
           HK$1900。而若有可減免的金額為 HK$150，最終店主可拿到的金額是
           HK$2000（因減免額不可超過每月成交管理費, 最多可扣除HK$100）。
         </li>
-        <li></li>
-        <li>
+        <p>&nbsp;</p>
+        <li *ngIf="selectedLang == 'en'">
           Example 1: The income of this month is HK$2000, the transaction
           management fee is HK$100, and the shop owner can get HK$1900. And if
           there is a deduction of HK$150, the final amount that the shop owner
@@ -170,46 +170,49 @@
         </li>
       </ul>
       <p>&nbsp;</p>
-      <p>最終匯款金額</p>
-      <p>=HK$2000(收入)-HK$100(成交管理費)+HK$100(減免金額)</p>
-      <p>=HK$2000</p>
-      <p>Final remittance amount</p>
-      <p>
+      <p *ngIf="selectedLang != 'en'">最終匯款金額</p>
+      <p *ngIf="selectedLang != 'en'">
+        =HK$2000(收入)-HK$100(成交管理費)+HK$100(減免金額)
+      </p>
+      <p *ngIf="selectedLang != 'en'">=HK$2000</p>
+      <p *ngIf="selectedLang == 'en'">Final remittance amount</p>
+      <p *ngIf="selectedLang == 'en'">
         =HK$2000 (income) - HK$100 (transaction management fee) + HK$100
         (reduction amount)
       </p>
-      <p>=HK$2000</p>
+      <p *ngIf="selectedLang == 'en'">=HK$2000</p>
       <p>&nbsp;</p>
-      <p>
+      <p *ngIf="selectedLang != 'en'">
         例子2：本月收入HK$2000，成交管理費為 HK$100，店主可拿到
         HK$1900。而若有可減免的金額為 HK$50，最終店主可拿到的金額是 HK$1950。
       </p>
-      <p>
+      <p *ngIf="selectedLang == 'en'">
         Example 2: This month's income is HK$2000, transaction management fee is
         HK$100, and the shop owner can get HK$1900. And if there is a deductible
         amount of HK$50, the final amount the shop owner can get is HK$1950.
       </p>
       <p>&nbsp;</p>
-      <p>最終匯款金額</p>
-      <p>=HK$2000(收入)-HK$100(成交管理費)+HK$50(減免金額)</p>
-      <p>=HK$1950</p>
-      <p>Final remittance amount</p>
-      <p>
-        =HK$2000(收入)-HK$100(transaction management fee)+HK$50(reduction
+      <p *ngIf="selectedLang != 'en'">最終匯款金額</p>
+      <p *ngIf="selectedLang != 'en'">
+        =HK$2000(收入)-HK$100(成交管理費)+HK$50(減免金額)
+      </p>
+      <p *ngIf="selectedLang != 'en'">=HK$1950</p>
+      <p *ngIf="selectedLang == 'en'">Final remittance amount</p>
+      <p *ngIf="selectedLang == 'en'">
+        =HK$2000(income)-HK$100(transaction management fee)+HK$50(reduction
         amount)
       </p>
-      <p>=HK$1950</p>
+      <p *ngIf="selectedLang == 'en'">=HK$1950</p>
       <p>&nbsp;</p>
-
       <ul>
-        <li>
+        <li *ngIf="selectedLang != 'en'">
           系統根據新店主上架商品日期，利用月結形式，自動減免當月成交管理費。例如：推薦後,
           新店主於1月 31日成功上架商品，將納入
           1月減免金額中，支付金額於次月二十號(遇假日順延)扣除相關費用後,
           匯至店主指定帳戶。
         </li>
         <li></li>
-        <li>
+        <li *ngIf="selectedLang == 'en'">
           The system automatically reduces or exempts the transaction management
           fee of the month based on the date when the new store owner puts the
           product on the shelf. For example: After the recommendation, the new
@@ -221,9 +224,8 @@
         </li>
       </ul>
       <p><em>&nbsp;</em></p>
-      <p>&nbsp;</p>
       <ul>
-        <li>
+        <li *ngIf="selectedLang != 'en'">
           當月收入未達<a href="https://www.pinkoi.com/faq/shop?question=monthly"
             >匯款標準</a
           >(月結金額不足HK$500)，但店主也成功邀請會員，系統亦會自動以月結形式折抵成交管理費，待累積達匯款<a
@@ -232,13 +234,13 @@
           >後一併匯款。
         </li>
         <li></li>
-        <li>
+        <li *ngIf="selectedLang != 'en'">
           例如：1 月營收 HK$500，成交管理費 HK$50，可減免 HK$20，可拿金額為
           HK$470；因 HK$470 未達匯款標準，故將累積至下月收入，待合共超過 HK$500
           時進行匯款。
         </li>
         <li></li>
-        <li>
+        <li *ngIf="selectedLang == 'en'">
           The monthly income does not meet the remittance standard (monthly
           settlement amount is less than HK$500), but the shop owner also
           successfully invites members, the system will automatically deduct the
@@ -247,7 +249,7 @@
           remittance standard.
         </li>
         <li></li>
-        <li>
+        <li *ngIf="selectedLang == 'en'">
           For example: January revenue is HK$500, transaction management fee is
           HK$50, HK$20 can be deducted, and the available amount is HK$470; as
           HK$470 is not up to the remittance standard, it will accumulate to the

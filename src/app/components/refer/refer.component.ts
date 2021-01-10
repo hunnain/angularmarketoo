@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { invoiceDB } from '../../shared/tables/invoice';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-refer',
   templateUrl: './refer.component.html',
@@ -10,11 +11,12 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 export class ReferComponent implements OnInit {
   public userForm: FormGroup;
   public closeResult: string;
-
+  public selectedLang: string = 'en';
   constructor(
     private fb: FormBuilder,
     private elementRef: ElementRef,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private translate: TranslateService
   ) {
     this.userForm = this.fb.group({
       email: [
@@ -26,6 +28,11 @@ export class ReferComponent implements OnInit {
       ],
       description_1: [''],
       description_2: [''],
+    });
+
+    this.selectedLang = this.translate.currentLang;
+    this.translate.onLangChange.subscribe((res) => {
+      this.selectedLang = res.lang;
     });
   }
   open(content) {
