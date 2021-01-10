@@ -7,7 +7,10 @@
           <h5>{{ "manage_order" | translate }}</h5>
         </div>
         <div class="card-body">
-          <div class="custom-datatable">
+          <div style="display: flex; align-items: center; justify-content: center">
+            <app-loader [loading]="loading"></app-loader>
+          </div>
+          <div class="custom-datatable" *ngIf="!loading">
             <input
               type="text"
               class="filter-ngx form-control"
@@ -29,24 +32,40 @@
             >
               <ngx-datatable-column 
               name='{{ "ordersmanagement_orderid" | translate }}'
-              prop="order id"></ngx-datatable-column>
+              prop="orderId"></ngx-datatable-column>
               <ngx-datatable-column 
               name='{{ "ordersmanagement_product" | translate }}'
-              prop="product"></ngx-datatable-column>
+              prop="orderedProductDetails">
+              <ng-template
+              let-row="row"
+              let-value="value"
+              ngx-datatable-cell-template
+            >
+              {{getProductsName(value)}}
+            </ng-template>
+            </ngx-datatable-column>
               <ngx-datatable-column
               name='{{ "ordersmanagement_paymentstatus" | translate }}'
-                prop="payment status"
+                prop="paymentStatus"
               ></ngx-datatable-column>
               <ngx-datatable-column
                 name='{{ "ordersmanagement_paymentmethod" | translate }}'
-                prop="paymeny method"
+                prop="paymentService"
               ></ngx-datatable-column>
               <ngx-datatable-column 
               name='{{ "ordersmanagement_orderstatus" | translate }}'
-              prop="order status"></ngx-datatable-column>
+              prop="orderStatus"></ngx-datatable-column>
               <ngx-datatable-column 
               name='{{ "ordersmanagement_orderdate" | translate }}'
-              prop="date"></ngx-datatable-column>
+              prop="creationDate">
+              <ng-template
+              let-row="row"
+              let-value="value"
+              ngx-datatable-cell-template
+            >
+              {{getFormatDate(value)}}
+            </ng-template>
+            </ngx-datatable-column>
               <ngx-datatable-column 
               name='{{ "ordersmanagement_total" | translate }}'
               name="total"></ngx-datatable-column>
@@ -54,7 +73,7 @@
               name='{{ "ordersmanagement_action" | translate }}'
                 prpp="action"
                 sortable="false"
-                prop="order id"
+                prop="orderId"
               >
                 <ng-template
                   let-row="row"

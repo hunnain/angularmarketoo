@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Image } from '@ks89/angular-modal-gallery';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute, Router } from '@angular/router';
+import { OrderService } from 'src/app/shared/service/order-service/order.service';
+import { CommonService } from 'src/app/shared/service/common.service';
+import { Order } from 'src/app/shared/interfaces/order';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-order-detail',
@@ -17,7 +22,7 @@ export class OrderDetailComponent implements OnInit {
 
   public total: number;
   public img: string = 'assets/images/user.png';
-
+  public order: Order;
   public dummyData = {
     'order id': '#51240',
     products: [
@@ -41,8 +46,20 @@ export class OrderDetailComponent implements OnInit {
     total: 54671,
   };
 
-  constructor(private modalService: NgbModal) {
+  public orderId: string;
+  public fetching: boolean = false;
+  constructor(
+    private modalService: NgbModal,
+    private activeRoute: ActivatedRoute,
+    private router: Router,
+    private orderService: OrderService,
+    private cs: CommonService
+  ) {
     this.status = this.dummyData.order_status;
+    if (this.activeRoute.params['value'].id) {
+      this.orderId = this.activeRoute.params['value'].id;
+      this.fetchOrderById(this.orderId);
+    }
   }
 
   open(content) {
@@ -69,7 +86,19 @@ export class OrderDetailComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  fetchOrderById(id) {
+    this.fetching = true;
+    this.orderService.getOrderById(id).subscribe((res) => {
+      if (res) {
+        console.log('fetch res---', res.body);
+        this.order = res.body;
+        this.cs.isLoading.next(false);
+        this.fetching = false;
+      }
+    });
+  }
 
   changeTotal(content) {
     // this.total = Number(this.dummyData.total);
@@ -114,5 +143,9 @@ export class OrderDetailComponent implements OnInit {
     console.log(content);
 
     this.open(content);
+  }
+
+  formatDate(date) {
+    return moment(date).format('MMM DD,YY');
   }
 }

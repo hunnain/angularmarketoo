@@ -146,6 +146,23 @@
               >
               <ng-template ngbTabContent>
                 <div class="account-setting">
+                  <h5 class="f-w-600">{{ "announcement" | translate }}</h5>
+                  <div class="row mb-2">
+                    <div class="col">
+                      <textarea class="form-control" 
+                      id="exampleFormControlTextarea1" 
+                      rows="3" 
+                      maxlength="250"
+                      placeholder="{{'announcement_placeholder' | translate}}"></textarea>
+                      <div class="mt-2 text-right">
+                        <button type="button" class="btn btn-primary">
+                          {{ "save_announcement" | translate }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="account-setting">
                   <h5 class="f-w-600">{{ "notification" | translate }}</h5>
                   <div class="row">
                     <div class="col">

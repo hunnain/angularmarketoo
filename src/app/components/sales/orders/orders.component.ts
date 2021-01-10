@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DatatableComponent } from "@swimlane/ngx-datatable";
+import * as moment from 'moment';
 import { Paginate } from 'src/app/shared/interfaces/pagination';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { OrderService } from 'src/app/shared/service/order-service/order.service';
@@ -45,9 +46,7 @@ export class OrdersComponent implements OnInit {
           this.cs.isLoading.next(false);
           this.loading = false;
           this.orders = res.body;
-          console.log('orders-res', res.headers.get('x-pagination'));
           this.pagination = JSON.parse(res.headers.get('X-Pagination'));
-          console.log("pagination", this.pagination)
         }
       }
       //  ,err => {
@@ -75,12 +74,23 @@ export class OrdersComponent implements OnInit {
   }
 
   onSelectRow(row) {
-    let route = `/sales/order-detail/${row.replace(/#/g, "")}`
+    let route = `/sales/order-detail/${row}`
     this.router.navigate([route])
   }
 
   setPage(page) {
     console.log("page--", page)
+  }
+
+  getFormatDate(date) {
+    return moment(date).format('MMM DD,YY');
+  }
+
+  getProductsName(products) {
+    if (products && products.length) {
+      return products.map(prod => prod.name).join(',')
+    }
+    return 'N/A';
   }
 
 }
