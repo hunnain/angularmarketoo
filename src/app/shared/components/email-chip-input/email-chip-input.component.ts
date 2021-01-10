@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { find, get, pull } from 'lodash';
 @Component({
@@ -9,6 +9,7 @@ import { find, get, pull } from 'lodash';
 export class EmailChipInputComponent implements OnInit {
   @ViewChild('tagInput') tagInputRef: ElementRef;
   tags: string[] = [];
+  @Input() placeholder: string = 'Email Here...';
   // form: FormGroup;
   public tag = null;
   constructor(private fb: FormBuilder) {}

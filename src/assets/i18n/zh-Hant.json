@@ -148,11 +148,11 @@
   "ordermanagement_ordercustomersummaryorderstatuschange": "更改",
   "ordermanagement_ordercustomersummaryorderstotals": "總額",
   "ordermanagement_ordercustomersummaryorderstotalschange": "更改",
-  "prod_image":"图片",
-  "prod_Name":"名称",
-  "prod_unitAmount":"单位金额",
-  "prod_qty":"数量",
-  "prod_totalAmount":"总金额",
+  "prod_image": "图片",
+  "prod_Name": "名称",
+  "prod_unitAmount": "单位金额",
+  "prod_qty": "数量",
+  "prod_totalAmount": "总金额",
 
   "Product Detail": "产品信息",
   "Add Products": "添加产品",
@@ -232,8 +232,8 @@
   "tab_settings": "設定",
   "notification": "提示信息",
   "announcement": "公告",
-  "announcement_placeholder":"請以簡短方式填寫你想告知客戶的重要消息",
-  "save_announcement":"保存",
+  "announcement_placeholder": "請以簡短方式填寫你想告知客戶的重要消息",
+  "save_announcement": "保存",
   "n_allow_desk_not": "允許桌面提示信息",
   "n_enable_not": "允許提示信息",
   "n_get_not": "允許個人活動提示信息",
@@ -393,6 +393,8 @@
   "csc": "新增積分",
   "csc_send_amount": "發放⾦額",
   "csc_reason": "原因",
+  "csc_reciver": "接收者",
+  "csc_email_here": "請電郵致",
 
   "bid_boosting": "廣告優化",
   "bid_boosting_desc": "「廣告優化」是一種按需要付費的廣告工具，旨在提高您在Marketoo上的可見度。您列出的產品將固定在搜索結果和廣告系列中的各個類別上，從而使更多的潛在買家能夠參與其中。",
@@ -556,7 +558,7 @@
   "Indoor Activities": "室外運動",
   "Casual Seminar": "休閒講座",
 
-  "Mismatched items":"與訂單不符的商品",
-  "Faulty items":"商品有缺陷瑕疵",
-  "Wrong size":"商品與商品⾴說明不符"
+  "Mismatched items": "與訂單不符的商品",
+  "Faulty items": "商品有缺陷瑕疵",
+  "Wrong size": "商品與商品⾴說明不符"
 }

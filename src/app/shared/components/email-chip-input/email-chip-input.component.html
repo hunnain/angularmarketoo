@@ -5,7 +5,7 @@
       <span class="remove-tag" (click)="removeTag(i)">×</span>
     </span>
     <input
-      placeholder="Email Here..."
+      [placeholder]="placeholder"
       #tagInput
       name="tag"
       type="text"
