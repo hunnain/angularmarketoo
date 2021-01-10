@@ -1,32 +1,82 @@
 <!-- Container-fluid starts-->
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5>{{'re_return_exchange'|translate}}</h5>
-                </div>
-                <div class="card-body">
-                    <div class="custom-datatable">
-                        <ngx-datatable class="bootstrap" [rows]="order" [columnMode]="'force'" [headerHeight]="50"
-                            [footerHeight]="50" [rowHeight]="'auto'" [limit]="5">
-                            <!-- <ngx-datatable-column prop="order id"></ngx-datatable-column> -->
-                            <ngx-datatable-column name='{{ "returnexchange_products" | translate }}' prop="products"></ngx-datatable-column>
-                            <ngx-datatable-column name='{{ "returnexchange_type" | translate }}' prop="type"></ngx-datatable-column>
-                            <ngx-datatable-column name='{{ "returnexchange_requestedon" | translate }}' prop="requested_on"></ngx-datatable-column>
-                            <ngx-datatable-column name='{{ "returnexchange_amount" | translate }}' prop="total"></ngx-datatable-column>
-                            <ngx-datatable-column name='{{ "returnexchange_remarks" | translate }}' prop="remarks"></ngx-datatable-column>
-                            <ngx-datatable-column name='{{ "returnexchange_action" | translate }}' sortable="false" prop="order id">
-                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                                    <span style="color:#f88379;cursor: pointer;">
-                                        <i class="fa fa-eye" (click)='onSelectRow(value)'></i>
-                                    </span>
-                                  </ng-template>
-                            </ngx-datatable-column>
-                        </ngx-datatable>
-                    </div>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>{{ "re_return_exchange" | translate }}</h5>
         </div>
+        <div class="card-body">
+          <div class="custom-datatable">
+            <ngx-datatable
+              class="bootstrap"
+              [rows]="order"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [rowHeight]="'auto'"
+              [limit]="5"
+            >
+              <!-- <ngx-datatable-column prop="order id"></ngx-datatable-column> -->
+              <ngx-datatable-column
+                name="{{ 'returnexchange_products' | translate }}"
+                prop="products"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'returnexchange_type' | translate }}"
+                prop="type"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'returnexchange_requestedon' | translate }}"
+                prop="requested_on"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'returnexchange_amount' | translate }}"
+                prop="total"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'returnexchange_remarks' | translate }}"
+                prop="remarks"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'returnexchange_action' | translate }}"
+                sortable="false"
+                prop="order id"
+              >
+                <ng-template
+                  let-row="row"
+                  let-value="value"
+                  ngx-datatable-cell-template
+                >
+                  <span style="color: #f88379; cursor: pointer">
+                    <i class="fa fa-eye" (click)="onSelectRow(value)"></i>
+                  </span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-footer>
+                <ng-template ngx-datatable-footer-template>
+                  <div
+                    class="pagination"
+                    *ngIf="!loading"
+                    style="margin-bottom: 10px; width: -webkit-fill-available"
+                  >
+                    <mat-paginator
+                      style="width: -webkit-fill-available"
+                      [pageIndex]="pagination.CurrentPage - 1"
+                      [length]="pagination.TotalCount"
+                      [pageSize]="pagination.PageSize"
+                      [pageSizeOptions]="pageSizeOptions"
+                      (page)="pageEvent($event)"
+                    >
+                    </mat-paginator>
+                  </div>
+                </ng-template>
+              </ngx-datatable-footer>
+            </ngx-datatable>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- Container-fluid Ends-->
+  </div>
+  <!-- Container-fluid Ends-->
+</div>
