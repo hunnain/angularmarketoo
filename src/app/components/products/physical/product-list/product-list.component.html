@@ -89,7 +89,7 @@
   <!-- Pagination -->
   <div class="pagination" *ngIf="!loading" style="margin-bottom: 10px">
     <mat-paginator
-      color="primary"
+      style="width: -webkit-fill-available"
       [pageIndex]="pagination.CurrentPage - 1"
       [length]="pagination.TotalCount"
       [pageSize]="pagination.PageSize"

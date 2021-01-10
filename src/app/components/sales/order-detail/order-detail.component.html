@@ -4,7 +4,9 @@
       <div class="col-xl-8">
         <div class="product-page-details product-right mb-0">
           <div class="row">
-            <h2 class="col-12 col-md-6">{{ "ordermanagement_orderdetail" | translate }}</h2>
+            <h2 class="col-12 col-md-6">
+              {{ "ordermanagement_orderdetail" | translate }}
+            </h2>
             <div class="col-12 col-md-6" style="text-align: right">
               <span
                 style="color: #36f; cursor: pointer"
@@ -34,50 +36,78 @@
             </p> -->
 
             <div style="margin-top: 30px">
-              <h4 class="product-title">{{ "ordermanagement_ordercustomer" | translate }}</h4>
+              <h4 class="product-title">
+                {{ "ordermanagement_ordercustomer" | translate }}
+              </h4>
               <hr />
               <div class="payment-section" style="margin-top: 20px">
                 <div class="font-size-13">
-                  <strong>{{ "ordermanagement_ordercustomername" | translate }}</strong>: {{ dummyData?.user_info?.name }}
+                  <strong>{{
+                    "ordermanagement_ordercustomername" | translate
+                  }}</strong
+                  >: {{ dummyData?.user_info?.name }}
                 </div>
                 <div class="font-size-13">
-                  <strong>{{ "ordermanagement_ordercustomercontactno" | translate }}</strong>:
+                  <strong>{{
+                    "ordermanagement_ordercustomercontactno" | translate
+                  }}</strong
+                  >:
                   {{ dummyData?.user_info?.contact }}
                 </div>
               </div>
               <div style="margin-top: 20px" class="font-size-13">
-                <strong>{{ "ordermanagement_ordercustomeraddress" | translate }}</strong>: {{ dummyData?.user_info?.address }}
+                <strong>{{
+                  "ordermanagement_ordercustomeraddress" | translate
+                }}</strong
+                >: {{ dummyData?.user_info?.address }}
               </div>
             </div>
           </div>
 
           <div class="container-gap">
-            <h4 class="product-title">{{ "ordermanagement_ordercustomerpayment" | translate }}</h4>
+            <h4 class="product-title">
+              {{ "ordermanagement_ordercustomerpayment" | translate }}
+            </h4>
             <hr />
             <div class="payment-section">
               <div class="font-size-13">
-                <strong>{{ "ordermanagement_ordercustomerstatus" | translate }}</strong>:
+                <strong>{{
+                  "ordermanagement_ordercustomerstatus" | translate
+                }}</strong
+                >:
                 <span class="badge badge-secondary">{{
                   dummyData.payment_status
                 }}</span>
               </div>
               <div class="font-size-13">
-                <strong>{{ "ordermanagement_ordercustomermethod" | translate }}</strong>:
+                <strong>{{
+                  "ordermanagement_ordercustomermethod" | translate
+                }}</strong
+                >:
                 <span class="badge badge-secondary">{{
                   dummyData.payment_method
                 }}</span>
               </div>
               <div class="font-size-13">
-                <strong>{{ "ordermanagement_ordercustomerinvoiceno" | translate }}</strong>: {{ dummyData.invoice_no }}
+                <strong>{{
+                  "ordermanagement_ordercustomerinvoiceno" | translate
+                }}</strong
+                >: {{ dummyData.invoice_no }}
               </div>
               <div class="font-size-13">
-                <strong>{{ "ordermanagement_ordercustomershippingmethod" | translate }}</strong>:
+                <strong>{{
+                  "ordermanagement_ordercustomershippingmethod" | translate
+                }}</strong
+                >:
                 {{ dummyData.shipment_method }}
                 <span
                   class="change-btn"
                   data-toggle="modal"
                   (click)="changeShipmentMethod(Shipment)"
-                  >{{ "ordermanagement_ordercustomershippingmethodchange" | translate }}</span
+                  >{{
+                    "ordermanagement_ordercustomershippingmethodchange"
+                      | translate
+                  }}</span
                 >
               </div>
             </div>
@@ -85,12 +115,17 @@
               <strong>Billing Address {{ "ordermanagement_ordercustomershippingmethodchange" | translate }}</strong>: {{ dummyData.billing_address }}
             </div> -->
             <div style="margin-top: 20px" class="font-size-13">
-              <strong>{{ "ordermanagement_ordercustomershippingaddress" | translate }}</strong>:
+              <strong>{{
+                "ordermanagement_ordercustomershippingaddress" | translate
+              }}</strong
+              >:
               {{ dummyData.shipping_address }}
             </div>
           </div>
           <div class="container-gap">
-            <h4 class="product-title">{{ "ordermanagement_ordercustomerproducts" | translate }}</h4>
+            <h4 class="product-title">
+              {{ "ordermanagement_ordercustomerproducts" | translate }}
+            </h4>
             <hr />
             <div>
               <ul class="list-inline">
@@ -111,10 +146,16 @@
             <h4>{{ "ordermanagement_ordercustomersummary" | translate }}</h4>
             <hr />
             <div style="margin-top: 20px" class="font-size-13">
-              <strong>{{ "ordermanagement_ordercustomersummarydate" | translate }}</strong>: {{ dummyData.date }}
+              <strong>{{
+                "ordermanagement_ordercustomersummarydate" | translate
+              }}</strong
+              >: {{ dummyData.date }}
             </div>
             <div style="margin-top: 20px" class="font-size-13">
-              <strong>{{ "ordermanagement_ordercustomersummaryorderstatus" | translate }}</strong>:
+              <strong>{{
+                "ordermanagement_ordercustomersummaryorderstatus" | translate
+              }}</strong
+              >:
               <span class="badge badge-success">{{
                 dummyData.order_status
               }}</span>
@@ -122,17 +163,26 @@
                 class="change-btn"
                 data-toggle="modal"
                 (click)="changeStatus(Status)"
-                >{{ "ordermanagement_ordercustomersummaryorderstatuschange" | translate }}</span
+                >{{
+                  "ordermanagement_ordercustomersummaryorderstatuschange"
+                    | translate
+                }}</span
               >
             </div>
             <div style="margin-top: 20px" class="font-size-13">
-              <strong>{{ "ordermanagement_ordercustomersummaryorderstotals" | translate }}</strong>:
+              <strong>{{
+                "ordermanagement_ordercustomersummaryorderstotals" | translate
+              }}</strong
+              >:
               <h5 class="d-inline">${{ dummyData.total }}</h5>
               <span
                 class="change-btn"
                 data-toggle="modal"
                 (click)="changeTotal(Total)"
-                >{{ "ordermanagement_ordercustomersummaryorderstotalschange" | translate }}</span
+                >{{
+                  "ordermanagement_ordercustomersummaryorderstotalschange"
+                    | translate
+                }}</span
               >
             </div>
             <div
@@ -140,7 +190,7 @@
               style="margin-top: 30px; justify-content: space-evenly"
             >
               <button
-                class="btn btn-primary col-12 col-sm-3"
+                class="btn btn-custom col-12 col-sm-3"
                 type="button"
                 ngbTooltip="print"
                 placement="bottom"
@@ -152,7 +202,7 @@
                 ></app-feather-icons>
               </button>
               <button
-                class="btn btn-secondary col-12 col-sm-3"
+                class="btn btn-custom col-12 col-sm-3"
                 type="button"
                 ngbTooltip="message"
                 placement="bottom"
@@ -164,7 +214,7 @@
                 ></app-feather-icons>
               </button>
               <button
-                class="btn btn-warning col-12 col-sm-3"
+                class="btn btn-custom col-12 col-sm-3"
                 type="button"
                 ngbTooltip="back"
                 placement="bottom"
