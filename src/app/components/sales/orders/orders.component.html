@@ -7,7 +7,9 @@
           <h5>{{ "manage_order" | translate }}</h5>
         </div>
         <div class="card-body">
-          <div style="display: flex; align-items: center; justify-content: center">
+          <div
+            style="display: flex; align-items: center; justify-content: center"
+          >
             <app-loader [loading]="loading"></app-loader>
           </div>
           <div class="custom-datatable" *ngIf="!loading">
@@ -24,53 +26,58 @@
               [headerHeight]="50"
               [footerHeight]="50"
               [rowHeight]="'auto'"
-              [externalPaging]="true"
+            >
+              <!-- [externalPaging]="true"
               [count]="pagination.TotalCount"
               [offset]="pagination.CurrentPage"
               [limit]="pagination.PageSize"
-              (page)="setPage($event)"
-            >
-              <ngx-datatable-column 
-              name='{{ "ordersmanagement_orderid" | translate }}'
-              prop="orderId"></ngx-datatable-column>
-              <ngx-datatable-column 
-              name='{{ "ordersmanagement_product" | translate }}'
-              prop="orderedProductDetails">
-              <ng-template
-              let-row="row"
-              let-value="value"
-              ngx-datatable-cell-template
-            >
-              {{getProductsName(value)}}
-            </ng-template>
-            </ngx-datatable-column>
+              (page)="setPage($event)" -->
               <ngx-datatable-column
-              name='{{ "ordersmanagement_paymentstatus" | translate }}'
+                name="{{ 'ordersmanagement_orderid' | translate }}"
+                prop="orderId"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'ordersmanagement_product' | translate }}"
+                prop="orderedProductDetails"
+              >
+                <ng-template
+                  let-row="row"
+                  let-value="value"
+                  ngx-datatable-cell-template
+                >
+                  {{ getProductsName(value) }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'ordersmanagement_paymentstatus' | translate }}"
                 prop="paymentStatus"
               ></ngx-datatable-column>
               <ngx-datatable-column
-                name='{{ "ordersmanagement_paymentmethod" | translate }}'
+                name="{{ 'ordersmanagement_paymentmethod' | translate }}"
                 prop="paymentService"
               ></ngx-datatable-column>
-              <ngx-datatable-column 
-              name='{{ "ordersmanagement_orderstatus" | translate }}'
-              prop="orderStatus"></ngx-datatable-column>
-              <ngx-datatable-column 
-              name='{{ "ordersmanagement_orderdate" | translate }}'
-              prop="creationDate">
-              <ng-template
-              let-row="row"
-              let-value="value"
-              ngx-datatable-cell-template
-            >
-              {{getFormatDate(value)}}
-            </ng-template>
-            </ngx-datatable-column>
-              <ngx-datatable-column 
-              name='{{ "ordersmanagement_total" | translate }}'
-              name="total"></ngx-datatable-column>
               <ngx-datatable-column
-              name='{{ "ordersmanagement_action" | translate }}'
+                name="{{ 'ordersmanagement_orderstatus' | translate }}"
+                prop="orderStatus"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'ordersmanagement_orderdate' | translate }}"
+                prop="creationDate"
+              >
+                <ng-template
+                  let-row="row"
+                  let-value="value"
+                  ngx-datatable-cell-template
+                >
+                  {{ getFormatDate(value) }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'ordersmanagement_total' | translate }}"
+                name="total"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'ordersmanagement_action' | translate }}"
                 prpp="action"
                 sortable="false"
                 prop="orderId"
@@ -85,6 +92,25 @@
                   </span>
                 </ng-template>
               </ngx-datatable-column>
+              <ngx-datatable-footer>
+                <ng-template ngx-datatable-footer-template>
+                  <div
+                    class="pagination"
+                    *ngIf="!loading"
+                    style="margin-bottom: 10px; width: -webkit-fill-available"
+                  >
+                    <mat-paginator
+                      style="width: -webkit-fill-available"
+                      [pageIndex]="pagination.CurrentPage - 1"
+                      [length]="pagination.TotalCount"
+                      [pageSize]="pagination.PageSize"
+                      [pageSizeOptions]="pageSizeOptions"
+                      (page)="pageEvent($event)"
+                    >
+                    </mat-paginator>
+                  </div>
+                </ng-template>
+              </ngx-datatable-footer>
             </ngx-datatable>
           </div>
         </div>
