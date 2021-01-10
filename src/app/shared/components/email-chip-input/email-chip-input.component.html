@@ -1,0 +1,17 @@
+<div>
+  <div class="editor-tag" (click)="focusTagInput()">
+    <span class="tag-item" *ngFor="let tag of tags; let i = index">
+      {{ tag }}
+      <span class="remove-tag" (click)="removeTag(i)">×</span>
+    </span>
+    <input
+      placeholder="Email Here..."
+      #tagInput
+      name="tag"
+      type="text"
+      class="input-tag"
+      (keyup)="onKeyUp($event)"
+      [(ngModel)]="tag"
+    />
+  </div>
+</div>
