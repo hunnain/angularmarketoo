@@ -138,6 +138,7 @@ export class CreateStoreCreditComponent implements OnInit {
       sendAmount: ['', Validators.required],
       reason: ['', Validators.required],
       // recivers: ['', Validators.required],
+      notifyRecivers: [false],
     });
   }
 
