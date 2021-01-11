@@ -25,8 +25,6 @@ export class EmailChipInputComponent implements OnInit {
   }
 
   onKeyUp(event: KeyboardEvent): void {
-    // const inputValue: string = this.form.controls.tag.value;
-    // const inputValue = this.tag;
     if (event.code === 'Backspace' && !this.tag) {
       this.removeTag();
       return;
@@ -44,13 +42,11 @@ export class EmailChipInputComponent implements OnInit {
   }
 
   addTag(): void {
-    console.log(this.tag);
-    // this.tag;
     if (
       this.tag[this.tag.length - 1] === ',' ||
       this.tag[this.tag.length - 1] === ' '
     ) {
-      this.tag.slice(0, -1);
+      this.tag = this.tag.slice(0, -1);
     }
     let re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (
