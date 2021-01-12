@@ -5,6 +5,20 @@
                 <div class="row">
                     <h5 class="col-12 col-md-6">{{ "Boosting_performance" | translate }}</h5>
                     <span class="col-12 col-md-6" style="text-align: right;">{{ "Boosting_last30days" | translate }}</span>
+                    <span class="col-12 col-md-6" style="text-align: right;">
+                        <!-- <div style="display: inline-block;">
+                            <div class="input-group input-grp-p">
+                                <input class="datepicker-here form-control digits" ngbDatepicker
+                                    [(ngModel)]="start_date" #c="ngbDatepicker" 
+                                    [displayMonths]="2"
+                                    [placement]="'left'">
+                                <div class="input-group-append">
+                                    <button class="btn calendar" (click)="c.toggle()" type="button"><i
+                                            class="fa fa-calendar"></i></button>
+                                </div>
+                            </div>
+                        </div> -->
+                    </span>
                 </div>
             </div>
         </div>
@@ -148,6 +162,126 @@
         </div>
     </div>
 </div>
+
+<!-- Ads Prediction table -->
+<div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>{{ "Boosting_result_prediction" | translate }}</h5>
+        </div>
+        <div class="card-body">
+          <div class="custom-datatable prediction-table">
+            <ngx-datatable
+              class="bootstrap"
+              [rows]="predictions"
+              [columnMode]="'force'"
+              [headerHeight]="60"
+              [footerHeight]="50"
+              [rowHeight]="'auto'"
+            >
+              <ngx-datatable-column
+                name="{{ 'Boosting_result_previous_investment' | translate }}"
+                prop="prev_investment"
+                headerClass="header-style"
+              >
+              <ng-template
+              let-row="row"
+              let-value="value"
+              ngx-datatable-cell-template
+            >
+              ${{value}}
+            </ng-template>
+            </ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'Boosting_result_impression' | translate }}"
+                prop="impression"
+                headerClass="header-style"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'Boosting_result_sales' | translate }}"
+                prop="sales"
+                headerClass="header-style"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'Boosting_result_clicks' | translate }}"
+                prop="clicks"
+                headerClass="header-style"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'Boosting_result_CTR' | translate }}"
+                prop="CTR"
+                headerClass="header-style"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'Boosting_result_pqs' | translate }}"
+                prop="product_quality_score"
+                headerClass="header-style"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'Boosting_result_as_score' | translate }}"
+                prop="as_score"
+                headerClass="header-style"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'Boosting_result_ranking' | translate }}"
+                prop="ranking"
+                headerClass="header-style"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'Boosting_result_next_invest' | translate }}"
+                prop="next_investment"
+                headerClass="header-style"
+              >
+              <ng-template
+              let-row="row"
+              let-value="value"
+              ngx-datatable-cell-template
+            >
+              ${{value}}
+            </ng-template>
+            </ngx-datatable-column>
+              <!-- <ngx-datatable-column
+                name="{{ 'returnexchange_action' | translate }}"
+                sortable="false"
+                prop="order id"
+              >
+                <ng-template
+                  let-row="row"
+                  let-value="value"
+                  ngx-datatable-cell-template
+                >
+                  <span style="color: #f88379; cursor: pointer">
+                    <i class="fa fa-eye" (click)="onSelectRow(value)"></i>
+                  </span>
+                </ng-template>
+              </ngx-datatable-column> -->
+              <!-- <ngx-datatable-footer>
+                <ng-template ngx-datatable-footer-template>
+                  <div
+                    class="pagination"
+                    *ngIf="!loading"
+                    style="margin-bottom: 10px; width: -webkit-fill-available"
+                  >
+                    <mat-paginator
+                      style="width: -webkit-fill-available"
+                      [pageIndex]="pagination.CurrentPage - 1"
+                      [length]="pagination.TotalCount"
+                      [pageSize]="pagination.PageSize"
+                      [pageSizeOptions]="pageSizeOptions"
+                      (page)="pageEvent($event)"
+                    >
+                    </mat-paginator>
+                  </div>
+                </ng-template>
+              </ngx-datatable-footer> -->
+            </ngx-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Ads Prediction table End -->
 
 
 

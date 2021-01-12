@@ -46,22 +46,31 @@
                   <strong>{{
                     "ordermanagement_ordercustomername" | translate
                   }}</strong
-                  >: {{ dummyData?.user_info?.name }}
+                  >: {{ order?.customer?.username }}
                 </div>
+                <div class="font-size-13">
+                  <strong>{{
+                    "ordermanagement_ordercustomeremail" | translate
+                  }}</strong
+                  >:
+                  {{ order?.customer?.email }}
+                </div>
+              </div>
+              <div class="payment-section" style="margin-top: 20px">
                 <div class="font-size-13">
                   <strong>{{
                     "ordermanagement_ordercustomercontactno" | translate
                   }}</strong
                   >:
-                  {{ dummyData?.user_info?.contact }}
+                  {{ dummyData.user_info?.contact }}
                 </div>
               </div>
-              <div style="margin-top: 20px" class="font-size-13">
+              <!-- <div style="margin-top: 20px" class="font-size-13">
                 <strong>{{
                   "ordermanagement_ordercustomeraddress" | translate
                 }}</strong
                 >: {{ dummyData?.user_info?.address }}
-              </div>
+              </div> -->
             </div>
           </div>
 
