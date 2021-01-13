@@ -1,3 +1,11 @@
 ::ng-deep .ngx-datatable .datatable-pager {
   display: block !important;
 }
+
+::ng-deep .header-style {
+  white-space: normal !important;
+}
+
+::ng-deep .empty-row {
+  text-align: center !important;
+}

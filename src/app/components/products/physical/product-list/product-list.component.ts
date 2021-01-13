@@ -142,21 +142,25 @@ export class ProductListComponent implements OnInit {
       .subscribe((res) => {
         let paginate = JSON.parse(res.headers.get('X-Pagination'));
         console.log('res', res, paginate);
-        let templist = res.body.map((pro) => {
-          return {
-            uuid: pro.productUuid,
-            img: pro.image ? 'data:image/jpeg;base64,' + pro.image : '',
-            product_title: pro.name,
-            discount: pro.discountBuy,
-            price: pro.price,
-            sale: 'not on sale',
-            tag: 'old',
-          };
-        });
-        this.pagination = paginate;
+        let data = res.body;
+        if (data) {
+          let templist = data.map((pro) => {
+            return {
+              uuid: pro.productUuid,
+              img: pro.image ? 'data:image/jpeg;base64,' + pro.image : '',
+              product_title: pro.name,
+              discount: pro.discountBuy,
+              price: pro.price,
+              sale: 'not on sale',
+              tag: 'old',
+            };
+          });
+          this.product_list = JSON.parse(JSON.stringify(templist));
+          this.pagination = paginate;
+        }
+
         this.cs.isLoading.next(false);
         this.loading = false;
-        this.product_list = JSON.parse(JSON.stringify(templist));
 
         //           {availableColours: []
         // availableSizes: ["XSmall", "S"]

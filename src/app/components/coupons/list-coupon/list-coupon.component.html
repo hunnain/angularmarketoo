@@ -13,7 +13,7 @@
             <app-loader [loading]="loading"></app-loader>
           </div>
           <div class="custom-datatable" *ngIf="!loading">
-            <button class="btn btn-primary mr-1 mb-3" style="float: right">
+            <button class="btn btn-primary mr-1 mb-3" style="float: right" *ngIf="digital_categories.length">
               {{ "delete" | translate }}
             </button>
             <div class="clearfix"></div>
@@ -89,7 +89,7 @@
                   </div>
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-footer>
+              <ngx-datatable-footer *ngIf="digital_categories.length">
                 <ng-template ngx-datatable-footer-template>
                   <div
                     class="pagination"

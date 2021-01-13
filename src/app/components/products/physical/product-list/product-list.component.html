@@ -8,6 +8,7 @@
           [data]="filterOptions"
           [options]="filterConfig"
           [width]="300"
+          [disabled]="product_list.length ? false: true"
         >
         </ng-select2>
       </div>
@@ -86,8 +87,13 @@
       </div>
     </div>
   </div>
+  <div class="row products-admin" *ngIf="product_list.length === 0">
+    <div class="col-12" style="text-align: center;">
+        <span>No Products Found</span>
+    </div>
+  </div>
   <!-- Pagination -->
-  <div class="pagination" *ngIf="!loading" style="margin-bottom: 10px">
+  <div class="pagination" *ngIf="!loading && product_list.length" style="margin-bottom: 10px">
     <mat-paginator
       style="width: -webkit-fill-available"
       [pageIndex]="pagination.CurrentPage - 1"

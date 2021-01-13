@@ -47,8 +47,10 @@ export class OrdersComponent implements OnInit {
         if (res) {
           this.cs.isLoading.next(false);
           this.loading = false;
-          this.orders = res.body;
-          this.pagination = JSON.parse(res.headers.get('X-Pagination'));
+          if (res.body) {
+            this.orders = res.body;
+            this.pagination = JSON.parse(res.headers.get('X-Pagination'));
+          }
         }
       }
       //  ,err => {

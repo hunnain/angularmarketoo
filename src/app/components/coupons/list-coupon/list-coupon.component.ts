@@ -62,10 +62,10 @@ export class ListCouponComponent implements OnInit {
         if (res) {
           this.cs.isLoading.next(false);
           this.loading = false;
-          this.digital_categories = res.body;
-          console.log('coupon-res', res.headers.get('x-pagination'));
-          this.pagination = JSON.parse(res.headers.get('X-Pagination'));
-          console.log('pagination', this.pagination);
+          if (res.body) {
+            this.digital_categories = res.body;
+            this.pagination = JSON.parse(res.headers.get('X-Pagination'));
+          }
         }
       }
       //  ,err => {
