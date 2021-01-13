@@ -45,7 +45,7 @@ export class OrderDetailComponent implements OnInit {
     date: 'Dec 10,18',
     total: 54671,
   };
-
+  public blastEmail: boolean = false;
   public orderId: string;
   public fetching: boolean = false;
   constructor(
@@ -86,7 +86,7 @@ export class OrderDetailComponent implements OnInit {
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   fetchOrderById(id) {
     this.fetching = true;

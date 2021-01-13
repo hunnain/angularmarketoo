@@ -125,15 +125,20 @@
               <strong>Billing Address {{ "ordermanagement_ordercustomershippingmethodchange" | translate }}</strong>: {{ dummyData.billing_address }}
             </div> -->
             <div style="margin-top: 20px" class="font-size-13">
-              <strong>{{ "ordermanagement_ordercustomershippingaddress" | translate }}</strong>:
+              <strong>{{
+                "ordermanagement_ordercustomershippingaddress" | translate
+              }}</strong
+              >:
               {{ order?.address }}
             </div>
           </div>
           <div class="container-gap">
-            <h4 class="product-title">{{ "ordermanagement_note" | translate }}</h4>
+            <h4 class="product-title">
+              {{ "ordermanagement_note" | translate }}
+            </h4>
             <hr />
             <div>
-              <p class="mb-0">{{order?.note}}</p>              
+              <p class="mb-0">{{ order?.note }}</p>
             </div>
           </div>
           <div class="container-gap">
@@ -144,69 +149,80 @@
             <div>
               <ul>
                 <li class="mb-2">
-                <div class="row align-items-center">
-                  <div class="col-2 col-sm-4 col-md-2">
-                    <strong>
-                      {{'prod_image' | translate}}
-                    </strong>
+                  <div class="row align-items-center">
+                    <div class="col-2 col-sm-4 col-md-2">
+                      <strong>
+                        {{ "prod_image" | translate }}
+                      </strong>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4">
+                      <strong>
+                        {{ "prod_name" | translate }}
+                      </strong>
+                    </div>
+                    <div class="prod_unitAmount col-2 col-sm-4 col-md-2">
+                      <strong>
+                        {{ "prod_unitAmount" | translate }}
+                      </strong>
+                    </div>
+                    <div class="prod_qty col-2 col-sm-4 col-md-2">
+                      <strong>
+                        {{ "prod_qty" | translate }}
+                      </strong>
+                    </div>
+                    <div class="prod_totalAmount col-2 col-sm-4 col-md-2">
+                      <strong>
+                        {{ "prod_totalAmount" | translate }}
+                      </strong>
+                    </div>
                   </div>
-                  <div class="col-4 col-sm-4 col-md-4">
-                    <strong>
-                      {{ 'prod_name' | translate}}
-                    </strong>
-                  </div>
-                  <div class="prod_unitAmount col-2 col-sm-4 col-md-2">
-                    <strong>
-                      {{'prod_unitAmount' | translate}}
-                    </strong>
-                  </div>
-                  <div class="prod_qty col-2 col-sm-4 col-md-2">
-                    <strong>
-                      {{ 'prod_qty' | translate}}
-                    </strong>
-                  </div>
-                  <div class="prod_totalAmount col-2 col-sm-4 col-md-2">
-                    <strong>
-                      {{'prod_totalAmount' | translate}}
-                    </strong>
-                  </div>
-                </div>  
-                <hr/>
+                  <hr />
                 </li>
-                <li class="mb-2"  *ngFor="let prod of order?.orderedProductDetails">
-                <div class="row align-items-center">
-                  <div class="prod_img col-2 col-sm-4 col-md-2">
-                    <img [src]="prod.src ? prod.src : 'assets/images/electronics/product/16.jpg'" class="img-30 mr-2" />
+                <li
+                  class="mb-2"
+                  *ngFor="let prod of order?.orderedProductDetails"
+                >
+                  <div class="row align-items-center">
+                    <div class="prod_img col-2 col-sm-4 col-md-2">
+                      <img
+                        [src]="
+                          prod.src
+                            ? prod.src
+                            : 'assets/images/electronics/product/16.jpg'
+                        "
+                        class="img-30 mr-2"
+                      />
+                    </div>
+                    <div class="prod_name col-4 col-sm-4 col-md-4">
+                      {{ prod?.name | titlecase }}
+                    </div>
+                    <div class="prod_unitAmount col-2 col-sm-4 col-md-2">
+                      ${{ prod?.unitAmount }}
+                    </div>
+                    <div class="prod_qty col-2 col-sm-4 col-md-2">
+                      {{ prod?.qty }}
+                    </div>
+                    <div class="prod_totalAmount col-2 col-sm-4 col-md-2">
+                      ${{ prod?.totalAmount }}
+                    </div>
                   </div>
-                  <div class="prod_name col-4 col-sm-4 col-md-4">
-                    {{prod?.name | titlecase}}
-                  </div>
-                  <div class="prod_unitAmount col-2 col-sm-4 col-md-2">
-                    ${{prod?.unitAmount}}
-                  </div>
-                  <div class="prod_qty col-2 col-sm-4 col-md-2">
-                    {{prod?.qty}}
-                  </div>
-                  <div class="prod_totalAmount col-2 col-sm-4 col-md-2">
-                    ${{prod?.totalAmount}}
-                  </div>
-                </div>  
-                <hr/>
+                  <hr />
                 </li>
                 <li class="mb-2">
-                <div class="row align-items-center">
-                  <div class="prod_qty col-2 offset-8 col-sm-4 col-md-2">
-                    <strong>
-                      {{'ordermanagement_ordercustomersummaryorderstotals' | translate}}
-                    </strong>
+                  <div class="row align-items-center">
+                    <div class="prod_qty col-2 offset-8 col-sm-4 col-md-2">
+                      <strong>
+                        {{
+                          "ordermanagement_ordercustomersummaryorderstotals"
+                            | translate
+                        }}
+                      </strong>
+                    </div>
+                    <div class="prod_totalAmount col-2 col-sm-4 col-md-2">
+                      <strong> ${{ order?.total }} </strong>
+                    </div>
                   </div>
-                  <div class="prod_totalAmount col-2 col-sm-4 col-md-2">
-                    <strong>
-                      ${{order?.total}}
-                    </strong>
-                  </div>
-                </div>  
-                <hr/>
+                  <hr />
                 </li>
               </ul>
             </div>
@@ -219,16 +235,17 @@
             <h4>{{ "ordermanagement_ordercustomersummary" | translate }}</h4>
             <hr />
             <div style="margin-top: 20px" class="font-size-13">
-              <strong>{{ "ordermanagement_ordercustomersummarydate" | translate }}</strong>: {{ formatDate(order.creationDate) }}
+              <strong>{{
+                "ordermanagement_ordercustomersummarydate" | translate
+              }}</strong
+              >: {{ formatDate(order.creationDate) }}
             </div>
             <div style="margin-top: 20px" class="font-size-13">
               <strong>{{
                 "ordermanagement_ordercustomersummaryorderstatus" | translate
               }}</strong
               >:
-              <span class="badge badge-success">{{
-                order?.orderStatus
-              }}</span>
+              <span class="badge badge-success">{{ order?.orderStatus }}</span>
               <!-- <span
                 class="change-btn"
                 data-toggle="modal"
@@ -237,7 +254,10 @@
               > -->
             </div>
             <div style="margin-top: 20px" class="font-size-13">
-              <strong>{{ "ordermanagement_ordercustomersummaryorderstotals" | translate }}</strong>:
+              <strong>{{
+                "ordermanagement_ordercustomersummaryorderstotals" | translate
+              }}</strong
+              >:
               <h5 class="d-inline">${{ order?.total }}</h5>
               <span
                 class="change-btn"
@@ -289,6 +309,37 @@
                   class="font-primary"
                   style="color: #fff !important"
                 ></app-feather-icons>
+              </button>
+            </div>
+            <div
+              class="row"
+              style="
+                margin-top: 30px;
+                margin-left: 0px;
+                display: flex;
+                align-items: center;
+              "
+            >
+              <div class="checkbox checkbox-primary" style="text-align: end">
+                <input
+                  id="checkbox-primary-2"
+                  type="checkbox"
+                  name="blastEmail"
+                  style="margin: 0px 10px"
+                  [(ngModel)]="blastEmail"
+                  data-original-title=""
+                  title=""
+                />
+                <label for="checkbox-primary-2">{{
+                  "ordermanagement_blast_email" | translate
+                }}</label>
+              </div>
+              <button
+                type="button"
+                class="btn btn-primary"
+                style="margin-left: 10px"
+              >
+                {{ "send" | translate }}
               </button>
             </div>
           </div>
