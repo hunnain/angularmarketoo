@@ -1,4 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthServiceService } from 'src/app/shared/service/auth-service/auth-service.service';
+import { CommonService } from 'src/app/shared/service/common.service';
+
+interface Profile {
+  chineseFname: string;
+  englishFname: string;
+  email: string;
+  gender: string;
+  shopName: string;
+  shopLocation: string;
+  shopIntro: string
+}
+
+enum DeactiveAcount {
+  PrivacyConcern = 0,
+  Temporary = 1,
+  Other = 2
+}
+
+enum DeleteAcount {
+  NoLongerUsable = 0,
+  SwitchAccount = 1,
+  Other = 2
+}
 
 @Component({
   selector: 'app-profile',
@@ -7,8 +32,129 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  public loading: boolean = false;
+  public deleting: boolean = false;
+  public deactivating: boolean = false;
+  public isEdit: boolean = false;
+  public announcement: string = '';
+  public allowDesktopNotifications: boolean = false;
+  public enableNotifications: boolean = false;
+  public getNotificationForOwnActivity: boolean = false;
+  public dnd: boolean = false;
+  public deleteAccount: number;
+  public deactivateAccount: number;
+
+  public sellerForm: FormGroup;
+  public profile: Profile;
+  public userInfo;
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthServiceService,
+    private cs: CommonService
+  ) {
+    this.cs.isLoading.subscribe((loading) => {
+      this.loading = loading;
+      this.deleting = loading;
+      this.deactivating = loading;
+    });
+
+    this.createProfileForm();
+
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (this.userInfo) {
+      let { chineseFname, englishFname, email, gender, shopName = "", shopLocation = "", shopIntro = "", profileSetting } = this.userInfo;
+      this.profile = this.userInfo;
+      this.sellerForm.setValue({ chineseFname, englishFname, email, gender, shopName, shopLocation, shopIntro });
+      if (profileSetting) {
+        this.initializeSetting(profileSetting)
+      }
+    }
+  }
+
+  createProfileForm() {
+    this.sellerForm = this.fb.group({
+      chineseFname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+      englishFname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}')]],
+      gender: ['', [Validators.required]],
+      shopName: ['', [Validators.required]],
+      shopLocation: ['', [Validators.required]],
+      shopIntro: ['', [Validators.required]],
+    })
+  }
+
+  initializeSetting(settings) {
+    const { sellerId, ...remaingSettings } = settings;
+    this.announcement = remaingSettings.announcement;
+    this.allowDesktopNotifications = remaingSettings.allowDesktopNotifications;
+    this.enableNotifications = remaingSettings.enableNotifications;
+    this.getNotificationForOwnActivity = remaingSettings.getNotificationForOwnActivity;
+    this.dnd = remaingSettings.dnd;
+    this.deleteAccount = remaingSettings.deleteAccount;
+    this.deactivateAccount = remaingSettings.deactivateAccount;
+  }
 
   ngOnInit() { }
+
+  handleSubmit(event) {
+    this.loading = true;
+    let data = {
+      announcement: this.announcement,
+      allowDesktopNotifications: this.allowDesktopNotifications,
+      enableNotifications: this.enableNotifications,
+      getNotificationForOwnActivity: this.getNotificationForOwnActivity,
+      dnd: this.dnd
+    }
+    console.log("component submit", data);
+    this.authService.updateProfileSettings(data).subscribe(res => {
+      if (res) {
+        this.loading = false;
+        this.userInfo = { ...this.userInfo, profileSetting: { ...data } }
+        this.authService.writeToLS('userInfo', JSON.stringify(this.userInfo))
+      }
+    })
+  }
+
+  editProfile() {
+    console.log("edit")
+    this.isEdit = true;
+  }
+
+  submitProfile(event) {
+    this.loading = true;
+    let data = { ...this.sellerForm.value };
+    this.authService.updateProfile(data).subscribe(res => {
+      console.log("profile res--", res)
+      if (res) {
+        this.loading = false;
+        this.isEdit = false;
+        this.profile = data;
+        this.userInfo = { ...this.userInfo, ...data }
+        this.authService.writeToLS('userInfo', JSON.stringify(this.userInfo))
+      }
+    })
+  }
+
+  handleDeactiveAccount() {
+    this.deactivating = true;
+    console.log(this.deactivateAccount)
+    this.authService.deactivateAccount(this.deactivateAccount).subscribe(res => {
+      if (res) {
+        console.log(res);
+        this.deactivating = false
+      }
+    })
+  }
+
+  handleDeleteAccount() {
+    this.deleting = true;
+    console.log(this.deleteAccount)
+    this.authService.deleteAccount(this.deleteAccount).subscribe(res => {
+      if (res) {
+        console.log(res);
+        this.deleting = false;
+      }
+    })
+  }
 
 }

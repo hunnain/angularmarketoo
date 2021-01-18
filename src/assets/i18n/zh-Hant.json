@@ -238,6 +238,8 @@
   "p_email": "電郵",
   "p_gender": "性別",
   "p_gender_male": "男",
+  "p_gender_female": "女", 
+  "p_gender_other": "其他",
   "p_bank": "銀行:",
   "p_shop_intro": "商店簡介:",
   "p_acc_no": "商店編號:",

@@ -10,7 +10,9 @@
               alt=""
               class="img-fluid img-90 rounded-circle blur-up lazyloaded"
             />
-            <h5 class="f-w-600 mb-0">{{'tab_marketoo_seller' | translate}}</h5>
+            <h5 class="f-w-600 mb-0">
+              {{ "tab_marketoo_seller" | translate }}
+            </h5>
             <span>MKS0001</span>
             <!-- <div class="social">
                             <div class="form-group btn-showcase">
@@ -25,11 +27,16 @@
           </div>
           <hr />
           <div class="project-status">
-            <h5 class="f-w-600">{{'tab_marketoo_performance' | translate}}</h5>
+            <h5 class="f-w-600">
+              {{ "tab_marketoo_performance" | translate }}
+            </h5>
             <div class="media">
               <div class="media-body">
                 <h6>
-                  {{'tab_marketoo_averagetime_ship' | translate}}<span class="pull-right">{{'tab_marketoo_averagetime_ship_days' | translate}}</span>
+                  {{ "tab_marketoo_averagetime_ship" | translate
+                  }}<span class="pull-right">{{
+                    "tab_marketoo_averagetime_ship_days" | translate
+                  }}</span>
                 </h6>
                 <div class="progress sm-progress-bar">
                   <div
@@ -45,7 +52,10 @@
             </div>
             <div class="media">
               <div class="media-body">
-                <h6>{{'tab_marketoo_likes' | translate}} <span class="pull-right">21</span></h6>
+                <h6>
+                  {{ "tab_marketoo_likes" | translate }}
+                  <span class="pull-right">21</span>
+                </h6>
                 <div class="progress sm-progress-bar">
                   <div
                     class="progress-bar bg-secondary"
@@ -60,7 +70,10 @@
             </div>
             <div class="media">
               <div class="media-body">
-                <h6>{{'tab_marketoo_purchased' | translate}}<span class="pull-right">287</span></h6>
+                <h6>
+                  {{ "tab_marketoo_purchased" | translate
+                  }}<span class="pull-right">287</span>
+                </h6>
                 <div class="progress sm-progress-bar">
                   <div
                     class="progress-bar bg-danger"
@@ -83,9 +96,9 @@
           <ngb-tabset class="tab-coupon profile-tabs">
             <ngb-tab>
               <ng-template ngbTabTitle>
-                <app-feather-icons [icon]="'user'"></app-feather-icons
-                >{{ "tab_profile" | translate }}</ng-template
-              >
+                <app-feather-icons [icon]="'user'"></app-feather-icons>
+                {{ "tab_profile" | translate }}
+              </ng-template>
               <ng-template ngbTabContent>
                 <div
                   class="tab-pane fade show active"
@@ -93,48 +106,171 @@
                   role="tabpanel"
                   aria-labelledby="top-profile-tab"
                 >
-                  <h5 class="f-w-600">{{ "profile" | translate }}</h5>
+                  <div class="row">
+                    <div class="col-6">
+                      <h5 class="f-w-600">{{ "profile" | translate }}</h5>
+                    </div>
+                    <div class="col-6 text-right">
+                      <app-feather-icons
+                        [icon]="'edit'"
+                        style="cursor: pointer"
+                        (click)="editProfile()"
+                        *ngIf="!isEdit"
+                      ></app-feather-icons>
+                    </div>
+                  </div>
                   <div class="table-responsive profile-table">
                     <table class="table table-responsive">
                       <tbody>
                         <tr>
-                          <td>{{ "p_first_name" | translate }}</td>
-                          <td>XXXXX</td>
+                          <td>{{ "ch_full_name" | translate }}</td>
+                          <td *ngIf="!isEdit">{{ profile?.chineseFname }}</td>
+                          <td *ngIf="isEdit" [formGroup]="sellerForm">
+                            <input
+                              class="form-control"
+                              id="chineseFname"
+                              type="text"
+                              [formControl]="
+                                sellerForm.controls['chineseFname']
+                              "
+                              required
+                            />
+                            <div
+                              *ngIf="
+                                sellerForm.controls.chineseFname.touched &&
+                                sellerForm.controls.chineseFname.errors
+                                  ?.required
+                              "
+                              class="text text-danger"
+                            >
+                              {{ "ch_name_req" | translate }}
+                            </div>
+                          </td>
                         </tr>
                         <tr>
-                          <td>{{ "p_last_name" | translate }}</td>
-                          <td>XXXXX</td>
+                          <td>{{ "en_full_name" | translate }}</td>
+                          <td *ngIf="!isEdit">{{ profile?.englishFname }}</td>
+                          <td *ngIf="isEdit" [formGroup]="sellerForm">
+                            <input
+                              class="form-control"
+                              id="englishFname"
+                              type="text"
+                              [formControl]="
+                                sellerForm.controls['englishFname']
+                              "
+                              required
+                            />
+                            <div
+                              *ngIf="
+                                sellerForm.controls.englishFname.touched &&
+                                sellerForm.controls.englishFname.errors
+                                  ?.required
+                              "
+                              class="text text-danger"
+                            >
+                              {{ "en_name_req" | translate }}
+                            </div>
+                          </td>
                         </tr>
                         <tr>
-                          <td>{{ "p_shop_name" | translate }}</td>
-                          <td>XXXXX</td>
-                        </tr>
-                        <tr>
-                          <td>{{ "p_shop_loc" | translate }}</td>
-                          <td>XXXXX</td>
-                        </tr>
-                        <tr>
-                          <td>{{ "p_email" | translate }}</td>
-                          <td>XXXXX@gmail.com</td>
+                          <td>{{ "email" | translate }}</td>
+                          <td>{{ profile?.email }}</td>
                         </tr>
                         <tr>
                           <td>{{ "p_gender" | translate }}</td>
-                          <td>{{ "p_gender_male" | translate }}</td>
+                          <td *ngIf="!isEdit">
+                            {{ profile?.gender | translate }}
+                          </td>
+                          <td *ngIf="isEdit" [formGroup]="sellerForm">
+                            <select
+                              class="form-control digits"
+                              id="validationCustom04"
+                              [formControl]="sellerForm.controls['gender']"
+                            >
+                              <option value="male">
+                                {{ "p_gender_male" | translate }}
+                              </option>
+                              <option value="female">
+                                {{ "p_gender_female" | translate }}
+                              </option>
+                              <option value="other">
+                                {{ "p_gender_other" | translate }}
+                              </option>
+                            </select>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>{{ "p_shop_name" | translate }}</td>
+                          <td *ngIf="!isEdit">
+                            {{ profile?.shopName || "N/A" }}
+                          </td>
+                          <td *ngIf="isEdit" [formGroup]="sellerForm">
+                            <input
+                              class="form-control"
+                              id="shopName"
+                              type="text"
+                              [formControl]="sellerForm.controls['shopName']"
+                              required
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>{{ "p_shop_loc" | translate }}</td>
+                          <td *ngIf="!isEdit">
+                            {{ profile?.shopLocation || "N/A" }}
+                          </td>
+                          <td *ngIf="isEdit" [formGroup]="sellerForm">
+                            <input
+                              class="form-control"
+                              id="shopLocation"
+                              type="text"
+                              [formControl]="
+                                sellerForm.controls['shopLocation']
+                              "
+                              required
+                            />
+                          </td>
                         </tr>
                         <tr>
                           <td>{{ "p_shop_intro" | translate }}</td>
-                          <td>XXXXXXXXXXXXXXXXXXXXXXXX</td>
+                          <td *ngIf="!isEdit">
+                            {{ profile?.shopIntro || "N/A" }}
+                          </td>
+                          <td *ngIf="isEdit" [formGroup]="sellerForm">
+                            <input
+                              class="form-control"
+                              id="shopIntro"
+                              type="text"
+                              [formControl]="sellerForm.controls['shopIntro']"
+                              required
+                            />
+                          </td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                           <td>{{ "p_bank" | translate }}</td>
                           <td>XXXXXXXXXXXXXXXXXX</td>
                         </tr>
                         <tr>
                           <td>{{ "p_acc_no" | translate }}</td>
                           <td>1111111111111</td>
-                        </tr>
+                        </tr> -->
                       </tbody>
                     </table>
+                    <div *ngIf="isEdit" style="text-align: right">
+                      <app-button
+                        [loading]="loading"
+                        [disabled]="sellerForm.invalid"
+                        [btnText]="'save_announcement'"
+                        (onSubmit)="submitProfile($event)"
+                      ></app-button>
+                      <button
+                        type="button"
+                        class="btn btn-danger ml-2"
+                        (click)="isEdit = false"
+                      >
+                        {{ "cancel" | translate }}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </ng-template>
@@ -149,16 +285,17 @@
                   <h5 class="f-w-600">{{ "announcement" | translate }}</h5>
                   <div class="row mb-2">
                     <div class="col">
-                      <textarea class="form-control" 
-                      id="exampleFormControlTextarea1" 
-                      rows="3" 
-                      maxlength="250"
-                      placeholder="{{'announcement_placeholder' | translate}}"></textarea>
-                      <div class="mt-2 text-right">
-                        <button type="button" class="btn btn-primary">
-                          {{ "save_announcement" | translate }}
-                        </button>
-                      </div>
+                      <textarea
+                        class="form-control"
+                        id="exampleFormControlTextarea1"
+                        rows="3"
+                        maxlength="250"
+                        name="announcement"
+                        [(ngModel)]="announcement"
+                        placeholder="{{
+                          'announcement_placeholder' | translate
+                        }}"
+                      ></textarea>
                     </div>
                   </div>
                 </div>
@@ -171,6 +308,8 @@
                           class="checkbox_animated"
                           id="chk-ani"
                           type="checkbox"
+                          name="allowDesktopNotifications"
+                          [(ngModel)]="allowDesktopNotifications"
                         />
                         {{ "n_allow_desk_not" | translate }}
                       </label>
@@ -179,6 +318,8 @@
                           class="checkbox_animated"
                           id="chk-ani1"
                           type="checkbox"
+                          name="enableNotifications"
+                          [(ngModel)]="enableNotifications"
                         />
                         {{ "n_enable_not" | translate }}
                       </label>
@@ -187,6 +328,8 @@
                           class="checkbox_animated"
                           id="chk-ani2"
                           type="checkbox"
+                          name="getNotificationForOwnActivity"
+                          [(ngModel)]="getNotificationForOwnActivity"
                         />
                         {{ "n_get_not" | translate }}
                       </label>
@@ -195,10 +338,19 @@
                           class="checkbox_animated"
                           id="chk-ani3"
                           type="checkbox"
-                          checked=""
+                          name="dnd"
+                          [(ngModel)]="dnd"
                         />
                         {{ "n_dnd" | translate }}
                       </label>
+                      <div class="mt-2 text-right">
+                        <app-button
+                          [loading]="loading"
+                          [disabled]="!announcement"
+                          [btnText]="'save_announcement'"
+                          (onSubmit)="handleSubmit($event)"
+                        ></app-button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -211,8 +363,9 @@
                           class="radio_animated"
                           id="edo-ani"
                           type="radio"
-                          name="rdo-ani"
-                          checked=""
+                          [value]="0"
+                          name="deactive_account"
+                          [(ngModel)]="deactivateAccount"
                         />
                         {{ "d_i_have_priv" | translate }}
                       </label>
@@ -221,7 +374,9 @@
                           class="radio_animated"
                           id="edo-ani1"
                           type="radio"
-                          name="rdo-ani"
+                          [value]="1"
+                          name="deactive_account"
+                          [(ngModel)]="deactivateAccount"
                         />
                         {{ "d_this_is_temp" | translate }}
                       </label>
@@ -230,16 +385,23 @@
                           class="radio_animated"
                           id="edo-ani2"
                           type="radio"
-                          name="rdo-ani"
-                          checked=""
+                          [value]="2"
+                          name="deactive_account"
+                          [(ngModel)]="deactivateAccount"
                         />
                         {{ "d_other" | translate }}
                       </label>
                     </div>
                   </div>
-                  <button type="button" class="btn btn-primary">
+                  <!-- <button type="button" class="btn btn-primary">
                     {{ "d_deactive_acc" | translate }}
-                  </button>
+                  </button> -->
+                  <app-button
+                    [loading]="deactivating"
+                    [disabled]="false"
+                    [btnText]="'d_deactive_acc'"
+                    (onSubmit)="handleDeactiveAccount($event)"
+                  ></app-button>
                 </div>
                 <div class="account-setting deactivate-account">
                   <h5 class="f-w-600">{{ "delete_acc" | translate }}</h5>
@@ -250,8 +412,9 @@
                           class="radio_animated"
                           id="edo-ani3"
                           type="radio"
-                          name="rdo-ani1"
-                          checked=""
+                          [value]="0"
+                          name="account_delete"
+                          [(ngModel)]="deleteAccount"
                         />
                         {{ "d_no_long" | translate }}
                       </label>
@@ -260,7 +423,9 @@
                           class="radio_animated"
                           id="edo-ani4"
                           type="radio"
-                          name="rdo-ani1"
+                          [value]="1"
+                          name="account_delete"
+                          [(ngModel)]="deleteAccount"
                         />
                         {{ "d_want_to_switch" | translate }}
                       </label>
@@ -269,16 +434,23 @@
                           class="radio_animated"
                           id="edo-ani5"
                           type="radio"
-                          name="rdo-ani1"
-                          checked=""
+                          name="account_delete"
+                          [value]="2"
+                          [(ngModel)]="deleteAccount"
                         />
                         {{ "d_other" | translate }}
                       </label>
                     </div>
                   </div>
-                  <button type="button" class="btn btn-primary">
+                  <!-- <button type="button" class="btn btn-primary">
                     {{ "d_delete_acc" | translate }}
-                  </button>
+                  </button> -->
+                  <app-button
+                    [loading]="deleting"
+                    [disabled]="false"
+                    [btnText]="'d_delete_acc'"
+                    (onSubmit)="handleDeleteAccount($event)"
+                  ></app-button>
                 </div>
               </ng-template>
             </ngb-tab>

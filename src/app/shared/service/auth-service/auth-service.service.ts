@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthServiceService {
-  constructor(private commonService: CommonService) {}
+  constructor(private commonService: CommonService) { }
 
   writeToLS(key, value) {
     localStorage.setItem(key, value);
@@ -32,5 +32,25 @@ export class AuthServiceService {
 
   logout() {
     return this.commonService.post('token/revoke', {});
+  }
+
+  updateProfile(data) {
+    return this.commonService.post('seller/editProfile', data);
+  }
+
+  updateProfilePic(data) {
+    return this.commonService.post('seller/updateProfilePic', data);
+  }
+
+  updateProfileSettings(data) {
+    return this.commonService.post('seller/updateProfileSettings', data);
+  }
+
+  deactivateAccount(deactiveEnum) {
+    return this.commonService.post(`seller/deactivateAccount/${deactiveEnum}`, {});
+  }
+
+  deleteAccount(deleteEnum) {
+    return this.commonService.post(`seller/deleteAccount/${deleteEnum}`, {});
   }
 }

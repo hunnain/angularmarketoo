@@ -12,13 +12,9 @@
         </div>
         <div class="card-body" style="padding-top: 0px">
           <div class="row product-adding">
-            <div class="col-xl-7">
-              
-                <div class="add-product-form">
-                  <form
-                class="needs-validation"
-                [formGroup]="sellerForm"
-              >
+            <div class="col-xl-7" style="margin: 0 auto">
+              <div class="add-product-form">
+                <form class="needs-validation" [formGroup]="sellerForm">
                   <div>
                     <fieldset class="fieldset" style="margin-bottom: 20px">
                       <legend class="legend">
@@ -33,16 +29,13 @@
                             class="form-control"
                             id="chineseFname"
                             type="text"
-                            [formControl]="
-                              sellerForm.controls['chineseFname']
-                            "
+                            [formControl]="sellerForm.controls['chineseFname']"
                             required
                           />
                           <div
                             *ngIf="
                               sellerForm.controls.chineseFname.touched &&
-                              sellerForm.controls.chineseFname.errors
-                                ?.required
+                              sellerForm.controls.chineseFname.errors?.required
                             "
                             class="text text-danger"
                           >
@@ -57,16 +50,13 @@
                             class="form-control"
                             id="englishFname"
                             type="text"
-                            [formControl]="
-                              sellerForm.controls['englishFname']
-                            "
+                            [formControl]="sellerForm.controls['englishFname']"
                             required
                           />
                           <div
                             *ngIf="
                               sellerForm.controls.englishFname.touched &&
-                              sellerForm.controls.englishFname.errors
-                                ?.required
+                              sellerForm.controls.englishFname.errors?.required
                             "
                             class="text text-danger"
                           >
@@ -75,8 +65,7 @@
                           <div
                             *ngIf="
                               sellerForm.controls.englishFname.touched &&
-                              sellerForm.controls.englishFname.errors
-                                ?.pattern
+                              sellerForm.controls.englishFname.errors?.pattern
                             "
                             class="text text-danger"
                           >
@@ -125,8 +114,8 @@
                           <label for="country" class="required mb-0"
                             >{{ "select_country" | translate }}
                           </label>
-                          <select 
-                            class="form-control digits" 
+                          <select
+                            class="form-control digits"
                             id="country"
                             [formControl]="sellerForm.controls['country']"
                           >
@@ -223,7 +212,9 @@
                           <select
                             class="form-control digits"
                             id="your_identity"
-                            [formControl]="sellerForm.controls['sellerIdentity']"
+                            [formControl]="
+                              sellerForm.controls['sellerIdentity']
+                            "
                           >
                             <option value="1">
                               Full Time Designer / Handicraftsman
@@ -263,10 +254,12 @@
                           <label for="hear_about" class="mb-0"
                             >{{ "how_did_you_hear" | translate }}
                           </label>
-                          <select 
-                            class="form-control digits" 
+                          <select
+                            class="form-control digits"
                             id="hear_about"
-                            [formControl]="sellerForm.controls['hdyHearAbtMarketoo']"
+                            [formControl]="
+                              sellerForm.controls['hdyHearAbtMarketoo']
+                            "
                           >
                             <option value="1">
                               Marketoo Designers’ Refer （please specify
@@ -294,7 +287,9 @@
                                 name="inlineRadioOptions"
                                 id="inlineRadio1"
                                 value="true"
-                                [formControl]="sellerForm.controls['interestedToJoinWm']"
+                                [formControl]="
+                                  sellerForm.controls['interestedToJoinWm']
+                                "
                               />
                               <label
                                 class="form-check-label"
@@ -309,7 +304,9 @@
                                 name="inlineRadioOptions"
                                 id="inlineRadio2"
                                 value="false"
-                                [formControl]="sellerForm.controls['interestedToJoinWm']"
+                                [formControl]="
+                                  sellerForm.controls['interestedToJoinWm']
+                                "
                               />
                               <label
                                 class="form-check-label"
@@ -342,11 +339,8 @@
                       </div>
                     </fieldset>
                   </div>
-                  </form>
-                  <form
-                class="needs-validation"
-                [formGroup]="brandForm"
-              >
+                </form>
+                <form class="needs-validation" [formGroup]="brandForm">
                   <div>
                     <fieldset class="fieldset">
                       <legend class="legend">
@@ -354,7 +348,7 @@
                       </legend>
                       <div class="form-group row">
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="brand_name" class="required mb-0" 
+                          <label for="brand_name" class="required mb-0"
                             >{{ "brand_name" | translate }}
                           </label>
                           <input
@@ -366,8 +360,8 @@
                           />
                           <div
                             *ngIf="
-                            brandForm.controls.brandName.touched &&
-                            brandForm.controls.brandName.errors?.required
+                              brandForm.controls.brandName.touched &&
+                              brandForm.controls.brandName.errors?.required
                             "
                             class="text text-danger"
                           >
@@ -378,17 +372,34 @@
                           <label for="url" class="required mb-0">
                             {{ "design_hall" | translate }}
                           </label>
-                          <input
+
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon3"
+                                >https://seller.marketoo.hk/</span
+                              >
+                            </div>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="url"
+                              aria-describedby="basic-addon3"
+                              [formControl]="
+                                brandForm.controls['designHallUrl']
+                              "
+                            />
+                          </div>
+                          <!-- <input
                             class="form-control"
                             id="url"
                             type="text"
                             [formControl]="brandForm.controls['designHallUrl']"
                             required
-                          />
+                          /> -->
                           <div
                             *ngIf="
-                            brandForm.controls.designHallUrl.touched &&
-                            brandForm.controls.designHallUrl.errors?.required
+                              brandForm.controls.designHallUrl.touched &&
+                              brandForm.controls.designHallUrl.errors?.required
                             "
                             class="text text-danger"
                           >
@@ -396,8 +407,8 @@
                           </div>
                           <div
                             *ngIf="
-                            brandForm.controls.designHallUrl.touched &&
-                            brandForm.controls.designHallUrl.errors?.pattern
+                              brandForm.controls.designHallUrl.touched &&
+                              brandForm.controls.designHallUrl.errors?.pattern
                             "
                             class="text text-danger"
                           >
@@ -413,7 +424,9 @@
                           <select
                             class="form-control digits"
                             id="product_category"
-                            [formControl]="brandForm.controls['productCategory']"
+                            [formControl]="
+                              brandForm.controls['productCategory']
+                            "
                           >
                             <option value="1">Original Design</option>
                             <option value="2">Authorised Sales</option>
@@ -440,7 +453,11 @@
                                   <img
                                     class="imgUpload"
                                     alt="prod-img"
-                                    [src]="productWishImages[i] ? productWishImages[i] :item.img"
+                                    [src]="
+                                      productWishImages[i]
+                                        ? productWishImages[i]
+                                        : item.img
+                                    "
                                   />
                                 </div>
                               </li>
@@ -485,13 +502,17 @@
                           />
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
-                          <label for="average_price_per_product" class="required mb-0"
+                          <label
+                            for="average_price_per_product"
+                            class="required mb-0"
                             >{{ "avg_price" | translate }}
                           </label>
                           <select
                             class="form-control digits"
                             id="average_price_per_product"
-                            [formControl]="brandForm.controls['avgPricePerProduct']"
+                            [formControl]="
+                              brandForm.controls['avgPricePerProduct']
+                            "
                           >
                             <option value="1">&#60;HK$100</option>
                             <option value=" 2">HK$100-300</option>
@@ -525,8 +546,8 @@
                           <label for="deliver_from" class="required mb-0"
                             >{{ "deliver_from" | translate }}
                           </label>
-                          <select 
-                            class="form-control digits" 
+                          <select
+                            class="form-control digits"
                             id="deliver_from"
                             [formControl]="brandForm.controls['deliverFrom']"
                           >
@@ -545,29 +566,35 @@
                       </div>
                     </fieldset>
                   </div>
-                  </form>
-                </div>
+                </form>
+              </div>
               <div class="form-group row mb-0 footer">
                 <div class="product-buttons col-sm-8 offset-xl-3 offset-sm-4">
-                  <button 
-                    type="button" 
-                    class="btn btn-primary mr-1" 
-                    (click)="createSeller()" 
-                    [disabled]="sellerForm.invalid || brandForm.invalid || productWishImages.length === 0 ||  loading"
-                  >
-                    {{ "sign_up" | translate }}
-                  </button>
+                  <app-button
+                    [loading]="loading"
+                    [disabled]="
+                      sellerForm.invalid ||
+                      brandForm.invalid ||
+                      productWishImages.length === 0
+                    "
+                    [btnText]="'sign_up'"
+                    (onSubmit)="createSeller($event)"
+                  ></app-button>
                   <button
                     [routerLink]="'/login'"
                     type="button"
-                    class="btn btn-danger mr-1"
+                    class="btn btn-danger ml-1"
                   >
                     {{ "cancel" | translate }}
                   </button>
-                  
-                    <img (click)="changeLanguage()" width="30" src="assets/images/icon.png" alt="change-lang-icon"
-                      style="margin-left:10px;cursor:pointer;"/>
-                  
+
+                  <img
+                    (click)="changeLanguage()"
+                    width="30"
+                    src="assets/images/icon.png"
+                    alt="change-lang-icon"
+                    style="margin-left: 10px; cursor: pointer"
+                  />
                 </div>
               </div>
             </div>

@@ -19,6 +19,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { MaterialModule } from '../material.module';
 import { EmailChipInputComponent } from './components/email-chip-input/email-chip-input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ButtonComponent } from './components/button/button.component';
 @NgModule({
   declarations: [
     ToggleFullscreenDirective,
@@ -31,6 +32,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RightSidebarComponent,
     LoaderComponent,
     EmailChipInputComponent,
+    ButtonComponent
   ],
   imports: [
     CommonModule,
@@ -54,6 +56,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatPaginatorModule,
     LoaderComponent,
     EmailChipInputComponent,
+    ButtonComponent
   ],
 })
-export class SharedModule {}
+export class SharedModule { }

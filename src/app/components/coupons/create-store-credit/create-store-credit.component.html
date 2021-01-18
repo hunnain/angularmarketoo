@@ -81,14 +81,12 @@
         </form>
       </fieldset>
       <div class="pull-right" style="margin-top: 20px">
-        <button
-          type="button"
-          class="btn btn-primary"
-          [disabled]="storeCreditForm.invalid || loading"
-          (click)="isEdit ? editCoupon() : createCoupon()"
-        >
-          {{ (isEdit ? "cop_update" : "cop_create") | translate }}
-        </button>
+        <app-button
+          [loading]="loading"
+          [disabled]="storeCreditForm.invalid"
+          [btnText]="isEdit ? 'cop_update' : 'cop_create'"
+          (onSubmit)="isEdit ? editCoupon() : createCoupon()"
+        ></app-button>
         <button
           *ngIf="isEdit"
           type="button"

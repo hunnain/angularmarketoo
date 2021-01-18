@@ -180,8 +180,8 @@
                           </div>
                           <div
                             *ngIf="
-                            loginForm.controls.email.touched &&
-                            loginForm.controls.email.errors?.pattern
+                              loginForm.controls.email.touched &&
+                              loginForm.controls.email.errors?.pattern
                             "
                             class="text text-danger"
                           >
@@ -227,14 +227,13 @@
                           </div>
                         </div>
                         <div class="form-button">
-                          <button
-                            [disabled]="loginForm.invalid || loading"
-                            (click)="onSubmit()"
-                            class="btn btn-primary"
-                            type="submit"
-                          >
-                            {{ "LOGIN" | translate }}
-                          </button>
+                          <app-button
+                            [btnType]="'submit'"
+                            [loading]="loading"
+                            [disabled]="loginForm.invalid"
+                            [btnText]="'LOGIN'"
+                            (onSubmit)="onSubmit($event)"
+                          ></app-button>
                         </div>
                         <!-- [routerLink]="'/dashboard/default'" -->
 

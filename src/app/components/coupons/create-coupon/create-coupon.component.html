@@ -9,7 +9,7 @@
         <app-loader [loading]="loading"></app-loader>
       </div>
     </div>
-    <div class="card-body" *ngIf="isEdit && !fetching || !isEdit">
+    <div class="card-body" *ngIf="(isEdit && !fetching) || !isEdit">
       <!-- <ngb-tabset class="tab-coupon"> -->
       <!-- <ngb-tab title="General"> -->
       <fieldset class="fieldset">
@@ -336,14 +336,12 @@
         </form>
       </fieldset>
       <div class="pull-right" style="margin-top: 20px">
-        <button
-          type="button"
-          class="btn btn-primary"
-          [disabled]="generalForm.invalid || restrictionForm.invalid || loading"
-          (click)="isEdit ? editCoupon() : createCoupon()"
-        >
-          {{ (isEdit ? "cop_update" : "cop_create") | translate }}
-        </button>
+        <app-button
+          [loading]="loading"
+          [disabled]="generalForm.invalid || restrictionForm.invalid"
+          [btnText]="isEdit ? 'cop_update' : 'cop_create'"
+          (onSubmit)="isEdit ? editCoupon() : createCoupon()"
+        ></app-button>
         <button
           *ngIf="isEdit"
           type="button"

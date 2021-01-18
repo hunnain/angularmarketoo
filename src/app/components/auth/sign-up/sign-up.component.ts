@@ -43,9 +43,9 @@ export class SignUpComponent implements OnInit {
     private translate: TranslateService,
     private cs: CommonService,
     @Inject(PLATFORM_ID) private platformId: Object,
-    ) {
-      this.cs.isLoading.subscribe(loading => {
-        this.loading = loading;
+  ) {
+    this.cs.isLoading.subscribe(loading => {
+      this.loading = loading;
     })
     this.sellerForm = this.fb.group({
       chineseFname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
@@ -54,24 +54,24 @@ export class SignUpComponent implements OnInit {
       password: ['', [Validators.required]],
       sellerIdentity: ['', [Validators.required]],
       nick_name: ['', [Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
-      gender: ['',[Validators.required]],
+      gender: ['', [Validators.required]],
       country: ['', [Validators.required]],
       contactNo: ['', [Validators.required]],
       hdySellBefore: [''],
       hdyHearAbtMarketoo: [''],
       interestedToJoinWm: [true],
-      refereeUrl: ['',[Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
+      refereeUrl: ['', [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
     })
     this.brandForm = this.fb.group({
       brandName: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
-      designHallUrl: ['',[Validators.required,Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
-      brandUrl: ['',[Validators.required,Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
-      productCategory: ['',[Validators.required]],
-      facebookUrl: ['',[Validators.required,Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
-      instaUrl: ['',[Validators.required,Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
+      designHallUrl: ['', [Validators.required]],
+      brandUrl: ['', [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
+      productCategory: ['', [Validators.required]],
+      facebookUrl: ['', [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
+      instaUrl: ['', [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
       avgPricePerProduct: ['', [Validators.required]],
-      placeOfProduct: ['',[Validators.required]],
-      deliverFrom: ['',[Validators.required]],
+      placeOfProduct: ['', [Validators.required]],
+      deliverFrom: ['', [Validators.required]],
     })
   }
 
@@ -103,7 +103,7 @@ export class SignUpComponent implements OnInit {
       let splited = img.split('base64,');
       let byteImg = splited[1];
       console.log(splited)
-      this.imgs[i]= byteImg;
+      this.imgs[i] = byteImg;
     }
   }
 
@@ -113,9 +113,9 @@ export class SignUpComponent implements OnInit {
   public config1: DropzoneConfigInterface = {
     clickable: true,
     maxFiles: 1,
-    url:null,
-    autoProcessQueue:false,
-    autoQueue:false,
+    url: null,
+    autoProcessQueue: false,
+    autoQueue: false,
     autoReset: null,
     errorReset: null,
     cancelReset: null
@@ -136,19 +136,19 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  createSeller(){
+  createSeller() {
     // console.log('seller info',this.sellerForm.value)
     // console.log('brand info',this.brandForm.value)
     // console.log('byteImages',this.imgs)
 
     let data = {
       ...this.sellerForm.value,
-      brandUu:{...this.brandForm.value,productWishImages:this.imgs}
+      brandUu: { ...this.brandForm.value, productWishImages: this.imgs }
     }
     this.loading = true;
     this.authService.signUp(data).subscribe(
       (res) => {
-        if(res){
+        if (res) {
           // console.log(res, 'response');
           this.cs.isLoading.next(false)
           this.loading = false;
