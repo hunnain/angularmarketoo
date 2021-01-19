@@ -146,7 +146,9 @@
           <div class="media align-items-center">
             <img
               class="align-self-center pull-right img-50 rounded-circle"
-              src="assets/images/dashboard/man.png"
+              [src]="
+                profileImage ? profileImage : 'assets/images/dashboard/man.png'
+              "
               alt="header-user"
             />
 

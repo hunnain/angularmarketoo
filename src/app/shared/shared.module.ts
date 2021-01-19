@@ -20,6 +20,9 @@ import { MaterialModule } from '../material.module';
 import { EmailChipInputComponent } from './components/email-chip-input/email-chip-input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from './components/button/button.component';
+import { CropperComponent } from './components/cropper/cropper.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+
 @NgModule({
   declarations: [
     ToggleFullscreenDirective,
@@ -32,7 +35,8 @@ import { ButtonComponent } from './components/button/button.component';
     RightSidebarComponent,
     LoaderComponent,
     EmailChipInputComponent,
-    ButtonComponent
+    ButtonComponent,
+    CropperComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +48,8 @@ import { ButtonComponent } from './components/button/button.component';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    ImageCropperModule
+
   ],
   providers: [NavService, WINDOW_PROVIDERS],
   exports: [
@@ -56,7 +62,9 @@ import { ButtonComponent } from './components/button/button.component';
     MatPaginatorModule,
     LoaderComponent,
     EmailChipInputComponent,
-    ButtonComponent
+    ButtonComponent,
+    CropperComponent,
+    ImageCropperModule
   ],
 })
 export class SharedModule { }

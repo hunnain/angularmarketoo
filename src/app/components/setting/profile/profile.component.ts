@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthServiceService } from 'src/app/shared/service/auth-service/auth-service.service';
 import { CommonService } from 'src/app/shared/service/common.service';
 
@@ -35,6 +36,7 @@ export class ProfileComponent implements OnInit {
   public loading: boolean = false;
   public deleting: boolean = false;
   public deactivating: boolean = false;
+  public submittingPic: boolean = false;
   public isEdit: boolean = false;
   public announcement: string = '';
   public allowDesktopNotifications: boolean = false;
@@ -43,6 +45,8 @@ export class ProfileComponent implements OnInit {
   public dnd: boolean = false;
   public deleteAccount: number;
   public deactivateAccount: number;
+  public tempProfileImage: string;
+  public profileImage: string;
 
   public sellerForm: FormGroup;
   public profile: Profile;
@@ -50,25 +54,35 @@ export class ProfileComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthServiceService,
-    private cs: CommonService
+    private cs: CommonService,
+    private modalService: NgbModal,
+
   ) {
     this.cs.isLoading.subscribe((loading) => {
       this.loading = loading;
       this.deleting = loading;
       this.deactivating = loading;
+      this.submittingPic = loading;
+      // this.modalService.dismissAll('close');
     });
 
     this.createProfileForm();
 
     this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
     if (this.userInfo) {
-      let { chineseFname, englishFname, email, gender, shopName = "", shopLocation = "", shopIntro = "", profileSetting } = this.userInfo;
+      let { chineseFname, englishFname, email, gender, image, shopName = "", shopLocation = "", shopIntro = "", profileSetting } = this.userInfo;
       this.profile = this.userInfo;
       this.sellerForm.setValue({ chineseFname, englishFname, email, gender, shopName, shopLocation, shopIntro });
+      this.profileImage = this.addBase64(image) || '';
       if (profileSetting) {
         this.initializeSetting(profileSetting)
       }
     }
+  }
+
+  addBase64(data) {
+    let base = `data:image/jpeg;base64,${data}`;
+    return base;
   }
 
   createProfileForm() {
@@ -96,7 +110,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() { }
 
-  handleSubmit(event) {
+  handleSubmit() {
     this.loading = true;
     let data = {
       announcement: this.announcement,
@@ -120,7 +134,7 @@ export class ProfileComponent implements OnInit {
     this.isEdit = true;
   }
 
-  submitProfile(event) {
+  submitProfile() {
     this.loading = true;
     let data = { ...this.sellerForm.value };
     this.authService.updateProfile(data).subscribe(res => {
@@ -155,6 +169,62 @@ export class ProfileComponent implements OnInit {
         this.deleting = false;
       }
     })
+  }
+
+  saveProfilePic() {
+    this.submittingPic = true;
+    let splited = this.tempProfileImage.split('base64,');
+    let byteImg = splited[1];
+    let data = {
+      image: byteImg
+    }
+    this.authService.updateProfilePic(data).subscribe(res => {
+      if (res) {
+        console.log(res);
+        this.cs.isLoading.next(false);
+        this.submittingPic = false;
+        this.profileImage = this.tempProfileImage;
+        this.tempProfileImage = "";
+        this.userInfo = { ...this.userInfo, image: data.image }
+        this.authService.writeToLS('userInfo', JSON.stringify(this.userInfo))
+        this.modalService.dismissAll('close')
+      }
+    })
+  }
+
+  // cropper 
+  openCropper(content) {
+    this.open(content);
+  }
+
+  getCroppedImage(croppedImg) {
+    // console.log("crop image", croppedImg)
+    this.tempProfileImage = croppedImg
+  }
+
+  // modal event
+  open(content) {
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          console.log(`Closed with: ${result}`);
+        },
+        (reason) => {
+          this.tempProfileImage = "";
+          console.log(`Dismissed ${this.getDismissReason(reason)}`);
+        }
+      );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
 }

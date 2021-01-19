@@ -5,11 +5,27 @@
       <div class="card">
         <div class="card-body">
           <div class="profile-details text-center">
-            <img
+            <!-- <img
               src="assets/images/dashboard/designer.jpg"
               alt=""
               class="img-fluid img-90 rounded-circle blur-up lazyloaded"
-            />
+            /> -->
+            <div class="img-container">
+              <img
+                [src]="
+                  profileImage
+                    ? profileImage
+                    : 'assets/images/dashboard/designer.jpg'
+                "
+                alt="Avatar"
+                class="image img-fluid img-90 rounded-circle blur-up lazyloaded"
+              />
+              <div class="middle" (click)="openCropper(cropperModal)">
+                <div class="text">
+                  {{ profileImage ? "Change Image" : "Add Image" }}
+                </div>
+              </div>
+            </div>
             <h5 class="f-w-600 mb-0">
               {{ "tab_marketoo_seller" | translate }}
             </h5>
@@ -261,7 +277,7 @@
                         [loading]="loading"
                         [disabled]="sellerForm.invalid"
                         [btnText]="'save_announcement'"
-                        (onSubmit)="submitProfile($event)"
+                        (onSubmit)="submitProfile()"
                       ></app-button>
                       <button
                         type="button"
@@ -348,7 +364,7 @@
                           [loading]="loading"
                           [disabled]="!announcement"
                           [btnText]="'save_announcement'"
-                          (onSubmit)="handleSubmit($event)"
+                          (onSubmit)="handleSubmit()"
                         ></app-button>
                       </div>
                     </div>
@@ -400,7 +416,7 @@
                     [loading]="deactivating"
                     [disabled]="false"
                     [btnText]="'d_deactive_acc'"
-                    (onSubmit)="handleDeactiveAccount($event)"
+                    (onSubmit)="handleDeactiveAccount()"
                   ></app-button>
                 </div>
                 <div class="account-setting deactivate-account">
@@ -449,7 +465,7 @@
                     [loading]="deleting"
                     [disabled]="false"
                     [btnText]="'d_delete_acc'"
-                    (onSubmit)="handleDeleteAccount($event)"
+                    (onSubmit)="handleDeleteAccount()"
                   ></app-button>
                 </div>
               </ng-template>
@@ -461,3 +477,45 @@
   </div>
 </div>
 <!-- Container-fluid Ends-->
+
+<!-- Cropper Modal -->
+<ng-template #cropperModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Cropper</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="main-container" ngbAutofocus>
+      <div>
+        <app-cropper
+          [roundCropper]="true"
+          (getImage)="getCroppedImage($event)"
+        ></app-cropper>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <app-button
+      [loading]="submittingPic"
+      [disabled]="!tempProfileImage"
+      [btnText]="'save_announcement'"
+      (onSubmit)="saveProfilePic()"
+    ></app-button>
+    <button
+      class="btn btn-light"
+      type="button"
+      data-dismiss="modal"
+      (click)="modal.dismiss('Cross click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
+<!-- Cropper Modal End -->

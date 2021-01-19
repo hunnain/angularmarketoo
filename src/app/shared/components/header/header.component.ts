@@ -24,12 +24,24 @@ export class HeaderComponent implements OnInit {
 
   @Output() rightSidebarEvent = new EventEmitter<boolean>();
   public isTranslate: boolean = false;
+
+  public profileImage: string;
   constructor(
     public navServices: NavService,
     private authService: AuthServiceService,
     @Inject(PLATFORM_ID) private platformId: Object,
     private translate: TranslateService
-  ) { }
+  ) {
+    let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (userInfo.image) {
+      this.profileImage = this.addBase64(userInfo.image);
+    }
+  }
+
+  addBase64(data) {
+    let base = `data:image/jpeg;base64,${data}`;
+    return base;
+  }
 
   collapseSidebar() {
     this.open = !this.open;
