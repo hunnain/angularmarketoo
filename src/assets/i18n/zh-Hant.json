@@ -280,6 +280,8 @@
   "prod_product_for": "商品用途",
   "prod_inter_shipping": "國際郵寄",
   "prod_local_shipping": "本地郵寄",
+  "prod_qty_req":"數量為必填項",
+  "prod_qty_invalid":"數量無效",
   "prod_category": "類別",
   "prod_sub_category": "次類別",
   "prod_Groups": "組別",

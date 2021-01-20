@@ -271,6 +271,8 @@
   "prod_product_for": "Product For",
   "prod_inter_shipping": "International Shipping",
   "prod_local_shipping": "Local Shipping",
+  "prod_qty_req":"Quantity is Required",
+  "prod_qty_invalid":"Quantity is Invalid",
   "prod_category": "Category",
   "prod_sub_category": "Sub Category",
   "prod_ex_sub_category": "Extended Sub Category",

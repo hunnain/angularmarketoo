@@ -156,6 +156,7 @@ export class AddProductComponent implements OnInit {
       sub_category: ['', Validators.required],
       extended_category: ['', Validators.required],
       labels: [''],
+      quantity: [1, [Validators.required, Validators.pattern(/^[0-9]*$/)]],
       sizes: [''],
       customSize: [false],
       customizeSize: [''],
@@ -244,7 +245,7 @@ export class AddProductComponent implements OnInit {
             custom_color: body.customColours[0] || '',
             extended_category: body.extendedSubCategory,
           });
-          this.counter = body.quantity;
+          // this.counter = body.quantity;
           this.customSizeImage = this.addBase64(body.customSizeImage);
           this.customDesignImage = body.customDesignUu
             ? this.addBase64(body.customDesignUu.image)
@@ -286,11 +287,9 @@ export class AddProductComponent implements OnInit {
               self.openModal();
             });
           });
-          return `${
-            this.selectedLang == 'en' ? 'No Keyword found' : '沒有相關鍵字'
-          } <span id='no-results-btn' class='badge badge-secondary'>${
-            this.selectedLang == 'en' ? 'Request Label' : '申請關鍵字'
-          }</span>`;
+          return `${this.selectedLang == 'en' ? 'No Keyword found' : '沒有相關鍵字'
+            } <span id='no-results-btn' class='badge badge-secondary'>${this.selectedLang == 'en' ? 'Request Label' : '申請關鍵字'
+            }</span>`;
         },
       },
       escapeMarkup: function (markup) {
@@ -304,12 +303,15 @@ export class AddProductComponent implements OnInit {
   }
 
   increment() {
-    this.counter += 1;
+    let field = this.productForm.controls.quantity;
+    field.setValue(field.value + 1);
   }
 
   decrement() {
-    if (this.counter > 0) {
-      this.counter -= 1;
+    let field = this.productForm.controls.quantity;
+    if (field.value > 1) {
+      field.setValue(field.value - 1);
+      // this.counter -= 1;
     }
   }
 
@@ -426,7 +428,7 @@ export class AddProductComponent implements OnInit {
     };
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   myClick() {
     // changes.prop contains the old and the new value...
@@ -447,18 +449,18 @@ export class AddProductComponent implements OnInit {
     this.router.navigate(['/products/physical/product-list']);
   }
 
-  public onUploadInit(args: any): void {}
+  public onUploadInit(args: any): void { }
 
-  public onUploadError(args: any): void {}
+  public onUploadError(args: any): void { }
 
-  public onUploadSuccess(args: any): void {}
+  public onUploadSuccess(args: any): void { }
 
   public onSubmit() {
     let temp = this.productForm.value;
     let data = {
       ...temp,
       subCategory: temp.sub_category,
-      quantity: this.counter,
+      // quantity: this.counter,
       images: this.imgs,
       availableSizes: temp.sizes,
       description: temp.description,

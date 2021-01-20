@@ -320,16 +320,33 @@
                           (click)="decrement()"
                         ></i>
                         <input
-                          class="touchspin1 text-center"
-                          name="counter"
-                          [value]="counter"
-                          type="text"
-                          [pattern]="'/^[0-9]*$/'"
+                          class="touchspin1 text-center counter"
+                          name="quantity"
+                          [formControl]="productForm.controls['quantity']"
+                          type="number"
                         />
                         <i
                           class="fa fa-plus btnLess1"
                           (click)="increment()"
                         ></i>
+                        <div
+                          *ngIf="
+                            productForm.controls.quantity.touched &&
+                            productForm.controls.quantity.errors?.required
+                          "
+                          class="text text-danger required"
+                        >
+                          {{ "prod_qty_req" | translate }}
+                        </div>
+                        <div
+                          *ngIf="
+                            productForm.controls.quantity.touched &&
+                            productForm.controls.quantity.errors?.pattern
+                          "
+                          class="text text-danger required"
+                        >
+                          {{ "prod_qty_invalid" | translate }}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -526,7 +543,7 @@
                     [loading]="loading"
                     [disabled]="false"
                     [btnText]="isEdit ? 'prod_update' : 'prod_add'"
-                    (onSubmit)="onSubmit($event)"
+                    (onSubmit)="onSubmit()"
                   ></app-button>
                   <button
                     type="button"
