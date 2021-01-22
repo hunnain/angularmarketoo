@@ -13,7 +13,7 @@ import {
   LabelOptions,
   SizeOptions,
   getValueOfCate,
-  getIdOfCate
+  getIdOfCate,
 } from './data';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -125,47 +125,34 @@ export class AddProductComponent implements OnInit {
     });
 
     this.productForm = this.fb.group({
-      name: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$'),
-        ],
-      ],
-      price: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$'),
-        ],
-      ],
-      markdownPrice: ['', [Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
-      discountBuy: ['', [Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
-      discountGet: ['', [Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+      name: ['', Validators.required],
+      price: ['', Validators.required],
+      markdownPrice: ['', Validators.required],
+      discountBuy: [''],
+      discountGet: [''],
 
-      code: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$'),
-        ],
-      ],
-      custom_color: ['', Validators.required],
-      size: ['', Validators.required],
+      // code: [
+      //   '',
+      //   [
+      //     Validators.required,
+      //     Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$'),
+      //   ],
+      // ],
+      custom_color: [''],
       category: ['', Validators.required],
       paymentOptions: ['', Validators.required],
-      colorOption: ['', Validators.required],
+      colorOption: [''],
       sub_category: ['', Validators.required],
-      extended_category: ['', Validators.required],
-      labels: [''],
-      quantity: [1, [Validators.required, Validators.pattern(/^[0-9]*$/)]],
-      sizes: [''],
+      extended_category: [''],
+      labels: ['', Validators.required],
+      quantity: [1],
+      sizes: ['', Validators.required],
       customSize: [false],
       customizeSize: [''],
       customDesign: [false],
       isInternationalShipping: [true],
       customDesignFormat: [''],
-      description: [''],
+      description: ['', Validators.required],
       customDescription: [''],
       customMaterial: [''],
 
@@ -230,15 +217,15 @@ export class AddProductComponent implements OnInit {
         this.fetchProductById(this.product_id);
       }
     });
-    this.productForm.controls.category.valueChanges.subscribe(res => {
-      console.log("res---", res)
-      this.productForm.controls.sub_category.setValue("")
-      this.productForm.controls.extended_category.setValue("")
-    })
-    this.productForm.controls.sub_category.valueChanges.subscribe(res => {
-      console.log("res---", res)
-      this.productForm.controls.extended_category.setValue("")
-    })
+    this.productForm.controls.category.valueChanges.subscribe((res) => {
+      console.log('res---', res);
+      this.productForm.controls.sub_category.setValue('');
+      this.productForm.controls.extended_category.setValue('');
+    });
+    this.productForm.controls.sub_category.valueChanges.subscribe((res) => {
+      console.log('res---', res);
+      this.productForm.controls.extended_category.setValue('');
+    });
   }
 
   fetchProductById(id) {
@@ -250,23 +237,26 @@ export class AddProductComponent implements OnInit {
         const { category, subCategory, extendedSubCategory } = body;
         let cates = getIdOfCate(category, subCategory, extendedSubCategory);
 
-        this.productForm.patchValue({
-          ...res.body,
-          sizes: body.availableSizes,
-          category: cates.category,
-          sub_category: cates.subCategory,
-          extended_category: cates.extendedSubCategory,
-          customizeSize: body.customSize,
-          customDesign: body.customDesignUu ? true : false,
-          customDesignFormat: body.customDesignUu
-            ? body.customDesignUu.customDesignFormat
-            : '',
-          customDescription: body.customDesignUu
-            ? body.customDesignUu.description
-            : '',
-          colorOption: body.availableColours,
-          custom_color: body.customColours[0] || '',
-        }, { emitEvent: false });
+        this.productForm.patchValue(
+          {
+            ...res.body,
+            sizes: body.availableSizes,
+            category: cates.category,
+            sub_category: cates.subCategory,
+            extended_category: cates.extendedSubCategory,
+            customizeSize: body.customSize,
+            customDesign: body.customDesignUu ? true : false,
+            customDesignFormat: body.customDesignUu
+              ? body.customDesignUu.customDesignFormat
+              : '',
+            customDescription: body.customDesignUu
+              ? body.customDesignUu.description
+              : '',
+            colorOption: body.availableColours,
+            custom_color: body.customColours[0] || '',
+          },
+          { emitEvent: false }
+        );
         // this.counter = body.quantity;
         this.customSizeImage = this.addBase64(body.customSizeImage);
         this.customDesignImage = body.customDesignUu
@@ -305,9 +295,11 @@ export class AddProductComponent implements OnInit {
               self.openModal();
             });
           });
-          return `${this.selectedLang == 'en' ? 'No Keyword found' : '沒有相關鍵字'
-            } <span id='no-results-btn' class='badge badge-secondary'>${this.selectedLang == 'en' ? 'Request Label' : '申請關鍵字'
-            }</span>`;
+          return `${
+            this.selectedLang == 'en' ? 'No Keyword found' : '沒有相關鍵字'
+          } <span id='no-results-btn' class='badge badge-secondary'>${
+            this.selectedLang == 'en' ? 'Request Label' : '申請關鍵字'
+          }</span>`;
         },
       },
       escapeMarkup: function (markup) {
@@ -446,7 +438,7 @@ export class AddProductComponent implements OnInit {
     };
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   myClick() {
     // changes.prop contains the old and the new value...
@@ -467,14 +459,15 @@ export class AddProductComponent implements OnInit {
     this.router.navigate(['/products/physical/product-list']);
   }
 
-  public onUploadInit(args: any): void { }
+  public onUploadInit(args: any): void {}
 
-  public onUploadError(args: any): void { }
+  public onUploadError(args: any): void {}
 
-  public onUploadSuccess(args: any): void { }
+  public onUploadSuccess(args: any): void {}
 
   public onSubmit() {
     let temp = this.productForm.value;
+
     const { category, sub_category, extended_category, ...remaining } = temp;
     let data = {
       ...remaining,
@@ -488,7 +481,7 @@ export class AddProductComponent implements OnInit {
       customColours: [remaining.custom_color],
       // subCategory: temp.sub_category,
       // extendedSubCategory: temp.extended_category,
-      ...getValueOfCate(category, sub_category, extended_category)
+      ...getValueOfCate(category, sub_category, extended_category),
     };
     console.log(temp);
 

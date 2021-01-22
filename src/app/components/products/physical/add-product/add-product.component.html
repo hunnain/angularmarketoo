@@ -47,17 +47,13 @@
               >
                 <div class="add-product-form">
                   <div class="form-group row">
-                    <label
-                      for="validationCustom01"
-                      class="col-xl-3 col-sm-4 mb-0 required"
+                    <label class="col-xl-3 col-sm-4 mb-0 required"
                       >{{ "prod_name" | translate }}
                     </label>
                     <input
                       class="form-control col-xl-8 col-sm-7"
-                      id="validationCustom01"
                       type="text"
                       [formControl]="productForm.controls['name']"
-                      required
                     />
                     <div
                       *ngIf="
@@ -81,7 +77,6 @@
                       id="validationCustom02"
                       type="number"
                       [formControl]="productForm.controls['price']"
-                      required=""
                     />
                     <div
                       *ngIf="
@@ -225,9 +220,13 @@
                       class="form-control col-xl-2 col-sm-2"
                       id="buy_x"
                       type="text"
+                      [required]="
+                        disc_buy.value || disc_get.value ? true : false
+                      "
                       [formControl]="productForm.controls['discountBuy']"
                       placeholder="XXX"
                     />
+
                     <label
                       for="get_x"
                       class="col-xl-1 col-sm-1 mb-0"
@@ -240,6 +239,9 @@
                       class="form-control col-xl-2 col-sm-2"
                       id="get_x"
                       type="text"
+                      [required]="
+                        disc_buy.value || disc_get.value ? true : false
+                      "
                       [formControl]="productForm.controls['discountGet']"
                       placeholder="XXX"
                     />
@@ -449,17 +451,13 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label
-                      for="validationCustom01"
-                      class="col-xl-3 col-sm-4 mb-0"
+                    <label class="col-xl-3 col-sm-4 mb-0"
                       >{{ "prod_custom_color" | translate }}
                     </label>
                     <input
                       class="form-control col-xl-8 col-sm-7"
-                      id="validationCustom01"
                       type="text"
                       [formControl]="productForm.controls['custom_color']"
-                      required
                     />
                   </div>
                   <div class="form-group row">
@@ -469,10 +467,8 @@
                     <div class="col-xl-8 col-sm-7 pl-0 description-sm">
                       <input
                         class="form-control col-xl-8 col-sm-7"
-                        id="validationCustom01"
                         type="text"
                         [formControl]="productForm.controls['customMaterial']"
-                        required
                       />
                       <!-- <ck-editor
                         id="editor3"
@@ -490,10 +486,8 @@
                     <div class="col-xl-8 col-sm-7 pl-0">
                       <input
                         class="form-control col-xl-8 col-sm-7"
-                        id="validationCustom01"
                         type="text"
                         [formControl]="productForm.controls['description']"
-                        required
                       />
                       <!-- <ck-editor
                         id="editor3"
@@ -541,7 +535,7 @@
                 <div class="product-buttons col-sm-8 offset-xl-3 offset-sm-4">
                   <app-button
                     [loading]="loading"
-                    [disabled]="false"
+                    [disabled]="!productForm.valid || !imgs.length"
                     [btnText]="isEdit ? 'prod_update' : 'prod_add'"
                     (onSubmit)="onSubmit()"
                   ></app-button>
@@ -588,7 +582,6 @@
             id="label"
             type="text"
             [(ngModel)]="label"
-            required
           />
         </div>
       </div>
