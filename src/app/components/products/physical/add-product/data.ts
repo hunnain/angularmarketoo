@@ -1,10 +1,10 @@
 export const MainCategories = [
   { id: 'acces', name: 'Accessories' },
-  { id: 'cloth', name: 'clothing' },
+  { id: 'cloth', name: 'Clothing' },
   { id: 'stat', name: 'Stationery' },
   { id: 'dn', name: 'Daily Necessities' },
-  { id: 'hr', name: 'handbag' },
-  { id: 'sc', name: 'skin-care' },
+  { id: 'hr', name: 'Handbag/ Rucksack' },
+  { id: 'sc', name: 'Skin Care' },
   { id: 'le', name: 'Leisure Experience' },
 ];
 export const SendToOptions = (lang = 'en') => [
@@ -374,3 +374,47 @@ export const SizeOptions = (lang) => [
   { id: 'xl', text: lang === 'en' ? 'XL' : '加大碼' },
   { id: 'xxl', text: lang === 'en' ? 'XXL' : '加大大碼' },
 ];
+
+
+export const getValueOfCate = (mainValue, subValue, exValue) => {
+  console.log("main=>", mainValue, "sub=>", subValue, "extended=>", exValue);
+  let all = {};
+  if (mainValue) {
+    let mainCate = MainCategories.filter(main => main.id === mainValue);
+    all['category'] = mainCate[0].name;
+  }
+  if (subValue) {
+    let subCate = SubCategories[mainValue].filter(sub => sub.id === subValue);
+    all['subCategory'] = subCate[0].name;
+  }
+  if (exValue) {
+    let exCate = ExtendedCategories[subValue].filter(ex => ex.id === exValue);
+    all['extendedSubCategory'] = exCate[0].name;
+  }
+  console.log(all)
+  return all;
+}
+
+interface Cate {
+  category: string;
+  subCategory: string;
+  extendedSubCategory: string;
+}
+export const getIdOfCate = (mainValue, subValue, exValue): Cate => {
+  console.log("main=>", mainValue, "sub=>", subValue, "extended=>", exValue);
+  let all: Cate = { category: '', subCategory: '', extendedSubCategory: '' };
+  if (mainValue) {
+    let mainCate = MainCategories.filter(main => main.name === mainValue);
+    all['category'] = mainCate[0].id;
+  }
+  if (subValue && all.hasOwnProperty('category')) {
+    let subCate = SubCategories[all['category']].filter(sub => sub.name === subValue);
+    all['subCategory'] = subCate[0].id;
+  }
+  if (exValue && all.hasOwnProperty('subCategory')) {
+    let exCate = ExtendedCategories[all['subCategory']].filter(ex => ex.name === exValue);
+    all['extendedSubCategory'] = exCate[0].id;
+  }
+  console.log(all)
+  return all;
+}

@@ -12,6 +12,8 @@ import {
   ExtendedCategories,
   LabelOptions,
   SizeOptions,
+  getValueOfCate,
+  getIdOfCate
 } from './data';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -225,51 +227,67 @@ export class AddProductComponent implements OnInit {
         this.product_id = params.id;
         this.isEdit = true;
         this.loading = true;
-        productService.getProductById(params.id).subscribe((res) => {
-          // console.log(res.body);
-          // Object.keys(res.body).forEach((key) => {
-          const { body } = res;
-          this.productForm.patchValue({
-            ...res.body,
-            sizes: body.availableSizes,
-            sub_category: body.subCategory,
-            customizeSize: body.customSize,
-            customDesign: body.customDesignUu ? true : false,
-            customDesignFormat: body.customDesignUu
-              ? body.customDesignUu.customDesignFormat
-              : '',
-            customDescription: body.customDesignUu
-              ? body.customDesignUu.description
-              : '',
-            colorOption: body.availableColours,
-            custom_color: body.customColours[0] || '',
-            extended_category: body.extendedSubCategory,
-          });
-          // this.counter = body.quantity;
-          this.customSizeImage = this.addBase64(body.customSizeImage);
-          this.customDesignImage = body.customDesignUu
-            ? this.addBase64(body.customDesignUu.image)
-            : '';
-          if (body.images && body.images.length)
-            body.images.forEach((img, i) => {
-              if (img) {
-                this.url[i].img = this.addBase64(img);
-                this.imgs[i] = img;
-              }
-            });
-
-          console.log(this.productForm.value);
-
-          // });
-          this.cs.isLoading.next(false);
-          this.loading = false;
-          console.log(res);
-        });
+        this.fetchProductById(this.product_id);
       }
     });
-    // this.productForm.valueChanges.subscribe(res => {
-    //   console.log("res---",res)
-    // })
+    this.productForm.controls.category.valueChanges.subscribe(res => {
+      console.log("res---", res)
+      this.productForm.controls.sub_category.setValue("")
+      this.productForm.controls.extended_category.setValue("")
+    })
+    this.productForm.controls.sub_category.valueChanges.subscribe(res => {
+      console.log("res---", res)
+      this.productForm.controls.extended_category.setValue("")
+    })
+  }
+
+  fetchProductById(id) {
+    this.productService.getProductById(id).subscribe((res) => {
+      // console.log(res.body);
+      // Object.keys(res.body).forEach((key) => {
+      if (res && res.body) {
+        const { body } = res;
+        const { category, subCategory, extendedSubCategory } = body;
+        let cates = getIdOfCate(category, subCategory, extendedSubCategory);
+
+        this.productForm.patchValue({
+          ...res.body,
+          sizes: body.availableSizes,
+          category: cates.category,
+          sub_category: cates.subCategory,
+          extended_category: cates.extendedSubCategory,
+          customizeSize: body.customSize,
+          customDesign: body.customDesignUu ? true : false,
+          customDesignFormat: body.customDesignUu
+            ? body.customDesignUu.customDesignFormat
+            : '',
+          customDescription: body.customDesignUu
+            ? body.customDesignUu.description
+            : '',
+          colorOption: body.availableColours,
+          custom_color: body.customColours[0] || '',
+        }, { emitEvent: false });
+        // this.counter = body.quantity;
+        this.customSizeImage = this.addBase64(body.customSizeImage);
+        this.customDesignImage = body.customDesignUu
+          ? this.addBase64(body.customDesignUu.image)
+          : '';
+        if (body.images && body.images.length)
+          body.images.forEach((img, i) => {
+            if (img) {
+              this.url[i].img = this.addBase64(img);
+              this.imgs[i] = img;
+            }
+          });
+
+        console.log(this.productForm.value);
+
+        // });
+        this.cs.isLoading.next(false);
+        this.loading = false;
+        console.log(res);
+      }
+    });
   }
 
   generateLabelConfig(): Options {
@@ -457,18 +475,20 @@ export class AddProductComponent implements OnInit {
 
   public onSubmit() {
     let temp = this.productForm.value;
+    const { category, sub_category, extended_category, ...remaining } = temp;
     let data = {
-      ...temp,
-      subCategory: temp.sub_category,
+      ...remaining,
       // quantity: this.counter,
       images: this.imgs,
-      availableSizes: temp.sizes,
-      description: temp.description,
+      availableSizes: remaining.sizes,
+      description: remaining.description,
       sellerUuid: this.user.sellerUuid,
-      paymentOptions: temp.paymentOptions,
-      availableColours: temp.colorOption,
-      customColours: [temp.custom_color],
-      extendedSubCategory: temp.extended_category,
+      paymentOptions: remaining.paymentOptions,
+      availableColours: remaining.colorOption,
+      customColours: [remaining.custom_color],
+      // subCategory: temp.sub_category,
+      // extendedSubCategory: temp.extended_category,
+      ...getValueOfCate(category, sub_category, extended_category)
     };
     console.log(temp);
 
