@@ -396,6 +396,8 @@
   "cop_notify_recivers": "Notify Recivers",
   "cop_per_customer": "Per Customer",
   "cop_create": "CREATE",
+  "cop_update": "UPDATE",
+  "cop_back": "Back",
   "send": "Send",
   "csc": "Create Store Credit",
   "csc_send_amount": "Send Amount",

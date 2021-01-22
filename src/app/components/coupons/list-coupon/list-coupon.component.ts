@@ -56,6 +56,7 @@ export class ListCouponComponent implements OnInit {
   fetchCoupons() {
     const { PageSize, CurrentPage } = this.pagination;
     this.loading = true;
+    this.digital_categories = []
     let query = `PageSize=${PageSize}&PageNumber=${CurrentPage}`;
     this.couponService.getCoupon(query).subscribe(
       (res) => {
@@ -81,6 +82,11 @@ export class ListCouponComponent implements OnInit {
 
   onDelete(val) {
     console.log('row click', val);
+    this.couponService.deleteCoupon(val).subscribe(res => {
+      if (res) {
+        this.fetchCoupons();
+      }
+    })
   }
 
   setPage(page) {

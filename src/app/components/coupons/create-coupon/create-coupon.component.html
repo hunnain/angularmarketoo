@@ -74,8 +74,8 @@
                     ngbDatepicker
                     placeholder="dd-mm-yyyy"
                     [minDate]="
-                      generalForm.controls.startDate.value
-                        ? generalForm.controls.startDate.value
+                      keys(startDate.value).length
+                        ? startDate.value
                         : currentDate
                     "
                     [maxDate]="generalForm.controls.endDate.value"
@@ -348,7 +348,7 @@
           class="btn btn-danger ml-1"
           [routerLink]="'/coupons/list-coupons'"
         >
-          Back
+          {{ "cop_back" | translate }}
         </button>
       </div>
     </div>

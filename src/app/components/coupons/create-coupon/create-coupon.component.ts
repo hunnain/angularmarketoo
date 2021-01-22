@@ -15,6 +15,8 @@ import {
   MainCategories,
   SubCategories,
   SendToOptions,
+  getValueOfCate,
+  getIdOfCate
 } from '../../products/physical/add-product/data';
 
 @Component({
@@ -44,10 +46,15 @@ export class CreateCouponComponent implements OnInit {
   public subCategories = SubCategories;
   public extendedCategories = ExtendedCategories;
 
+  public keys = Object.keys
+
   get send_to() {
     return this.restrictionForm.get('category');
   }
 
+  get startDate() {
+    return this.generalForm.get('startDate');
+  }
   get main_category() {
     return this.restrictionForm.get('category');
   }
@@ -119,7 +126,11 @@ export class CreateCouponComponent implements OnInit {
           endDate: this.formatDate(endDate, true),
         };
         this.generalForm.setValue(general);
-        this.restrictionForm.setValue(rest);
+        const { category, subCategory, extendedSubCategory } = rest;
+        this.restrictionForm.patchValue({
+          ...rest,
+          ...getIdOfCate(category, subCategory, extendedSubCategory)
+        });
         console.log(
           'general form invalid',
           this.generalForm.invalid,
@@ -169,16 +180,18 @@ export class CreateCouponComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   createCoupon() {
     console.log('general form', this.generalForm.value);
     // console.log('restrictionForm', this.restrictionForm.value)
+    const { category, subCategory, extendedSubCategory, ...remaining } = this.restrictionForm.value;
     let data = {
       ...this.generalForm.value,
       startDate: this.formatDate(this.generalForm.value.startDate),
       endDate: this.formatDate(this.generalForm.value.endDate),
-      ...this.restrictionForm.value,
+      ...remaining,
+      ...getValueOfCate(category, subCategory, extendedSubCategory)
     };
     this.loading = true;
     console.log(data);
@@ -194,11 +207,13 @@ export class CreateCouponComponent implements OnInit {
   editCoupon() {
     // console.log('general form', this.generalForm.value)
     // console.log('restrictionForm', this.restrictionForm.value)
+    const { category, subCategory, extendedSubCategory, ...remaining } = this.restrictionForm.value;
     let data = {
       ...this.generalForm.value,
       startDate: this.formatDate(this.generalForm.value.startDate),
       endDate: this.formatDate(this.generalForm.value.endDate),
-      ...this.restrictionForm.value,
+      ...remaining,
+      ...getValueOfCate(category, subCategory, extendedSubCategory)
     };
     this.loading = true;
     console.log(data);
