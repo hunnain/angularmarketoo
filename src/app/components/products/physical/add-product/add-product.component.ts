@@ -245,22 +245,22 @@ export class AddProductComponent implements OnInit {
             sub_category: cates.subCategory,
             extended_category: cates.extendedSubCategory,
             customizeSize: body.customSize,
-            customDesign: body.customDesignUu ? true : false,
-            customDesignFormat: body.customDesignUu
-              ? body.customDesignUu.customDesignFormat
+            customDesign: body.customDesign ? true : false,
+            customDesignFormat: body.customDesign
+              ? body.customDesign.customDesignFormat
               : '',
-            customDescription: body.customDesignUu
-              ? body.customDesignUu.description
+            customDescription: body.customDesign
+              ? body.customDesign.description
               : '',
-            colorOption: body.availableColours,
+            colorOption: body.availableColors,
             custom_color: body.customColours[0] || '',
           },
           { emitEvent: false }
         );
         // this.counter = body.quantity;
-        this.customSizeImage = this.addBase64(body.customSizeImage);
-        this.customDesignImage = body.customDesignUu
-          ? this.addBase64(body.customDesignUu.image)
+        this.customImage = this.addBase64(body.customImage);
+        this.customDesignImage = body.customDesign
+          ? this.addBase64(body.customDesign.image)
           : '';
         if (body.images && body.images.length)
           body.images.forEach((img, i) => {
@@ -295,11 +295,9 @@ export class AddProductComponent implements OnInit {
               self.openModal();
             });
           });
-          return `${
-            this.selectedLang == 'en' ? 'No Keyword found' : '沒有相關鍵字'
-          } <span id='no-results-btn' class='badge badge-secondary'>${
-            this.selectedLang == 'en' ? 'Request Label' : '申請關鍵字'
-          }</span>`;
+          return `${this.selectedLang == 'en' ? 'No Keyword found' : '沒有相關鍵字'
+            } <span id='no-results-btn' class='badge badge-secondary'>${this.selectedLang == 'en' ? 'Request Label' : '申請關鍵字'
+            }</span>`;
         },
       },
       escapeMarkup: function (markup) {
@@ -398,7 +396,7 @@ export class AddProductComponent implements OnInit {
   }
 
   //FileUpload
-  customSizeImage = '';
+  customImage = '';
   customDesignImage = '';
   readCustomSizeImg(event: any) {
     if (event.target.files.length === 0) return;
@@ -414,8 +412,8 @@ export class AddProductComponent implements OnInit {
       let base = reader.result.toString();
       // let splited = base.split('base64,');
       // let byteImg = splited[1];
-      // this.customSizeImage = byteImg;
-      this.customSizeImage = base;
+      // this.customImage = byteImg;
+      this.customImage = base;
     };
   }
 
@@ -438,7 +436,7 @@ export class AddProductComponent implements OnInit {
     };
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   myClick() {
     // changes.prop contains the old and the new value...
@@ -459,11 +457,11 @@ export class AddProductComponent implements OnInit {
     this.router.navigate(['/products/physical/product-list']);
   }
 
-  public onUploadInit(args: any): void {}
+  public onUploadInit(args: any): void { }
 
-  public onUploadError(args: any): void {}
+  public onUploadError(args: any): void { }
 
-  public onUploadSuccess(args: any): void {}
+  public onUploadSuccess(args: any): void { }
 
   public onSubmit() {
     let temp = this.productForm.value;
@@ -477,7 +475,7 @@ export class AddProductComponent implements OnInit {
       description: remaining.description,
       sellerUuid: this.user.sellerUuid,
       paymentOptions: remaining.paymentOptions,
-      availableColours: remaining.colorOption,
+      availableColors: remaining.colorOption,
       customColours: [remaining.custom_color],
       // subCategory: temp.sub_category,
       // extendedSubCategory: temp.extended_category,
@@ -486,7 +484,7 @@ export class AddProductComponent implements OnInit {
     console.log(temp);
 
     if (temp.customDesign) {
-      data['customDesignUu'] = {
+      data['customDesign'] = {
         image: this.removeBase64(this.customDesignImage),
         description: temp.customDescription,
         customDesignFormat: temp.customDesignFormat,
@@ -498,7 +496,7 @@ export class AddProductComponent implements OnInit {
     }
 
     if (temp.customSize) {
-      data['customSizeImage'] = this.removeBase64(this.customSizeImage);
+      data['customImage'] = this.removeBase64(this.customImage);
       data['customSize'] = temp.customizeSize;
     } else {
       delete data['customizeSize'];

@@ -50,27 +50,6 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
           this.router.navigate(['auth/login']);
           return Observable.of(false);
         });
-      // .subscribe(res => {
-      //   console.log("res---", res, next['_routerState'].url);
-      //   if (res) {
-      //     this.router.navigate([next['_routerState'].url])
-      //     return Observable.of(true);
-      //   }
-      //   return Observable.of(false);
-      // })
-      // .subscribe(res => {
-      //   console.log("guard res", res)
-      //   this.auth.writeToLS('accessToken', res['accessToken']);
-      //   this.auth.writeToLS('refreshToken', res['refreshToken']);
-      //   return true;
-      // }, err => {
-      //   console.log("guard error", err)
-      //   let msg = this.parseServerError(err.error)
-      //   this.ns.showError(msg ? msg : err.message);
-      //   this.router.navigate(['auth/login'])
-      //   return false;
-      // });
-      // return true
     } else {
       this.router.navigate(['auth/login']);
       return false;

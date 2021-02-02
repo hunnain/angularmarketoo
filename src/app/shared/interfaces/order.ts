@@ -16,18 +16,51 @@ export interface Order {
     shipmentMethod: any;
     note: string;
     creationDate: string;
-    customer: any;
-    invoice: any;
-    orderedProductDetails: orderedProductDetails[];
+    customer: Customer;
+    invoice: Invoice;
+    orderedProductDetails?: (OrderedProductDetailsEntity)[] | null;
 }
 
-interface orderedProductDetails {
+export interface Customer {
+    username: string;
+    email: string;
+    customerId: string;
+    phoneNumber?: null;
+    country?: null;
+    zipCode?: null;
+    regionState?: null;
+    address?: null;
+    city?: null;
+    flatPlot?: null;
+    message?: null;
+}
+export interface Invoice {
+    invoiceNo: string;
+    customerName: string;
+    grandTotal: number;
+    orderId: number;
+    creationDate: string;
+    country: string;
+    address: string;
+    city: string;
+    state: string;
+    postalCode: string;
+    invoiceProductDetails?: (InvoiceProductDetailsEntity)[] | null;
+}
+export interface InvoiceProductDetailsEntity {
+    invoiceNo: string;
+    productName: string;
+    qty: number;
+    price: number;
+    total: number;
+}
+export interface OrderedProductDetailsEntity {
     orderId: number;
     productId: string;
     unitAmount: number;
     qty: number;
     totalAmount: number;
-    size: any;
-    colour: any;
+    size?: null;
+    colour?: null;
     name: string;
 }

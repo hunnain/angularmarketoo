@@ -404,15 +404,15 @@ export const getIdOfCate = (mainValue, subValue, exValue): Cate => {
   console.log("main=>", mainValue, "sub=>", subValue, "extended=>", exValue);
   let all: Cate = { category: '', subCategory: '', extendedSubCategory: '' };
   if (mainValue) {
-    let mainCate = MainCategories.filter(main => main.name === mainValue);
+    let mainCate = MainCategories.filter(main => main.name.toLocaleLowerCase() === mainValue);
     all['category'] = mainCate[0].id;
   }
   if (subValue && all.hasOwnProperty('category')) {
-    let subCate = SubCategories[all['category']].filter(sub => sub.name === subValue);
+    let subCate = SubCategories[all['category']].filter(sub => sub.name.toLocaleLowerCase() === subValue);
     all['subCategory'] = subCate[0].id;
   }
   if (exValue && all.hasOwnProperty('subCategory')) {
-    let exCate = ExtendedCategories[all['subCategory']].filter(ex => ex.name === exValue);
+    let exCate = ExtendedCategories[all['subCategory']].filter(ex => ex.name.toLocaleLowerCase() === exValue);
     all['extendedSubCategory'] = exCate[0].id;
   }
   console.log(all)
