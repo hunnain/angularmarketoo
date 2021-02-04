@@ -7,6 +7,7 @@ import {
   PLATFORM_ID,
   Inject,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthServiceService } from '../../service/auth-service/auth-service.service';
 import { NavService } from '../../service/nav.service';
@@ -30,7 +31,8 @@ export class HeaderComponent implements OnInit {
     public navServices: NavService,
     private authService: AuthServiceService,
     @Inject(PLATFORM_ID) private platformId: Object,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {
     let userInfo = JSON.parse(localStorage.getItem('userInfo'));
     if (userInfo.image) {
@@ -65,13 +67,9 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout() {
-    console.log('logout');
-    this.authService.logout().subscribe(res => {
-      localStorage.clear();
-    })
-    // localStorage.removeItem('userInfo');
-    // localStorage.removeItem('userInfo');
-    // localStorage.removeItem('userInfo');
+    this.authService.logout().subscribe((res) => {
+      this.router.navigate(['/auth/login']);
+    });
   }
 
   ngOnInit() { }

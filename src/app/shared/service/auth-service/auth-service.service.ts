@@ -31,7 +31,14 @@ export class AuthServiceService {
   }
 
   logout() {
-    return this.commonService.post('token/revoke', {});
+    return this.commonService.post('token/revoke', {}).pipe(map((res) => {
+      console.log("log1", res)
+      if (res) {
+        console.log("log2", res)
+        localStorage.clear();
+        this.commonService.isLoading.next(false);
+      }
+    }));
   }
 
   updateProfile(data) {
