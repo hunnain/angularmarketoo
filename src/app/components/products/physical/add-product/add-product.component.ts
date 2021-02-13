@@ -253,7 +253,7 @@ export class AddProductComponent implements OnInit {
               ? body.customDesign.description
               : '',
             colorOption: body.availableColors,
-            custom_color: body.customColours[0] || '',
+            custom_color: body.customColours ? body.customColours[0] : '',
           },
           { emitEvent: false }
         );
@@ -262,10 +262,10 @@ export class AddProductComponent implements OnInit {
         this.customDesignImage = body.customDesign
           ? this.addBase64(body.customDesign.image)
           : '';
-        if (body.images && body.images.length)
-          body.images.forEach((img, i) => {
+        if (body.imageUrls && body.imageUrls.length)
+          body.imageUrls.forEach((img, i) => {
             if (img) {
-              this.url[i].img = this.addBase64(img);
+              this.url[i].img = img;
               this.imgs[i] = img;
             }
           });

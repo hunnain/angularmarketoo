@@ -109,7 +109,7 @@ export class CreateCouponComponent implements OnInit {
           allowFreeShipping,
           quantity,
           discountType,
-          percentageDiscount,
+          amtOrPercentage,
           couponId,
           seller,
           sellerId,
@@ -121,7 +121,7 @@ export class CreateCouponComponent implements OnInit {
           allowFreeShipping,
           quantity,
           discountType,
-          percentageDiscount,
+          amtOrPercentage,
           startDate: this.formatDate(startDate, true),
           endDate: this.formatDate(endDate, true),
         };
@@ -158,7 +158,7 @@ export class CreateCouponComponent implements OnInit {
       allowFreeShipping: [false],
       quantity: [1, [Validators.required, Validators.pattern('^[1-9][0-9]*$')]],
       discountType: ['', Validators.required],
-      percentageDiscount: [
+      amtOrPercentage: [
         '',
         [Validators.required, Validators.pattern('^[1-9][0-9]*$')],
       ],
@@ -171,11 +171,10 @@ export class CreateCouponComponent implements OnInit {
       subCategory: ['', Validators.required],
       extendedSubCategory: [''],
       minSpend: [''],
-      maxSpend: [''],
-      perLimit: [''],
-      perCustomer: [''],
+      // perLimit: [''],
+      // perCustomer: [''],
+      usageLimit: [''],
       sendTo: [''],
-      canBeUsed: [''],
       notifyRecivers: [false],
     });
   }

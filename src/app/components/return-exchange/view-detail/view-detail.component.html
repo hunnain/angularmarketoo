@@ -1,6 +1,11 @@
 <div class="container-fluid">
   <div class="card">
-    <div class="row product-page-main card-body">
+    <div class="card-body">
+      <div style="display: flex; align-items: center; justify-content: center">
+        <app-loader [loading]="fetching"></app-loader>
+      </div>
+    </div>
+    <div class="row product-page-main card-body" *ngIf="!fetching">
       <div class="col-xl-8">
         <div class="product-page-details product-right mb-0">
           <div class="row">
@@ -34,7 +39,7 @@
                 <ul>
                   <li
                     style="margin-bottom: 10px"
-                    *ngFor="let prod of dummyData.products"
+                    *ngFor="let prod of order?.products"
                   >
                     <div
                       style="
@@ -74,9 +79,15 @@
                     [(ngModel)]="refund_reason"
                     name="refund_reason"
                   >
-                    <option value="faulty">{{'Mismatched items' | translate}}</option>
-                    <option value="faulty">{{'Faulty items' | translate}}</option>
-                    <option value="faulty">{{'Wrong size' | translate}}</option>
+                    <option value="Mismatched items">
+                      {{ "Mismatched items" | translate }}
+                    </option>
+                    <option value="Faulty items">
+                      {{ "Faulty items" | translate }}
+                    </option>
+                    <option value="Wrong size">
+                      {{ "Wrong size" | translate }}
+                    </option>
                   </select>
                 </div>
                 <div class="font-size-13">

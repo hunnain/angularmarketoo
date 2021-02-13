@@ -35,14 +35,9 @@ export class HeaderComponent implements OnInit {
     private router: Router
   ) {
     let userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    if (userInfo.image) {
-      this.profileImage = this.addBase64(userInfo.image);
+    if (userInfo.imageUrl) {
+      this.profileImage = userInfo.imageUrl;
     }
-  }
-
-  addBase64(data) {
-    let base = `data:image/jpeg;base64,${data}`;
-    return base;
   }
 
   collapseSidebar() {

@@ -3,6 +3,9 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Image } from '@ks89/angular-modal-gallery';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute } from '@angular/router';
+import { ReturnExchangeService } from 'src/app/shared/service/return-exchange-service/return-exchange.service';
+import { CommonService } from 'src/app/shared/service/common.service';
 
 @Component({
   selector: 'app-view-detail',
@@ -53,14 +56,26 @@ export class ViewDetailComponent implements OnInit {
     },
   };
   public selectedLang: string = 'en';
+
+  public orderId;
+  public order;
+  public fetching: boolean = false;
   constructor(
     private modalService: NgbModal,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private returnService: ReturnExchangeService,
+    private cs: CommonService,
+    private activeRoute: ActivatedRoute
   ) {
     this.selectedLang = this.translate.currentLang;
     this.translate.onLangChange.subscribe((res) => {
       this.selectedLang = res.lang;
     });
+
+    if (this.activeRoute.params['value'].id) {
+      this.orderId = this.activeRoute.params['value'].id;
+      this.fetchReturnOrderById(this.orderId);
+    }
   }
 
   open(content) {
@@ -85,7 +100,19 @@ export class ViewDetailComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  fetchReturnOrderById(id) {
+    this.fetching = true;
+    this.returnService.getReturnOrderById(id).subscribe((res) => {
+      if (res && res['body']) {
+        console.log('fetch res---', res.body);
+        this.order = res.body;
+        this.cs.isLoading.next(false);
+        this.fetching = false;
+      }
+    });
+  }
 
   changeTotal(content) {
     // this.total = Number(this.dummyData.total);

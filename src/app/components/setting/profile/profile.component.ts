@@ -70,19 +70,14 @@ export class ProfileComponent implements OnInit {
 
     this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
     if (this.userInfo) {
-      let { chineseFname, englishFname, email, gender, image, shopName = "", shopLocation = "", shopIntro = "", profileSetting } = this.userInfo;
+      let { chineseFname, englishFname, email, gender, imageUrl, shopName = "", shopLocation = "", shopIntro = "", profileSetting } = this.userInfo;
       this.profile = this.userInfo;
       this.sellerForm.setValue({ chineseFname, englishFname, email, gender, shopName, shopLocation, shopIntro });
-      this.profileImage = this.addBase64(image) || '';
+      this.profileImage = imageUrl || '';
       if (profileSetting) {
         this.initializeSetting(profileSetting)
       }
     }
-  }
-
-  addBase64(data) {
-    let base = `data:image/jpeg;base64,${data}`;
-    return base;
   }
 
   createProfileForm() {
@@ -185,7 +180,7 @@ export class ProfileComponent implements OnInit {
         this.submittingPic = false;
         this.profileImage = this.tempProfileImage;
         this.tempProfileImage = "";
-        this.userInfo = { ...this.userInfo, image: data.image }
+        this.userInfo = { ...this.userInfo, imageUrl: res['profilePicUrl'] }
         this.authService.writeToLS('userInfo', JSON.stringify(this.userInfo))
         this.modalService.dismissAll('close')
       }

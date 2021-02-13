@@ -175,8 +175,8 @@
                   formControlName="discountType"
                 >
                   <option value="">--Select--</option>
-                  <option value="1">Percent</option>
-                  <option value="2">Fixed</option>
+                  <option value="Percent">Percent</option>
+                  <option value="Fixed">Fixed</option>
                 </select>
               </div>
               <div class="form-group row">
@@ -185,14 +185,14 @@
                 }}</label>
                 <input
                   class="form-control col-md-7"
-                  formControlName="percentageDiscount"
+                  formControlName="amtOrPercentage"
                   type="number"
                   required=""
                 />
                 <div
                   *ngIf="
-                    generalForm.controls.percentageDiscount.touched &&
-                    generalForm.controls.percentageDiscount.errors?.required
+                    generalForm.controls.amtOrPercentage.touched &&
+                    generalForm.controls.amtOrPercentage.errors?.required
                   "
                   class="text text-danger offset-md-3 col-md-7"
                 >
@@ -200,8 +200,8 @@
                 </div>
                 <div
                   *ngIf="
-                    generalForm.controls.percentageDiscount.touched &&
-                    generalForm.controls.percentageDiscount.errors?.pattern
+                    generalForm.controls.amtOrPercentage.touched &&
+                    generalForm.controls.amtOrPercentage.errors?.pattern
                   "
                   class="text text-danger offset-md-3 col-md-7"
                 >
@@ -273,7 +273,7 @@
               type="number"
             />
           </div>
-          <div class="form-group row">
+          <!-- <div class="form-group row">
             <label for="validationCustom5" class="col-xl-3 col-md-4">{{
               "cop_max_spend" | translate
             }}</label>
@@ -283,7 +283,7 @@
               id="validationCustom5"
               type="number"
             />
-          </div>
+          </div> -->
           <h5>{{ "cop_usage_limit" | translate }}</h5>
           <div class="form-group row">
             <label for="validationCustom6" class="col-xl-3 col-md-4">{{
@@ -291,7 +291,7 @@
             }}</label>
             <input
               class="form-control col-md-7"
-              formControlName="canBeUsed"
+              formControlName="usageLimit"
               id="validationCustom6"
               type="text"
             />

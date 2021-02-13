@@ -8,9 +8,9 @@ export const MainCategories = [
   { id: 'le', name: 'Leisure Experience' },
 ];
 export const SendToOptions = (lang = 'en') => [
-  { id: 'all_fol', name: lang == 'en' ? 'All Followers' : '所有粉絲' },
+  { id: 'followers', name: lang == 'en' ? 'All Followers' : '所有粉絲' },
   {
-    id: 'wnpwm',
+    id: 'purchasers',
     name: lang == 'en' ? 'Who made purchases with me' : '曾向我下單的客⼾',
   },
   { id: 'both', name: lang == 'en' ? 'Both' : '兩類群組' },
@@ -404,15 +404,15 @@ export const getIdOfCate = (mainValue, subValue, exValue): Cate => {
   console.log("main=>", mainValue, "sub=>", subValue, "extended=>", exValue);
   let all: Cate = { category: '', subCategory: '', extendedSubCategory: '' };
   if (mainValue) {
-    let mainCate = MainCategories.filter(main => main.name.toLocaleLowerCase() === mainValue);
+    let mainCate = MainCategories.filter(main => main.name.toLowerCase() === mainValue.toLowerCase());
     all['category'] = mainCate[0].id;
   }
   if (subValue && all.hasOwnProperty('category')) {
-    let subCate = SubCategories[all['category']].filter(sub => sub.name.toLocaleLowerCase() === subValue);
+    let subCate = SubCategories[all['category']].filter(sub => sub.name.toLowerCase() === subValue.toLowerCase());
     all['subCategory'] = subCate[0].id;
   }
   if (exValue && all.hasOwnProperty('subCategory')) {
-    let exCate = ExtendedCategories[all['subCategory']].filter(ex => ex.name.toLocaleLowerCase() === exValue);
+    let exCate = ExtendedCategories[all['subCategory']].filter(ex => ex.name.toLowerCase() === exValue.toLowerCase());
     all['extendedSubCategory'] = exCate[0].id;
   }
   console.log(all)

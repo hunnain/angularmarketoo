@@ -13,7 +13,11 @@
             <app-loader [loading]="loading"></app-loader>
           </div>
           <div class="custom-datatable" *ngIf="!loading">
-            <button class="btn btn-primary mr-1 mb-3" style="float: right" *ngIf="digital_categories.length">
+            <button
+              class="btn btn-primary mr-1 mb-3"
+              style="float: right"
+              *ngIf="digital_categories.length"
+            >
               {{ "delete" | translate }}
             </button>
             <div class="clearfix"></div>
@@ -57,7 +61,7 @@
               ></ngx-datatable-column>
               <ngx-datatable-column
                 name="{{ 'coupon_code_discount' | translate }}"
-                prop="percentageDiscount"
+                prop="amtOrPercentage"
               ></ngx-datatable-column>
               <ngx-datatable-column
                 name="{{ 'coupon_duedate' | translate }}"

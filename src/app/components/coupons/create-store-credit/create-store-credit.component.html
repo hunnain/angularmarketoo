@@ -85,7 +85,7 @@
           [loading]="loading"
           [disabled]="storeCreditForm.invalid"
           [btnText]="isEdit ? 'cop_update' : 'cop_create'"
-          (onSubmit)="isEdit ? editCoupon() : createCoupon()"
+          (onSubmit)="isEdit ? editCoupon() : createCredit()"
         ></app-button>
         <button
           *ngIf="isEdit"

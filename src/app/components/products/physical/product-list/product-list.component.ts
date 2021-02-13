@@ -147,7 +147,7 @@ export class ProductListComponent implements OnInit {
           let templist = data.map((pro) => {
             return {
               uuid: pro.productId,
-              img: pro.image ? 'data:image/jpeg;base64,' + pro.image : '',
+              img: pro.image ? pro.image : '',
               product_title: pro.name,
               discount: pro.discountBuy,
               price: pro.price,

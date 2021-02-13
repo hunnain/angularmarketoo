@@ -10,12 +10,11 @@
           <div class="custom-datatable">
             <ngx-datatable
               class="bootstrap"
-              [rows]="order"
+              [rows]="orders"
               [columnMode]="'force'"
               [headerHeight]="50"
               [footerHeight]="50"
               [rowHeight]="'auto'"
-              [limit]="5"
             >
               <!-- <ngx-datatable-column prop="order id"></ngx-datatable-column> -->
               <ngx-datatable-column
@@ -28,20 +27,28 @@
               ></ngx-datatable-column>
               <ngx-datatable-column
                 name="{{ 'returnexchange_requestedon' | translate }}"
-                prop="requested_on"
-              ></ngx-datatable-column>
+                prop="requestedOn"
+              >
+                <ng-template
+                  let-row="row"
+                  let-value="value"
+                  ngx-datatable-cell-template
+                >
+                  {{ getFormatDate(value) }}
+                </ng-template>
+              </ngx-datatable-column>
               <ngx-datatable-column
                 name="{{ 'returnexchange_amount' | translate }}"
-                prop="total"
+                prop="totalAmount"
               ></ngx-datatable-column>
               <ngx-datatable-column
                 name="{{ 'returnexchange_remarks' | translate }}"
-                prop="remarks"
+                prop="requestReason"
               ></ngx-datatable-column>
               <ngx-datatable-column
                 name="{{ 'returnexchange_action' | translate }}"
                 sortable="false"
-                prop="order id"
+                prop="id"
               >
                 <ng-template
                   let-row="row"
