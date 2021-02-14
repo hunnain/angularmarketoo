@@ -16,7 +16,7 @@ export class CreateStoreCreditComponent implements OnInit {
   public fetching: boolean = false;
   public selectedId: string = null;
 
-
+  public receivers: string[] = [];
   constructor(
     private formBuilder: FormBuilder,
     private storeCreditService: CouponService,
@@ -53,17 +53,22 @@ export class CreateStoreCreditComponent implements OnInit {
 
   createStoreCreditForm() {
     this.storeCreditForm = this.formBuilder.group({
-      sendAmount: ['', Validators.required],
+      amount: ['', Validators.required],
       reason: ['', Validators.required],
       // recivers: ['', Validators.required],
-      notifyRecivers: [false],
+      notify: [false],
     });
   }
 
   ngOnInit() { }
 
+  onChange(ev) {
+    console.log(ev)
+    this.receivers = ev;
+  }
+
   createCredit() {
-    let data = { ...this.storeCreditForm.value };
+    let data = { ...this.storeCreditForm.value, receivers: this.receivers };
     this.loading = true;
     console.log(data);
     this.storeCreditService.addStoreCredit(data).subscribe((res) => {

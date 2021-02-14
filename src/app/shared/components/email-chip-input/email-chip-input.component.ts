@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { find, get, pull } from 'lodash';
 @Component({
@@ -10,9 +10,10 @@ export class EmailChipInputComponent implements OnInit {
   @ViewChild('tagInput') tagInputRef: ElementRef;
   tags: string[] = [];
   @Input() placeholder: string = 'Email Here...';
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
   // form: FormGroup;
   public tag = null;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     // this.form = this.fb.group({
@@ -56,6 +57,7 @@ export class EmailChipInputComponent implements OnInit {
       // !find(this.tags, this.tag)
     ) {
       this.tags.push(this.tag);
+      this.onChange.emit(this.tags);
       this.tag = '';
     }
   }
@@ -67,5 +69,7 @@ export class EmailChipInputComponent implements OnInit {
     } else {
       this.tags.splice(index, 1);
     }
+
+    this.onChange.emit(this.tags);
   }
 }
