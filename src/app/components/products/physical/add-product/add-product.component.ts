@@ -140,7 +140,7 @@ export class AddProductComponent implements OnInit {
       // ],
       custom_color: [''],
       category: ['', Validators.required],
-      paymentOptions: ['', Validators.required],
+      // paymentOptions: ['', Validators.required],
       colorOption: [''],
       sub_category: ['', Validators.required],
       extended_category: [''],

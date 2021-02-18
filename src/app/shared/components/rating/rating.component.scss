@@ -1,0 +1,25 @@
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 1.2rem;
+  color: #d3d3d3;
+}
+.full {
+  color: #ffa200;
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: #ffa200;
+}
+
+.heartFull {
+  color: #f2917e;
+}
+.heart-half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: #f2917e;
+}

@@ -22,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from './components/button/button.component';
 import { CropperComponent } from './components/cropper/cropper.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { RatingComponent } from './components/rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     LoaderComponent,
     EmailChipInputComponent,
     ButtonComponent,
-    CropperComponent
+    CropperComponent,
+    RatingComponent
   ],
   imports: [
     CommonModule,
@@ -53,6 +55,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
   ],
   providers: [NavService, WINDOW_PROVIDERS],
   exports: [
+    FormsModule,
+    ReactiveFormsModule,
     NgSelect2Module,
     FeatherIconsComponent,
     NgbModule,
@@ -64,6 +68,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     EmailChipInputComponent,
     ButtonComponent,
     CropperComponent,
+    RatingComponent,
     ImageCropperModule
   ],
 })

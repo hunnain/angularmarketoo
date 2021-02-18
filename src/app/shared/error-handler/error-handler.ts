@@ -6,26 +6,26 @@ import { NotificationService } from '../service/notification/notification.servic
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
-  
+
     // Error handling is important and needs to be loaded first.
     // Because of this we should manually inject the services with Injector.
     constructor(private injector: Injector) { }
-  
+
     handleError(error: Error | HttpErrorResponse) {
 
         const errorService = this.injector.get(CommonErrorService);
         const notifier = this.injector.get(NotificationService);
-        
+
         let message;
-        
+
         if (error instanceof HttpErrorResponse) {
             // Server Error
             message = errorService.getServerMessage(error);
             notifier.showError(message);
         } else {
             // Client Error
-            message = errorService.getClientMessage(error);
-            notifier.showError(message);
+            // message = errorService.getClientMessage(error);
+            // notifier.showError(message);
         }
 
         console.error(error);

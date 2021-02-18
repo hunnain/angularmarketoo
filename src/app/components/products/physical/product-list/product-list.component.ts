@@ -153,6 +153,8 @@ export class ProductListComponent implements OnInit {
               price: pro.price,
               sale: 'not on sale',
               tag: 'old',
+              rating: pro.rating,
+              status: pro.status
             };
           });
           this.product_list = JSON.parse(JSON.stringify(templist));
@@ -185,5 +187,19 @@ export class ProductListComponent implements OnInit {
       // this.loading = false;
       this.getProducts();
     });
+  }
+
+  statusColor(status) {
+    switch (status) {
+      case "Pending":
+        return "badge-warning";
+      case "Approved":
+        return "badge-success";
+      case "Rejected":
+        return "badge-danger";
+      default:
+        return "badge-info"
+
+    }
   }
 }

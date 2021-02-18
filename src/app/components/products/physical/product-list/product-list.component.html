@@ -68,9 +68,13 @@
           </div>
           <div class="product-detail">
             <div class="rating">
+              <!-- <i class="fa fa-star"></i> <i class="fa fa-star"></i>
               <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i> -->
+              <app-rating
+                [rating]="product.rating"
+                [readonly]="true"
+              ></app-rating>
             </div>
             <a href="javascript:void(0)">
               <h6>{{ product.product_title }}</h6>
@@ -78,6 +82,11 @@
             <h4>
               {{ product.discount }} <del>{{ product.price }}</del>
             </h4>
+            <h6>
+              <span class="badge" [ngClass]="statusColor(product.status)">{{
+                product.status
+              }}</span>
+            </h6>
             <!-- <ul class="color-variant">
                             <li class="bg-light0"></li>
                             <li class="bg-light1"></li>
