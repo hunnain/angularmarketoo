@@ -385,6 +385,7 @@
 
   "cop_restriction": "Restriction",
   "cop_cate": "Category",
+  "cop_product":"Product",
   "cop_sub_cate": "Sub Category",
   "cop_ex_sub_cate": "Extended Sub Category",
   "cop_groups": "Groups",

@@ -5,9 +5,9 @@ import { CommonService } from '../common.service';
   providedIn: 'root',
 })
 export class ProductService {
-  constructor(private commonService: CommonService) {}
+  constructor(private commonService: CommonService) { }
 
-  getProduct(query) {
+  getProduct(query = "") {
     return this.commonService.get(`product/seller?${query}`);
   }
 

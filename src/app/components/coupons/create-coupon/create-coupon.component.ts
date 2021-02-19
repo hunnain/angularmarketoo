@@ -10,6 +10,7 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { CouponService } from 'src/app/shared/service/coupon/coupon.service';
+import { ProductService } from 'src/app/shared/service/product-service/product.service';
 import {
   ExtendedCategories,
   MainCategories,
@@ -41,10 +42,11 @@ export class CreateCouponComponent implements OnInit {
     day: this.curr.getDate(),
   };
   public selectedLang: string = 'en';
-  public mainCategories = MainCategories;
+  public products: any[] = [];
+  // public mainCategories = MainCategories;
   public sendOptions = SendToOptions(this.selectedLang);
-  public subCategories = SubCategories;
-  public extendedCategories = ExtendedCategories;
+  // public subCategories = SubCategories;
+  // public extendedCategories = ExtendedCategories;
 
   public keys = Object.keys
 
@@ -55,17 +57,17 @@ export class CreateCouponComponent implements OnInit {
   get startDate() {
     return this.generalForm.get('startDate');
   }
-  get main_category() {
-    return this.restrictionForm.get('category');
-  }
+  // get main_category() {
+  //   return this.restrictionForm.get('category');
+  // }
 
-  get sub_category() {
-    return this.restrictionForm.get('subCategory');
-  }
+  // get sub_category() {
+  //   return this.restrictionForm.get('subCategory');
+  // }
 
-  get extended_category() {
-    return this.restrictionForm.get('extendedSubCategory');
-  }
+  // get extended_category() {
+  //   return this.restrictionForm.get('extendedSubCategory');
+  // }
   constructor(
     private formBuilder: FormBuilder,
     private couponService: CouponService,
@@ -73,8 +75,10 @@ export class CreateCouponComponent implements OnInit {
     private calendar: NgbCalendar,
     private activeRoute: ActivatedRoute,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private prodService: ProductService
   ) {
+    this.fetchProducts();
     this.createGeneralForm();
     this.createRestrictionForm();
     this.selectedLang = this.translate.currentLang;
@@ -98,7 +102,6 @@ export class CreateCouponComponent implements OnInit {
     this.fetching = true;
     this.couponService.getCouponByCode(code).subscribe((res) => {
       if (res) {
-        console.log('fetch res---', res);
         this.cs.isLoading.next(false);
         this.fetching = false;
         const {
@@ -118,7 +121,7 @@ export class CreateCouponComponent implements OnInit {
         let general = {
           couponTitle,
           couponCode,
-          allowFreeShipping,
+          allowFreeShipping: false,
           quantity,
           discountType,
           amtOrPercentage,
@@ -126,23 +129,22 @@ export class CreateCouponComponent implements OnInit {
           endDate: this.formatDate(endDate, true),
         };
         this.generalForm.setValue(general);
-        const { category, subCategory, extendedSubCategory } = rest;
+        // const { category, subCategory, extendedSubCategory } = rest;
         this.restrictionForm.patchValue({
           ...rest,
-          ...getIdOfCate(category, subCategory, extendedSubCategory)
+          sendTo: rest.sentTo
+          // ...getIdOfCate(category, subCategory, extendedSubCategory)
         });
-        console.log(
-          'general form invalid',
-          this.generalForm.invalid,
-          this.generalForm
-        );
-        console.log(
-          'restrict form invalid',
-          this.restrictionForm.invalid,
-          this.restrictionForm
-        );
       }
     });
+  }
+
+  fetchProducts() {
+    this.prodService.getProduct().subscribe(res => {
+      if (res && res['body']) {
+        this.products = res['body'];
+      }
+    })
   }
 
   selectToday() {
@@ -167,9 +169,10 @@ export class CreateCouponComponent implements OnInit {
 
   createRestrictionForm() {
     this.restrictionForm = this.formBuilder.group({
-      category: ['', Validators.required],
-      subCategory: ['', Validators.required],
-      extendedSubCategory: [''],
+      productId: ['', Validators.required],
+      // category: ['', Validators.required],
+      // subCategory: ['', Validators.required],
+      // extendedSubCategory: [''],
       minSpend: [''],
       // perLimit: [''],
       // perCustomer: [''],
@@ -184,13 +187,14 @@ export class CreateCouponComponent implements OnInit {
   createCoupon() {
     console.log('general form', this.generalForm.value);
     // console.log('restrictionForm', this.restrictionForm.value)
-    const { category, subCategory, extendedSubCategory, ...remaining } = this.restrictionForm.value;
+    // const { category, subCategory, extendedSubCategory, ...remaining } = this.restrictionForm.value;
     let data = {
       ...this.generalForm.value,
       startDate: this.formatDate(this.generalForm.value.startDate),
       endDate: this.formatDate(this.generalForm.value.endDate),
-      ...remaining,
-      ...getValueOfCate(category, subCategory, extendedSubCategory)
+      ...this.restrictionForm.value
+      // ...remaining,
+      // ...getValueOfCate(category, subCategory, extendedSubCategory)
     };
     this.loading = true;
     console.log(data);
@@ -206,13 +210,14 @@ export class CreateCouponComponent implements OnInit {
   editCoupon() {
     // console.log('general form', this.generalForm.value)
     // console.log('restrictionForm', this.restrictionForm.value)
-    const { category, subCategory, extendedSubCategory, ...remaining } = this.restrictionForm.value;
+    // const { category, subCategory, extendedSubCategory, ...remaining } = this.restrictionForm.value;
     let data = {
       ...this.generalForm.value,
       startDate: this.formatDate(this.generalForm.value.startDate),
       endDate: this.formatDate(this.generalForm.value.endDate),
-      ...remaining,
-      ...getValueOfCate(category, subCategory, extendedSubCategory)
+      ...this.restrictionForm.value
+      // ...remaining,
+      // ...getValueOfCate(category, subCategory, extendedSubCategory)
     };
     this.loading = true;
     console.log(data);
