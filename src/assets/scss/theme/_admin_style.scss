@@ -3209,6 +3209,8 @@ ul.notification-dropdown.onhover-show-div {
     .people-list {
       ul {
         padding-top: 20px;
+        padding-bottom: 20px;
+
         li {
           position: relative;
         }
@@ -6209,7 +6211,7 @@ $i: 1;
     .chat-box {
       .friend-list {
         max-height: calc(100vh - 150px);
-        overflow: scroll;
+        overflow: auto;
       }
     }
   }

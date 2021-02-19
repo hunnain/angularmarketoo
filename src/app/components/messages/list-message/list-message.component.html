@@ -1,16 +1,28 @@
 <!-- Container-fluid starts-->
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12 col-md-4" style="margin-bottom: 20px;">
-            <div class="right-sidebar  chat-side-bar">
-                <app-right-sidebar (selectUser)="openChat($event)"></app-right-sidebar>
-            </div>
-        </div>
-        <div class="col-12 col-md-8" style="margin-bottom: 20px;">
-            <div class="no-chat-msg" *ngIf="!openChatScreen">
-                Click on user to start chat
-            </div>
-            <app-chat-box *ngIf="openChatScreen" [user]="selectedUser" [messages]="dummyMessages"></app-chat-box>
-        </div>
+  <div class="row">
+    <div class="col-12 col-md-4" style="margin-bottom: 20px">
+      <div class="right-sidebar chat-side-bar">
+        <app-right-sidebar
+          [onlineUsers]="signalRService.onlineUsers"
+          [allUsers]="allUsers"
+          [loading]="loadingUsers"
+          (selectUser)="openChat($event)"
+        ></app-right-sidebar>
+      </div>
     </div>
+    <div class="col-12 col-md-8" style="margin-bottom: 20px">
+      <div class="no-chat-msg" *ngIf="!openChatScreen">
+        Click on user to start chat
+      </div>
+      <app-chat-box
+        *ngIf="openChatScreen"
+        [user]="selectedUser"
+        [onlineUsers]="signalRService.onlineUsers"
+        [loading]="loadingMessages"
+        [messages]="signalRService.messages"
+        (sendMsg)="sendMessage($event)"
+      ></app-chat-box>
+    </div>
+  </div>
 </div>

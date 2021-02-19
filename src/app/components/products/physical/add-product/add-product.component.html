@@ -184,7 +184,9 @@
                     </select>
                   </div>
                   <div class="form-group row" *ngIf="sub_category.value">
-                    <label for="ext-cate" class="col-xl-3 col-sm-4 mb-0"
+                    <label
+                      for="ext-cate"
+                      class="col-xl-3 col-sm-4 mb-0 required"
                       >{{ "cop_ex_sub_cate" | translate }}
                     </label>
                     <select
@@ -484,11 +486,11 @@
                       >{{ "prod_desc" | translate }}
                     </label>
                     <div class="col-xl-8 col-sm-7 pl-0">
-                      <input
-                        class="form-control col-xl-8 col-sm-7"
-                        type="text"
+                      <textarea
+                        class="form-control"
+                        rows="6"
                         [formControl]="productForm.controls['description']"
-                      />
+                      ></textarea>
                       <!-- <ck-editor
                         id="editor3"
                         cols="30"
@@ -499,7 +501,7 @@
                       ></ck-editor> -->
                     </div>
                   </div>
-                  <div class="form-group row">
+                  <!-- <div class="form-group row">
                     <label
                       for="exampleFormControlSelect1"
                       class="col-xl-3 col-sm-4 mb-0 required"
@@ -514,20 +516,7 @@
                       >
                       </ng-select2>
                     </div>
-
-                    <!-- <select
-                      class="form-control digits col-xl-8 col-sm-7"
-                      id="exampleFormControlSelect1"
-                      [formControl]="productForm.controls['paymentOption']"
-                    >
-                      <option
-                        *ngFor="let opt of paymentOptions"
-                        [value]="opt.id"
-                      >
-                        {{ opt.name }}
-                      </option>
-                    </select> -->
-                  </div>
+                  </div> -->
                 </div>
               </form>
 
