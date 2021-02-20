@@ -222,6 +222,16 @@
         >
           <div class="form-group row">
             <label class="col-xl-3 col-md-4 required">{{
+              "cop_product" | translate
+            }}</label>
+            <select class="custom-select col-md-7" formControlName="productId">
+              <option *ngFor="let prod of products" [value]="prod.productId">
+                {{ prod.name }}
+              </option>
+            </select>
+          </div>
+          <!-- <div class="form-group row">
+            <label class="col-xl-3 col-md-4 required">{{
               "cop_cate" | translate
             }}</label>
             <select class="custom-select col-md-7" formControlName="category">
@@ -261,7 +271,7 @@
                 {{ extndCate.name }}
               </option>
             </select>
-          </div>
+          </div> -->
           <div class="form-group row">
             <label for="validationCustom4" class="col-xl-3 col-md-4">{{
               "cop_min_spend" | translate

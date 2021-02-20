@@ -8,6 +8,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/internal/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -107,7 +108,10 @@ export class CommonService {
         // headers: new HttpHeaders().set('X-Pagination', ''),
         observe: 'response',
         headers: headers
-      })
+      }).pipe(map(res => {
+        this.isLoading.next(false)
+        return res;
+      }))
   }
 
   delete(url: string): Observable<Response> {

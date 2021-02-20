@@ -396,6 +396,7 @@
 
   "cop_restriction": "優惠限制",
   "cop_cate": "類別",
+  "cop_product":"產品",
   "cop_sub_cate": "次類別",
   "cop_ex_sub_cate": "扩展子类别",
   "cop_groups": "組別",
