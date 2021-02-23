@@ -15,7 +15,10 @@ export class RightSidebarComponent implements OnInit {
 
 
 
+  public isCustomer: boolean = true;
 
+  public admins: Array<any> = []
+  public customers: Array<any> = []
   constructor() { }
 
   // public users = [
@@ -70,16 +73,29 @@ export class RightSidebarComponent implements OnInit {
       let user_prev = userChange.previousValue;
       let user_curr = userChange.currentValue;
 
-      if (!user_prev || user_curr !== user_prev) {
+      if (!user_prev || JSON.stringify(user_curr) !== JSON.stringify(user_prev)) {
+        console.log("onchange all users")
         this.allUsers = user_curr;
+        if (this.allUsers.length) {
+          const groupz = this.groupBy(this.allUsers);
+          this.admins = groupz['admin']
+          this.customers = groupz['customer']
+        }
       }
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    // const groupz = this.groupBy(this.allUsers);
+    // this.admins = groupz['admin']
+    // this.customers = groupz['customer']
+  }
 
   onUserClick(val) {
     this.selectUser.emit(val)
+  }
+  changeSellerCustomer() {
+    this.isCustomer = !this.isCustomer;
   }
 
   userStatus(userId) {
@@ -88,6 +104,16 @@ export class RightSidebarComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  groupBy(users) {
+    console.log('💻', 'group by', users);
+    let group = users.reduce((r, a) => {
+      r[a.role.toLowerCase()] = [...r[a.role.toLowerCase()] || [], a];
+      return r;
+    }, {});
+
+    return group;
   }
 
 }

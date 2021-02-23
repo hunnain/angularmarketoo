@@ -56,6 +56,7 @@ export class AddProductComponent implements OnInit {
     },
   ];
 
+  public selectedImgs = [];
   public labelOptions: Array<Select2OptionData>;
   public labelConfig: Options;
   public sizeOptions: Array<Select2OptionData>;
@@ -127,7 +128,7 @@ export class AddProductComponent implements OnInit {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       price: ['', Validators.required],
-      markdownPrice: ['', Validators.required],
+      markdownPrice: [''],
       discountBuy: [''],
       discountGet: [''],
 
@@ -262,13 +263,15 @@ export class AddProductComponent implements OnInit {
         this.customDesignImage = body.customDesign
           ? this.addBase64(body.customDesign.image)
           : '';
-        if (body.imageUrls && body.imageUrls.length)
+        if (body.imageUrls && body.imageUrls.length) {
+          this.selectedImgs = body.imageUrls;
           body.imageUrls.forEach((img, i) => {
             if (img) {
               this.url[i].img = img;
-              this.imgs[i] = img;
+              // this.imgs[i] = img;
             }
           });
+        }
 
         console.log(this.productForm.value);
 
@@ -380,6 +383,9 @@ export class AddProductComponent implements OnInit {
       let byteImg = splited[1];
       console.log(splited);
       this.imgs[i] = byteImg;
+      if (this.selectedImgs.length && typeof this.selectedImgs[i] !== 'undefined') {
+        this.selectedImgs[i] = undefined;
+      }
     };
   }
 
@@ -445,13 +451,14 @@ export class AddProductComponent implements OnInit {
 
   public config: DropzoneConfigInterface = {
     clickable: true,
-    maxFiles: 1,
+    maxFiles: 4,
     autoReset: null,
     errorReset: null,
     cancelReset: null,
     autoProcessQueue: false,
     autoQueue: false,
     addRemoveLinks: true,
+    createImageThumbnails: false
   };
   public onDiscard() {
     this.router.navigate(['/products/physical/product-list']);
@@ -470,7 +477,7 @@ export class AddProductComponent implements OnInit {
     let data = {
       ...remaining,
       // quantity: this.counter,
-      images: this.imgs,
+      images: this.imgs.filter(img => img),
       availableSizes: remaining.sizes,
       description: remaining.description,
       sellerUuid: this.user.sellerUuid,
@@ -506,6 +513,11 @@ export class AddProductComponent implements OnInit {
     console.log(data);
     this.loading = true;
     if (this.product_id) {
+      if (this.selectedImgs.length) {
+        data['imageUrls'] = this.selectedImgs.filter(img => img);
+      }
+
+      console.log("data---", data)
       this.productService
         .updateProduct(this.product_id, data)
         .subscribe((res) => {

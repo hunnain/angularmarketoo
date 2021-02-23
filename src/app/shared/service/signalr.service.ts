@@ -97,7 +97,7 @@ export class SignalrService {
     return this.cs.get(`chat/get-chat-list`);
   }
 
-  private closeConnection() {
+  public disconnection() {
     this.hubConnection.stop();
   }
 
