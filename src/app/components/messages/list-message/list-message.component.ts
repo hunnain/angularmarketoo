@@ -29,6 +29,10 @@ export class ListMessageComponent implements OnInit {
     this.createConnection()
   }
 
+  ngOnDestroy() {
+    this.signalRService.disconnection()
+  }
+
   createConnection() {
     this.signalRService.connect();
   }

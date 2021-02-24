@@ -14,12 +14,13 @@
               </div>
             </div>
             <div class="media-body col-8">
-              <span class="m-0">{{'dash_earnings' | translate}}</span>
+              <span class="m-0">{{ "dash_earnings" | translate }}</span>
               <h3 class="mb-0">
                 $
-                <span class="counter" [CountTo]="0" [from]="0" [duration]="2"
-                  >0</span
-                ><small> {{'dash_this_month' | translate}}</small>
+                <span class="counter" [CountTo]="0" [from]="0" [duration]="2">{{
+                  report?.revenue
+                }}</span
+                ><small> {{ "dash_this_month" | translate }}</small>
               </h3>
             </div>
           </div>
@@ -39,11 +40,14 @@
               </div>
             </div>
             <div class="media-body col-8">
-              <span class="m-0">{{'dash_total_active_products' | translate}}</span>
+              <span class="m-0">{{
+                "dash_total_active_products" | translate
+              }}</span>
               <h3 class="mb-0">
-                <span class="counter" [CountTo]="0" [from]="0" [duration]="2"
-                  >0</span
-                ><small> {{'dash_this_month' | translate}}</small>
+                <span class="counter" [CountTo]="0" [from]="0" [duration]="2">{{
+                  report?.totalActiveProducts
+                }}</span
+                ><small> {{ "dash_this_month" | translate }}</small>
               </h3>
             </div>
           </div>
@@ -63,11 +67,12 @@
               </div>
             </div>
             <div class="media-body col-8">
-              <span class="m-0">{{'dash_messages' | translate}}</span>
+              <span class="m-0">{{ "dash_messages" | translate }}</span>
               <h3 class="mb-0">
-                <span class="counter" [CountTo]="0" [from]="0" [duration]="2"
-                  >0</span
-                ><small> {{'dash_this_month' | translate}}</small>
+                <span class="counter" [CountTo]="0" [from]="0" [duration]="2">{{
+                  report?.totalMessages
+                }}</span
+                ><small> {{ "dash_this_month" | translate }}</small>
               </h3>
             </div>
           </div>
@@ -87,11 +92,12 @@
               </div>
             </div>
             <div class="media-body col-8">
-              <span class="m-0">{{'dash_new_followers' | translate}}</span>
+              <span class="m-0">{{ "dash_new_followers" | translate }}</span>
               <h3 class="mb-0">
-                <span class="counter" [CountTo]="0" [from]="0" [duration]="2"
-                  >0</span
-                ><small> {{'dash_this_month' | translate}}</small>
+                <span class="counter" [CountTo]="0" [from]="0" [duration]="2">{{
+                  report?.newFollowers
+                }}</span
+                ><small> {{ "dash_this_month" | translate }}</small>
               </h3>
             </div>
           </div>
@@ -115,7 +121,9 @@
     <div class="col-xl-6 xl-100">
       <section class="report-dashboard">
         <div class="row align-items-center">
-          <h2 class="col-8 report-dashboard-title">{{'dash_monthly_report' | translate}}</h2>
+          <h2 class="col-8 report-dashboard-title">
+            {{ "dash_monthly_report" | translate }}
+          </h2>
           <div class="col-4 text-right">
             <span
               class="d-flex align-items-center justify-content-end"
@@ -125,7 +133,7 @@
                 [icon]="'download'"
                 class="font-primary"
               ></app-feather-icons>
-              <span>{{'dash_export_report' | translate}}</span>
+              <span>{{ "dash_export_report" | translate }}</span>
             </span>
           </div>
         </div>
@@ -214,99 +222,107 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">{{'dash_amount' | translate}}</th>
+                <th scope="col">{{ "dash_amount" | translate }}</th>
                 <!-- <th scope="col">Other Deductions</th>
                 <th scope="col">Returns</th> -->
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row">{{'dash_net_profit' | translate}}</th>
-                <td>$80</td>
+                <th scope="row">{{ "dash_net_profit" | translate }}</th>
+                <td>${{ report?.netProfit }}</td>
                 <!-- <td>Otto</td>
                 <td>@mdo</td> -->
               </tr>
-              <tr>
-                <th scope="row">{{'dash_discounted' | translate}}</th>
+              <!-- <tr>
+                <th scope="row">{{ "dash_discounted" | translate }}</th>
                 <td>$16</td>
-                <!-- <td>Thornton</td>
-                <td>@fat</td> -->
-              </tr>
+              </tr> -->
               <tr>
-                <th scope="row">{{'dash_referral_deduction' | translate}}</th>
-                <td>$6</td>
+                <th scope="row">{{ "dash_referral_deduction" | translate }}</th>
+                <td>${{ report?.referrelDeduction }}</td>
                 <!-- <td>the Bird</td>
                 <td>@twitter</td> -->
               </tr>
               <tr>
-                <th scope="row">{{'dash_refund' | translate}}</th>
-                <td>$58</td>
+                <th scope="row">{{ "dash_refund" | translate }}</th>
+                <td>${{ report?.refund }}</td>
                 <!-- <td>the Bird</td>
                 <td>@twitter</td> -->
               </tr>
               <tr>
-                <th scope="row">{{'dash_coupons' | translate}}</th>
-                <td>$164</td>
+                <th scope="row">{{ "dash_coupons" | translate }}</th>
+                <td>${{ report?.coupons }}</td>
                 <!-- <td>the Bird</td>
                 <td>@twitter</td> -->
               </tr>
               <tr>
-                <th scope="row">{{'dash_transaction_management_fee' | translate}}</th>
-                <td>$1,234</td>
+                <th scope="row">
+                  {{ "dash_transaction_management_fee" | translate }}
+                </th>
+                <td>${{ report?.transactionsManagementFee }}</td>
                 <!-- <td>the Bird</td>
                 <td>@twitter</td> -->
               </tr>
               <tr>
-                <th scope="row">{{'dash_online_payment_fee' | translate}}</th>
-                <td>$820</td>
+                <th scope="row">{{ "dash_online_payment_fee" | translate }}</th>
+                <td>${{ report?.onlinePaymentFee }}</td>
                 <!-- <td>the Bird</td>
                 <td>@twitter</td> -->
               </tr>
               <tr>
-                <th scope="row">{{'dash_total_reimbursement' | translate}}</th>
-                <td>$240</td>
+                <th scope="row">
+                  {{ "dash_total_reimbursement" | translate }}
+                </th>
+                <td>${{ report?.totalReimbursment }}</td>
                 <!-- <td>the Bird</td>
                 <td>@twitter</td> -->
               </tr>
               <tr>
-                <th scope="row">{{'dash_total_orders' | translate}}</th>
-                <td>230</td>
+                <th scope="row">{{ "dash_total_orders" | translate }}</th>
+                <td>{{ report?.totalOrders }}</td>
               </tr>
               <tr>
-                <th scope="row">{{'dash_delivered_orders' | translate}}</th>
-                <td>158</td>
+                <th scope="row">{{ "dash_delivered_orders" | translate }}</th>
+                <td>{{ report?.totalDeliveredOrders }}</td>
               </tr>
               <tr>
-                <th scope="row">{{'dash_cancelled_orders' | translate}}</th>
-                <td>12</td>
+                <th scope="row">{{ "dash_cancelled_orders" | translate }}</th>
+                <td>{{ report?.totalCancelledOrders }}</td>
               </tr>
               <tr>
-                <th scope="row">{{'dash_returned_orders' | translate}}</th>
-                <td>5</td>
+                <th scope="row">{{ "dash_refunded_orders" | translate }}</th>
+                <td>{{ report?.totalRefundedOrders }}</td>
               </tr>
-              <tr>
-                <th scope="row">{{'dash_exchanged_orders' | translate}}</th>
-                <td>25</td>
-              </tr>
+              <!-- <tr>
+                <th scope="row">{{ "dash_exchanged_orders" | translate }}</th>
+                <td>{{ report?.refund }}</td>
+              </tr> -->
             </tbody>
           </table>
         </div>
         <!-- /.row -->
-        <h2 class="report-dashboard-title">{{'dash_shipping_cost' | translate}}</h2>
+        <h2 class="report-dashboard-title">
+          {{ "dash_shipping_cost" | translate }}
+        </h2>
         <div class="row">
           <div class="flex-container">
             <div class="report-dashboard-item">
-              <div class="report-dashboard-label">{{'dash_shipped_via_own_account' | translate}}</div>
+              <div class="report-dashboard-label">
+                {{ "dash_shipped_via_own_account" | translate }}
+              </div>
               <div class="report-dashboard-number">
-                <span class="dollar-unit">$</span>79
+                <span class="dollar-unit">$</span
+                >{{ report?.shippingViaOwnAccount }}
               </div>
             </div>
             <div class="report-dashboard-item">
               <div class="report-dashboard-label">
-                {{'dash_shipped_via_marketoo_account' | translate}}
+                {{ "dash_shipped_via_marketoo_account" | translate }}
               </div>
               <div class="report-dashboard-number">
-                <span class="dollar-unit">$</span>129
+                <span class="dollar-unit">$</span
+                >{{ report?.shippingViaMarketooAccount }}
               </div>
             </div>
           </div>
@@ -318,7 +334,9 @@
     <div class="col-md-4 col-sm-6">
       <div class="card order-graph sales-carousel">
         <div class="card-header">
-          <h6 style="font-family: sans-serif; font-weight: 600;">{{'dash_total_revenue' | translate}}</h6>
+          <h6 style="font-family: sans-serif; font-weight: 600">
+            {{ "dash_total_revenue" | translate }}
+          </h6>
           <div class="row">
             <div class="col-6">
               <div class="small-chartjs">
@@ -341,7 +359,7 @@
             <div class="col-6">
               <div class="value-graph">
                 <h3>
-                  42% 
+                  42%
                   <!-- <span><i class="fa fa-angle-up font-primary"></i></span> -->
                 </h3>
               </div>
@@ -351,10 +369,12 @@
         <div class="card-body">
           <div class="media">
             <div class="media-body">
-              <span style="font-weight: 600;">{{'dash_compared_to_last_month' | translate}}</span>
+              <span style="font-weight: 600">{{
+                "dash_compared_to_last_month" | translate
+              }}</span>
               <h2 class="mb-0">0</h2>
               <p>
-                0.25% 
+                0.25%
                 <!-- <span><i class="fa fa-angle-up"></i></span> -->
               </p>
               <!-- <h5 class="f-w-600">Gross sales of August</h5>
@@ -374,7 +394,9 @@
     <div class="col-md-4 col-sm-6">
       <div class="card order-graph sales-carousel">
         <div class="card-header">
-          <h6 style="font-family: sans-serif;font-weight: 600;">{{'dash_average_basket_value' | translate}}</h6>
+          <h6 style="font-family: sans-serif; font-weight: 600">
+            {{ "dash_average_basket_value" | translate }}
+          </h6>
           <div class="row">
             <div class="col-6">
               <div class="small-chartjs">
@@ -397,7 +419,8 @@
             <div class="col-6">
               <div class="value-graph">
                 <h3>
-                  20% <span>
+                  20%
+                  <span>
                     <!-- <i class="fa fa-angle-up font-secondary"></i> -->
                   </span>
                 </h3>
@@ -408,10 +431,13 @@
         <div class="card-body">
           <div class="media">
             <div class="media-body">
-              <span style="font-weight: 600;">{{'dash_compared_to_last_month' | translate}}</span>
+              <span style="font-weight: 600">{{
+                "dash_compared_to_last_month" | translate
+              }}</span>
               <h2 class="mb-0">0</h2>
               <p>
-                0.13% <span>
+                0.13%
+                <span>
                   <!-- <i class="fa fa-angle-up"></i> -->
                 </span>
               </p>
@@ -486,7 +512,9 @@
     <div class="col-md-4 col-sm-6">
       <div class="card order-graph sales-carousel">
         <div class="card-header">
-          <h6 style="font-family: sans-serif;font-weight: 600;">{{'dash_new_followers' | translate}}</h6>
+          <h6 style="font-family: sans-serif; font-weight: 600">
+            {{ "dash_new_followers" | translate }}
+          </h6>
           <div class="row">
             <div class="col-6">
               <div class="small-chartjs">
@@ -509,7 +537,7 @@
             <div class="col-6">
               <div class="value-graph">
                 <h3>
-                  75% 
+                  75%
                   <!-- <span><i class="fa fa-angle-up font-danger"></i></span> -->
                 </h3>
               </div>
@@ -519,10 +547,12 @@
         <div class="card-body">
           <div class="media">
             <div class="media-body">
-              <span style="font-weight: 600;">{{'dash_compared_to_last_month' | translate}}</span>
+              <span style="font-weight: 600">{{
+                "dash_compared_to_last_month" | translate
+              }}</span>
               <h2 class="mb-0">0</h2>
               <p>
-                0.25% 
+                0.25%
                 <!-- <span><i class="fa fa-angle-up"></i></span> -->
               </p>
               <!-- <h5 class="f-w-600">Followers of June</h5>
@@ -542,53 +572,33 @@
     <div class="col-xl-6 xl-100">
       <div class="card">
         <div class="card-header">
-          <h5>{{'dash_latest_orders' | translate}}</h5>
+          <h5>{{ "dash_latest_orders" | translate }}</h5>
         </div>
         <div class="card-body">
           <div class="user-status table-responsive latest-order-table">
             <table class="table table-bordernone">
               <thead>
                 <tr>
-                  <th scope="col">{{'dash_order_ID' | translate}}</th>
-                  <th scope="col">{{'dash_order_total' | translate}}</th>
-                  <th scope="col">{{'dash_product_name' | translate}}</th>
-                  <th scope="col">{{'dash_status' | translate}}</th>
+                  <th scope="col">{{ "dash_order_ID" | translate }}</th>
+                  <th scope="col">{{ "dash_order_total" | translate }}</th>
+                  <th scope="col">{{ "dash_product_name" | translate }}</th>
+                  <th scope="col">{{ "dash_status" | translate }}</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td class="digits">$120.00</td>
-                  <td class="font-secondary">XXXXXXX</td>
-                  <td class="digits">On Way</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td class="digits">$90.00</td>
-                  <td class="font-secondary">XXXXXXX</td>
-                  <td class="digits">Delivered</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td class="digits">$240.00</td>
-                  <td class="font-secondary">XXXXXXX</td>
-                  <td class="digits">Delivered</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td class="digits">$120.00</td>
-                  <td class="font-secondary">XXXXXXX</td>
-                  <td class="digits">$6523</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td class="digits">$50.00</td>
-                  <td class="font-secondary">XXXXXXX</td>
-                  <td class="digits">Delivered</td>
+                <tr *ngFor="let order of latestOrders">
+                  <td>{{ order?.orderId }}</td>
+                  <td class="digits">${{ order?.total }}</td>
+                  <td class="font-secondary">
+                    {{ getNames(order?.orderedProductDetails) }}
+                  </td>
+                  <td class="digits">{{ order?.orderStatus }}</td>
                 </tr>
               </tbody>
             </table>
-            <span class="btn btn-primary">{{'dash_view_all_orders' | translate}}</span>
+            <span class="btn btn-primary" [routerLink]="'/sales/orders'">{{
+              "dash_view_all_orders" | translate
+            }}</span>
           </div>
         </div>
       </div>
