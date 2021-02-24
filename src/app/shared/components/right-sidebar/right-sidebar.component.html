@@ -3,11 +3,26 @@
     <div class="modal-header p-l-20 p-r-20">
       <div class="col-sm-8 p-0">
         <h6 class="modal-title font-weight-bold">
-          {{ "messeges_followers" | translate }}
+          {{ (isCustomer ? "Customers" : "Admins") | translate }}
         </h6>
       </div>
-      <div class="col-sm-4 text-right p-0">
+      <!-- <div class="col-sm-4 text-right p-0">
         <i class="mr-2" data-feather="settings"></i>
+      </div> -->
+      <div class="form-button">
+        <button
+          (click)="changeSellerCustomer()"
+          class="btn btn-custom"
+          style="padding: 5px 10px"
+          ngbTooltip="Click to Change between Customers & Admins"
+        >
+          <!-- {{ "LOGIN" | translate }} -->
+          <app-feather-icons
+            [icon]="'refresh-cw'"
+            class="font-secondary"
+          ></app-feather-icons>
+          <!-- <i class="mr-2" data-feather="settings"></i> -->
+        </button>
       </div>
     </div>
   </div>
@@ -25,10 +40,10 @@
         >
           <app-loader [loading]="loading"></app-loader>
         </div>
-        <ul class="list">
+        <ul class="list" *ngIf="isCustomer">
           <li
             class="clearfix"
-            *ngFor="let user of allUsers"
+            *ngFor="let user of customers"
             (click)="onUserClick(user)"
             style="cursor: pointer"
           >
@@ -46,9 +61,36 @@
               <div class="status">{{ user?.status }}</div>
             </div>
           </li>
-          <li class="clearfix" *ngIf="!loading && allUsers.length == 0">
+          <li class="clearfix" *ngIf="!loading && customers.length == 0">
             <div class="about">
               <div class="name">No user available</div>
+            </div>
+          </li>
+        </ul>
+        <ul class="list" *ngIf="!isCustomer">
+          <li
+            class="clearfix"
+            *ngFor="let user of admins"
+            (click)="onUserClick(user)"
+            style="cursor: pointer"
+          >
+            <img
+              class="rounded-circle user-image blur-up lazyloaded"
+              [src]="user.imageUrl ? user.imageUrl : 'assets/images/team/1.jpg'"
+              alt=""
+            />
+            <div
+              class="status-circle offline"
+              [ngClass]="{ online: userStatus(user.senderId) }"
+            ></div>
+            <div class="about">
+              <div class="name">{{ user?.name }}</div>
+              <div class="status">{{ user?.status }}</div>
+            </div>
+          </li>
+          <li class="clearfix" *ngIf="!loading && admins.length == 0">
+            <div class="about">
+              <div class="name">No admin available</div>
             </div>
           </li>
         </ul>

@@ -135,6 +135,7 @@ export class ProfileComponent implements OnInit {
     this.authService.updateProfile(data).subscribe(res => {
       console.log("profile res--", res)
       if (res) {
+        this.cs.isLoading.next(false);
         this.loading = false;
         this.isEdit = false;
         this.profile = data;

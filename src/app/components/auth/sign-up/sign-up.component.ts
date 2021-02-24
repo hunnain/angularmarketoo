@@ -18,6 +18,7 @@ export class SignUpComponent implements OnInit {
   public brandForm: FormGroup;
   public counter: number = 1;
   public loading: boolean = false;
+  public agree: boolean = false;
   public productWishImages: Array<string> = []
   public url = [{
     img: "assets/images/attach.png",
@@ -143,7 +144,9 @@ export class SignUpComponent implements OnInit {
 
     let data = {
       ...this.sellerForm.value,
-      brandUu: { ...this.brandForm.value, productWishImages: this.imgs }
+      brandUu: { ...this.brandForm.value, productWishImages: this.imgs },
+      isAgree: this.agree
+
     }
     this.loading = true;
     this.authService.signUp(data).subscribe(

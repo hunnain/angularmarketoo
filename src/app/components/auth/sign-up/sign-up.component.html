@@ -601,6 +601,8 @@
                       type="checkbox"
                       class="custom-control-input"
                       id="understand2"
+                      name="agree"
+                      [(ngModel)]="agree"
                     />
                     <label class="custom-control-label" for="understand2">{{
                       "I understand" | translate
@@ -615,7 +617,8 @@
                     [disabled]="
                       sellerForm.invalid ||
                       brandForm.invalid ||
-                      productWishImages.length === 0
+                      productWishImages.length === 0 ||
+                      !agree
                     "
                     [btnText]="'sign_up'"
                     (onSubmit)="createSeller()"
