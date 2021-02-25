@@ -60,4 +60,8 @@ export class AuthServiceService {
   deleteAccount(deleteEnum) {
     return this.commonService.post(`seller/deleteAccount/${deleteEnum}`, {});
   }
+
+  createReferCode() {
+    return this.commonService.get(`seller/get-seller-reference-code`);
+  }
 }

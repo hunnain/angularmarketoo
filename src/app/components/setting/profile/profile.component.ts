@@ -12,6 +12,7 @@ interface Profile {
   shopName: string;
   shopLocation: string;
   shopIntro: string
+  referSeller?: string
 }
 
 enum DeactiveAcount {
@@ -36,6 +37,7 @@ export class ProfileComponent implements OnInit {
   public loading: boolean = false;
   public deleting: boolean = false;
   public deactivating: boolean = false;
+  public generating: boolean = false;
   public submittingPic: boolean = false;
   public isEdit: boolean = false;
   public announcement: string = '';
@@ -63,6 +65,7 @@ export class ProfileComponent implements OnInit {
       this.deleting = loading;
       this.deactivating = loading;
       this.submittingPic = loading;
+      this.generating = loading;
       // this.modalService.dismissAll('close');
     });
 
@@ -163,6 +166,20 @@ export class ProfileComponent implements OnInit {
       if (res) {
         console.log(res);
         this.deleting = false;
+      }
+    })
+  }
+
+  generateReferCode() {
+    console.log("generating")
+    this.generating = true;
+    this.authService.createReferCode().subscribe(res => {
+      console.log(res);
+      if (res && res['body']) {
+        this.generating = false;
+        this.profile = { ...this.profile, referSeller: res['body']['referSeller'] }
+        this.userInfo = { ...this.userInfo, referSeller: res['body']['referSeller'] }
+        this.authService.writeToLS('userInfo', JSON.stringify(this.userInfo))
       }
     })
   }

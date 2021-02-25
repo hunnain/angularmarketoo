@@ -30,7 +30,7 @@ export class ListMessageComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.signalRService.disconnection()
+    this.signalRService.disconnection('ChatHub')
   }
 
   createConnection() {

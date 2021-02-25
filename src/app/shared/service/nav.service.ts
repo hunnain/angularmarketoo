@@ -148,14 +148,14 @@ export class NavService {
       badgeType: 'primary',
       active: false,
     },
-    {
-      path: '/refer-seller',
-      title: 'sidebar_Refer_a_Seller',
-      icon: 'package',
-      type: 'link',
-      badgeType: 'primary',
-      active: false,
-    },
+    // {
+    //   path: '/refer-seller',
+    //   title: 'sidebar_Refer_a_Seller',
+    //   icon: 'package',
+    //   type: 'link',
+    //   badgeType: 'primary',
+    //   active: false,
+    // },
     // {
     // 	title: 'Pages', icon: 'clipboard', type: 'sub', active: false, children: [
     // 		{ path: '/pages/list-page', title: 'List Page', type: 'link' },

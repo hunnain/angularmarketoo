@@ -7,6 +7,7 @@ import { chatMesage } from '../interfaces/chatMesage';
 import { MessagePackHubProtocol } from '@microsoft/signalr-protocol-msgpack'
 import { CommonService } from './common.service';
 import { environment } from 'src/environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -16,20 +17,28 @@ export class SignalrService {
   private base_url = environment.API_Base_URL;
   private signalr_base_url = environment.Signalr_Base_URL;
 
-  private hubConnection: HubConnection
+  private ChatHub: HubConnection
+  private NotificationsHub: HubConnection
   public messages: any[] = [];
   public onlineUsers: any[] = [];
 
   isConnected: EventEmitter<boolean> = new EventEmitter(false);
   constructor(
-    private http: HttpClient,
-    private cs: CommonService
+    private cs: CommonService,
+    private toastrService: ToastrService
   ) {
   }
 
   public connect = () => {
-    this.startConnection(this.cs.getAccessToken());
+    let token = this.cs.getAccessToken()
+    this.startConnection(token, 'ChatHub');
     this.addListeners();
+  }
+
+  public connectNotificationHub = () => {
+    let token = this.cs.getAccessToken()
+    this.startConnection(token, 'NotificationsHub');
+    this.addNotificationListeners();
   }
 
   public sendMessageToApi(data: object) {
@@ -44,7 +53,7 @@ export class SignalrService {
   }
 
   public sendMessageToHub(message: string) {
-    var promise = this.hubConnection.invoke("BroadcastAsync", this.buildChatMessage(message))
+    var promise = this.ChatHub.invoke("BroadcastAsync", this.buildChatMessage(message))
       .then(() => { console.log('message sent successfully to hub'); })
       .catch((err) => console.log('error while sending a message to hub: ' + err));
 
@@ -62,10 +71,10 @@ export class SignalrService {
       }));
   }
 
-  private getConnection(token): HubConnection {
+  private getConnection(token, hubName): HubConnection {
     return new HubConnectionBuilder()
       .withAutomaticReconnect()
-      .withUrl(`${this.signalr_base_url}ChatHub`, {
+      .withUrl(`${this.signalr_base_url}${hubName}`, {
         //skipNegotiation: true,
         //transport: signalR.HttpTransportType.WebSockets,
         accessTokenFactory: () => token
@@ -78,14 +87,14 @@ export class SignalrService {
   private buildChatMessage(message: string): chatMesage {
     return {
       text: message,
-      receiverId: this.hubConnection.connectionId
+      receiverId: this.ChatHub.connectionId
     };
   }
 
-  private startConnection(token) {
-    this.hubConnection = this.getConnection(token);
+  private startConnection(token, hubName) {
+    this[hubName] = this.getConnection(token, hubName);
 
-    this.hubConnection.start()
+    this[hubName].start()
       .then(() => {
         console.log('connection started')
         this.isConnected.next(true)
@@ -97,8 +106,8 @@ export class SignalrService {
     return this.cs.get(`chat/get-chat-list`);
   }
 
-  public disconnection() {
-    this.hubConnection.stop();
+  public disconnection(hubType) {
+    this[hubType].stop();
   }
 
   private addListeners() {
@@ -110,14 +119,14 @@ export class SignalrService {
     //   console.log("message received from Hub")
     //   this.messages.push(data);
     // })
-    this.hubConnection.on("ConnectedUserList", res => {
+    this.ChatHub.on("ConnectedUserList", res => {
       console.log("new user connected list", res);
       if (res) {
         this.onlineUsers = res;
         // console.log('💻', 'online users', this.onlineUsers);
       }
     })
-    this.hubConnection.on("UserConnected", res => {
+    this.ChatHub.on("UserConnected", res => {
       console.log("new user connected", res);
       if (res) {
         if (!this.onlineUsers.includes(res)) {
@@ -126,14 +135,14 @@ export class SignalrService {
         }
       }
     })
-    this.hubConnection.on("ReceiveNotifications", (userId: string, message: string) => {
+    this.ChatHub.on("ReceiveNotifications", (userId: string, message: string) => {
       console.log("ReceiveNotifications", userId, message);
     })
-    this.hubConnection.on("ReceiveMessage", (obj) => {
+    this.ChatHub.on("ReceiveMessage", (obj) => {
       console.log("ReceiveMessage", obj);
       this.messages.push(obj);
     })
-    this.hubConnection.on("UserDisconnected", (userId: string, message: string) => {
+    this.ChatHub.on("UserDisconnected", (userId: string, message: string) => {
       console.log("UserDisconnected", userId, message);
       if (userId) {
         if (this.onlineUsers.includes(userId)) {
@@ -141,6 +150,15 @@ export class SignalrService {
           this.onlineUsers.splice(index, 1);
           // console.log('💻', 'offline users', this.onlineUsers);
         }
+      }
+    })
+  }
+
+  private addNotificationListeners() {
+    this.NotificationsHub.on("ReceiveNotifications", (res) => {
+      console.log("ReceiveNotifications", res);
+      if (res) {
+        this.toastrService.success(res.Text, res.Type);
       }
     })
   }

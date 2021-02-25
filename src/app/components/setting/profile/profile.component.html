@@ -370,6 +370,22 @@
                     </div>
                   </div>
                 </div>
+                <div class="account-setting">
+                  <h5 class="f-w-600 mb-1">{{ "Refer Code" | translate }}</h5>
+                  <div class="row" *ngIf="profile?.referSeller">
+                    <div class="col">
+                      <p>{{ profile?.referSeller }}</p>
+                    </div>
+                  </div>
+                  <div *ngIf="!profile?.referSeller">
+                    <app-button
+                      [loading]="generating"
+                      [disabled]="false"
+                      [btnText]="'Generate Code'"
+                      (onSubmit)="generateReferCode()"
+                    ></app-button>
+                  </div>
+                </div>
                 <div class="account-setting deactivate-account">
                   <h5 class="f-w-600">{{ "deactivate_acc" | translate }}</h5>
                   <div class="row">

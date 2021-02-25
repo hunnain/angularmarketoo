@@ -3,6 +3,7 @@ import { isPlatformBrowser } from '@angular/common';
 // import { LoadingBarService } from '@ngx-loading-bar/core';
 import { map, delay, withLatestFrom } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
+import { SignalrService } from './shared/service/signalr.service';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +15,25 @@ export class AppComponent {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     // private loader: LoadingBarService,
-    translate: TranslateService
+    translate: TranslateService,
+    private srService: SignalrService
   ) {
     if (isPlatformBrowser(this.platformId)) {
       translate.setDefaultLang('en');
       translate.addLangs(['en', 'zh-Hant']);
       translate.use('en');
     }
+  }
+
+  ngOnInit() {
+    this.createConnection();
+  }
+
+  ngOnDestory() {
+    this.srService.disconnection('NotificationsHub')
+  }
+
+  createConnection() {
+    this.srService.connectNotificationHub();
   }
 }

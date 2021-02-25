@@ -35,6 +35,7 @@ import { EditorComponent } from './components/editor/editor.component';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { GlobalErrorHandler } from './shared/error-handler/error-handler';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -66,6 +67,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     ReactiveFormsModule,
     // MatSnackBarModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      progressBar: false,
+      enableHtml: true,
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
