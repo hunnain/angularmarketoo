@@ -69,6 +69,7 @@
   "dash_delivered_orders": "Delivered Orders",
   "dash_cancelled_orders": "Cancelled Orders",
   "dash_returned_orders": "Returned Orders",
+  "dash_refunded_orders": "Refunded Orders",
   "dash_exchanged_orders": "Exchanged Orders",
   "dash_shipped_via_own_account": "Shipped via Own Account",
   "dash_shipped_via_marketoo_account": "Shipped via Marketoo Account",

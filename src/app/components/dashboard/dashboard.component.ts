@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { Report } from 'src/app/shared/interfaces/report';
+import { CommonService } from 'src/app/shared/service/common.service';
+import { DashboardService } from 'src/app/shared/service/dashboard/dashboard.service';
+import { OrderService } from 'src/app/shared/service/order-service/order.service';
 import * as chartData from '../../shared/data/chart';
 import { doughnutData, pieData } from '../../shared/data/chart';
 
@@ -11,7 +14,13 @@ import { doughnutData, pieData } from '../../shared/data/chart';
 export class DashboardComponent implements OnInit {
   public doughnutData = doughnutData;
   public pieData = pieData;
-  constructor(private translate: TranslateService) {
+  constructor(
+    private dashboardService: DashboardService,
+    private orderService: OrderService,
+    private cs: CommonService
+  ) {
+    this.fetchReport();
+    this.fetchOrders();
     Object.assign(this, { doughnutData, pieData })
   }
 
@@ -78,4 +87,67 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
   }
 
+  report: Report = {
+    netProfit: 0,
+    referrelDeduction: 0,
+    storeCredit: 0,
+    refund: 0,
+    coupons: 0,
+    transactionsManagementFee: 0,
+    onlinePaymentFee: 0,
+    totalReimbursment: 0,
+    totalOrders: 0,
+    totalDeliveredOrders: 0,
+    totalCancelledOrders: 0,
+    totalRefundedOrders: 0,
+    shippingViaOwnAccount: 0,
+    shippingViaMarketooAccount: 0,
+    newFollowers: 0,
+    lastMonthFollowers: 0,
+    followersCompareDesc: '0% Increase',
+    averageBasketValue: 0,
+    averageBasketValueLastMonth: 0,
+    averageBasketValueCompareDesc: '0% Increase',
+    totalMessages: 0,
+    revenue: 0,
+    revenueLastMonth: 0,
+    revenueCompareDesc: '0% Increase',
+    totalActiveProducts: 0
+  };
+  fetchReport() {
+    this.dashboardService.getReports().subscribe(res => {
+      if (res && res['body']) {
+        this.report = res['body'];
+      }
+    })
+  }
+
+  latestOrders: any[] = [];
+  fetchOrders() {
+    // this.loading = true;
+    let query = `PageSize=${5}&PageNumber=${1}`;
+    this.orderService.getOrders(query).subscribe(
+      (res) => {
+        if (res) {
+          this.cs.isLoading.next(false);
+          // this.loading = false;
+          if (res.body) {
+            this.latestOrders = res.body;
+            // this.pagination = JSON.parse(res.headers.get('X-Pagination'));
+          }
+        }
+      }
+      //  ,err => {
+      //   this.loading = false;
+      //  }
+    );
+  }
+
+  getNames(prods) {
+    if (prods && prods.length) {
+      return prods.map(item => item.name).join(',');
+    } else {
+      return 'N/A';
+    }
+  }
 }

@@ -71,6 +71,7 @@
   "dash_delivered_orders": "已運出貨品總數",
   "dash_cancelled_orders": "已取消訂單總數",
   "dash_returned_orders": "已退回訂單總數",
+  "dash_refunded_orders": "退款訂單",
   "dash_exchanged_orders": "換貨總次數",
   "dash_shipped_via_own_account": "運費 （使用個人用戶）",
   "dash_shipped_via_marketoo_account": "運費 （使用Marketoo帳戶）",
