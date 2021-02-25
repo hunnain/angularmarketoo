@@ -126,20 +126,20 @@ export class NavService {
       badgeType: 'primary',
       active: false,
     },
-    {
-      title: 'sidebar_Boosting',
-      icon: 'trending-up',
-      type: 'sub',
-      active: false,
-      children: [
-        { path: '/boosting', title: 'sidebar_Boost_My_Product', type: 'link' },
-        {
-          path: '/boosting/my-ads-performance',
-          title: 'sidebar_My_Ads_Performance',
-          type: 'link',
-        },
-      ],
-    },
+    // {
+    //   title: 'sidebar_Boosting',
+    //   icon: 'trending-up',
+    //   type: 'sub',
+    //   active: false,
+    //   children: [
+    //     { path: '/boosting', title: 'sidebar_Boost_My_Product', type: 'link' },
+    //     {
+    //       path: '/boosting/my-ads-performance',
+    //       title: 'sidebar_My_Ads_Performance',
+    //       type: 'link',
+    //     },
+    //   ],
+    // },
     {
       path: '/return-exchange',
       title: 'sidebar_Return_Exchange',
