@@ -61,6 +61,7 @@ export class SignalrService {
   }
 
   public getChatMessage(id) {
+    this.messages = [];
     return this.cs.get(`chat/get-chat/${id}`)
       .pipe(map(res => {
         console.log("sucessfully get messages", res)

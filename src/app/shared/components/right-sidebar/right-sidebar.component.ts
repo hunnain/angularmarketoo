@@ -78,8 +78,8 @@ export class RightSidebarComponent implements OnInit {
         this.allUsers = user_curr;
         if (this.allUsers.length) {
           const groupz = this.groupBy(this.allUsers);
-          this.admins = groupz['admin']
-          this.customers = groupz['customer']
+          this.admins = groupz['admin'] || []
+          this.customers = groupz['customer'] || []
         }
       }
     }

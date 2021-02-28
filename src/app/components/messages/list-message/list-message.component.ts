@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SignalrService } from 'src/app/shared/service/signalr.service';
+import { ChatBoxComponent } from '../chat-box/chat-box.component';
 
 @Component({
   selector: 'app-list-message',
@@ -7,7 +8,7 @@ import { SignalrService } from 'src/app/shared/service/signalr.service';
   styleUrls: ['./list-message.component.scss']
 })
 export class ListMessageComponent implements OnInit {
-
+  @ViewChild('chatBox') chatBox: ChatBoxComponent;
   public selectedUser: any = {};
   public allUsers: any[] = [];
   public messages: any[] = [];
@@ -55,17 +56,18 @@ export class ListMessageComponent implements OnInit {
     this.getMessages(user.senderId)
   }
 
-  sendMessage(msg): void {
+  sendMessage({ msg, images }): void {
     let data = {
       text: msg,
-      receiverId: this.selectedUser.senderId
+      receiverId: this.selectedUser.senderId,
+      images
     }
     // you can send the messge direclty to the hub or use the api controller.
     // choose wisely
-
-    this.signalRService.sendMessageToApi(data).subscribe({
-      next: _ => this.text = '',
-      error: (err) => console.error(err)
+    this.signalRService.sendMessageToApi(data).subscribe(res => {
+      if (res) {
+        this.chatBox.resetState();
+      }
     });
 
     // this.signalRService.sendMessageToHub(data).subscribe({

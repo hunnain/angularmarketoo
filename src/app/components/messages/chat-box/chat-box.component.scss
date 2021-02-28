@@ -18,9 +18,26 @@
   }
   .content li.right {
     text-align: right;
+    // float: right;
     .msg {
+      display: inline-block;
       background-color: #e1ffc7;
       color: #000;
+      // border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      position: relative;
+      &:after {
+        border-width: 0px 0px 10px 10px;
+        border-color: transparent transparent transparent #e1ffc7;
+        top: 0;
+        right: -10px;
+
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 0;
+        border-style: solid;
+      }
     }
   }
   .content .msg {
@@ -29,20 +46,66 @@
     background-color: #dddddd;
     border: 1px solid #f8f8f9;
     padding: 10px 15px;
-    border-radius: 25px;
+    border-radius: 8px;
     letter-spacing: 1px;
-    // :after {
-    //     border-width: 0px 0 10px 10px;
-    //     border-color: transparent transparent transparent #e1ffc7;
-    //     top: 0;
-    //     right: -10px;
+    position: relative;
+    // &:after {
+    //   border-width: 0px 10px 10px 0;
+    //   border-color: transparent transparent transparent #898989;
+    //   top: 0;
+    //   left: -10px;
 
-    //     position: absolute;
-    //     content: "";
-    //     width: 0;
-    //     height: 0;
-    //     border-style: solid;
+    //   position: absolute;
+    //   content: "";
+    //   width: 0;
+    //   height: 0;
+    //   border-style: solid;
     // }
+  }
+  .content li.left {
+    .msg {
+      border-top-left-radius: 0;
+      position: relative;
+      &:after {
+        border-width: 0px 10px 10px 0px;
+        border-color: transparent #dddddd transparent transparent;
+        top: 0;
+        left: -10px;
+
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 0;
+        border-style: solid;
+      }
+    }
+  }
+
+  .img-list {
+    // display: flex;
+    // align-items: center;
+    // justify-content: flex-end;
+    .img-container {
+      display: block;
+
+      position: relative;
+      margin-bottom: 5px;
+      padding: 10px;
+      .download-icon {
+        position: absolute;
+        cursor: pointer;
+        right: 0;
+        opacity: 0;
+        visibility: hidden;
+      }
+      &:hover {
+        .download-icon {
+          visibility: visible;
+          opacity: 1;
+          transition: all 0.4s ease-in-out;
+        }
+      }
+    }
   }
 }
 .action-footer {
@@ -93,4 +156,19 @@
 }
 .online {
   background-color: #81ba00;
+}
+
+::ng-deep .attachment-container {
+  background-color: #c1c1c1;
+  .close-btn {
+    display: block;
+    text-align: right;
+    cursor: pointer;
+  }
+  .dz-progress {
+    display: none !important;
+  }
+  .dz-preview {
+    background-color: #c1c1c1 !important;
+  }
 }
