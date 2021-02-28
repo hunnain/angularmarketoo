@@ -12,7 +12,15 @@ interface Profile {
   shopName: string;
   shopLocation: string;
   shopIntro: string
-  referSeller?: string
+  referSeller?: string;
+  statsInfo: null | StatsInfo
+
+}
+interface StatsInfo {
+  avgTimeToShip: number;
+  totalOrdersShipped: number;
+  totalLikes: number;
+  totalSoldProducts: number;
 }
 
 enum DeactiveAcount {

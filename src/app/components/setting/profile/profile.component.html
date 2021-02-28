@@ -50,29 +50,31 @@
               <div class="media-body">
                 <h6>
                   {{ "tab_marketoo_averagetime_ship" | translate
-                  }}<span class="pull-right">{{
-                    "tab_marketoo_averagetime_ship_days" | translate
-                  }}</span>
+                  }}<span class="pull-right"
+                    >{{ profile?.statsInfo?.avgTimeToShip }} Days</span
+                  >
                 </h6>
-                <div class="progress sm-progress-bar">
+                <!-- <div class="progress sm-progress-bar">
                   <div
                     class="progress-bar bg-primary"
                     role="progressbar"
                     style="width: 90%"
-                    aria-valuenow="25"
+                    aria-valuenow="45"
                     aria-valuemin="0"
                     aria-valuemax="100"
                   ></div>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="media">
               <div class="media-body">
                 <h6>
                   {{ "tab_marketoo_likes" | translate }}
-                  <span class="pull-right">21</span>
+                  <span class="pull-right">{{
+                    profile?.statsInfo?.totalLikes
+                  }}</span>
                 </h6>
-                <div class="progress sm-progress-bar">
+                <!-- <div class="progress sm-progress-bar">
                   <div
                     class="progress-bar bg-secondary"
                     role="progressbar"
@@ -81,16 +83,18 @@
                     aria-valuemin="0"
                     aria-valuemax="100"
                   ></div>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="media">
               <div class="media-body">
                 <h6>
                   {{ "tab_marketoo_purchased" | translate
-                  }}<span class="pull-right">287</span>
+                  }}<span class="pull-right">{{
+                    profile?.statsInfo?.totalSoldProducts
+                  }}</span>
                 </h6>
-                <div class="progress sm-progress-bar">
+                <!-- <div class="progress sm-progress-bar">
                   <div
                     class="progress-bar bg-danger"
                     role="progressbar"
@@ -99,7 +103,7 @@
                     aria-valuemin="0"
                     aria-valuemax="100"
                   ></div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
