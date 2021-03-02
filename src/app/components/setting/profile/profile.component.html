@@ -240,7 +240,7 @@
                             {{ profile?.shopLocation || "N/A" }}
                           </td>
                           <td *ngIf="isEdit" [formGroup]="sellerForm">
-                            <input
+                            <!-- <input
                               class="form-control"
                               id="shopLocation"
                               type="text"
@@ -248,7 +248,25 @@
                                 sellerForm.controls['shopLocation']
                               "
                               required
-                            />
+                            /> -->
+                            <select
+                              class="form-control digits"
+                              id="deliver_from"
+                              [formControl]="
+                                sellerForm.controls['shopLocation']
+                              "
+                            >
+                              <option value="Hong Kong">Hong Kong</option>
+                              <option value=" Macau">Macau</option>
+                              <option value="Taiwan">Taiwan</option>
+                              <option value="Japan">Japan</option>
+                              <option value="China">China</option>
+                              <option value="Singapore">Singapore</option>
+                              <option value="South Korea">South Korea</option>
+                              <option value="Thailand">Thailand</option>
+                              <option value="Malaysia">Malaysia</option>
+                              <option value="other">Other</option>
+                            </select>
                           </td>
                         </tr>
                         <tr>
@@ -257,13 +275,18 @@
                             {{ profile?.shopIntro || "N/A" }}
                           </td>
                           <td *ngIf="isEdit" [formGroup]="sellerForm">
-                            <input
+                            <!-- <input
                               class="form-control"
                               id="shopIntro"
                               type="text"
                               [formControl]="sellerForm.controls['shopIntro']"
                               required
-                            />
+                            /> -->
+                            <textarea
+                              class="form-control"
+                              rows="6"
+                              [formControl]="sellerForm.controls['shopIntro']"
+                            ></textarea>
                           </td>
                         </tr>
                         <!-- <tr>

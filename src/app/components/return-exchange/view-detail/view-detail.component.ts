@@ -18,6 +18,7 @@ export class ViewDetailComponent implements OnInit {
   public status: string;
   public refund_reason: string;
   public reason: string;
+  public trackingNumber: number;
   public reasonDesc: string;
 
   public total: number;
@@ -159,5 +160,11 @@ export class ViewDetailComponent implements OnInit {
 
   showDetail(content) {
     this.open(content);
+  }
+
+  submitReturn() {
+    console.log('💻=refundreason', this.refund_reason);
+    console.log('💻=reason', this.reason);
+    console.log('💻=tracknumber', this.trackingNumber);
   }
 }

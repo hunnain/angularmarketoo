@@ -48,6 +48,10 @@ export class OrderDetailComponent implements OnInit {
   public blastEmail: boolean = false;
   public orderId: string;
   public fetching: boolean = false;
+  public shippingCost = '';
+  public trackingDetails = '';
+  public courier_service = '';
+  public loading: boolean = false;
   constructor(
     private modalService: NgbModal,
     private activeRoute: ActivatedRoute,
@@ -60,6 +64,10 @@ export class OrderDetailComponent implements OnInit {
       this.orderId = this.activeRoute.params['value'].id;
       this.fetchOrderById(this.orderId);
     }
+
+    this.cs.isLoading.subscribe((loading) => {
+      this.loading = loading;
+    });
   }
 
   open(content) {
@@ -86,7 +94,7 @@ export class OrderDetailComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   fetchOrderById(id) {
     this.fetching = true;
@@ -147,5 +155,23 @@ export class OrderDetailComponent implements OnInit {
 
   formatDate(date) {
     return moment(date).format('MMM DD,YY');
+  }
+
+
+  updateShippingMethodStatus() {
+    let obj = {
+      orderId: this.orderId,
+      CourierService: this.courier_service,
+      IsMarketooAccount: false,
+      shippingCost: this.shippingCost,
+      trackingDetails: this.trackingDetails,
+    };
+    console.log(obj);
+
+    this.loading = true;
+    this.orderService.updateShippingMethod(obj).subscribe((res) => {
+      console.log(res);
+      this.loading = false;
+    });
   }
 }

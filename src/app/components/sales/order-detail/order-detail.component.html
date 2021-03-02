@@ -468,6 +468,8 @@
             ngbAutofocus
             id="other"
             type="text"
+            name="courier_service"
+            [(ngModel)]="courier_service"
           />
           <div class="box-input-file col-12 col-sm-3">
             <input
@@ -506,14 +508,34 @@
       <div style="margin: 10px 0px">
         <div class="row form-inline">
           <label class="col-12 col-sm-4">Add Tracking Details</label>
-          <input class="form-control col-12 col-sm-5" id="size" type="text" />
+          <input
+            class="form-control col-12 col-sm-5"
+            id="size"
+            type="text"
+            [(ngModel)]="trackingDetails"
+          />
+        </div>
+      </div>
+      <div style="margin: 10px 0px">
+        <div class="row form-inline">
+          <label class="col-12 col-sm-4">Add Shipping Cost</label>
+          <input
+            class="form-control col-12 col-sm-5"
+            id="size"
+            type="text"
+            [(ngModel)]="shippingCost"
+          />
         </div>
       </div>
     </div>
     <div class="action">
-      <button class="btn btn-primary" type="button" (click)="updateStatus()">
-        Update
-      </button>
+      <app-button
+        [btnType]="'submit'"
+        [loading]="loading"
+        [disabled]="loading || !shippingCost || !trackingDetails"
+        [btnText]="'Update'"
+        (onSubmit)="updateShippingMethodStatus()"
+      ></app-button>
     </div>
   </div>
 </ng-template>
