@@ -20,18 +20,14 @@
               (keyup)="updateFilter($event)"
             />
             <ngx-datatable
-              class="bootstrap"
+              class="bootstrap responsive-table"
               [rows]="orders"
               [columnMode]="'force'"
               [headerHeight]="60"
               [footerHeight]="50"
-              [rowHeight]="'auto'"
             >
-              <!-- [externalPaging]="true"
-              [count]="pagination.TotalCount"
-              [offset]="pagination.CurrentPage"
-              [limit]="pagination.PageSize"
-              (page)="setPage($event)" -->
+              <!-- [scrollbarV]="true" -->
+              <!-- [rowHeight]="'auto'" -->
               <ngx-datatable-column
                 name="{{ 'ordersmanagement_orderid' | translate }}"
                 prop="orderId"

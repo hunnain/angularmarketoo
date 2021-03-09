@@ -9,3 +9,32 @@
 ::ng-deep .empty-row {
   text-align: center !important;
 }
+
+// Responsive Table CSS //
+/*
+	Max width before this PARTICULAR table gets nasty. This query will take effect for any screen smaller than 760px and also iPads specifically.
+	*/
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px) {
+  ::ng-deep .responsive-table {
+    .datatable-body-cell:nth-of-type(1):before {
+      content: "Title";
+    }
+    .datatable-body-cell:nth-of-type(2):before {
+      content: "Code";
+    }
+    .datatable-body-cell:nth-of-type(3):before {
+      content: "Discount";
+    }
+    .datatable-body-cell:nth-of-type(4):before {
+      content: "Start Date";
+    }
+    .datatable-body-cell:nth-of-type(5):before {
+      content: "End Date";
+    }
+    .datatable-body-cell:nth-of-type(6):before {
+      content: "Action";
+    }
+  }
+}
+// Responsive Table CSS End  //

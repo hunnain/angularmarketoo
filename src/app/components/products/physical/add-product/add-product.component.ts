@@ -96,6 +96,10 @@ export class AddProductComponent implements OnInit {
     return this.productForm.get('customSize');
   }
 
+  get getCustomColor() {
+    return this.productForm.get('customColor');
+  }
+
   get custom_design() {
     return this.productForm.get('customDesign');
   }
@@ -149,6 +153,7 @@ export class AddProductComponent implements OnInit {
       quantity: [1],
       sizes: ['', Validators.required],
       customSize: [false],
+      customColor: [false],
       customizeSize: [''],
       customDesign: [false],
       isInternationalShipping: [true],

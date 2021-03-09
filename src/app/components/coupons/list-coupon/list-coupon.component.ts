@@ -6,6 +6,7 @@ import { CouponService } from 'src/app/shared/service/coupon/coupon.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AllCoupons } from '../../../shared/interfaces/coupon/coupon';
 import { Paginate } from 'src/app/shared/interfaces/pagination';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-list-coupon',
@@ -73,6 +74,10 @@ export class ListCouponComponent implements OnInit {
       //   this.loading = false;
       //  }
     );
+  }
+
+  getFormatDate(date) {
+    return moment(date).format('MMM DD,YY');
   }
 
   onEdit(val) {

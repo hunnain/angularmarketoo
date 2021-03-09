@@ -7,6 +7,7 @@ import { OrderService } from 'src/app/shared/service/order-service/order.service
 import { CommonService } from 'src/app/shared/service/common.service';
 import { Order } from 'src/app/shared/interfaces/order';
 import * as moment from 'moment';
+import { SignalrService } from 'src/app/shared/service/signalr.service';
 
 @Component({
   selector: 'app-order-detail',
@@ -51,12 +52,14 @@ export class OrderDetailComponent implements OnInit {
   public shippingCost = '';
   public trackingDetails = '';
   public courier_service = '';
+  public msg = '';
   public loading: boolean = false;
   constructor(
     private modalService: NgbModal,
     private activeRoute: ActivatedRoute,
     private router: Router,
     private orderService: OrderService,
+    private signalService: SignalrService,
     private cs: CommonService
   ) {
     this.status = this.dummyData.order_status;
@@ -172,6 +175,20 @@ export class OrderDetailComponent implements OnInit {
     this.orderService.updateShippingMethod(obj).subscribe((res) => {
       console.log(res);
       this.loading = false;
+    });
+  }
+
+  sendMessage() {
+    let obj = {
+      text: this.msg,
+      receiverId: this.order.customerId
+    };
+    console.log(obj);
+    this.loading = true;
+    this.signalService.sendMessageToApi(obj).subscribe((res) => {
+      console.log(res);
+      this.loading = false;
+      this.modalService.dismissAll('save button clicked');
     });
   }
 }

@@ -98,6 +98,8 @@
   "sidebar_Create_Coupons": "新增優惠卷",
   "create_Store_Credit": "新增積分",
   "coupon_duedate": "限期",
+  "coupon_startDate": "開始日期",
+  "coupon_endDate": "結束日期",
   "coupon_title": "名稱",
   "coupon_code": "優惠碼",
   "coupon_code_discount": "折扣",

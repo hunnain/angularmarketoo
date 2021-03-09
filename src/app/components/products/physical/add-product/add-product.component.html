@@ -301,6 +301,53 @@
                       />
                     </div>
                   </div>
+
+                  <!--  -->
+                  <div class="form-group row">
+                    <label for="size" class="col-xl-3 col-sm-4 mb-0 required"
+                      >{{ "prod_select_color" | translate }}
+                    </label>
+                    <div class="col-xl-4 col-sm-5" style="padding-left: 0">
+                      <ng-select2
+                        [formControl]="productForm.controls['colorOption']"
+                        [data]="colorOptions"
+                        [options]="colorConfig"
+                        [width]="300"
+                      >
+                      </ng-select2>
+                    </div>
+                    <div class="col-xl-3 col-sm-2">
+                      <div class="custom-control custom-switch">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="customColor1"
+                          [formControl]="productForm.controls['customColor']"
+                        />
+                        <label
+                          class="custom-control-label"
+                          for="customColor1"
+                          >{{ "prod_custom_color" | translate }}</label
+                        >
+                      </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-4 mb-0"></div>
+                    <div
+                      class="col-xl-8 col-sm-7 form-inline"
+                      style="margin-top: 20px"
+                      *ngIf="getCustomColor.value"
+                    >
+                      <input
+                        class="form-control col-xl-4 col-sm-5"
+                        id="size"
+                        type="text"
+                        [formControl]="productForm.controls['custom_color']"
+                        placeholder="{{ 'prod_custom_color' | translate }}"
+                      />
+                    </div>
+                  </div>
+                  <!--  -->
+
                   <div class="form-group row">
                     <label for="labels" class="col-xl-3 col-sm-4 mb-0 required"
                       >{{ "prod_labels" | translate }}
@@ -426,22 +473,10 @@
                       />
                     </div>
                   </div>
-                  <div class="form-group row">
+                  <!-- <div class="form-group row">
                     <label for="colors" class="col-xl-3 col-sm-4 mb-0"
                       >{{ "prod_select_color" | translate }}
                     </label>
-                    <!-- <select
-                      class="form-control digits col-xl-8 col-sm-7"
-                      id="exampleFormControlSelect1"
-                      [formControl]="productForm.controls['colorOption']"
-                    >
-                      <option
-                        *ngFor="let color of colorOptions"
-                        [value]="color.id"
-                      >
-                        {{ color.name | translate }}
-                      </option>
-                    </select> -->
                     <div class="col-xl-8 col-sm-7" style="padding-left: 0">
                       <ng-select2
                         [formControl]="productForm.controls['colorOption']"
@@ -461,8 +496,8 @@
                       type="text"
                       [formControl]="productForm.controls['custom_color']"
                     />
-                  </div>
-                  <div class="form-group row">
+                  </div> -->
+                  <!-- <div class="form-group row">
                     <label class="col-xl-3 col-sm-4"
                       >{{ "prod_custom_material" | translate }}
                     </label>
@@ -472,15 +507,8 @@
                         type="text"
                         [formControl]="productForm.controls['customMaterial']"
                       />
-                      <!-- <ck-editor
-                        id="editor3"
-                        cols="30"
-                        rows="10"
-                        language="en"
-                        [fullPage]="true"
-                      ></ck-editor> -->
                     </div>
-                  </div>
+                  </div> -->
                   <div class="form-group row">
                     <label class="col-xl-3 col-sm-4 required"
                       >{{ "prod_desc" | translate }}

@@ -96,6 +96,8 @@
   "sidebar_Create_Coupons": "Create Coupons",
   "create_Store_Credit": "Create Store Credit",
   "coupon_duedate": "Due Date",
+  "coupon_startDate": "Start Date",
+  "coupon_endDate": "End Date",
   "coupon_title": "Title",
   "coupon_code": "Code",
   "coupon_code_discount": "Discount",
