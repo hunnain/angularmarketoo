@@ -8,7 +8,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/shared/service/common.service';
-
+import 'rxjs/add/operator/debounceTime';
+import { FormControl } from '@angular/forms';
+import { generateUrl } from 'src/app/shared/utilities';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -33,6 +35,9 @@ export class ProductListComponent implements OnInit {
   // pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 50];
   public selectedLang: string = 'en';
+  selectedFilter = [];
+  searchTerm = new FormControl();
+  formCtrlSub;
   constructor(
     private productService: ProductService,
     private translate: TranslateService,
@@ -98,6 +103,11 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.formCtrlSub = this.searchTerm.valueChanges
+      .debounceTime(2000)
+      .subscribe((newValue) => {
+        this.getProducts();
+      });
     this.getProducts();
   }
 
@@ -133,37 +143,55 @@ export class ProductListComponent implements OnInit {
     this.router.navigate(['/products/physical/edit-product', data.uuid]);
   }
 
+  getKey(key) {
+    let tempKey = key.match(/[A-Z][a-z]+/g).split('_')[2];
+    console.log(tempKey);
+    return tempKey;
+  }
+
+  generateUrlLocal(query) {
+    let filters = {};
+    this.selectedFilter.forEach((key) => {
+      filters[this.getKey(key)] = this.searchTerm;
+    });
+
+    let que = query;
+    if (query) que = query + '&' + generateUrl(filters);
+
+    return que;
+  }
+
   getProducts() {
     const { PageSize, CurrentPage } = this.pagination;
     this.loading = true;
     this.product_list = [];
-    this.productService
-      .getProduct(`pageSize=${PageSize}&pageNumber=${CurrentPage}`)
-      .subscribe((res) => {
-        let paginate = JSON.parse(res.headers.get('X-Pagination'));
-        console.log('res', res, paginate);
-        let data = res.body;
-        if (data) {
-          let templist = data.map((pro) => {
-            return {
-              uuid: pro.productId,
-              img: pro.image ? pro.image : '',
-              product_title: pro.name,
-              discount: pro.discountBuy,
-              price: pro.price,
-              sale: 'not on sale',
-              tag: 'old',
-              rating: pro.rating,
-              status: pro.status
-            };
-          });
-          this.product_list = JSON.parse(JSON.stringify(templist));
-          this.pagination = paginate;
-        }
+    let query = `pageSize=${PageSize}&pageNumber=${CurrentPage}`;
+    // query = this.generateUrlLocal(query);
+    this.productService.getProduct(query).subscribe((res) => {
+      let paginate = JSON.parse(res.headers.get('X-Pagination'));
+      console.log('res', res, paginate);
+      let data = res.body;
+      if (data) {
+        let templist = data.map((pro) => {
+          return {
+            uuid: pro.productId,
+            img: pro.image ? pro.image : '',
+            product_title: pro.name,
+            discount: pro.discountBuy,
+            price: pro.price,
+            sale: 'not on sale',
+            tag: 'old',
+            rating: pro.rating,
+            status: pro.status,
+          };
+        });
+        this.product_list = JSON.parse(JSON.stringify(templist));
+        this.pagination = paginate;
+      }
 
-        this.cs.isLoading.next(false);
-        this.loading = false;
-      });
+      this.cs.isLoading.next(false);
+      this.loading = false;
+    });
   }
   pageNumberClick(pageNumber) {
     this.pagination['CurrentPage'] = pageNumber;
@@ -191,15 +219,14 @@ export class ProductListComponent implements OnInit {
 
   statusColor(status) {
     switch (status) {
-      case "Pending":
-        return "badge-warning";
-      case "Approved":
-        return "badge-success";
-      case "Rejected":
-        return "badge-danger";
+      case 'Pending':
+        return 'badge-warning';
+      case 'Approved':
+        return 'badge-success';
+      case 'Rejected':
+        return 'badge-danger';
       default:
-        return "badge-info"
-
+        return 'badge-info';
     }
   }
 }

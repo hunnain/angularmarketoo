@@ -1,6 +1,19 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-6">
+    <div
+      class="col-6"
+      style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 10px"
+    >
+      <div>
+        <span>{{ "search_term" | translate }}</span>
+        <input
+          style="width: auto; height: auto"
+          type="text"
+          class="filter-ngx form-control"
+          placeholder="Type here..."
+          [formControl]="searchTerm"
+        />
+      </div>
       <div class="filter-box">
         <span>{{ "filter_by" | translate }}</span>
         <ng-select2

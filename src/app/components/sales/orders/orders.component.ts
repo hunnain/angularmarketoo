@@ -7,6 +7,9 @@ import { Paginate } from 'src/app/shared/interfaces/pagination';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { OrderService } from 'src/app/shared/service/order-service/order.service';
 import { orderDB } from '../../../shared/tables/order-list';
+import 'rxjs/add/operator/debounceTime';
+import { FormControl } from '@angular/forms';
+import { generateUrl } from 'src/app/shared/utilities';
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -15,7 +18,9 @@ import { orderDB } from '../../../shared/tables/order-list';
 export class OrdersComponent implements OnInit {
   public orders = [];
   public temp = [];
-
+  selectedFilter = [];
+  searchTerm = new FormControl();
+  formCtrlSub;
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
   public pagination: Paginate = {
@@ -38,10 +43,29 @@ export class OrdersComponent implements OnInit {
     // this.orders = orderDB.list_order;
   }
 
+  getKey(key) {
+    let tempKey = key.match(/[A-Z][a-z]+/g).split('_')[2];
+    console.log(tempKey);
+    return tempKey;
+  }
+
+  generateUrlLocal(query) {
+    let filters = {};
+    this.selectedFilter.forEach((key) => {
+      filters[this.getKey(key)] = this.searchTerm;
+    });
+
+    let que = query;
+    if (query) que = query + '&' + generateUrl(filters);
+
+    return que;
+  }
+
   fetchOrders() {
     const { PageSize, CurrentPage } = this.pagination;
     this.loading = true;
     let query = `PageSize=${PageSize}&PageNumber=${CurrentPage}`;
+    // query = this.generateUrlLocal(query);
     this.orderService.getOrders(query).subscribe(
       (res) => {
         if (res) {
@@ -74,6 +98,11 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.formCtrlSub = this.searchTerm.valueChanges
+      .debounceTime(2000)
+      .subscribe((newValue) => {
+        this.fetchOrders();
+      });
     this.fetchOrders();
   }
 

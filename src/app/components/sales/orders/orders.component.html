@@ -13,12 +13,22 @@
             <app-loader [loading]="loading"></app-loader>
           </div>
           <div class="custom-datatable" *ngIf="!loading">
-            <input
+            <!-- <input
               type="text"
               class="filter-ngx form-control"
               placeholder="Search..."
               (keyup)="updateFilter($event)"
-            />
+            /> -->
+            <div style="width: auto; margin: 20px 0px">
+              <span>{{ "search_term" | translate }}</span>
+              <input
+                style="width: auto"
+                type="text"
+                class="filter-ngx form-control"
+                placeholder="Type here..."
+                [formControl]="searchTerm"
+              />
+            </div>
             <ngx-datatable
               class="bootstrap responsive-table"
               [rows]="orders"

@@ -97,7 +97,7 @@
                   <div class="form-group row">
                     <label
                       for="validationCustom02"
-                      class="col-xl-3 col-sm-4 mb-0"
+                      class="col-xl-3 col-sm-4 mb-0 required"
                       >{{ "prod_mark_price" | translate }}
                     </label>
                     <input
@@ -151,13 +151,13 @@
                   </div>
                   <div class="form-group row">
                     <label
-                      for="mainCate"
+                      for="exampleFormControlSelect1"
                       class="col-xl-3 col-sm-4 mb-0 required"
                       >{{ "prod_category" | translate }}
                     </label>
                     <select
                       class="form-control digits col-xl-8 col-sm-7"
-                      id="mainCate"
+                      id="exampleFormControlSelect1"
                       [formControl]="productForm.controls['category']"
                     >
                       <option
@@ -169,12 +169,14 @@
                     </select>
                   </div>
                   <div class="form-group row" *ngIf="main_category.value">
-                    <label for="subCate" class="col-xl-3 col-sm-4 mb-0 required"
+                    <label
+                      for="exampleFormControlSelect1"
+                      class="col-xl-3 col-sm-4 mb-0 required"
                       >{{ "prod_sub_category" | translate }}
                     </label>
                     <select
                       class="form-control digits col-xl-8 col-sm-7"
-                      id="subCate"
+                      id="exampleFormControlSelect1"
                       [formControl]="productForm.controls['sub_category']"
                     >
                       <option
@@ -188,9 +190,7 @@
                     </select>
                   </div>
                   <div class="form-group row" *ngIf="sub_category.value">
-                    <label
-                      for="ext-cate"
-                      class="col-xl-3 col-sm-4 mb-0 required"
+                    <label for="ext-cate" class="col-xl-3 col-sm-4 mb-0"
                       >{{ "cop_ex_sub_cate" | translate }}
                     </label>
                     <select
@@ -349,7 +349,9 @@
                   <!--  -->
 
                   <div class="form-group row">
-                    <label for="labels" class="col-xl-3 col-sm-4 mb-0 required"
+                    <label
+                      for="exampleFormControlSelect1"
+                      class="col-xl-3 col-sm-4 mb-0 required"
                       >{{ "prod_labels" | translate }}
                     </label>
                     <div class="col-xl-8 col-sm-7" style="padding-left: 0">
@@ -473,10 +475,24 @@
                       />
                     </div>
                   </div>
-                  <!-- <div class="form-group row">
-                    <label for="colors" class="col-xl-3 col-sm-4 mb-0"
+                  <div class="form-group row">
+                    <label
+                      for="exampleFormControlSelect1"
+                      class="col-xl-3 col-sm-4 mb-0"
                       >{{ "prod_select_color" | translate }}
                     </label>
+                    <!-- <select
+                      class="form-control digits col-xl-8 col-sm-7"
+                      id="exampleFormControlSelect1"
+                      [formControl]="productForm.controls['colorOption']"
+                    >
+                      <option
+                        *ngFor="let color of colorOptions"
+                        [value]="color.id"
+                      >
+                        {{ color.name | translate }}
+                      </option>
+                    </select> -->
                     <div class="col-xl-8 col-sm-7" style="padding-left: 0">
                       <ng-select2
                         [formControl]="productForm.controls['colorOption']"
@@ -514,11 +530,11 @@
                       >{{ "prod_desc" | translate }}
                     </label>
                     <div class="col-xl-8 col-sm-7 pl-0">
-                      <textarea
-                        class="form-control"
-                        rows="6"
+                      <input
+                        class="form-control col-xl-8 col-sm-7"
+                        type="text"
                         [formControl]="productForm.controls['description']"
-                      ></textarea>
+                      />
                       <!-- <ck-editor
                         id="editor3"
                         cols="30"
@@ -529,7 +545,7 @@
                       ></ck-editor> -->
                     </div>
                   </div>
-                  <!-- <div class="form-group row">
+                  <div class="form-group row">
                     <label
                       for="exampleFormControlSelect1"
                       class="col-xl-3 col-sm-4 mb-0 required"
@@ -544,7 +560,20 @@
                       >
                       </ng-select2>
                     </div>
-                  </div> -->
+
+                    <!-- <select
+                      class="form-control digits col-xl-8 col-sm-7"
+                      id="exampleFormControlSelect1"
+                      [formControl]="productForm.controls['paymentOption']"
+                    >
+                      <option
+                        *ngFor="let opt of paymentOptions"
+                        [value]="opt.id"
+                      >
+                        {{ opt.name }}
+                      </option>
+                    </select> -->
+                  </div>
                 </div>
               </form>
 
@@ -552,10 +581,7 @@
                 <div class="product-buttons col-sm-8 offset-xl-3 offset-sm-4">
                   <app-button
                     [loading]="loading"
-                    [disabled]="
-                      !productForm.valid ||
-                      (!imgs.length && !selectedImgs.length)
-                    "
+                    [disabled]="!productForm.valid || !imgs.length"
                     [btnText]="isEdit ? 'prod_update' : 'prod_add'"
                     (onSubmit)="onSubmit()"
                   ></app-button>

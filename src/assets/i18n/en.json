@@ -588,5 +588,8 @@
 
   "exam_heading": "Example",
   "exam_para": "If you think it's worth 1 HKD to have someone visit your website, you can set 1 HKD as your max. CPC. You'll pay a maximum of 1 HKD when a person reads your ad and clicks it, and you pay nothing if they don't click.",
-  "exam_highlight": "We will refund you for clicks that were not generated."
+  "exam_highlight": "We will refund you for clicks that were not generated.",
+
+
+  "search_term":"Search"
 }
