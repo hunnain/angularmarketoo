@@ -264,9 +264,9 @@ export class AddProductComponent implements OnInit {
           { emitEvent: false }
         );
         // this.counter = body.quantity;
-        this.customImage = this.addBase64(body.customImage);
+        this.customImageUrl = body.customImage;
         this.customDesignImage = body.customDesign
-          ? this.addBase64(body.customDesign.image)
+          ? body.customDesign.image
           : '';
         if (body.imageUrls && body.imageUrls.length) {
           this.selectedImgs = body.imageUrls;
@@ -408,6 +408,7 @@ export class AddProductComponent implements OnInit {
 
   //FileUpload
   customImage = '';
+  customImageUrl = '';
   customDesignImage = '';
   readCustomSizeImg(event: any) {
     if (event.target.files.length === 0) return;
@@ -508,8 +509,13 @@ export class AddProductComponent implements OnInit {
     }
 
     if (temp.customSize) {
-      data['customImage'] = this.removeBase64(this.customImage);
       data['customSize'] = temp.customizeSize;
+      if (this.customImage) {
+        data['customImage'] = this.removeBase64(this.customImage);
+      }
+      if (this.customImageUrl) {
+        data['customImageUrl'] = this.customImageUrl
+      }
     } else {
       delete data['customizeSize'];
       delete data['customSize'];
