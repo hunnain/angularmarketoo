@@ -342,7 +342,7 @@ export const PaymentOptions = [
   { id: 'google_pay', text: 'Google Pay' },
 ];
 
-export const ColorOptions = (lang) => [
+export const ColorOptions = (lang = 'en') => [
   { id: 'red', text: lang === 'en' ? 'Red' : '紅' },
   { id: 'orange', text: lang === 'en' ? 'Orange' : '橙' },
   { id: 'yellow', text: lang === 'en' ? 'Yellow' : '黃' },
@@ -355,16 +355,6 @@ export const ColorOptions = (lang) => [
   { id: 'white', text: lang === 'en' ? 'White' : '白' },
 ];
 
-// "Red": "紅"},
-//   "Orange": "橙"},
-//   "Yellow": "黃"},
-//   "Green": "綠"},
-//   "Blue": "藍"},
-//   "Indigo": "靛"},
-//   "Violet": "紫"},
-//   "Grey": "灰"},
-//   "Black": "黑"},
-//   "White": "白"},
 
 export const SizeOptions = (lang) => [
   { id: 'xs', text: lang === 'en' ? 'XS' : '加細碼' },

@@ -234,6 +234,8 @@ export class AddProductComponent implements OnInit {
     });
   }
 
+  defaultColor = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'voilet', 'grey', 'black', 'white'];
+
   fetchProductById(id) {
     this.productService.getProductById(id).subscribe((res) => {
       // console.log(res.body);
@@ -243,6 +245,13 @@ export class AddProductComponent implements OnInit {
         const { category, subCategory, extendedSubCategory } = body;
         let cates = getIdOfCate(category, subCategory, extendedSubCategory);
 
+        let indexOfCustomColor = body.availableColors.findIndex(item => !this.defaultColor.includes(item));
+        let available_colors = [...body.availableColors];
+        let custom_color = indexOfCustomColor !== -1 ? body.availableColors[indexOfCustomColor] : "";
+        if (indexOfCustomColor !== -1) {
+          available_colors.splice(indexOfCustomColor, 1);
+          console.log(available_colors)
+        }
         this.productForm.patchValue(
           {
             ...res.body,
@@ -258,13 +267,15 @@ export class AddProductComponent implements OnInit {
             customDescription: body.customDesign
               ? body.customDesign.description
               : '',
-            colorOption: body.availableColors,
-            custom_color: body.customColours ? body.customColours[0] : '',
+            colorOption: available_colors,
+            customColor: custom_color ? true : false,
+            custom_color: custom_color,
           },
           { emitEvent: false }
         );
         // this.counter = body.quantity;
-        this.customImageUrl = body.customImage;
+
+        this.customImageUrl = body.customImageUrl ? body.customImageUrl : "";
         this.customDesignImage = body.customDesign
           ? body.customDesign.image
           : '';
@@ -479,22 +490,26 @@ export class AddProductComponent implements OnInit {
   public onSubmit() {
     let temp = this.productForm.value;
 
-    const { category, sub_category, extended_category, ...remaining } = temp;
+    const { category, sub_category, extended_category, colorOption, custom_color, customColor, sizes, ...remaining } = temp;
     let data = {
       ...remaining,
       // quantity: this.counter,
       images: this.imgs.filter(img => img),
-      availableSizes: remaining.sizes,
+      availableSizes: sizes,
       description: remaining.description,
-      sellerUuid: this.user.sellerUuid,
-      paymentOptions: remaining.paymentOptions,
-      availableColors: remaining.colorOption,
-      customColours: [remaining.custom_color],
+      // sellerUuid: this.user.sellerUuid,
+      // paymentOptions: remaining.paymentOptions,
+      availableColors: colorOption,
+      // customColours: remaining.custom_color,
       // subCategory: temp.sub_category,
       // extendedSubCategory: temp.extended_category,
       ...getValueOfCate(category, sub_category, extended_category),
     };
     console.log(temp);
+
+    if (custom_color && customColor) {
+      data['availableColors'] = [...data['availableColors'], custom_color];
+    }
 
     if (temp.customDesign) {
       data['customDesign'] = {
@@ -510,6 +525,7 @@ export class AddProductComponent implements OnInit {
 
     if (temp.customSize) {
       data['customSize'] = temp.customizeSize;
+      delete data['customizeSize'];
       if (this.customImage) {
         data['customImage'] = this.removeBase64(this.customImage);
       }

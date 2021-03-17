@@ -19,3 +19,24 @@ input.counter::-webkit-inner-spin-button {
 input.counter[type="number"] {
   -moz-appearance: textfield;
 }
+
+
+.box-input-file{  
+  width: 50px;
+  height: 50px;
+  background-color: #f1f4fb;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  cursor: pointer;
+ .upload{
+   cursor: pointer;
+  position: absolute;
+  width: 70px;
+  left: 0;
+  right: 0;
+  opacity: 0
+ } 
+}
