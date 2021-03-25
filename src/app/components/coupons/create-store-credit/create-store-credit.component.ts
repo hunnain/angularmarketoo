@@ -75,7 +75,7 @@ export class CreateStoreCreditComponent implements OnInit {
       if (res) {
         this.cs.isLoading.next(false);
         this.loading = false;
-        // this.router.navigate(['/coupons/list-coupons']);
+        this.router.navigate(['/coupons/list-coupons']);
       }
     });
   }

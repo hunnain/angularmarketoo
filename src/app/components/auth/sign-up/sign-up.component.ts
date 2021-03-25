@@ -49,7 +49,7 @@ export class SignUpComponent implements OnInit {
       this.loading = loading;
     })
     this.sellerForm = this.fb.group({
-      chineseFname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+      chineseFname: ['', [Validators.required]],
       englishFname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}')]],
       password: ['', [Validators.required]],

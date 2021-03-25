@@ -175,6 +175,7 @@ export class OrderDetailComponent implements OnInit {
     this.orderService.updateShippingMethod(obj).subscribe((res) => {
       console.log(res);
       this.loading = false;
+      this.modalService.dismissAll()
     });
   }
 
