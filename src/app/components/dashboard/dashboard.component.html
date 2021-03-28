@@ -128,12 +128,17 @@
             <span
               class="d-flex align-items-center justify-content-end"
               style="cursor: pointer"
+              *ngIf="!generating"
+              (click)="downloadReport()"
             >
               <app-feather-icons
                 [icon]="'download'"
                 class="font-primary"
               ></app-feather-icons>
               <span>{{ "dash_export_report" | translate }}</span>
+            </span>
+            <span *ngIf="generating">
+              <i class="fa fa-circle-o-notch fa-spin"></i>
             </span>
           </div>
         </div>

@@ -150,4 +150,40 @@ export class DashboardComponent implements OnInit {
       return 'N/A';
     }
   }
+
+  public generating: boolean = false;
+  downloadReport() {
+    this.generating = true;
+    let currentDate = new Date();
+    let month = currentDate.getMonth() + 1;
+    let year = currentDate.getFullYear();
+    this.dashboardService.generateReport(year, month).subscribe(res => {
+      if (res && res['body']) {
+        console.log(res['body'])
+        this.generating = false;
+        let content = res['body'].fileContents;
+        let type = res['body'].contentType;
+        let name = res['body'].fileDownloadName;
+        this.downLoadFile(content, type, name);
+      }
+    })
+  }
+
+  /**
+     * Method is use to download file.
+     * @param data - Array Buffer data
+     * @param type - type of the document.
+     */
+  downLoadFile(data: any, type: string, filename: string) {
+    let blob = new Blob([data], { type: type });
+    let url = window.URL.createObjectURL(blob);
+    let downloadLink = document.createElement('a');
+    downloadLink.href = url
+    if (filename) {
+      downloadLink.setAttribute('download', filename);
+    }
+
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+  }
 }

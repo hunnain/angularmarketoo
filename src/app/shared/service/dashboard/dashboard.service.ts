@@ -12,4 +12,8 @@ export class DashboardService {
     return this.commonService.get(`seller/get-monthly-report`);
   }
 
+  generateReport(year, month) {
+    return this.commonService.get(`seller/generate-report/${year}-${month}`);
+  }
+
 }
