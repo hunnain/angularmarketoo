@@ -159,10 +159,10 @@ export class CreateCouponComponent implements OnInit {
       endDate: [{}, Validators.required],
       allowFreeShipping: [false],
       quantity: [1, [Validators.required, Validators.pattern('^[1-9][0-9]*$')]],
-      discountType: ['', Validators.required],
+      discountType: ['Percent', Validators.required],
       amtOrPercentage: [
         '',
-        [Validators.required, Validators.pattern('^[1-9][0-9]*$')],
+        [Validators.required, Validators.pattern(/^(100|([0-9][0-9]?(\.[0-9]+)?))$/)],
       ],
     });
   }

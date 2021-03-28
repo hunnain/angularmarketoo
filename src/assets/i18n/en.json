@@ -272,6 +272,7 @@
   "prod_actual_price_req": "Actual Price is Required",
   "prod_mark_price": "Markdown Price",
   "prod_mark_price_req": "Markdown Price is Required",
+  "prod_mark_price_invalid": "Markdown Price is Invalid",
   "prod_product_for": "Product For",
   "prod_inter_shipping": "International Shipping",
   "prod_local_shipping": "Local Shipping",
@@ -382,7 +383,7 @@
   "qty_req": "Quantity is required",
   "qty_invalid": "Quantity is invalid",
   "cop_disc_type": "Discount Type",
-  "cop_amount_percent": "Amount $/ Percentage %",
+  "cop_amount_percent": "Percentage %",
   "PercentageDiscount_req": "Discount is required",
   "PercentageDiscount_invalid": "Discount is invalid",
 
