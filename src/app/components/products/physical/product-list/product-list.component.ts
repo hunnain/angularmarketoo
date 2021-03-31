@@ -179,6 +179,7 @@ export class ProductListComponent implements OnInit {
             product_title: pro.name,
             discount: pro.discountBuy,
             price: pro.price,
+            markdownPrice: pro.markdownPrice,
             sale: 'not on sale',
             tag: 'old',
             rating: pro.rating,

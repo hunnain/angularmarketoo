@@ -31,6 +31,7 @@ import { EmailChipInputComponent } from './components/email-chip-input/email-chi
 import { ButtonComponent } from './components/button/button.component';
 import { CropperComponent } from './components/cropper/cropper.component';
 import { RatingComponent } from './components/rating/rating.component';
+import { DiscountPipe } from './pipes/discount.pipe';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { RatingComponent } from './components/rating/rating.component';
     EmailChipInputComponent,
     ButtonComponent,
     CropperComponent,
-    RatingComponent
+    RatingComponent,
+    DiscountPipe
   ],
   imports: [
     CommonModule,
@@ -80,7 +82,8 @@ import { RatingComponent } from './components/rating/rating.component';
     ButtonComponent,
     CropperComponent,
     RatingComponent,
-    ImageCropperModule
+    ImageCropperModule,
+    DiscountPipe
   ],
 })
 export class SharedModule { }

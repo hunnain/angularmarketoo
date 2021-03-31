@@ -61,7 +61,7 @@ export class SignUpComponent implements OnInit {
       hdySellBefore: [''],
       hdyHearAbtMarketoo: [''],
       interestedToJoinWm: [true],
-      refereeUrl: ['', [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
+      refereeUrl: [''],
     })
     this.brandForm = this.fb.group({
       brandName: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],

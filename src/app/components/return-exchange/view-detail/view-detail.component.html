@@ -51,14 +51,20 @@
                       <div>
                         <figure style="margin: 0px">
                           <img [src]="prod.img" class="img-50" />
-                          <figcaption>{{ prod.name }}</figcaption>
+                          <figcaption>
+                            {{ prod?.orderedProductDetail?.name }}
+                          </figcaption>
                         </figure>
                       </div>
                       <div>
-                        <span>{{ prod.qty }}</span>
+                        <span>{{ prod?.quantity }}</span>
                       </div>
                       <div>
-                        <span>${{ prod.price }}HKD</span>
+                        <span
+                          >${{
+                            prod.orderedProductDetail?.totalAmount
+                          }}HKD</span
+                        >
                       </div>
                     </div>
                   </li>
@@ -97,7 +103,13 @@
                   <label for="reject_reason">{{
                     "re_rej_reason" | translate
                   }}</label>
-                  <input type="text" class="form-control" id="reject_reason" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="reject_reason"
+                    name="reason"
+                    [(ngModel)]="reason"
+                  />
                 </div>
               </div>
             </div>
@@ -134,12 +146,12 @@
             <hr />
             <div style="margin-top: 20px" class="font-size-13">
               <strong>{{ "re_req_on" | translate }}</strong
-              >: {{ dummyData.requested_on }}
+              >: {{ getFormatDate(order?.requested_on) }}
             </div>
             <div style="margin-top: 20px" class="font-size-13">
               <strong>{{ "re_type" | translate }}</strong
               >:
-              <span class="badge badge-success">{{ dummyData.type }}</span>
+              <span class="badge badge-success">{{ order?.type }}</span>
             </div>
             <div style="margin-top: 20px" class="font-size-13">
               <div class="input-group mb-2">
@@ -150,7 +162,7 @@
                   type="number"
                   class="form-control"
                   id="inlineFormInputGroup"
-                  [value]="dummyData.total"
+                  [(ngModel)]="total"
                 />
               </div>
               <!-- <strong>Total</strong>: <h5 class="d-inline">${{dummyData.total}}</h5> 
@@ -163,7 +175,7 @@
                   type="button"
                   (click)="submitReturn()"
                 >
-                  {{ "re_refund" | translate }} ${{ dummyData.total }}
+                  {{ "re_refund" | translate }} ${{ total }}
                 </button>
               </div>
               <div class="col-12 col-sm-12" style="margin-top: 10px">
@@ -188,175 +200,6 @@
     </div>
   </div>
 </div>
-
-<ng-template #Total let-modal>
-  <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Update Price</h5>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="form-group">
-      <div>
-        <label for="price">Price</label>
-        <input
-          type="number"
-          ngbAutofocus
-          [(ngModel)]="total"
-          class="form-control"
-          id="price"
-          aria-describedby="price"
-          placeholder="Enter Price"
-        />
-      </div>
-      <div style="margin-top: 10px">
-        <label for="reason">Select Reason</label>
-        <select
-          class="form-control"
-          id="reason"
-          [(ngModel)]="reason"
-          name="reason"
-        >
-          <option value="wrapping">Wrapping</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      <div style="margin-top: 10px" *ngIf="reason == 'other'">
-        <label for="desc">Reason</label>
-        <input
-          type="text"
-          [(ngModel)]="reasonDesc"
-          name="reasonDesc"
-          class="form-control"
-          id="desc"
-          aria-describedby="desc"
-          placeholder="Enter Reason"
-        />
-      </div>
-    </div>
-    <div class="action">
-      <button class="btn btn-primary" type="button" (click)="updateTotal()">
-        Update
-      </button>
-    </div>
-  </div>
-</ng-template>
-
-<ng-template #Status let-modal>
-  <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="form-group">
-      <label for="status">Select Status</label>
-      <select
-        class="form-control"
-        id="status"
-        ngbAutofocus
-        [(ngModel)]="status"
-        name="status"
-      >
-        <option value="confirmingOrder">Confirming Order</option>
-        <option value="orderConfirmed">Order Confirmed</option>
-        <option value="shipped">Shipped</option>
-        <option value="delivered">Delivered</option>
-        <option value="processingRefund">Processing Refund</option>
-        <option value="refunded">Refunded</option>
-      </select>
-    </div>
-    <div class="action">
-      <button class="btn btn-primary" type="button" (click)="updateStatus()">
-        Update
-      </button>
-    </div>
-  </div>
-</ng-template>
-
-<ng-template #Shipment let-modal>
-  <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Update Shipment Method</h5>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="form-group">
-      <div>
-        <div class="row form-inline">
-          <label class="col-12 col-sm-3" for="other">Other Courier</label>
-          <input
-            class="form-control col-12 col-sm-4"
-            ngbAutofocus
-            id="other"
-            type="text"
-          />
-          <div class="box-input-file col-12 col-sm-3">
-            <input
-              class="upload"
-              type="file"
-              (change)="readUrlSizeImg($event)"
-            />
-            <img class="imgUpload" alt="" [src]="img" />
-          </div>
-        </div>
-      </div>
-      <div style="margin: 20px 0px">
-        <label style="margin-right: 10px">Marketoo Account</label>
-        <ol>
-          <li>
-            <a href="https://www.sf-express.com/hk/tc/" target="_blank"
-              >SF Express</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://www.hongkongpost.hk/en/home/index.html"
-              target="_blank"
-              >HK Post</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://ec-ship.hongkongpost.hk/platform/index.jsf?lang=en_us"
-              target="_blank"
-              >EC Shipment</a
-            >
-          </li>
-        </ol>
-      </div>
-      <div style="margin: 10px 0px">
-        <div class="row form-inline">
-          <label class="col-12 col-sm-4">Add Tracking Details</label>
-          <input class="form-control col-12 col-sm-5" id="size" type="text" />
-        </div>
-      </div>
-    </div>
-    <div class="action">
-      <button class="btn btn-primary" type="button" (click)="updateStatus()">
-        Update
-      </button>
-    </div>
-  </div>
-</ng-template>
 
 <ng-template #Document let-modal class="modal-xl">
   <div class="modal-header" style="background: #f88379">

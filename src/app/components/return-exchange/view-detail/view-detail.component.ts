@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReturnExchangeService } from 'src/app/shared/service/return-exchange-service/return-exchange.service';
 import { CommonService } from 'src/app/shared/service/common.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-view-detail',
@@ -24,38 +25,6 @@ export class ViewDetailComponent implements OnInit {
   public total: number;
   public img: string = 'assets/images/user.png';
 
-  public dummyData = {
-    'order id': '#51240',
-    products: [
-      {
-        name: 'Product 1',
-        qty: 2,
-        price: 10,
-        img: 'assets/images/digital-product/product-1.png',
-      },
-      {
-        name: 'Product 2',
-        qty: 1,
-        price: 20,
-        img: 'assets/images/digital-product/product-2.png',
-      },
-      {
-        name: 'Product 3',
-        qty: 3,
-        price: 30,
-        img: 'assets/images/digital-product/product-4.png',
-      },
-    ],
-    type: 'Exchange',
-    requested_on: 'Dec 10,18',
-    remarks: 'Mismatch items',
-    total: 54671,
-    user_info: {
-      name: 'John Doe',
-      contact: '714-508-5350',
-      address: '17601 N Thomas Hill Rd, Sturgeon, MO, 65284',
-    },
-  };
   public selectedLang: string = 'en';
 
   public orderId;
@@ -111,32 +80,12 @@ export class ViewDetailComponent implements OnInit {
         this.order = res.body;
         this.cs.isLoading.next(false);
         this.fetching = false;
+        this.total = this.order.totalAmount
       }
     });
   }
 
-  changeTotal(content) {
-    // this.total = Number(this.dummyData.total);
-    this.open(content);
-  }
 
-  updateTotal() {
-    this.dummyData.total = this.dummyData.total + this.total;
-    this.modalService.dismissAll('save button clicked');
-  }
-
-  changeStatus(content) {
-    this.open(content);
-  }
-
-  updateStatus() {
-    // this.dummyData.order_status = this.status
-    this.modalService.dismissAll('save button clicked');
-  }
-
-  changeShipmentMethod(content) {
-    this.open(content);
-  }
 
   //FileUpload
   readUrlSizeImg(event: any) {
@@ -166,5 +115,15 @@ export class ViewDetailComponent implements OnInit {
     console.log('💻=refundreason', this.refund_reason);
     console.log('💻=reason', this.reason);
     console.log('💻=tracknumber', this.trackingNumber);
+    let data = {
+      refundReason: this.refund_reason,
+      refundAmountApproved: this.total,
+      trackingNumber: this.trackingNumber
+    }
+    console.log("data-00--", data);
+  }
+
+  getFormatDate(date) {
+    return moment(date).format('MMM DD,YY');
   }
 }

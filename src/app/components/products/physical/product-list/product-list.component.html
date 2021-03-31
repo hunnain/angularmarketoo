@@ -92,8 +92,12 @@
             <a href="javascript:void(0)">
               <h6>{{ product.product_title }}</h6>
             </a>
-            <h4>
-              {{ product.discount }} <del>{{ product.price }}</del>
+            <h4 *ngIf="product?.markdownPrice">
+              {{ product.price | discount: product }}
+              <del>{{ product.price }}</del>
+            </h4>
+            <h4 *ngIf="!product?.markdownPrice">
+              {{ product.price }}
             </h4>
             <h6>
               <span class="badge" [ngClass]="statusColor(product.status)">{{
