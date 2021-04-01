@@ -96,6 +96,7 @@
   "sidebar_Coupons": "優惠卷",
   "sidebar_List_Coupons": "列出優惠卷",
   "sidebar_Create_Coupons": "新增優惠卷",
+  "sidebar_Notification": "通知事項",
   "create_Store_Credit": "新增積分",
   "coupon_duedate": "限期",
   "coupon_startDate": "開始日期",
@@ -594,5 +595,11 @@
   "Refer Code": "參考代碼",
   "Generate Code": "產生程式碼",
 
-  "search_term": "Search"
+  "search_term": "搜索",
+
+  "Type":"類型",
+  "Created On":"創建於",
+  "Text":"文本",
+  "Sender":"發件人",
+  "Action":"行動"
 }

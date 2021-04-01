@@ -69,65 +69,30 @@
         <li class="onhover-dropdown">
           <span
             class="badge badge-pill badge-primary pull-right notification-badge"
-            >3</span
+            *ngIf="signalRService.notifications.length"
+            >{{ signalRService.notifications.length }}</span
           >
-          <app-feather-icons [icon]="'bell'"></app-feather-icons
-          ><span class="dot"></span>
+          <app-feather-icons [icon]="'bell'"></app-feather-icons>
+          <span class="dot" *ngIf="signalRService.notifications.length"></span>
           <ul class="notification-dropdown onhover-show-div">
             <li>
               Notification
-              <span class="badge badge-pill badge-primary pull-right">3</span>
+              <span
+                class="badge badge-pill badge-primary pull-right"
+                *ngIf="signalRService.notifications.length"
+                >{{ signalRService.notifications.length }}</span
+              >
             </li>
-            <li>
+            <li *ngFor="let notif of signalRService.notifications">
               <div class="media">
                 <div class="media-body">
-                  <h6 class="mt-0">
-                    <span>
-                      <app-feather-icons
-                        class="shopping-color"
-                        [icon]="'shopping-bag'"
-                      >
-                      </app-feather-icons> </span
-                    >Your order ready for Ship..!
-                  </h6>
-                  <p class="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="media">
-                <div class="media-body">
-                  <h6 class="mt-0 txt-success">
-                    <span>
-                      <app-feather-icons
-                        class="download-color font-success"
-                        [icon]="'download'"
-                      >
-                      </app-feather-icons> </span
-                    >Download Complete
-                  </h6>
-                  <p class="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="media">
-                <div class="media-body">
-                  <h6 class="mt-0 txt-danger">
-                    <span>
-                      <app-feather-icons
-                        class="alert-color font-danger"
-                        [icon]="'alert-circle'"
-                      >
-                      </app-feather-icons> </span
-                    >250 MB trash files
-                  </h6>
-                  <p class="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p>
+                  <h6 class="mt-0">{{ formatType(notif?.Type) }}</h6>
+                  <p class="mb-0">{{ notif?.Text }}</p>
                 </div>
               </div>
             </li>
             <li class="txt-dark">
-              <a href="javascript:void(0)">All</a> notification
+              <a [routerLink]="'/notification'">All notifications</a>
             </li>
           </ul>
         </li>

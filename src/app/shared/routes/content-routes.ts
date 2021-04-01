@@ -150,4 +150,12 @@ export const content: Routes = [
       breadcrumb: 'Refer',
     },
   },
+  {
+    path: 'notification',
+    loadChildren: () =>
+      import('../../components/notification/notification.module').then((m) => m.NotificationModule),
+    data: {
+      breadcrumb: 'Notification',
+    },
+  },
 ];

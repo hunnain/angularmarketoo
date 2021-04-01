@@ -1,5 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CommonService } from '../common.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,9 +8,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class NotificationService {
 
   constructor(
+    private cs: CommonService,
     public snackBar: MatSnackBar,
     private zone: NgZone
   ) { }
+
+  getNotifications(query = "") {
+    return this.cs.get(`notifications/get-notifications?${query}`);
+  }
 
   showSuccess(message: string): void {
     this.zone.run(() => {

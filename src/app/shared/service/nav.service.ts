@@ -126,6 +126,14 @@ export class NavService {
       badgeType: 'primary',
       active: false,
     },
+    {
+      path: '/notification',
+      title: 'sidebar_Notification',
+      icon: 'bell',
+      type: 'link',
+      badgeType: 'primary',
+      active: false,
+    },
     // {
     //   title: 'sidebar_Boosting',
     //   icon: 'trending-up',

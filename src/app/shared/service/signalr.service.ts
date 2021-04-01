@@ -20,6 +20,7 @@ export class SignalrService {
   private ChatHub: HubConnection
   private NotificationsHub: HubConnection
   public messages: any[] = [];
+  public notifications: any[] = [];
   public onlineUsers: any[] = [];
 
   isConnected: EventEmitter<boolean> = new EventEmitter(false);
@@ -159,9 +160,14 @@ export class SignalrService {
     this.NotificationsHub.on("ReceiveNotifications", (res) => {
       console.log("ReceiveNotifications", res);
       if (res) {
+        this.notifications.push(res);
         this.toastrService.success(res.Text, res.Type);
       }
     })
+  }
+
+  public resetNotifications() {
+    this.notifications = [];
   }
 }
 

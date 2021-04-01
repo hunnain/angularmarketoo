@@ -1,0 +1,102 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>{{ "sidebar_Notification" | translate }}</h5>
+        </div>
+        <div class="card-body">
+          <div
+            style="display: flex; align-items: center; justify-content: center"
+          >
+            <app-loader [loading]="loading"></app-loader>
+          </div>
+          <div class="custom-datatable" *ngIf="!loading">
+            <ngx-datatable
+              class="bootstrap responsive-table"
+              [rows]="notifications"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [rowHeight]="'auto'"
+            >
+              <ngx-datatable-column name="{{ 'Type' | translate }}" prop="type">
+                <ng-template
+                  let-row="row"
+                  let-value="value"
+                  ngx-datatable-cell-template
+                >
+                  {{ formatType(value) }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'Created On' | translate }}"
+                prop="creationTime"
+              >
+                <ng-template
+                  let-row="row"
+                  let-value="value"
+                  ngx-datatable-cell-template
+                >
+                  {{ getFormatDate(value) }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'Text' | translate }}"
+                prop="text"
+              ></ngx-datatable-column>
+              <ngx-datatable-column
+                name="{{ 'Sender' | translate }}"
+                prop="sender"
+              >
+                <ng-template
+                  let-row="row"
+                  let-value="value"
+                  ngx-datatable-cell-template
+                >
+                  {{ value.name }}
+                </ng-template>
+              </ngx-datatable-column>
+              <!-- <ngx-datatable-column
+                name="{{ 'returnexchange_action' | translate }}"
+                sortable="false"
+                prop="id"
+              >
+                <ng-template
+                  let-row="row"
+                  let-value="value"
+                  ngx-datatable-cell-template
+                >
+                  <span style="color: #f88379; cursor: pointer">
+                    <i class="fa fa-eye" (click)="onSelectRow(value)"></i>
+                  </span>
+                </ng-template>
+              </ngx-datatable-column> -->
+              <ngx-datatable-footer>
+                <ng-template ngx-datatable-footer-template>
+                  <div
+                    class="pagination"
+                    *ngIf="!loading"
+                    style="margin-bottom: 10px; width: -webkit-fill-available"
+                  >
+                    <mat-paginator
+                      style="width: -webkit-fill-available"
+                      [pageIndex]="pagination.CurrentPage - 1"
+                      [length]="pagination.TotalCount"
+                      [pageSize]="pagination.PageSize"
+                      [pageSizeOptions]="pageSizeOptions"
+                      (page)="pageEvent($event)"
+                    >
+                    </mat-paginator>
+                  </div>
+                </ng-template>
+              </ngx-datatable-footer>
+            </ngx-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Container-fluid Ends-->

@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthServiceService } from '../../service/auth-service/auth-service.service';
 import { NavService } from '../../service/nav.service';
+import { PushNotificationService } from '../../service/pushNotification.service';
+import { SignalrService } from '../../service/signalr.service';
 
 @Component({
   selector: 'app-header',
@@ -32,7 +34,9 @@ export class HeaderComponent implements OnInit {
     private authService: AuthServiceService,
     @Inject(PLATFORM_ID) private platformId: Object,
     private translate: TranslateService,
-    private router: Router
+    private router: Router,
+    public signalRService: SignalrService,
+    private pnService: PushNotificationService
   ) {
     let userInfo = JSON.parse(localStorage.getItem('userInfo'));
     if (userInfo.imageUrl) {
@@ -64,8 +68,17 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     this.authService.logout().subscribe((res) => {
       this.router.navigate(['/auth/login']);
+      if (res && this.pnService.pushNotificationStatus.isSubscribed) {
+        this.pnService.unsubscribeUser();
+      }
+
     });
   }
 
   ngOnInit() { }
+
+  formatType(type) {
+    let formattedType = type.match(/[A-Z][a-z]+|[0-9]+/g).join(" ")
+    return formattedType;
+  }
 }

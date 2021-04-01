@@ -4,6 +4,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { map, delay, withLatestFrom } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { SignalrService } from './shared/service/signalr.service';
+import { PushNotificationService } from './shared/service/pushNotification.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent {
     @Inject(PLATFORM_ID) private platformId: Object,
     // private loader: LoadingBarService,
     translate: TranslateService,
-    private srService: SignalrService
+    private srService: SignalrService,
+    private pnService: PushNotificationService,
   ) {
     if (isPlatformBrowser(this.platformId)) {
       translate.setDefaultLang('en');
@@ -27,6 +29,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.createConnection();
+    this.pnService.init();
   }
 
   ngOnDestory() {

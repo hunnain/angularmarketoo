@@ -94,6 +94,7 @@
   "sidebar_Coupons": "Coupons",
   "sidebar_List_Coupons": "List Coupons",
   "sidebar_Create_Coupons": "Create Coupons",
+  "sidebar_Notification": "Notifications",
   "create_Store_Credit": "Create Store Credit",
   "coupon_duedate": "Due Date",
   "coupon_startDate": "Start Date",
@@ -592,5 +593,11 @@
   "exam_highlight": "We will refund you for clicks that were not generated.",
 
 
-  "search_term":"Search"
+  "search_term":"Search",
+
+  "Type":"Type",
+  "Created On":"Created On",
+  "Text":"Text",
+  "Sender":"Sender",
+  "Action":"Action"
 }

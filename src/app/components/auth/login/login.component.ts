@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthServiceService } from 'src/app/shared/service/auth-service/auth-service.service';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/shared/service/common.service';
+import { PushNotificationService } from 'src/app/shared/service/pushNotification.service';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
     private translate: TranslateService,
     private router: Router,
     private cs: CommonService,
+    private pnService: PushNotificationService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.createLoginForm();
@@ -60,6 +62,9 @@ export class LoginComponent implements OnInit {
         this.cs.isLoading.next(false)
         this.loading = false;
         // console.log(res, 'success');
+        if (res && !this.pnService.pushNotificationStatus.isSubscribed) {
+          this.pnService.subscribeUser();
+        }
         localStorage.setItem('userInfo', JSON.stringify(res));
         localStorage.setItem('accessToken', res['accessToken']);
         localStorage.setItem('refreshToken', res['refreshToken']);

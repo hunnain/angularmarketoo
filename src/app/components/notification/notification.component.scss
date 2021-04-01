@@ -1,0 +1,25 @@
+// Responsive Table CSS //
+/*
+	Max width before this PARTICULAR table gets nasty. This query will take effect for any screen smaller than 760px and also iPads specifically.
+	*/
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px) {
+  ::ng-deep .responsive-table {
+    .datatable-body-cell:nth-of-type(1):before {
+      content: "Type";
+    }
+    .datatable-body-cell:nth-of-type(2):before {
+      content: "Created On";
+    }
+    .datatable-body-cell:nth-of-type(3):before {
+      content: "Text";
+    }
+    .datatable-body-cell:nth-of-type(4):before {
+      content: "Sender";
+    }
+    // .datatable-body-cell:nth-of-type(5):before {
+    //   content: "Action";
+    // }
+  }
+}
+// Responsive Table CSS End  //

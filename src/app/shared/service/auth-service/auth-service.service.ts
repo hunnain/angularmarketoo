@@ -37,6 +37,7 @@ export class AuthServiceService {
         console.log("log2", res)
         localStorage.clear();
         this.commonService.isLoading.next(false);
+        return res;
       }
     }));
   }
