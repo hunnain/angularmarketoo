@@ -46,9 +46,11 @@ export class PushNotificationService {
             this.pushNotificationStatus.isSupported = false;
         }
 
-        navigator.serviceWorker.addEventListener('message', (event) => {
-            this.notifications.push(event.data);
-        });
+        if (navigator && navigator.serviceWorker) {
+            navigator.serviceWorker.addEventListener('message', (event) => {
+                this.notifications.push(event.data);
+            });
+        }
     }
 
     checkSubscription() {
