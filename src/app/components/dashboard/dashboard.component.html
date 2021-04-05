@@ -137,9 +137,12 @@
               ></app-feather-icons>
               <span>{{ "dash_export_report" | translate }}</span>
             </span>
-            <span *ngIf="generating">
-              <i class="fa fa-circle-o-notch fa-spin"></i>
-            </span>
+
+            <i
+              class="fa fa-circle-o-notch fa-spin"
+              style="font-family: 'FontAwesome' !important "
+              *ngIf="generating"
+            ></i>
           </div>
         </div>
 
