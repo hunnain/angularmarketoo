@@ -3,7 +3,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Image } from '@ks89/angular-modal-gallery';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ReturnExchangeService } from 'src/app/shared/service/return-exchange-service/return-exchange.service';
 import { CommonService } from 'src/app/shared/service/common.service';
 import * as moment from 'moment';
@@ -21,6 +21,8 @@ export class ViewDetailComponent implements OnInit {
   public reason: string;
   public trackingNumber: number;
   public reasonDesc: string;
+  public reason_type: string;
+  public courier: string;
 
   public total: number;
   public img: string = 'assets/images/user.png';
@@ -30,12 +32,14 @@ export class ViewDetailComponent implements OnInit {
   public orderId;
   public order;
   public fetching: boolean = false;
+  public loading: boolean = false;
   constructor(
     private modalService: NgbModal,
     private translate: TranslateService,
     private returnService: ReturnExchangeService,
     private cs: CommonService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.selectedLang = this.translate.currentLang;
     this.translate.onLangChange.subscribe((res) => {
@@ -46,6 +50,11 @@ export class ViewDetailComponent implements OnInit {
       this.orderId = this.activeRoute.params['value'].id;
       this.fetchReturnOrderById(this.orderId);
     }
+
+    this.cs.isLoading.subscribe(res => {
+      this.loading = res;
+      this.fetching = res;
+    })
   }
 
   open(content) {
@@ -112,15 +121,30 @@ export class ViewDetailComponent implements OnInit {
   }
 
   submitReturn() {
-    console.log('💻=refundreason', this.refund_reason);
-    console.log('💻=reason', this.reason);
-    console.log('💻=tracknumber', this.trackingNumber);
     let data = {
-      refundReason: this.refund_reason,
       refundAmountApproved: this.total,
-      trackingNumber: this.trackingNumber
+      // trackingNumber: this.trackingNumber,
+      // courier: this.courier
+    }
+
+    if (this.courier && this.trackingNumber) {
+      data['courier'] = this.courier;
+      data['trackingNumber'] = this.trackingNumber;
+    }
+
+    if (this.reason_type === 'Refund') {
+      data['refundReason'] = this.refund_reason
+    } else if (this.reason_type === 'Reject') {
+      data['rejectReason'] = this.reason
     }
     console.log("data-00--", data);
+    this.loading = true;
+    this.returnService.updateReturnOrder(this.orderId, data).subscribe(res => {
+      this.loading = false;
+      if (res) {
+        this.router.navigate(['/return-exchange'])
+      }
+    })
   }
 
   getFormatDate(date) {

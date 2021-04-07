@@ -16,6 +16,6 @@ export class ReturnExchangeService {
   }
 
   updateReturnOrder(id, data) {
-    return this.commonService.put(`return-exchange/refund-or-reject-return-exchange/${id}`, data);
+    return this.commonService.post(`return-exchange/refund-or-reject-return-exchange/${id}`, data);
   }
 }

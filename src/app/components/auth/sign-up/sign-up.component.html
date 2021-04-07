@@ -216,15 +216,14 @@
                               sellerForm.controls['sellerIdentity']
                             "
                           >
-                            <option value="1">
-                              Full Time Designer / Handicraftsman
+                            <option
+                              [value]="opt"
+                              *ngFor="
+                                let opt of getObjectKeys(yourIdentityOpts)
+                              "
+                            >
+                              {{ yourIdentityOpts[opt] }}
                             </option>
-                            <option value=" 2">
-                              Freelancing Designer /Handicraftsman
-                            </option>
-                            <option value="3">Design Corporation</option>
-                            <option value="4">Authorised Distributor</option>
-                            <option value="5">Other</option>
                           </select>
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
@@ -236,16 +235,14 @@
                             id="sell_product_before"
                             [formControl]="sellerForm.controls['hdySellBefore']"
                           >
-                            <option value="1">Store</option>
-                            <option value=" 2">Market</option>
-                            <option value="3">Consignment Shop</option>
-                            <option value="4">
-                              Shopping sites (such as Etsy, Pinkoi, Caurosell)
-                              Shopping sites
+                            <option
+                              [value]="opt"
+                              *ngFor="
+                                let opt of getObjectKeys(sellProductBeforeOpts)
+                              "
+                            >
+                              {{ sellProductBeforeOpts[opt] }}
                             </option>
-                            <option value="5">Facebook/Instagram</option>
-                            <option value="6">None</option>
-                            <option value="other">Other</option>
                           </select>
                         </div>
                       </div>
@@ -261,18 +258,14 @@
                               sellerForm.controls['hdyHearAbtMarketoo']
                             "
                           >
-                            <option value="1">
-                              Marketoo Designers’ Refer （please specify
-                              Designer’s URL)
+                            <option
+                              [value]="opt"
+                              *ngFor="
+                                let opt of getObjectKeys(hearAboutOptions)
+                              "
+                            >
+                              {{ hearAboutOptions[opt] }}
                             </option>
-                            <option value=" 2">Invited by Marketoo</option>
-                            <option value="3">Google</option>
-                            <option value="4">Newspapers/ Magazines</option>
-                            <option value="5">Facebook/Instagram</option>
-                            <option value="6">
-                              Introduced by family/ friends
-                            </option>
-                            <option value="other">Other</option>
                           </select>
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
@@ -432,10 +425,14 @@
                               brandForm.controls['productCategory']
                             "
                           >
-                            <option value="1">Original Design</option>
-                            <option value="2">Authorised Sales</option>
-                            <option value="3">Workshop</option>
-                            <option value="4">Other</option>
+                            <option
+                              [value]="opt"
+                              *ngFor="
+                                let opt of getObjectKeys(productCategoryOpts)
+                              "
+                            >
+                              {{ productCategoryOpts[opt] }}
+                            </option>
                           </select>
                         </div>
                         <div class="col-xl-6 col-sm-12 mb-0">
@@ -523,7 +520,7 @@
                             "
                           >
                             <option value="1">&#60;HK$100</option>
-                            <option value=" 2">HK$100-300</option>
+                            <option value="2">HK$100-300</option>
                             <option value="3">HK$300-500</option>
                             <option value="4">HK$500-1000</option>
                             <option value="5">&#62;HK$1000</option>
@@ -577,23 +574,19 @@
                 </form>
               </div>
               <div class="agreement mt-4 p-4">
-                <h6 style="font-weight: bold">When will i hear back?</h6>
+                <h6 style="font-weight: bold">
+                  {{ "When will i hear back?" | translate }}
+                </h6>
                 <p>
-                  Marketoo is a curated marketplace. We evaluate all
-                  applications carefully. We will notify you of the results
-                  within 7-10 business days. If you do not hear from us after 10
-                  business days, feel free to email us at admin@marketoo.hk with
-                  your name,brand name, and email address. Please check your
-                  spam box before emailing us!
+                  {{ "when_will_here_answer" | translate }}
                 </p>
                 <p class="mt-3 mb-0" style="margin-bottom: 0px">
-                  I understand how shops and Marketoo work together and our
-                  shared responsibilities.
+                  {{ "understand_line" | translate }}
                 </p>
                 <a
                   href="https://marketoo.hk/page/sellersignuppolicy"
                   target="_blank"
-                  >Seller Sign Up Policy</a
+                  >{{ "Seller Sign Up Policy" | translate }}</a
                 >
                 <div class="form-terms mt-2">
                   <div class="custom-control custom-checkbox mr-sm-2">

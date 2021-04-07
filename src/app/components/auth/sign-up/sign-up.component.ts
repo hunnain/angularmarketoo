@@ -38,6 +38,50 @@ export class SignUpComponent implements OnInit {
   ]
 
 
+  public hearAboutOptions = {
+    1: "Marketoo Designers’ Refer （please specify Designer’s URL)",
+    2: "Invited by Marketoo",
+    3: "Google",
+    4: "Newspapers/ Magazines",
+    5: "Facebook/Instagram",
+    6: "Introduced by family/ friends",
+    7: "Other"
+  }
+
+  public sellProductBeforeOpts = {
+    1: "Store",
+    2: "Market",
+    3: "Consignment Shop",
+    4: "Shopping sites (such as Etsy, Pinkoi, Caurosell) Shopping sites",
+    5: "Facebook/Instagram",
+    6: "None",
+    7: "Other"
+  }
+
+  public yourIdentityOpts = {
+    1: "Full Time Designer / Handicraftsman",
+    2: "Freelancing Designer /Handicraftsman",
+    3: "Design Corporation",
+    4: "Authorised Distributor",
+    5: "Other"
+  }
+
+  public productCategoryOpts = {
+    1: "Original Design",
+    2: "Authorised Sales",
+    3: "Workshop",
+    4: "Other"
+  }
+
+  public averageProductPriceOpts = {
+    1: "&#60;HK$100",
+    2: "HK$100-300",
+    3: "HK$300-500",
+    4: "HK$500-1000",
+    5: "&#62;HK$1000"
+  }
+
+  public getObjectKeys = Object.keys;
   constructor(private fb: FormBuilder,
     private authService: AuthServiceService,
     private router: Router,
@@ -148,22 +192,18 @@ export class SignUpComponent implements OnInit {
       isAgree: this.agree
 
     }
-    this.loading = true;
-    this.authService.signUp(data).subscribe(
-      (res) => {
-        if (res) {
-          // console.log(res, 'response');
-          this.cs.isLoading.next(false)
-          this.loading = false;
-          this.router.navigate(['/login'])
-        }
-      }
-      // ,
-      // (error) => {
-      //   console.log(error, 'error');
-      //   this.loading = false;
-      // }
-    );
+    console.log("data", data)
+    // this.loading = true;
+    // this.authService.signUp(data).subscribe(
+    //   (res) => {
+    //     if (res) {
+    //       // console.log(res, 'response');
+    //       this.cs.isLoading.next(false)
+    //       this.loading = false;
+    //       this.router.navigate(['/login'])
+    //     }
+    //   }
+    // );
   }
 
 

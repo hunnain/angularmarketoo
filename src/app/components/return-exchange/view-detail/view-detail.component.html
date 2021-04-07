@@ -69,13 +69,43 @@
                     </div>
                   </li>
                 </ul>
+                <hr />
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <b>Requested Reason:</b>{{ order.requestReason }}
+                </div>
+                <div class="col-12 col-md-6">
+                  <b>Requested Solution:</b>{{ order.solution }}
+                </div>
+                <div class="col-12 col-md-6 mt-2">
+                  <b>Status:</b>{{ order.status }}
+                </div>
               </div>
             </div>
             <div style="margin-top: 30px">
               <h4 class="product-title">{{ "re_refund_rej" | translate }}</h4>
               <hr />
               <div style="margin-top: 20px">
-                <div>
+                <div class="mb-2">
+                  <label for="reasonType">{{
+                    "re_reason_type" | translate
+                  }}</label>
+                  <select
+                    class="form-control"
+                    id="reasonType"
+                    [(ngModel)]="reason_type"
+                    name="reason_type"
+                  >
+                    <option value="Refund">
+                      {{ "Refund" | translate }}
+                    </option>
+                    <option value="Reject">
+                      {{ "Reject" | translate }}
+                    </option>
+                  </select>
+                </div>
+                <div *ngIf="reason_type === 'Refund'">
                   <label for="refund_reason">{{
                     "re_refunf_reason" | translate
                   }}</label>
@@ -96,10 +126,10 @@
                     </option>
                   </select>
                 </div>
-                <div class="font-size-13">
+                <div class="font-size-13" *ngIf="reason_type === 'Refund'">
                   <p>{{ "re_refund_reason_detail" | translate }}</p>
                 </div>
-                <div style="margin-top: 10px">
+                <div style="margin-top: 10px" *ngIf="reason_type === 'Reject'">
                   <label for="reject_reason">{{
                     "re_rej_reason" | translate
                   }}</label>
@@ -129,7 +159,12 @@
             </div>
             <div style="margin-top: 20px">
               <div class="input-group mb-2">
-                <input type="text" class="form-control" />
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="courier"
+                  name="courier"
+                />
               </div>
             </div>
             <div style="margin-top: 20px">
@@ -170,13 +205,19 @@
             </div>
             <div class="row" style="margin-top: 30px">
               <div class="col-12 col-sm-12" style="text-align: center">
-                <button
-                  class="btn btn-primary"
-                  type="button"
-                  (click)="submitReturn()"
-                >
-                  {{ "re_refund" | translate }} ${{ total }}
-                </button>
+                <app-button
+                  [loading]="loading"
+                  [disabled]="
+                    (reason_type == 'Refund' ? !refund_reason : !reason) ||
+                    courier
+                      ? !trackingNumber
+                      : false || trackingNumber
+                      ? !courier
+                      : false
+                  "
+                  [btnText]="'re_refund'"
+                  (onSubmit)="submitReturn()"
+                ></app-button>
               </div>
               <div class="col-12 col-sm-12" style="margin-top: 10px">
                 <p style="margin-bottom: 5px">
