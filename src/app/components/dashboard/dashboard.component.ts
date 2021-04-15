@@ -114,10 +114,22 @@ export class DashboardComponent implements OnInit {
     revenueCompareDesc: '0% Increase',
     totalActiveProducts: 0
   };
+  profitChartData = [{ data: [] }];
+  basketChartData = [{ data: [] }];
+  followerChartData = [{ data: [] }];
+  profitChartLabels = [];
+  basketChartLabels = [];
+  followerChartLabels = [];
   fetchReport() {
     this.dashboardService.getReports().subscribe(res => {
       if (res && res['body']) {
         this.report = res['body'];
+        this.profitChartData = [{ data: Object.values(this.report.netProfitDayWise) }]
+        this.basketChartData = [{ data: Object.values(this.report.avgBaskedValueDayWise) }]
+        this.followerChartData = [{ data: Object.values(this.report.followersDayWise) }]
+        this.profitChartLabels = Object.keys(this.report.netProfitDayWise)
+        this.basketChartLabels = Object.keys(this.report.avgBaskedValueDayWise)
+        this.followerChartLabels = Object.keys(this.report.followersDayWise)
       }
     })
   }
