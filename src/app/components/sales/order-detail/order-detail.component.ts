@@ -116,9 +116,23 @@ export class OrderDetailComponent implements OnInit {
     this.open(content);
   }
 
+  updatingTotal: boolean = false;
   updateTotal() {
-    this.dummyData.total = this.dummyData.total + this.total;
-    this.modalService.dismissAll('save button clicked');
+    this.updatingTotal = true;
+    let data = {
+      amount: this.total,
+      reason: this.reason === 'other' ? this.reasonDesc : this.reason,
+      orderId: this.orderId
+    }
+    this.orderService.updateOrderTotal(data).subscribe(res => {
+      this.updatingTotal = false;
+      if (res) {
+        this.fetchOrderById(this.orderId);
+        this.total = undefined;
+        this.reason = undefined
+        this.modalService.dismissAll('save button clicked');
+      }
+    })
   }
 
   changeStatus(content) {
@@ -152,7 +166,7 @@ export class OrderDetailComponent implements OnInit {
 
   openInvoice(content) {
     console.log(content);
-
+    // this.invoiceContent = content.elementRef;
     this.open(content);
   }
 
@@ -191,5 +205,52 @@ export class OrderDetailComponent implements OnInit {
       this.loading = false;
       this.modalService.dismissAll('save button clicked');
     });
+  }
+
+  shipLog = {
+    sfExpress: false,
+    HKPost: false,
+    ECShipment: false
+  }
+
+  showLog(type, bool) {
+    for (let key in this.shipLog) {
+      if (key === type) this.shipLog[key] = bool;
+      else if (bool) this.shipLog[key] = !bool;
+    }
+  }
+
+
+  invoiceContent;
+  printInvoice() {
+    // let doc = new jsPDF();
+    // let doc = new jsPDF('p', 'mm', [297, 210]);
+    // console.log(this.invoiceContent);
+    // doc.html(document.getElementById('invoice-container'), {
+    //   filename: 'Order-Invoice',
+    //   callback: (pdf) => {
+    //     console.log('Callback')
+    //     pdf.save()
+    //   },
+    //   x: 10,
+    //   y: 10,
+    // })
+
+    // const pdfTable = document.getElementById('invoice-container');
+
+    // doc.html(pdfTable.innerHTML, {
+    //   x: 0, y: 10,
+    //   filename: 'Order-Invoice',
+    //   html2canvas: {
+    //     scale: 0.2,
+    //   },
+    //   callback: (pdf) => {
+    //     console.log('Callback')
+    //     pdf.save('tableToPdf.pdf')
+    //   },
+    // }
+    // );
+
+    // doc.save('tableToPdf.pdf');
   }
 }

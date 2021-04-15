@@ -24,4 +24,7 @@ export interface Report {
     revenueLastMonth: number;
     totalActiveProducts: number;
     revenueCompareDesc: string;
+    netProfitDayWise?: Object;
+    avgBaskedValueDayWise?: Object;
+    followersDayWise?: Object;
 }

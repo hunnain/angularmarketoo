@@ -278,6 +278,7 @@
                 type="button"
                 ngbTooltip="print"
                 placement="bottom"
+                (click)="printInvoice()"
               >
                 <app-feather-icons
                   [icon]="'printer'"
@@ -402,9 +403,13 @@
       </div>
     </div>
     <div class="action">
-      <button class="btn btn-primary" type="button" (click)="updateTotal()">
-        Update
-      </button>
+      <app-button
+        [btnType]="'submit'"
+        [loading]="updatingTotal"
+        [disabled]="updatingTotal || !total || !reason"
+        [btnText]="'Update'"
+        (onSubmit)="updateTotal()"
+      ></app-button>
     </div>
   </div>
 </ng-template>
@@ -489,6 +494,12 @@
             <a href="https://www.sf-express.com/hk/tc/" target="_blank"
               >SF Express</a
             >
+            <span
+              class="ml-2 show-log"
+              (click)="showLog('sfExpress', !shipLog.sfExpress)"
+              >(show log)</span
+            ><br />
+            <span *ngIf="shipLog.sfExpress">email, password</span>
           </li>
           <li>
             <a
@@ -496,6 +507,12 @@
               target="_blank"
               >HK Post</a
             >
+            <span
+              class="ml-2 show-log"
+              (click)="showLog('HKPost', !shipLog.HKPost)"
+              >(show log)</span
+            ><br />
+            <span *ngIf="shipLog.HKPost">email, password</span>
           </li>
           <li>
             <a
@@ -503,6 +520,12 @@
               target="_blank"
               >EC Shipment</a
             >
+            <span
+              class="ml-2 show-log"
+              (click)="showLog('ECShipment', !shipLog.ECShipment)"
+              >(show log)</span
+            ><br />
+            <span *ngIf="shipLog.ECShipment">email, password</span>
           </li>
         </ol>
       </div>
@@ -554,7 +577,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <div class="main-container">
+    <div id="invoice-container" class="main-container">
       <div class="header">
         <img src="assets/images/Marketoo.png" alt="marketoo_logo" />
         <p class="company-name">MARKETOO LIMITED</p>
@@ -612,8 +635,20 @@
     </div>
   </div>
   <!-- <div class="action">
-            <button class="btn btn-primary" type="button" (click)="updateStatus()">Update</button>
-        </div> -->
+    <button
+      class="btn btn-custom col-12 col-sm-3"
+      type="button"
+      ngbTooltip="print"
+      placement="bottom"
+      (click)="printInvoice()"
+    >
+      <app-feather-icons
+        [icon]="'printer'"
+        class="font-primary"
+        style="color: #fff !important"
+      ></app-feather-icons>
+    </button>
+  </div> -->
 </ng-template>
 
 <ng-template #msgModal let-modal>
