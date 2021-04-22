@@ -25,6 +25,10 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule),
   },
+  {
+    path: '**', // Navigate to Login Page if not found any page
+    redirectTo: 'auth/login',
+  },
 ];
 
 @NgModule({
