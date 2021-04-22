@@ -10,7 +10,8 @@ self.addEventListener('push', function (event) {
         body: data.Text,
         icon: 'assets/push.png',
         badge: 'assets/push.png',
-        data: data.Url
+        // data: data.Url
+        data: '/notification'
     };
 
     const promiseChain = self.registration.showNotification(title, options);
