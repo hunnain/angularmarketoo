@@ -193,17 +193,17 @@ export class SignUpComponent implements OnInit {
 
     }
     console.log("data", data)
-    // this.loading = true;
-    // this.authService.signUp(data).subscribe(
-    //   (res) => {
-    //     if (res) {
-    //       // console.log(res, 'response');
-    //       this.cs.isLoading.next(false)
-    //       this.loading = false;
-    //       this.router.navigate(['/login'])
-    //     }
-    //   }
-    // );
+    this.loading = true;
+    this.authService.signUp(data).subscribe(
+      (res) => {
+        if (res) {
+          // console.log(res, 'response');
+          this.cs.isLoading.next(false)
+          this.loading = false;
+          this.router.navigate(['/login'])
+        }
+      }
+    );
   }
 
 
