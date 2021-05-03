@@ -602,5 +602,7 @@
   "Created On":"Created On",
   "Text":"Text",
   "Sender":"Sender",
-  "Action":"Action"
+  "Action":"Action",
+
+  "Please_upload_images_by_clicking_the_icon": "Please upload images by clicking the icon"
 }

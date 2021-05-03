@@ -50,7 +50,7 @@
                       class="form-control field-margin"
                       placeholder="{{ 'ref_desc' | translate }}"
                       rows="6"
-                    ></textarea>
+                    >{{sellerReferCode}}</textarea>
                     <!-- </div> -->
                     <div style="margin-top: 20px">
                       <button type="button" class="btn btn-primary full-width">
@@ -71,16 +71,16 @@
                 <ng-template ngbTabContent>
                   <div class="account-setting"></div>
                 </ng-template>
-              </ngb-tab>
-              <ngb-tab>
+              </ngb-tab> 
+              <!-- <ngb-tab>
                 <ng-template ngbTabTitle>
-                  <app-feather-icons [icon]="'twitter'"></app-feather-icons>
+                  <app-feather-icons [icon]="'twitter'"></app-feather-icons> -->
                   <!-- <i data-feather="facebook"></i> -->
-                </ng-template>
+                <!-- </ng-template>
                 <ng-template ngbTabContent>
                   <div class="account-setting"></div>
                 </ng-template>
-              </ngb-tab>
+              </ngb-tab> -->
             </ngb-tabset>
           </form>
         </div>

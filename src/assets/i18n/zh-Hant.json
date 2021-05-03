@@ -607,5 +607,7 @@
   "Created On":"創建於",
   "Text":"文本",
   "Sender":"發件人",
-  "Action":"行動"
+  "Action":"行動",
+
+  "Please_upload_images_by_clicking_the_icon": "請點擊圖標上傳圖片"
 }

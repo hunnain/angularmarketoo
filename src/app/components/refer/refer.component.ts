@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class ReferComponent implements OnInit {
   public userForm: FormGroup;
   public closeResult: string;
+  public sellerReferCode: String;
   public selectedLang: string = 'en';
   constructor(
     private fb: FormBuilder,
@@ -29,6 +30,8 @@ export class ReferComponent implements OnInit {
       description_1: [''],
       description_2: [''],
     });
+    let localdata = JSON.parse(localStorage.getItem('userInfo'));
+    this.sellerReferCode = "Here is your Referral Code " + localdata.referSeller;
 
     this.selectedLang = this.translate.currentLang;
     this.translate.onLangChange.subscribe((res) => {
