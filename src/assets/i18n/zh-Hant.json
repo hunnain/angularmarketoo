@@ -153,6 +153,7 @@
   "ordermanagement_ordercustomerinvoiceno": "訂單編號",
   "ordermanagement_ordercustomershippingmethod": "郵寄方式",
   "ordermanagement_ordercustomershippingmethodchange": "更改",
+  "ordermanagement_ordercustomershippingmethodAdd": "添加",
   "ordermanagement_ordercustomershippingaddress": "郵寄地址",
   "ordermanagement_ordercustomerproducts": "購買產品",
   "ordermanagement_ordercustomersummary": "訂單概況",

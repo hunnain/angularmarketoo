@@ -109,14 +109,16 @@
                   "ordermanagement_ordercustomershippingmethod" | translate
                 }}</strong
                 >:
-                {{ order?.shipmentMethod }}
+                {{ order?.shippingDetail?.courierService }}
                 <span
                   class="change-btn"
                   data-toggle="modal"
                   (click)="changeShipmentMethod(Shipment)"
                   >{{
-                    "ordermanagement_ordercustomershippingmethodchange"
-                      | translate
+                    (order?.shippingDetail
+                      ? "ordermanagement_ordercustomershippingmethodchange"
+                      : "ordermanagement_ordercustomershippingmethodAdd"
+                    ) | translate
                   }}</span
                 >
               </div>
@@ -132,7 +134,7 @@
               {{ order?.address }}
             </div>
           </div>
-          <div class="container-gap">
+          <div class="container-gap" *ngIf="order.note">
             <h4 class="product-title">
               {{ "ordermanagement_note" | translate }}
             </h4>
@@ -145,8 +147,50 @@
             <h4 class="product-title">
               {{ "ordermanagement_ordercustomerproducts" | translate }}
             </h4>
-            <hr />
-            <div>
+            <!-- <hr /> -->
+            <div class="table-responsive">
+              <table class="table mt-4">
+                <thead>
+                  <tr>
+                    <th scope="col">{{ "prod_image" | translate }}</th>
+                    <th scope="col">{{ "prod_name" | translate }}</th>
+                    <th scope="col">{{ "prod_unitAmount" | translate }}</th>
+                    <th scope="col">{{ "prod_qty" | translate }}</th>
+                    <th scope="col">{{ "prod_size" | translate }}</th>
+                    <th scope="col">{{ "prod_totalAmount" | translate }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let prod of order?.orderedProductDetails">
+                    <td>
+                      <img
+                        [src]="
+                          prod.src
+                            ? prod.src
+                            : 'assets/images/electronics/product/16.jpg'
+                        "
+                        class="img-30 mr-2"
+                      />
+                    </td>
+                    <td>{{ prod?.name | titlecase }}</td>
+                    <td>${{ prod?.unitAmount }}</td>
+                    <td>{{ prod?.quantity }}</td>
+                    <td>{{ prod?.size }}</td>
+                    <td>${{ prod?.totalAmount }}</td>
+                  </tr>
+                  <tr>
+                    <th colspan="5" style="text-align: right">
+                      {{
+                        "ordermanagement_ordercustomersummaryorderstotals"
+                          | translate
+                      }}
+                    </th>
+                    <th>${{ order?.total }}</th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- <div>
               <ul>
                 <li class="mb-2">
                   <div class="row align-items-center">
@@ -168,6 +212,11 @@
                     <div class="prod_qty col-2 col-sm-4 col-md-2">
                       <strong>
                         {{ "prod_qty" | translate }}
+                      </strong>
+                    </div>
+                    <div class="prod_qty col-2 col-sm-4 col-md-2">
+                      <strong>
+                        {{ "prod_size" | translate }}
                       </strong>
                     </div>
                     <div class="prod_totalAmount col-2 col-sm-4 col-md-2">
@@ -200,7 +249,10 @@
                       ${{ prod?.unitAmount }}
                     </div>
                     <div class="prod_qty col-2 col-sm-4 col-md-2">
-                      {{ prod?.qty }}
+                      {{ prod?.quantity }}
+                    </div>
+                    <div class="prod_qty col-2 col-sm-4 col-md-2">
+                      {{ prod?.size }}
                     </div>
                     <div class="prod_totalAmount col-2 col-sm-4 col-md-2">
                       ${{ prod?.totalAmount }}
@@ -225,7 +277,7 @@
                   <hr />
                 </li>
               </ul>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

@@ -103,12 +103,22 @@ export class OrderDetailComponent implements OnInit {
     this.fetching = true;
     this.orderService.getOrderById(id).subscribe((res) => {
       if (res) {
-        console.log('fetch res---', res.body);
+        // console.log('fetch res---', res.body);
         this.order = res.body;
         this.cs.isLoading.next(false);
         this.fetching = false;
+        if (this.order && this.order.shippingDetail) {
+          this.setShipmentModalData(this.order.shippingDetail);
+        }
       }
     });
+  }
+
+  setShipmentModalData(detail) {
+    this.courier_service = detail.courierService;
+    this.trackingDetails = detail.trackingDetails;
+    this.shippingCost = detail.shippingCost;
+
   }
 
   changeTotal(content) {
@@ -190,6 +200,7 @@ export class OrderDetailComponent implements OnInit {
       console.log(res);
       this.loading = false;
       this.modalService.dismissAll()
+      this.fetchOrderById(this.orderId);
     });
   }
 

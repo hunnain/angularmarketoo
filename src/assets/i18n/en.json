@@ -139,6 +139,7 @@
   "ordermanagement_ordercustomerinvoiceno": "Invoice No",
   "ordermanagement_ordercustomershippingmethod": "Shipment Method",
   "ordermanagement_ordercustomershippingmethodchange": "Change",
+  "ordermanagement_ordercustomershippingmethodAdd": "Add",
   "ordermanagement_ordercustomershippingaddress": "Shipping Address",
   "ordermanagement_ordercustomerproducts": "Products",
   "ordermanagement_ordercustomersummary": "Order Summary",
