@@ -157,6 +157,7 @@
                     <th scope="col">{{ "prod_unitAmount" | translate }}</th>
                     <th scope="col">{{ "prod_qty" | translate }}</th>
                     <th scope="col">{{ "prod_size" | translate }}</th>
+                    <th scope="col">{{ "prod_color" | translate }}</th>
                     <th scope="col">{{ "prod_totalAmount" | translate }}</th>
                   </tr>
                 </thead>
@@ -164,22 +165,29 @@
                   <tr *ngFor="let prod of order?.orderedProductDetails">
                     <td>
                       <img
+                        style="cursor: pointer"
                         [src]="
-                          prod.src
-                            ? prod.src
+                          prod.customImage
+                            ? prod.customImage
                             : 'assets/images/electronics/product/16.jpg'
                         "
                         class="img-30 mr-2"
+                        (click)="
+                          prod.customImage
+                            ? OpenImage(prod.customImage, imageModal)
+                            : null
+                        "
                       />
                     </td>
                     <td>{{ prod?.name | titlecase }}</td>
                     <td>${{ prod?.unitAmount }}</td>
                     <td>{{ prod?.quantity }}</td>
                     <td>{{ prod?.size }}</td>
+                    <td>{{ prod?.color }}</td>
                     <td>${{ prod?.totalAmount }}</td>
                   </tr>
                   <tr>
-                    <th colspan="5" style="text-align: right">
+                    <th colspan="6" style="text-align: right">
                       {{
                         "ordermanagement_ordercustomersummaryorderstotals"
                           | translate
@@ -733,6 +741,30 @@
         [btnText]="'Send'"
         (onSubmit)="sendMessage()"
       ></app-button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #imageModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel" ngbAutofocus>
+      Custom Image
+    </h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="mb-4">
+      <img [src]="prodImage" alt="product-image" style="width: 100%" />
+    </div>
+    <div class="action">
+      <a [href]="prodImage" target="_blank" download>Download</a>
     </div>
   </div>
 </ng-template>

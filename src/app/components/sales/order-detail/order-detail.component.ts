@@ -81,9 +81,11 @@ export class OrderDetailComponent implements OnInit {
       .result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;
+          this.prodImage = '';
         },
         (reason) => {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          this.prodImage = '';
         }
       );
   }
@@ -263,5 +265,15 @@ export class OrderDetailComponent implements OnInit {
     // );
 
     // doc.save('tableToPdf.pdf');
+  }
+
+
+  prodImage: string = '';
+  OpenImage(img, content) {
+    this.prodImage = img;
+    this.open(content);
+  }
+  downloadImage() {
+    console.log('download')
   }
 }
