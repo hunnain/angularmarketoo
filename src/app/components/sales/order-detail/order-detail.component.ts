@@ -70,6 +70,7 @@ export class OrderDetailComponent implements OnInit {
 
     this.cs.isLoading.subscribe((loading) => {
       this.loading = loading;
+      this.fetching = loading;
     });
   }
 
@@ -104,11 +105,12 @@ export class OrderDetailComponent implements OnInit {
   fetchOrderById(id) {
     this.fetching = true;
     this.orderService.getOrderById(id).subscribe((res) => {
+      this.fetching = false;
       if (res) {
         // console.log('fetch res---', res.body);
         this.order = res.body;
         this.cs.isLoading.next(false);
-        this.fetching = false;
+        // this.fetching = false;
         if (this.order && this.order.shippingDetail) {
           this.setShipmentModalData(this.order.shippingDetail);
         }
