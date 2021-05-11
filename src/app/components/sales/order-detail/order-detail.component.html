@@ -5,7 +5,7 @@
         <app-loader [loading]="fetching"></app-loader>
       </div>
     </div>
-    <div class="row product-page-main card-body" *ngIf="!fetching">
+    <div class="row product-page-main card-body" *ngIf="!fetching && order">
       <div class="col-xl-8">
         <div class="product-page-details product-right mb-0">
           <div class="row">
@@ -19,7 +19,12 @@
                 (click)="openInvoice(Invoice)"
               >
                 <span
-                  class="d-flex flex-column align-items-center position-absolute"
+                  class="
+                    d-flex
+                    flex-column
+                    align-items-center
+                    position-absolute
+                  "
                   style="right: 20px"
                 >
                   <app-feather-icons
@@ -134,7 +139,7 @@
               {{ order?.address }}
             </div>
           </div>
-          <div class="container-gap" *ngIf="order.note">
+          <div class="container-gap" *ngIf="order?.note">
             <h4 class="product-title">
               {{ "ordermanagement_note" | translate }}
             </h4>
@@ -298,7 +303,7 @@
               <strong>{{
                 "ordermanagement_ordercustomersummarydate" | translate
               }}</strong
-              >: {{ formatDate(order.creationDate) }}
+              >: {{ formatDate(order?.creationDate) }}
             </div>
             <div style="margin-top: 20px" class="font-size-13">
               <strong>{{
